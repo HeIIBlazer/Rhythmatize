@@ -56,3 +56,15 @@
     background-color: brown;
     transition: 0.3s;
 }
+
+.slim-dropdown-menu {
+    min-width: unset;
+    max-width: 150px;
+    text-align: center;
+    font-size: 17px;
+    font-family: 'Montserrat'; /* Adjust the width as per your preference */
+}
+
+.dropdown-item:active {
+    background-color: transparent;
+  }

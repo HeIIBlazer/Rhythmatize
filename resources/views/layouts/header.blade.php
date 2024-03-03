@@ -17,7 +17,15 @@
       <a class="navbar-brand" href="#"><img src="{{ URL::asset('images/logo.png') }}" alt="Logo_Rhythmatize"></a>
       <ul class="navbar-nav me-auto justify-content-evenly w-25 mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="header_button" href="#">Charts</a>
+          <div class="dropdown">
+            <a class="header_button" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">Charts</a>
+            <ul class="dropdown-menu dropdown-menu-dark slim-dropdown-menu" aria-labelledby="dropdownMenuLink">
+              <li><a class="dropdown-item" href="#">Artists</a></li>
+              <li><a class="dropdown-item" href="#">Albums</a></li>
+              <li><a class="dropdown-item" href="#">Tracks</a></li>
+            </ul>
+          </div>
+        </li>
         </li> 
         <li class="nav-item">
           <a class="header_button" href="#">Artists</a>
