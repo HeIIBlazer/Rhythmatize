@@ -12,13 +12,19 @@ class AlbumController extends Controller
      */
     public function index()
     {
-        $albums = Album::orderBy('created_at', 'desc')->get();
-        return view('albums.index', compact('albums'));
+        $albums = Album::orderBy('id', 'desc')->get();
+        return $albums;
     }
 
     /**
      * Show the form for creating a new resource.
      */
+
+    public function last_added_3(){
+        $albums = Album::orderBy('id', 'desc')->take(3)->get();
+        return view('main', compact('albums'));
+    }
+
     public function create()
     {
         
