@@ -2,18 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Album;
+use App\Models\Track;
 use Illuminate\Http\Request;
 
-class AlbumController extends Controller
+class TrackController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $albums = Album::orderBy('created_at', 'desc')->get();
-        return view('albums.index', compact('albums'));
+        return view('tracks.index');   
     }
 
     /**
@@ -21,7 +20,7 @@ class AlbumController extends Controller
      */
     public function create()
     {
-        
+        return view('tracks.create');
     }
 
     /**
@@ -31,63 +30,58 @@ class AlbumController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'cover_url' => 'required',
-            'release_date' => 'required',
-            'description' => 'required',
+            'duration' => 'required',
             'youtube_link' => 'required',
             'spotify_link' => 'required',
             'apple_music_link' => 'required',
-            'type' => 'required',
-            'artist_id' => 'required',
+            'album_id' => 'required',
         ]);
 
-        Album::create($request->all());
-        return redirect()->route('albums.index');
+        Track::create($request->all());
+        return redirect()->route('albums.show', $request->album_id);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Album $album)
+    public function show(Track $track)
     {
-        return view('albums.show', compact('album'));
+        return view('tracks.show', compact('track'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Album $album)
+    public function edit(Track $track)
     {
-        return view('albums.edit', compact('album'));
+        return view('tracks.edit', compact('track'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Album $album)
+    public function update(Request $request, Track $track)
     {
         $request->validate([
             'name' => 'required',
-            'cover_url' => 'required',
-            'release_date' => 'required',
-            'description' => 'required',
+            'duration' => 'required',
             'youtube_link' => 'required',
             'spotify_link' => 'required',
             'apple_music_link' => 'required',
-            'type' => 'required',
-            'artist_id' => 'required',
+            'album_id' => 'required',
         ]);
 
-        $album->update($request->all());
-        return redirect()->route('albums.index');
+        $track->update($request->all());
+        return redirect()->route('albums.show', $request->album_id);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Album $album)
+    public function destroy(Track $track)
     {
-        $album->delete();
-        return redirect()->route('albums.index');
+        $track->delete();
+
+        return redirect()->route('albums.show', $track->album_id);
     }
 }

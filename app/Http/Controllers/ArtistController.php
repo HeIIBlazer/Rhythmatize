@@ -2,18 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Album;
+use App\Models\Artist;
 use Illuminate\Http\Request;
 
-class AlbumController extends Controller
+class ArtistController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $albums = Album::orderBy('created_at', 'desc')->get();
-        return view('albums.index', compact('albums'));
+        $artists = Artist::orderBy('created_at', 'desc')->get();
+        return view('artists.index', compact('artists'));
     }
 
     /**
@@ -21,7 +21,7 @@ class AlbumController extends Controller
      */
     public function create()
     {
-        
+        return view('artists.create');
     }
 
     /**
@@ -31,63 +31,60 @@ class AlbumController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'cover_url' => 'required',
-            'release_date' => 'required',
+            'picture_url' => 'required',
+            'banner_url' => 'required',
             'description' => 'required',
             'youtube_link' => 'required',
             'spotify_link' => 'required',
             'apple_music_link' => 'required',
-            'type' => 'required',
-            'artist_id' => 'required',
         ]);
 
-        Album::create($request->all());
-        return redirect()->route('albums.index');
+        Artist::create($request->all());
+        return redirect()->route('artists.index');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Album $album)
+    public function show(Artist $artist)
     {
-        return view('albums.show', compact('album'));
+        return view('artists.show', compact('artist'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Album $album)
+    public function edit(Artist $artist)
     {
-        return view('albums.edit', compact('album'));
+        return view('artists.edit', compact('artist'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Album $album)
+    public function update(Request $request, Artist $artist)
     {
         $request->validate([
             'name' => 'required',
-            'cover_url' => 'required',
-            'release_date' => 'required',
+            'picture_url' => 'required',
+            'banner_url' => 'required',
             'description' => 'required',
             'youtube_link' => 'required',
             'spotify_link' => 'required',
             'apple_music_link' => 'required',
-            'type' => 'required',
-            'artist_id' => 'required',
         ]);
 
-        $album->update($request->all());
-        return redirect()->route('albums.index');
+        $artist->update($request->all());
+
+        return redirect()->route('artists.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Album $album)
+    public function destroy(Artist $artist)
     {
-        $album->delete();
-        return redirect()->route('albums.index');
+        $artist->delete();
+        return redirect()->route('artists.index');
     }
 }
