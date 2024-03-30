@@ -56,12 +56,12 @@ body {
     align-items: center;
     text-decoration: none;
     color: white;
-    border: 3px solid brown;
+    border: 3px solid #864334;
     margin-left: 5px;
     background-color: transparent;
 }
 .search_button:hover {
-    background-color: brown;
+    background-color: #864334;
     transition: 0.3s;
 }
 
@@ -80,7 +80,7 @@ body {
 
 /* FOOTER STYLES */
 .footer {
-    position: fixed;
+    /* position: fixed; */
     left: 0;
     bottom: 0;
     width: 100%;
@@ -201,16 +201,27 @@ body {
 .logo_button {
     border-radius: 8px;
 }
+
 /* MAIN PAGE */
+
+.Header-text {
+    font-family: "audiowide", sans-serif;
+    color: white;
+    font-size: 47px;
+}
 
 .left_part {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    /* justify-content: center; */
     align-items: center;
-    width: 100%;
+    width: 50%;
     height: 100%;
-    margin-top: 50px;
+    margin-top: 20px;
+    /* margin-bottom: 20px; */
+}
+.text-part {
+    margin-bottom: 30px;
 }
 
 .logo_text {
@@ -238,19 +249,54 @@ body {
 .albums_3 {
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
     text-align: center;
     width: 100%;
-    margin-top: 20px;
+    margin-top: 10px;
+    border-radius: 50px;
 }
 
 .Last_added_albums_part {
-    margin-top: 10px;
+    /* margin-top: 10px; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 37%;
+    background-color: #2C2C2C;
+    border-radius: 5px;
+    box-shadow: 10px 10px 4px #00000054;
+}
+
+.hide-text {
+    background-position: center;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     width: 100%;
     height: 100%;
+    text-align: center;
+}
+
+.hide-text:hover {
+    filter: brightness(50%);
+    transition: 0.2s;
+}
+
+.hide-text p {
+    display: none;
+    color: white;
+    font-family: 'audiowide', sans-serif;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 80%;
+    max-height: 100%;
+}
+
+.hide-text:hover p{
+    display: block;
 }
