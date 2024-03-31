@@ -204,6 +204,15 @@ body {
 
 /* MAIN PAGE */
 
+.main-page{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+    justify-content: space-evenly;
+    margin-top: 20px;
+}
+
 .Header-text {
     font-family: "audiowide", sans-serif;
     color: white;
@@ -217,8 +226,8 @@ body {
     align-items: center;
     width: 50%;
     height: 100%;
-    margin-top: 20px;
-    /* margin-bottom: 20px; */
+    /* margin-top: 20px; */
+
 }
 .text-part {
     margin-bottom: 30px;
@@ -231,7 +240,7 @@ body {
     justify-content: center;
     align-items: center;
     color: white;
-    margin-top: 20px;
+    /* margin-top: 20px; */
 }
 
 .welcome_p {
@@ -299,4 +308,45 @@ body {
 
 .hide-text:hover p{
     display: block;
+}
+
+.see_more_button {
+    font-family: 'Audiowide', sans-serif;
+    font-size: 22px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    color: white;
+    border: 3px solid #864334;
+    margin-left: 5px;
+    background-color: transparent;
+    width: 100%;
+}
+.see_more_button:hover {
+    background-color: #864334;
+    transition: 0.3s;
+}
+
+.chart_block{
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+    width: 40%;
+    height: 80%;
+    background-color: #2C2C2C;
+    border-radius: 5px;
+    box-shadow: 10px 10px 4px #00000054;
+
+}
+
+.charts_header {
+    font-family: 'audiowide', sans-serif;
+    font-size: 40px;
+    text-align: center;
+    justify-content: center;
+    /* align-items: center; */
+    color: white;
+    /* margin-top: 20px; */
 }

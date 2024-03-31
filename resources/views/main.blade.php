@@ -22,20 +22,22 @@
                 @php $artist = \App\Models\Artist::find($album->artist_id); @endphp
                 @php $album_name = explode(" ", $album->name); $album_name = array_slice($album_name, 0, 5);  $album_name = implode(" ", $album_name); @endphp
                     <div class="hide-text" style="background-image: url({{url ($album->cover_url)}}); height: 230px; width: 30%; background-size: contain; background-repeat: no-repeat;">
-                        <p>{{ $artist-> name }}</p>
-                        <p>{{ $album_name }}</p>
+                        <p style="font-size: 12px">{{ $artist-> name }}</p>
+                        <p style="font-size: 15px">{{ $album_name }}</p>
                     </div>
                 @endforeach
                 </div>
                         
                 <div style="width: 25%">
-                    <button class="search_button" type="submit">See more</button>
+                    <button class="see_more_button" type="submit">See more</button>
                 </div>
             </div>
         </div>
 
         <div class="chart_block">
-
+            <div>
+                <h1 class="charts_header">CHARTS</h1>
+            </div>
         </div>
 
     </div>

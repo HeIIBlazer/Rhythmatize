@@ -8,47 +8,47 @@
 
 
 
-<nav class="navbar navbar-expand-lg navbar-black bg-black">
-  <div class="container-fluid">
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-      <a class="navbar-brand" href="#"><img src="{{ URL::asset('images/logo.png') }}" alt="Logo_Rhythmatize"></a>
-      <ul class="navbar-nav me-auto justify-content-evenly w-25 mb-2 mb-lg-0">
-        <li class="nav-item">
-          <div class="dropdown">
-            <a class="header_button" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">Charts</a>
-            <ul class="dropdown-menu dropdown-menu-dark slim-dropdown-menu" aria-labelledby="dropdownMenuLink">
-              <li><a class="dropdown-item" href="#">Artists</a></li>
-              <li><a class="dropdown-item" href="#">Albums</a></li>
-              <li><a class="dropdown-item" href="#">Tracks</a></li>
-            </ul>
+  <nav class="navbar navbar-expand-lg navbar-black bg-black">
+    <div class="container-fluid">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+        <a class="navbar-brand" href="#"><img src="{{ URL::asset('images/logo.png') }}" alt="Logo_Rhythmatize"></a>
+        <ul class="navbar-nav me-auto justify-content-evenly w-25 mb-2 mb-lg-0">
+          <li class="nav-item">
+            <div class="dropdown">
+              <a class="header_button" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">Charts</a>
+              <ul class="dropdown-menu dropdown-menu-dark slim-dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <li><a class="dropdown-item" href="#">Artists</a></li>
+                <li><a class="dropdown-item" href="#">Albums</a></li>
+                <li><a class="dropdown-item" href="#">Tracks</a></li>
+              </ul>
+            </div>
+          </li>
+          </li> 
+          <li class="nav-item">
+            <a class="header_button" href="#">Artists</a>
+          </li> 
+          <li class="nav-item">
+            <a class="header_button" href="#">Albums</a>
+          </li>
+        </ul>
+        <form class="d-flex mt-3 ">
+          <input class="form-control rounded-0 mr-5" type="search" placeholder="Search" aria-label="Search">
+          <button class="search_button" type="submit">Search</button>
+        </form>
+        <div class="login_buttons">
+          <div class="mb-2">
+            <a href="#" class="login_button">LOG IN</a>
           </div>
-        </li>
-        </li> 
-        <li class="nav-item">
-          <a class="header_button" href="#">Artists</a>
-        </li> 
-        <li class="nav-item">
-          <a class="header_button" href="#">Albums</a>
-        </li>
-      </ul>
-      <form class="d-flex mt-3 ">
-        <input class="form-control rounded-0 mr-5" type="search" placeholder="Search" aria-label="Search">
-        <button class="search_button" type="submit">Search</button>
-      </form>
-      <div class="login_buttons">
-        <div class="mb-2">
-          <a href="#" class="login_button">LOG IN</a>
-        </div>
-        <div>
-          <a href="#" class="login_button">SIGN UP</a>
+          <div>
+            <a href="#" class="login_button">SIGN UP</a>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</nav>
+  </nav>
 
 <div class="">
   @yield('content')
