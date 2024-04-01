@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Artist;
 use app\Models\Album;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 
 class ArtistController extends Controller
@@ -17,6 +18,17 @@ class ArtistController extends Controller
         $artists = Artist::orderBy('created_at', 'desc')->get();
         return view('artists.index', compact('artists'));
     }
+
+    public function top_3_artists()
+{
+    $artists = Artist::select('artists.*', DB::raw('count(like_artists.id) as likes_count'))
+                    ->leftJoin('like_artists', 'artists.id', '=', 'like_artists.artist_id')
+                    ->groupBy('artists.id', 'artists.name', 'artists.picture_url', 'artists.banner_url', 'artists.description', 'artists.youtube_link', 'artists.spotify_link', 'artists.apple_music_link')
+                    ->orderBy('likes_count', 'desc')
+                    ->limit(3)
+                    ->get();
+    return view('main', compact('artists'));
+}
 
     /**
      * Show the form for creating a new resource.

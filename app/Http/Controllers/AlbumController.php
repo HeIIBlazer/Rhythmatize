@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Album;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AlbumController extends Controller
 {
@@ -12,8 +13,19 @@ class AlbumController extends Controller
      */
     public function index()
     {
-        $albums = Album::orderBy('id', 'desc')->get();
-        return $albums;
+        $albums = Album::all();
+        return view('albums.index', compact('albums'));
+    }
+
+    public function top_3_albums()
+    {
+        $albums = Album::select('albums.*', DB::raw('count(like_albums.id) as likes_count'))
+                        ->leftJoin('like_albums', 'albums.id', '=', 'like_albums.album_id')
+                        ->groupBy('albums.id', 'albums.name' , 'albums.cover_url', 'albums.release_date', 'albums.description', 'albums.youtube_link', 'albums.spotify_link', 'albums.apple_music_link', 'albums.type', 'albums.artist_id')
+                        ->orderBy('likes_count', 'desc')
+                        ->limit(3)
+                        ->get();
+        return view('main', compact('albums'));
     }
 
     /**

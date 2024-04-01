@@ -126,7 +126,7 @@
 
     <div class="Copyright_part">
         <div class="copyright_text">
-            <p>@ 2024 Copyright: <br>Rhythmatize.com</p>
+            <p>@ 2024 Copyright: <br>rhythmatize.com</p>
         </div>
     </div>
 </div>

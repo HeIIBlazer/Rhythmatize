@@ -1,4 +1,9 @@
+@php
+    use App\Http\Controllers\AlbumController;
+
+@endphp
 @extends ('layouts.app')
+
 
 @section('content')
     <div class="container main-page">
@@ -38,11 +43,47 @@
             <div>
                 <h1 class="charts_header">CHARTS</h1>
             </div>
-            <div class="h2-header">
-                <div class="line"></div>
-                <h2 class="h2-text">ALBUMS</h2>
-                <div class="line"></div>
+            <div class="w-100">
+                <div class="h2-header">
+                    <div class="line"></div>
+                    <h2 class="h2-text">ALBUMS</h2>
+                    <div class="line"></div>
+                </div>
+                <div class="albums_3">  
+                    @foreach ($albums as $album)
+                        @php
+                            $albumss = AlbumController::top_3_albums(); 
+                            $artist = \App\Models\Artist::find($album->artist_id); 
+                            $album_name = explode(" ", $album->name); $album_name = array_slice($album_name, 0, 5);  $album_name = implode(" ", $album_name); 
+                        @endphp
+                        <div class="hide-text" style="background-image: url({{url ($album->cover_url)}}); height: 190px; width: 30%; background-size: contain; background-repeat: no-repeat; margin-bottom: 10px;">
+                            <p style="font-size: 12px">{{ $artist-> name }}</p>
+                            <p style="font-size: 15px">{{ $album_name }}</p>
+                        </div>
+                    @endforeach
+                </div>
+                <div style="width: 100%; display: flex;  justify-content: center;">
+                    <button class="see_more_button" type="submit">See more</button>
+                </div>
             </div>
+
+            {{-- <div class="w-100">
+                <div class="h2-header">
+                    <div class="line"></div>
+                    <h2 class="h2-text">ARTISTS</h2>
+                    <div class="line"></div>
+                </div>
+                <div class="albums_3">
+                    @foreach ($artists as $artist)
+                        <div class="hide-text" style="background-image: url({{url ($artist->picture_url)}}); height: 190px; width: 30%; background-size: contain; background-repeat: no-repeat; margin-bottom: 10px;">
+                            <p style="font-size: 12px">{{ $artist-> name }}</p>
+                        </div>
+                    @endforeach
+                </div>
+                <div style="width: 100%; display: flex;  justify-content: center;">
+                    <button class="see_more_button" type="submit">See more</button>
+                </div>
+            </div> --}}
         </div>
 
     </div>
