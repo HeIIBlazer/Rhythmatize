@@ -17,6 +17,11 @@ class AlbumController extends Controller
         return view('albums.index', compact('albums'));
     }
 
+    public function show_top_3_albums() {
+        $albums = Album::orderBy('id', 'desc')->take(3)->get();
+        return view('main', compact('albums'));
+    }
+
     public function top_3_albums()
     {
         $albums = Album::select('albums.*', DB::raw('count(like_albums.id) as likes_count'))
@@ -27,6 +32,7 @@ class AlbumController extends Controller
                         ->get();
         return view('main', compact('albums'));
     }
+
 
     /**
      * Show the form for creating a new resource.
