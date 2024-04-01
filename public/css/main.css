@@ -235,7 +235,7 @@ body {
 
 .logo_text {
     font-family: 'audiowide', sans-serif;
-    font-size: 90px;
+    font-size: 85px;
     text-align: center;
     justify-content: center;
     align-items: center;
@@ -251,7 +251,7 @@ body {
     align-items: center;
     color: white;
     margin-top: 20px;
-    font-weight: 700;
+    font-weight: 600;
     width: 100%;
 }
 
@@ -267,7 +267,7 @@ body {
 }
 
 .Last_added_albums_part {
-    /* margin-top: 10px; */
+    margin-top: 50px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -343,10 +343,32 @@ body {
 
 .charts_header {
     font-family: 'audiowide', sans-serif;
-    font-size: 40px;
+    font-size: 60px;
     text-align: center;
     justify-content: center;
     /* align-items: center; */
     color: white;
+    margin-top: 10px;
+}
+.h2-header {
+    display: flex;
+    flex-direction: row;
+}
+
+.h2-text {
+    font-family: "audiowide", sans-serif;
+    color: white;
+    font-size: 45px;
+    /* text-align: center;
+    justify-content: center;
+    align-items: center; */
+    font-weight: 700px;
     /* margin-top: 20px; */
+    -webkit-text-stroke: 2px black;
+}
+
+.line {
+    width: 90px;
+    height: 2px;
+    border: white 1px solid;
 }

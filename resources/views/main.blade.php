@@ -27,7 +27,7 @@
                     </div>
                 @endforeach
                 </div>
-                        
+                    
                 <div style="width: 25%">
                     <button class="see_more_button" type="submit">See more</button>
                 </div>
@@ -37,6 +37,11 @@
         <div class="chart_block">
             <div>
                 <h1 class="charts_header">CHARTS</h1>
+            </div>
+            <div class="h2-header">
+                <div class="line"></div>
+                <h2 class="h2-text">ALBUMS</h2>
+                <div class="line"></div>
             </div>
         </div>
 
