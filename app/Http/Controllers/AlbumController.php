@@ -16,7 +16,7 @@ class AlbumController extends Controller
     public function index()
     {
         $albums = Album::all();
-        return view('albums.index', compact('albums'));
+        return view('album_views.albumsList', compact('albums'));
     }
 
     public function show_top_3_albums() {

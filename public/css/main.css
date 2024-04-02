@@ -216,7 +216,7 @@ body {
 .Header-text {
     font-family: "audiowide", sans-serif;
     color: white;
-    font-size: 47px;
+    font-size: 43px;
     margin-bottom: 0px;
     margin-top: 10px;
 }
@@ -275,7 +275,7 @@ body {
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: 34%;
+    height: 36%;
     background-color: #2C2C2C;
     border-radius: 5px;
     box-shadow: 10px 10px 4px #00000054;
@@ -348,7 +348,7 @@ body {
 
 .charts_header {
     font-family: 'audiowide', sans-serif;
-    font-size: 60px;
+    font-size: 50px;
     text-align: center;
     justify-content: center;
     /* align-items: center; */
@@ -361,12 +361,13 @@ body {
     align-items: center;
     justify-content: space-evenly;
     margin-bottom: 0px;
+    margin-top: 0px;
 }
 
 .h2-text {
     font-family: "audiowide", sans-serif;
     color: white;
-    font-size: 45px;
+    font-size: 35px;
     text-align: center;
     font-weight: 700px;
     -webkit-text-stroke: 2px black;
@@ -375,11 +376,65 @@ body {
 }
 
 .line {
-    width: 160px;
+    width: 180px;
     height: 2px;
     border: white 1px solid;
 }
 
 .container {
     max-width: 1440px;
+}
+
+.button-div {
+    width: 100%; 
+    display: flex;  
+    justify-content: center; 
+    margin: 3px;
+}
+
+/* LISTS */
+
+.Header-List {
+    font-family: "audiowide", sans-serif;
+    color: white;
+    font-size: 60px;
+    margin-bottom: 0px;
+    margin-top: 10px;
+    list-style-type: none;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 10%;
+    -webkit-text-stroke: 2px black;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    /* align-items: center; */
+    width: 15%;
+    height: 300px;
+    margin: 13px;
+    background-color: #2C2C2C;
+    border-radius: 5px;
+    box-shadow: 10px 10px 4px #00000054;
+}
+
+.card-text-bigger {
+    font-size: 16px;
+    font-family: 'Montserrat', sans-serif;
+    color: white;
+    font-weight: 700;
+}
+
+.card-text {
+    font-size: 11px;
+    font-family: 'Montserrat', sans-serif;
+    color: #B8B8B8;
+}
+
+.d-flex {
+    margin-bottom: 20px;
 }

@@ -14,7 +14,7 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-        <a class="navbar-brand" href="#"><img src="{{ URL::asset('images/logo.png') }}" alt="Logo_Rhythmatize"></a>
+        <a class="navbar-brand" href="/"><img src="{{ URL::asset('images/logo.png') }}" alt="Logo_Rhythmatize"></a>
         <ul class="navbar-nav me-auto justify-content-evenly w-25 mb-2 mb-lg-0">
           <li class="nav-item">
             <div class="dropdown">
@@ -31,7 +31,7 @@
             <a class="header_button" href="#">Artists</a>
           </li> 
           <li class="nav-item">
-            <a class="header_button" href="#">Albums</a>
+            <a class="header_button" href="{{ url('/album_list')}}">Albums</a>
           </li>
         </ul>
         <form class="d-flex mt-3 ">
