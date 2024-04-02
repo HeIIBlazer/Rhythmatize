@@ -14,8 +14,9 @@ class Album extends Model
     
     protected $fillable = [
         'name',
-        'cover_image_ur;',
+        'cover_ur;',
         'release_date',
+        'description',
         'youtube_link',
         'spotify_link',
         'apple_music_link',
