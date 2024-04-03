@@ -63,10 +63,11 @@ class AlbumController extends Controller
      * Show the form for creating a new resource.
      */
 
-    // public function last_added_3(){
-    //     $albums = Album::orderBy('id', 'desc')->take(3)->get();
-    //     return view('main', compact('albums'));
-    // }
+    public function last_added()
+    {
+        $albums = DB::table("albums")->orderBy('id', 'desc')->paginate(12);
+        return view('album_views.lastAddedAlbums', compact('albums'));
+    }
 
     public function create()
     {

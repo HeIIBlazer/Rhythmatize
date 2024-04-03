@@ -406,7 +406,6 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 10%;
     -webkit-text-stroke: 2px black;
 }
 

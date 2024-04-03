@@ -22,7 +22,7 @@
               <ul class="dropdown-menu dropdown-menu-dark slim-dropdown-menu" aria-labelledby="dropdownMenuLink">
                 <li><a class="dropdown-item" href="{{ url('/artist_chart')}}">Artists</a></li>
                 <li><a class="dropdown-item" href="{{ url('/album_chart')}}">Albums</a></li>
-                <li><a class="dropdown-item" href="#">Tracks</a></li>
+                <li><a class="dropdown-item" href="{{url ('/track_chart')}}">Tracks</a></li>
               </ul>
             </div>
           </li>
@@ -85,7 +85,7 @@
                 <a href="{{ url('/album_chart')}}" class="links_button">Charts</a>
             </div>
             <div class="links_buttons">
-                <a href="#" class="links_button">Last Added</a>
+                <a href="{{ url('/last_added_albums')}}" class="links_button">Last Added</a>
             </div>
             <div class="links_buttons">
                 <a href="{{ url('/album_list')}}" class="links_button">List</a>
@@ -99,7 +99,7 @@
                 <a href="{{ url('/artist_chart')}}" class="links_button">Charts</a>
             </div>
             <div class="links_buttons">
-                <a href="#" class="links_button">Last Added</a>
+                <a href="{{ url('/last_added_artists')}}" class="links_button">Last Added</a>
             </div>
             <div class="links_buttons">
                 <a href="{{ url('/artist_list')}}" class="links_button">List</a>
@@ -110,7 +110,7 @@
                 <p class="links_header">SONG</p>
             </div>
             <div class="links_buttons">
-                <a href="#" class="links_button">Charts</a>
+                <a href="{{url ('/track_chart')}}" class="links_button">Charts</a>
             </div>
             <div class="links_buttons">
                 <a href="#" class="links_button">Last Added</a>

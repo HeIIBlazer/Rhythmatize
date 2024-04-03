@@ -39,7 +39,13 @@ class ArtistController extends Controller
                     ->limit(3)
                     ->get();
     return view('main', compact('artists'));
-    }   
+    }
+    
+    public function last_added()
+    {
+        $artists = DB::table("artists")->orderBy('id', 'desc')->paginate(12);
+        return view('artist_views.lastAddedArtists', compact('artists'));
+    }
 
     /**
      * Show the form for creating a new resource.

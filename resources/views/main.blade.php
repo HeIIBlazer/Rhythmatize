@@ -30,7 +30,7 @@
                 </div>
                     
                 <div style="width: 25%">
-                    <button class="see_more_button" type="submit">See more</button>
+                    <a href="/last_added_albums"><button class="see_more_button" type="submit">See more</button></a>
                 </div>
             </div>
         </div>
