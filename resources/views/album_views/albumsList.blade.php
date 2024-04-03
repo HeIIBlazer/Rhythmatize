@@ -15,7 +15,7 @@
             @if ($loop->iteration <= 12)
                 <div class="card">
                     <div class=" mt-2 mb-4 d-flex justify-content-center">
-                        <img src="{{url ($album->cover_url)}}" alt="" style="width: 185px; height: 185px; border-radius: 5px; ">
+                        <img src="{{url ($album -> cover_url)}}" alt="" style="width: 185px; height: 185px; border-radius: 5px; ">
                     </div>
                     <div style="margin-left: 10px; max-width: 100%;">
                         <p class="card-text-bigger">{{$album -> name}}</p>

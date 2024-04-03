@@ -494,3 +494,104 @@ body {
     --bs-pagination-disabled-bg: #2C2C2C;
     --bs-pagination-disabled-border-color: #2C2C2C;
 }
+
+/* CHARTS */
+
+.chart-line{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+
+    align-items: center;
+
+}
+
+.number {
+    width: 4%;
+    margin-right: 5px;
+    margin-left: 5px;
+
+}
+
+.numbers {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 35px;
+    color: white;
+    margin-right: 50px;
+
+}
+
+.chart-pic {
+    width: 75px;
+    height: 75px;
+    object-fit: cover;
+    margin-right: 7px;
+}
+
+.chart-text-big {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 25px;
+    font-weight: 700;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 0 6px;
+    color: white;
+    height: 100%;
+
+}
+
+.chart-big {
+    display: flex;
+    flex-direction: row;
+    width: 50%;
+    height: 100%;
+}
+
+.chart-small {
+    display: flex;
+    flex-direction: row;
+    width: 25%;
+    height: 100%;
+}
+.chart-like {
+    display: flex;
+    flex-direction: row;
+    width: 12%;
+    height: 100%;
+    justify-content: end;
+    align-items: center;
+
+}
+
+
+.Header-Charts {
+    font-family: "audiowide", sans-serif;
+    color: white;
+    font-size: 60px;
+    margin-bottom: 0px;
+    margin-top: 10px;
+    list-style-type: none;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    -webkit-text-stroke: 2px black;
+}
+
+.chart-small-text {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 25px;
+    font-weight: 600;
+    color: white;
+}
+
+.chart-like-text {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 23px;
+    font-weight: 600;
+    color: white;
+    text-align: end;
+    width: 10%;
+}

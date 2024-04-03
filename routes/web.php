@@ -23,6 +23,7 @@ Route::get('/', function () {
 // Route::get('/albums', [AlbumController::class, 'index']);
 Route::get('/', [AlbumController::class, 'top_3_albums']);
 Route::get('/album_list', [AlbumController::class, 'index']);
+Route::get('/album_chart', [AlbumController::class, 'charts']);
 
 
 // ARTISTS
