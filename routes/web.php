@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AlbumController;
 use App\Http\Controllers\ArtistController;
+use App\Http\Controllers\TrackController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,13 +21,14 @@ Route::get('/', function () {
 });
 
 // ALBUMS
-// Route::get('/albums', [AlbumController::class, 'index']);
 Route::get('/', [AlbumController::class, 'top_3_albums']);
 Route::get('/album_list', [AlbumController::class, 'index']);
 Route::get('/album_chart', [AlbumController::class, 'charts']);
 
 
 // ARTISTS
-
 Route::get('/artist_list', [ArtistController::class, 'index']);
-// Route::get('/', [ArtistController::class, 'top_3_artists']);
+Route::get('/artist_chart', [ArtistController::class, 'charts']);
+
+// TRACKS
+Route::get('/track_chart', [TrackController::class, 'charts']);

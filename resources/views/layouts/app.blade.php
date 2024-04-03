@@ -20,7 +20,7 @@
             <div class="dropdown">
               <a class="header_button" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">Charts</a>
               <ul class="dropdown-menu dropdown-menu-dark slim-dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <li><a class="dropdown-item" href="#">Artists</a></li>
+                <li><a class="dropdown-item" href="{{ url('/artist_chart')}}">Artists</a></li>
                 <li><a class="dropdown-item" href="{{ url('/album_chart')}}">Albums</a></li>
                 <li><a class="dropdown-item" href="#">Tracks</a></li>
               </ul>
@@ -82,7 +82,7 @@
                 <p class="links_header">ALBUM</p>
             </div>
             <div class="links_buttons">
-                <a href="#" class="links_button">Charts</a>
+                <a href="{{ url('/album_chart')}}" class="links_button">Charts</a>
             </div>
             <div class="links_buttons">
                 <a href="#" class="links_button">Last Added</a>
@@ -96,7 +96,7 @@
                 <p class="links_header">ARTIST</p>
             </div>
             <div class="links_buttons">
-                <a href="#" class="links_button">Charts</a>
+                <a href="{{ url('/artist_chart')}}" class="links_button">Charts</a>
             </div>
             <div class="links_buttons">
                 <a href="#" class="links_button">Last Added</a>

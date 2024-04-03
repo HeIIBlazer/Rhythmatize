@@ -58,7 +58,7 @@
                     @endforeach
                 </div>
                 <div class="button-div">
-                    <button class="see_more_button" type="submit">See more</button>
+                    <a href="{{url ('/album_chart')}}"><button class="see_more_button" type="submit">See more</button></a>
                 </div>
             </div>
 
@@ -76,7 +76,7 @@
                     @endforeach
                 </div>
                 <div class="button-div">
-                    <button class="see_more_button" type="submit">See more</button>
+                    <a href="{{url ('/artist_chart')}}"><button class="see_more_button" type="submit">See more</button></a>
                 </div>
 
                 <div class="w-100">
@@ -99,7 +99,7 @@
                         @endforeach
                     </div>
                     <div class="button-div">
-                        <button class="see_more_button" type="submit">See more</button>
+                        <a href="{{ url ('/track_chart') }}"><button class="see_more_button" type="submit">See more</button></a>
                     </div>
             </div>
         </div>
