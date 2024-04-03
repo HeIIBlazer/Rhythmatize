@@ -28,7 +28,7 @@
           </li>
           </li> 
           <li class="nav-item">
-            <a class="header_button" href="#">Artists</a>
+            <a class="header_button" href="{{ url('/artist_list')}}">Artists</a>
           </li> 
           <li class="nav-item">
             <a class="header_button" href="{{ url('/album_list')}}">Albums</a>
@@ -50,7 +50,7 @@
     </div>
   </nav>
 
-<div class="">
+<div>
   @yield('content')
 </div>
 
@@ -91,7 +91,7 @@
                 <a href="#" class="links_button">Last Added</a>
             </div>
             <div class="links_buttons">
-                <a href="#" class="links_button">List</a>
+                <a href="{{ url('/album_list')}}" class="links_button">List</a>
             </div>
         </div>
         <div class="Artists_part">
@@ -105,7 +105,7 @@
                 <a href="#" class="links_button">Last Added</a>
             </div>
             <div class="links_buttons">
-                <a href="#" class="links_button">List</a>
+                <a href="{{ url('/artist_list')}}" class="links_button">List</a>
             </div>
         </div>
         <div class="Songs_part">

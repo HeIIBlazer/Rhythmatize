@@ -27,5 +27,5 @@ Route::get('/album_list', [AlbumController::class, 'index']);
 
 // ARTISTS
 
-Route::get('/artists', [ArtistController::class, 'index']);
+Route::get('/artist_list', [ArtistController::class, 'index']);
 // Route::get('/', [ArtistController::class, 'top_3_artists']);
