@@ -21,8 +21,8 @@
             @endphp --}}
             @if ($loop->iteration <= 12)
                 <div class="card">
-                    <div class=" mt-2 mb-2 d-flex justify-content-center">
-                        <img src="{{url ($artist -> picture_url)}}" alt="" style="width: 165px; height: 165px; border-radius: 10px; object-fit: cover;">
+                    <div class="mt-2 mb-3 d-flex justify-content-center">
+                        <img src="{{url ($artist -> picture_url)}}" alt="" style="width: 185px; height: 185px; border-radius: 5px; object-fit: cover;">
                     </div>
                     <div style="margin-left: 10px; max-width: 100%;">
                         <p class="card-text-bigger-artist">{{$artist -> name}}</p>
