@@ -445,6 +445,13 @@ body {
     padding: 3px;
 }
 
+.card-text:hover {
+    color: white;
+    text-decoration: underline;
+    transition: 0.3s ease-in-out;
+
+}
+
 .d-flex {
     margin-bottom: 20px;
 }
