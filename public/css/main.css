@@ -406,7 +406,6 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 10%;
     -webkit-text-stroke: 2px black;
 }
 
@@ -450,8 +449,6 @@ body {
     color: white;
     text-decoration: underline;
     transition: ease all .3s;
-
-
 }
 
 .d-flex {
@@ -469,8 +466,6 @@ body {
     text-overflow: ellipsis;
     padding: 0 6px;
 }
-
-
 
 .pagination {
     --bs-pagination-padding-x: 0.75rem;
@@ -554,6 +549,7 @@ body {
     width: 25%;
     height: 100%;
 }
+
 .chart-like {
     display: flex;
     flex-direction: row;
@@ -561,7 +557,6 @@ body {
     height: 100%;
     justify-content: end;
     align-items: center;
-
 }
 
 
@@ -576,7 +571,6 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-
     -webkit-text-stroke: 2px black;
 }
 
@@ -594,4 +588,22 @@ body {
     color: white;
     text-align: end;
     width: 10%;
+}
+
+.chart-like-text-artist {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 23px;
+    font-weight: 600;
+    color: white;
+    text-align: end;
+    width: 5%;
+}
+
+.chart-like-artist {
+    display: flex;
+    flex-direction: row;
+    width: 38%;
+    height: 100%;
+    justify-content: end;
+    align-items: center;
 }

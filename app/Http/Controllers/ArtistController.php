@@ -19,8 +19,19 @@ class ArtistController extends Controller
         return view('artist_views.artistsList', compact('artists'));
     }
 
+    public function charts() 
+    {
+        $artists = DB::table("artists")->select('artists.*', DB::raw('count(like_artists.id) as likes_count'))
+                        ->leftJoin('like_artists', 'artist_id', '=', 'artists.id')
+                        ->groupBy('artists.id', 'artists.name', 'artists.picture_url', 'artists.banner_url', 'artists.description', 'artists.youtube_link', 'artists.spotify_link', 'artists.apple_music_link')
+                        ->orderBy('likes_count', 'desc')
+                        ->paginate(10);
+
+        return view('artist_views.artistsChart', compact('artists'));
+    }
+
     public function top_3_artists()
-{
+    {
     $artists = Artist::select('artists.*', DB::raw('count(like_artists.id) as likes_count'))
                     ->leftJoin('like_artists', 'artists.id', '=', 'like_artists.artist_id')
                     ->groupBy('artists.id', 'artists.name', 'artists.picture_url', 'artists.banner_url', 'artists.description', 'artists.youtube_link', 'artists.spotify_link', 'artists.apple_music_link')
@@ -28,7 +39,13 @@ class ArtistController extends Controller
                     ->limit(3)
                     ->get();
     return view('main', compact('artists'));
-}
+    }
+    
+    public function last_added()
+    {
+        $artists = DB::table("artists")->orderBy('id', 'desc')->paginate(12);
+        return view('artist_views.lastAddedArtists', compact('artists'));
+    }
 
     /**
      * Show the form for creating a new resource.

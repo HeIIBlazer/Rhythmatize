@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="Header-List">
-        <p>ARTISTS</p>
+        <p>LAST ADDED ARTISTS</p>
     </div>
 
     <div class="d-flex">
