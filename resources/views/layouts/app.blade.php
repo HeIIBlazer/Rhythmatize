@@ -14,7 +14,7 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-        <a class="navbar-brand" href="#"><img src="{{ URL::asset('images/logo.png') }}" alt="Logo_Rhythmatize"></a>
+        <a class="navbar-brand" href="/"><img src="{{ URL::asset('images/logo.png') }}" alt="Logo_Rhythmatize"></a>
         <ul class="navbar-nav me-auto justify-content-evenly w-25 mb-2 mb-lg-0">
           <li class="nav-item">
             <div class="dropdown">
@@ -28,10 +28,10 @@
           </li>
           </li> 
           <li class="nav-item">
-            <a class="header_button" href="#">Artists</a>
+            <a class="header_button" href="{{ url('/artist_list')}}">Artists</a>
           </li> 
           <li class="nav-item">
-            <a class="header_button" href="#">Albums</a>
+            <a class="header_button" href="{{ url('/album_list')}}">Albums</a>
           </li>
         </ul>
         <form class="d-flex mt-3 ">
@@ -50,7 +50,7 @@
     </div>
   </nav>
 
-<div class="">
+<div>
   @yield('content')
 </div>
 
@@ -91,7 +91,7 @@
                 <a href="#" class="links_button">Last Added</a>
             </div>
             <div class="links_buttons">
-                <a href="#" class="links_button">List</a>
+                <a href="{{ url('/album_list')}}" class="links_button">List</a>
             </div>
         </div>
         <div class="Artists_part">
@@ -105,7 +105,7 @@
                 <a href="#" class="links_button">Last Added</a>
             </div>
             <div class="links_buttons">
-                <a href="#" class="links_button">List</a>
+                <a href="{{ url('/artist_list')}}" class="links_button">List</a>
             </div>
         </div>
         <div class="Songs_part">

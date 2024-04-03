@@ -1,7 +1,3 @@
-@php
-    use App\Http\Controllers\AlbumController;
-
-@endphp
 @extends ('layouts.app')
 
 
@@ -55,13 +51,13 @@
                             $artist = \App\Models\Artist::find($album->artist_id); 
                             $album_name = explode(" ", $album->name); $album_name = array_slice($album_name, 0, 5);  $album_name = implode(" ", $album_name); 
                         @endphp
-                        <div class="hide-text" style="background-image: url({{url ($album->cover_url)}}); height: 175px; width: 30%; background-size: cover; background-position: center center; background-repeat: no-repeat; margin-bottom: 10px;">
+                        <div class="hide-text" style="background-image: url({{url ($album->cover_url)}}); height: 170px; width: 29%; background-size: cover; background-position: center center; background-repeat: no-repeat; margin-bottom: 10px;">
                             <p style="font-size: 12px">{{ $artist-> name }}</p>
                             <p style="font-size: 15px">{{ $album_name }}</p>
                         </div>
                     @endforeach
                 </div>
-                <div style="width: 100%; display: flex;  justify-content: center;">
+                <div class="button-div">
                     <button class="see_more_button" type="submit">See more</button>
                 </div>
             </div>
@@ -74,12 +70,12 @@
                 </div>
                 <div class="albums_3">
                     @foreach ($artists as $artist)
-                        <div class="hide-text" style="background-image: url({{url ($artist->picture_url)}}); height: 175px; width: 30%; background-size: cover; background-repeat: no-repeat; margin-bottom: 10px;">
-                            <p style="font-size: 12px">{{ $artist-> name }}</p>
+                        <div class="hide-text" style="background-image: url({{url ($artist->picture_url)}}); height: 170px; width: 29%; background-size: cover; background-repeat: no-repeat; margin-bottom: 10px;">
+                            <p style="font-size: 19px">{{ $artist-> name }}</p>
                         </div>
                     @endforeach
                 </div>
-                <div style="width: 100%; display: flex;  justify-content: center;">
+                <div class="button-div">
                     <button class="see_more_button" type="submit">See more</button>
                 </div>
 
@@ -96,13 +92,13 @@
                             $artist = \App\Models\Artist::find($album->artist_id);
                             $track_name = explode(" ", $track->name); $track_name = array_slice($track_name, 0, 5);  $track_name = implode(" ", $track_name); 
                         @endphp
-                            <div class="hide-text" style="background-image: url({{url ($album->cover_url)}}); height: 175px; width: 30%; background-size: cover; background-position: center center; background-repeat: no-repeat; margin-bottom: 10px;">
+                            <div class="hide-text" style="background-image: url({{url ($album->cover_url)}}); height: 170px; width: 29%; background-size: cover; background-position: center center; background-repeat: no-repeat; margin-bottom: 10px;">
                                 <p style="font-size: 12px">{{ $artist-> name }}</p>
                                 <p style="font-size: 15px">{{ $track_name }}</p>
                             </div>
                         @endforeach
                     </div>
-                    <div style="width: 100%; display: flex;  justify-content: center;">
+                    <div class="button-div">
                         <button class="see_more_button" type="submit">See more</button>
                     </div>
             </div>

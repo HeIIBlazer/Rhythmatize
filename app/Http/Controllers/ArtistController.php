@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Artist;
-use app\Models\Album;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -15,8 +15,8 @@ class ArtistController extends Controller
      */
     public function index()
     {
-        $artists = Artist::orderBy('created_at', 'desc')->get();
-        return view('artists.index', compact('artists'));
+        $artists = DB::table("artists")->paginate(12);
+        return view('artist_views.artistsList', compact('artists'));
     }
 
     public function top_3_artists()

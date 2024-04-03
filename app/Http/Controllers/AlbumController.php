@@ -15,8 +15,8 @@ class AlbumController extends Controller
      */
     public function index()
     {
-        $albums = Album::all();
-        return view('albums.index', compact('albums'));
+        $albums = DB::table("albums")->paginate(12);
+        return view('album_views.albumsList', compact('albums'));
     }
 
     public function show_top_3_albums() {
