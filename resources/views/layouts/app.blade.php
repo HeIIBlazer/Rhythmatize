@@ -21,7 +21,7 @@
               <a class="header_button" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">Charts</a>
               <ul class="dropdown-menu dropdown-menu-dark slim-dropdown-menu" aria-labelledby="dropdownMenuLink">
                 <li><a class="dropdown-item" href="#">Artists</a></li>
-                <li><a class="dropdown-item" href="#">Albums</a></li>
+                <li><a class="dropdown-item" href="{{ url('/album_chart')}}">Albums</a></li>
                 <li><a class="dropdown-item" href="#">Tracks</a></li>
               </ul>
             </div>
@@ -50,10 +50,7 @@
     </div>
   </nav>
 
-<div>
   @yield('content')
-</div>
-
 
 <div class="footer">
     <div class="socials_part mt-4 ">
