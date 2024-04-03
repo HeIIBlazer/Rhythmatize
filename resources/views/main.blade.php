@@ -29,7 +29,7 @@
                 @endforeach
                 </div>
                     
-                <div style="width: 25%">
+                <div class="w-100 d-flex justify-content-center">
                     <button class="see_more_button" type="submit">See more</button>
                 </div>
             </div>
@@ -78,31 +78,31 @@
                 <div class="button-div">
                     <button class="see_more_button" type="submit">See more</button>
                 </div>
+            </div>
 
-                <div class="w-100">
-                    <div class="h2-header">
-                        <div class="line"></div>
-                        <h2 class="h2-text">TRACKS</h2>
-                        <div class="line"></div>
-                    </div>
-                    <div class="albums_3">
-                        @foreach ($tracks as $track)
-                        @php
-                            $album = \App\Models\Album::find($track->album_id); 
-                            $artist = \App\Models\Artist::find($album->artist_id);
-                            $track_name = explode(" ", $track->name); $track_name = array_slice($track_name, 0, 5);  $track_name = implode(" ", $track_name); 
-                        @endphp
-                            <div class="hide-text" style="background-image: url({{url ($album->cover_url)}}); height: 170px; width: 29%; background-size: cover; background-position: center center; background-repeat: no-repeat; margin-bottom: 10px;">
-                                <p style="font-size: 12px">{{ $artist-> name }}</p>
-                                <p style="font-size: 15px">{{ $track_name }}</p>
-                            </div>
-                        @endforeach
-                    </div>
-                    <div class="button-div">
-                        <button class="see_more_button" type="submit">See more</button>
-                    </div>
+            <div class="w-100">
+                <div class="h2-header">
+                    <div class="line"></div>
+                    <h2 class="h2-text">TRACKS</h2>
+                    <div class="line"></div>
+                </div>
+                <div class="albums_3">
+                    @foreach ($tracks as $track)
+                    @php
+                        $album = \App\Models\Album::find($track->album_id); 
+                        $artist = \App\Models\Artist::find($album->artist_id);
+                        $track_name = explode(" ", $track->name); $track_name = array_slice($track_name, 0, 5);  $track_name = implode(" ", $track_name); 
+                    @endphp
+                        <div class="hide-text" style="background-image: url({{url ($album->cover_url)}}); height: 170px; width: 29%; background-size: cover; background-position: center center; background-repeat: no-repeat; margin-bottom: 10px;">
+                            <p style="font-size: 12px">{{ $artist-> name }}</p>
+                            <p style="font-size: 15px">{{ $track_name }}</p>
+                        </div>
+                    @endforeach
+                </div>
+                <div class="button-div">
+                    <button class="see_more_button" type="submit">See more</button>
+                </div>
             </div>
         </div>
-
     </div>
 @endsection

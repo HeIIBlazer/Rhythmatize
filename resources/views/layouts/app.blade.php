@@ -110,13 +110,10 @@
         </div>
         <div class="Songs_part">
             <div>
-                <p class="links_header">SONG</p>
+                <p class="links_header">TRACKS</p>
             </div>
             <div class="links_buttons">
                 <a href="#" class="links_button">Charts</a>
-            </div>
-            <div class="links_buttons">
-                <a href="#" class="links_button">Last Added</a>
             </div>
         </div>
     </div>
@@ -126,7 +123,7 @@
 
     <div class="Copyright_part">
         <div class="copyright_text">
-            <p>@ 2024 Copyright: <br>rhythmatize.com</p>
+            <p>&copy; 2024 Copyright: <br>rhythmatize.com</p>
         </div>
     </div>
 </div>
