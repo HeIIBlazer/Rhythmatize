@@ -28,24 +28,36 @@
           </li>
           </li> 
           <li class="nav-item">
-            <a class="header_button" href="{{ url('/artist_list')}}">Artists</a>
+            <a class="header_button" href="{{ url ('/artist_list')}}">Artists</a>
           </li> 
           <li class="nav-item">
-            <a class="header_button" href="{{ url('/album_list')}}">Albums</a>
+            <a class="header_button" href="{{ url ('/album_list')}}">Albums</a>
           </li>
         </ul>
         <form class="d-flex mt-3 ">
           <input class="form-control rounded-0 mr-5" type="search" placeholder="Search" aria-label="Search">
           <button class="search_button" type="submit">Search</button>
         </form>
+        @if(Auth::guest())
         <div class="login_buttons">
           <div class="mb-2">
-            <a href="#" class="login_button">LOG IN</a>
+            <a class="login_button" href="{{url ('/login')}}">LOG IN</a>
           </div>
           <div>
-            <a href="#" class="login_button">SIGN UP</a>
+            <a class="login_button" href="{{url ('/registration')}}">SIGN UP</a>
           </div>
         </div>
+        @else
+        <li class="nav-item">
+          <div class="dropdown">
+            <a class="header_button" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"><img src="{{url (Auth::user()-> avatar_url)}}" alt="" style="width: 75px; height: 75px;"></a>
+            <ul class="dropdown-menu dropdown-menu-dark slim-dropdown-menu" aria-labelledby="dropdownMenuLink">
+              <li><a class="dropdown-item" href="{{ url('/account')}}">View profile</a></li>
+              <li><a class="dropdown-item" href="{{url ('/logout')}}">Log out</a></li>
+            </ul>
+          </div>
+        </li>
+        @endif
       </div>
     </div>
   </nav>
@@ -116,6 +128,12 @@
                 <a href="#" class="links_button">Last Added</a>
             </div>
         </div>
+          @if(Auth::check() && Auth::user()->role)
+          <div class="h-100 d-flex align-items-center justify-content-center">
+            <a href="{{url ('/track_chart')}}" class="links_header">ADMIN</a>
+          </div>
+          @else
+          @endif
     </div>
 
     <div class="vertical_line">

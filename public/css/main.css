@@ -117,6 +117,8 @@ body {
     font-family: 'audiowide', sans-serif;
     font-size: 22px;
     text-align: left;
+    color: white;
+        text-decoration: none;
 }
 
 .links_buttons {

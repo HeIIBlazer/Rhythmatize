@@ -14,8 +14,22 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::orderBy('created_at', 'desc')->get();
-        return view('users.index', compact('users'));
+        $roles = array('admin', 'user');
+        $users = User::orderBy('name', 'acs')->get();
+        return view('users.index', compact('users', 'roles'));
+    }
+
+    public function userByrole(Request $request)
+    {
+        $roles = array('admin', 'user');
+        $data = $request->all();
+        $selectRole = $data['role'];
+        if ($data['role'] == "0") {
+            return redirect('/users');
+        } else {
+            $users = User::where('role', 'LIKE', $data['role'])->get();
+            return view('users.index', compact('users', 'roles', 'selectRole'));
+        }
     }
 
     /**
@@ -57,13 +71,13 @@ class UserController extends Controller
 
     public function form_register()
     {
-        return view('users.register');
+        return view('user_views.registration');
     }
 
     public function store_register(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
+            'username' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
             'password_confirmation' => 'required',
@@ -72,13 +86,15 @@ class UserController extends Controller
 
         //Запрос на добавление пользователя
         User::create([
-            'name' => $request->name,
+            'username' => $request->username,
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'role' => 'user',
-        ]);
+            'avatar_url' => '0',
+            'description' => 'NO DESCRIPTION',
+         ]);
 
-        return view('users.registerResult');
+         return redirect('/');
     }
 
     /**
@@ -94,7 +110,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        $roles = array('admin', 'manager', 'user');
+        $roles = array('admin', 'user');
         return view('users.edit', compact('roles', 'user'));
     }
 
