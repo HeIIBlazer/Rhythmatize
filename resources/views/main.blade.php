@@ -95,7 +95,7 @@
                         @endphp
                             <div class="hide-text" style="background-image: url({{url ($album->cover_url)}}); height: 170px; width: 29%; background-size: cover; background-position: center center; background-repeat: no-repeat; margin-bottom: 10px;">
                                 <p style="font-size: 12px">{{ $artist-> name }}</p>
-                                <p style="font-size: 15px">{{ $track_name -}}</p>
+                                <p style="font-size: 15px">{{ $track_name }}</p>
                             </div>
                         @endforeach
                     </div>
