@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AlbumController;
 use App\Http\Controllers\ArtistController;
 use App\Http\Controllers\TrackController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,3 +36,11 @@ Route::get('/last_added_artists', [ArtistController::class, 'last_added']);
 
 // TRACKS
 Route::get('/track_chart', [TrackController::class, 'charts']);
+
+//LOGIN
+Route::get('/login', [AuthController::class, 'login']);
+Route::post('/login_auth', [AuthController::class, 'authenticate']);
+Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+
+Route::get('/registration', [UserController::class, 'form_register']);
+Route::post('/register', [UserController::class, 'store_register']);
