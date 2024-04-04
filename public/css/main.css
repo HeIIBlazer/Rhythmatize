@@ -79,6 +79,19 @@ body {
     background-color: transparent;
 }
 
+.avatar-button {
+    list-style: none;
+    width: 5%;
+    height: 50px;
+    color: white;
+    font-size: 15px;
+    text-align: center;
+    text-decoration: none;
+    font-weight: bold;
+    font-family: 'Montserrat', sans-serif;
+
+}
+
 
 /* FOOTER STYLES */
 .footer {
@@ -498,7 +511,6 @@ body {
     display: flex;
     flex-direction: row;
     width: 100%;
-
     align-items: center;
 
 }
@@ -608,4 +620,95 @@ body {
     height: 100%;
     justify-content: end;
     align-items: center;
+}
+
+/* LOGIN AND REGISTER */
+
+.h {
+    height: 66%;
+}
+
+.login {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 500px;
+    height: 100%;
+    background: #2C2C2C;
+    box-shadow: 10px 10px 4px #00000054;
+    border-radius: 10px;
+}
+
+.cross {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+    margin-top: 15px;
+    margin-right: 30px;
+}
+
+.login-header {
+    color: white;
+    text-align: center;
+    font-size: 70px;
+    font-family: 'audiowide', sans-serif;
+}
+
+.login-input {
+    width: 80%;
+    height: 57px;
+    background-color: transparent;
+    border: 2px solid white;
+    border-radius: 5px;
+    font-size: 22px;
+    color: white;
+    
+}
+
+.form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: center;
+    align-items: center ;
+}
+
+.login-button {
+    width: 40%;
+    height: 41px;
+    background-color: transparent;
+    border: 4px solid #864334;
+    border-radius: 4px;
+    font-size: 22px;
+    color: white;
+    font-family: 'audiowide', sans-serif;
+}
+
+.login-button:hover {
+    background-color: #864334;
+    transition: 0.3s;
+}
+
+.login-undertext {
+    color: white;
+    font-size: 17px;
+    font-family: 'Montserrat', sans-serif;
+    margin-top: 10px;
+}
+
+.login-undertext-button {
+    color: white;
+    font-size: 17px;
+    font-family: 'Montserrat', sans-serif;
+    margin-top: 10px;
+    text-decoration: none;
+    transition: ease all .3s;
+}
+
+.login-undertext-button:hover {
+    text-decoration: underline;
+    transition: ease all .3s;
 }

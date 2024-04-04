@@ -48,11 +48,15 @@
           </div>
         </div>
         @else
-        <li class="nav-item">
+        <li class="avatar-button">
           <div class="dropdown">
-            <a class="header_button" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"><img src="{{url (Auth::user()-> avatar_url)}}" alt="" style="width: 75px; height: 75px;"></a>
+            @if(Auth::user() -> avatar_url == 0)
+            <a class="header_button" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"><img src="{{URL::asset('images/default-user.jpg') }}" alt="" style="width: 45px; height: 45px; border-radius: 50px; object-fit: inherit;"></a>
+            @else
+            <a class="header_button" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"><img src="{{url (Auth::user()-> avatar_url)}}" alt="" style="width: 45px; height: 45px; border-radius: 50px; "></a>
+            @endif
             <ul class="dropdown-menu dropdown-menu-dark slim-dropdown-menu" aria-labelledby="dropdownMenuLink">
-              <li><a class="dropdown-item" href="{{ url('/account')}}">View profile</a></li>
+              <li><a class="dropdown-item" href="{{ url('/account')}}">Profile</a></li>
               <li><a class="dropdown-item" href="{{url ('/logout')}}">Log out</a></li>
             </ul>
           </div>

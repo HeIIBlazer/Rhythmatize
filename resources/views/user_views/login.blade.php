@@ -1,34 +1,38 @@
 @extends('layouts.app')
 
 @section('content')
-    <div>
-        <div>
-
-        </div>
-        <div>
-            <p>LOG IN</p>
-        </div>
-        @if (session()->has('error'))
-        <div class="alert alert-danger">
-            {{session()->get('error')}}
-        </div>
-        @endif
-        <div>
-            <form action="{{url('/login_auth')}}" method="POST">
-                @csrf
+    <div class="container h-50 d-flex justify-content-center mt-5">
+        <div class="login">
+            <div class="cross">
+                <a href="/"><img src="{{URL::asset('images/cross.png')}}" alt="" style="width: 30px; height: 30px;"></a>
+            </div>
+            <div class="w-100">
                 <div>
-                    <input type="email" class="form-control" name="email" placeholder="Email" required autofocus>
+                    <h1 class="login-header">LOG IN</h1>
                 </div>
-                <div>
-                    <input type="password" class="form-control" name="password" placeholder="Password" required autofocus>
+                @if (session()->has('error'))
+                <div class="alert alert-danger">
+                    {{session()->get('error')}}
                 </div>
-                <div>
-                    <button type="submit" class="" name="login">Log in</button>
+                @endif
+                <div class="d-flex w-100 flex-column justify-content-center align-items-center h-75">
+                    <form action="{{url('/login_auth')}}" method="POST" class="form">
+                        @csrf
+                        <div class="w-100 d-flex justify-content-center align-center mt-3">
+                            <input type="email" class="login-input" name="email" placeholder="Email" required autofocus>
+                        </div>
+                        <div class="w-100 d-flex justify-content-center align-center mt-3 mb-4">
+                            <input type="password" class="login-input" name="password" placeholder="Password" required autofocus>
+                        </div>
+                        <div class="w-100 d-flex justify-content-center mt-2 mb-0">
+                            <button type="submit" class="login-button" name="login">Log in</button>
+                        </div>
+                    </form>
+                    <hr style="border: 1px solid white; width:80%;">
+                    <div>
+                        <p class="login-undertext">You don't have an account? <a href="/registration" class="login-undertext-button">Create account here.</a></p>
+                    </div>
                 </div>
-            </form>
-            <hr>
-            <div>
-                <p>You don't have an account? <a>Create account here.</a></p>
             </div>
         </div>
     </div>
