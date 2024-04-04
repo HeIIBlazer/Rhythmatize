@@ -11,7 +11,7 @@
                     <p class="login-header">SIGN UP</p>
                 </div>
                 @if (session()->has('error'))
-                <div class="alert alert-danger">
+                <div class="alert error-login">
                     {{session()->get('error')}}
                 </div>
                 @endif
@@ -34,7 +34,7 @@
                             <button type="submit" class="login-button" name="login">Sign up</button>
                         </div>
                     </form>
-                    <hr style="border: 1px solid white; width:80%;">
+                    <hr style="border: 1px solid white; width:80%; margin-top: 1px;">
                     <div>
                         <p class="login-undertext">You already have an account? <a href="/login" class="login-undertext-button">Log in here.</a></p>
                     </div>

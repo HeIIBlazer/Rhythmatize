@@ -66,6 +66,7 @@ class UserController extends Controller
             'description' => $request->description,
 
         ]);
+        
         return redirect('/users');
     }
 
@@ -76,13 +77,27 @@ class UserController extends Controller
 
     public function store_register(Request $request)
     {
+
+        $userExistsEmail = User::where('email', $request->email)->first();
+        $userExistsUsername = User::where('username', $request->username)->first();
+        if ($userExistsEmail && $userExistsUsername) {
+            return redirect('/registration')->with('error', 'The username and email is already in use.');
+        }elseif ($userExistsUsername) {
+            return redirect('/registration')->with('error', 'The username is already in use.');
+        }elseif ($userExistsEmail) {
+            return redirect('/registration')->with('error', 'The email is already in use.');
+        }
+
         $request->validate([
             'username' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
-            'password_confirmation' => 'required',
-
+            'password' => 'required|string|min:6|',
+            'password_confirmation' => 'required|string|min:6|',
         ]);
+
+        if($request->password != $request->password_confirmation){
+            return redirect('/registration')->with('error', 'Passwords do not match.');
+        }
 
         //Запрос на добавление пользователя
         User::create([
@@ -94,7 +109,12 @@ class UserController extends Controller
             'description' => 'NO DESCRIPTION',
          ]);
 
-         return redirect('/');
+         if (auth()->attempt([
+            'email' => $request->email,
+            'password' => $request->password
+        ])) {
+            return redirect('/'); // or any other page for logged-in users
+        }
     }
 
     /**

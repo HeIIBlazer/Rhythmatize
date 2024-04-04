@@ -89,7 +89,6 @@ body {
     text-decoration: none;
     font-weight: bold;
     font-family: 'Montserrat', sans-serif;
-
 }
 
 
@@ -624,10 +623,6 @@ body {
 
 /* LOGIN AND REGISTER */
 
-.h {
-    height: 66%;
-}
-
 .login {
     display: flex;
     flex-direction: column;
@@ -711,4 +706,12 @@ body {
 .login-undertext-button:hover {
     text-decoration: underline;
     transition: ease all .3s;
+}
+
+.error-login {
+    margin-top: 0;
+    text-align: center;
+    height: 2%;
+    color: red;
+    /* width: 80%; */
 }
