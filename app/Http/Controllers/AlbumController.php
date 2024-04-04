@@ -58,6 +58,14 @@ class AlbumController extends Controller
         return view('main', compact('albums', 'lastAdded', 'artists', 'tracks'));
     }
 
+    public function search(Request $request)
+    {
+        $search = $request->get('search');
+        $albums = Album::select('albums.*')->where('name', 'like', '%'.$search.'%')->limit(6)->get();
+        $artists = Artist::select('artists.*')->where('name', 'like', '%'.$search.'%')->limit(6)->get();
+        $tracks = Track::select('tracks.*')->where('name', 'like', '%'.$search.'%')->limit(4)->get();
+        return view('searchResult', compact('albums', 'artists', 'tracks'));
+    }
 
     /**
      * Show the form for creating a new resource.

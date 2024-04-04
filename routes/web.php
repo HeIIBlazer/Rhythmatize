@@ -34,3 +34,6 @@ Route::get('/last_added_artists', [ArtistController::class, 'last_added']);
 
 // TRACKS
 Route::get('/track_chart', [TrackController::class, 'charts']);
+
+// SEARCH
+Route::get('/search', [AlbumController::class, 'search']);
