@@ -15,19 +15,25 @@ class AlbumController extends Controller
      */
     public function index()
     {
-        $albums = Album::all();
+        $albums = DB::table("albums")->paginate(12);
         return view('album_views.albumsList', compact('albums'));
     }
 
-    public function show_top_3_albums() {
-        $albums = Album::orderBy('id', 'desc')->take(3)->get();
-        return view('main', compact('albums'));
+    public function charts() 
+    {
+        $albums = DB::table("albums")->select('albums.*', DB::raw('count(like_albums.id) as likes_count'))
+                        ->leftJoin('like_albums', 'albums.id', '=', 'like_albums.album_id')
+                        ->groupBy('albums.id', 'albums.name' , 'albums.cover_url', 'albums.release_date', 'albums.description', 'albums.youtube_link', 'albums.spotify_link', 'albums.apple_music_link', 'albums.type', 'albums.artist_id')
+                        ->orderBy('likes_count', 'desc')
+                        ->paginate(10);
+
+        return view('album_views.albumsChart', compact('albums'));
     }
 
     public function top_3_albums()
     {
         $albums = Album::select('albums.*', DB::raw('count(like_albums.id) as likes_count'))
-                        ->leftJoin('like_albums', 'albums.id', '=', 'like_albums.album_id')
+                        ->leftJoin('like_albums', 'albums.id', '=', 'albums.id')
                         ->groupBy('albums.id', 'albums.name' , 'albums.cover_url', 'albums.release_date', 'albums.description', 'albums.youtube_link', 'albums.spotify_link', 'albums.apple_music_link', 'albums.type', 'albums.artist_id')
                         ->orderBy('likes_count', 'desc')
                         ->limit(3)
@@ -57,10 +63,11 @@ class AlbumController extends Controller
      * Show the form for creating a new resource.
      */
 
-    // public function last_added_3(){
-    //     $albums = Album::orderBy('id', 'desc')->take(3)->get();
-    //     return view('main', compact('albums'));
-    // }
+    public function last_added()
+    {
+        $albums = DB::table("albums")->orderBy('id', 'desc')->paginate(12);
+        return view('album_views.lastAddedAlbums', compact('albums'));
+    }
 
     public function create()
     {
