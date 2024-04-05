@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
+use function Laravel\Prompts\error;
+
 class AuthController extends Controller
 {
     public function login()
@@ -22,13 +24,13 @@ class AuthController extends Controller
 
         $credentials = $request->only('email', 'password');
         if (auth::attempt($credentials)) {
-            return redirect('/');
+            redirect()->back();
         }
-        return redirect('login')->with('error', 'Username or password is incorrect');
+        return redirect()->back()->with('error_login', 'Username or password is incorrect');
     }
     public function logout()
     {
         auth::logout();
-        return redirect('/');
+        return redirect()->back();
     }
 }

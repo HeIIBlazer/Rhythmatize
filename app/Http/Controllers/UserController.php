@@ -81,11 +81,11 @@ class UserController extends Controller
         $userExistsEmail = User::where('email', $request->email)->first();
         $userExistsUsername = User::where('username', $request->username)->first();
         if ($userExistsEmail && $userExistsUsername) {
-            return redirect('/registration')->with('error', 'The username and email is already in use.');
+            return redirect()->back()->with('error_signup', 'The username and email is already in use.');
         }elseif ($userExistsUsername) {
-            return redirect('/registration')->with('error', 'The username is already in use.');
+            return redirect()->back()->with('error_signup', 'The username is already in use.');
         }elseif ($userExistsEmail) {
-            return redirect('/registration')->with('error', 'The email is already in use.');
+            return redirect()->back()->with('error_signup', 'The email is already in use.');
         }
 
         $request->validate([
@@ -96,7 +96,7 @@ class UserController extends Controller
         ]);
 
         if($request->password != $request->password_confirmation){
-            return redirect('/registration')->with('error', 'Passwords do not match.');
+            return redirect()->back()->with('error_signup', 'Passwords do not match.');
         }
 
         //Запрос на добавление пользователя
@@ -107,13 +107,13 @@ class UserController extends Controller
             'role' => 'user',
             'avatar_url' => '0',
             'description' => 'NO DESCRIPTION',
-         ]);
+        ]);
 
-         if (auth()->attempt([
+        if (auth()->attempt([
             'email' => $request->email,
             'password' => $request->password
         ])) {
-            return redirect('/'); // or any other page for logged-in users
+            return redirect()->back(); // or any other page for logged-in users
         }
     }
 
