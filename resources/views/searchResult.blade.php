@@ -22,11 +22,20 @@
             @endforeach
         </div>
     </div>
-    <div class="h2-header d-flex justify-content-evenly flex-wrap">
+    <div class="h2-header d-flex justify-content-evenly flex-column">
         <h2 class="h2-text w-100">Artists</h2>
-        @foreach ($artists as $artist)
-        <div></div>
-        @endforeach
+        <div class="d-flex flex-row w-100">
+            @foreach ($artists as $artist)
+            <div class="card">
+                <div class="mt-2 mb-4 d-flex justify-content-center">
+                    <img src="{{url ($artist -> picture_url)}}" alt="" style="width: 185px; height: 185px; border-radius: 5px; object-fit: cover;">
+                </div>
+                <div style="margin-left: 10px; max-width: 100%;">
+                    <p class="card-text-bigger-artist">{{$artist -> name}}</p>
+                </div>
+            </div>
+            @endforeach
+        </div>
     </div>
     <div class="h2-header d-flex justify-content-evenly flex-wrap">
         <h2 class="h2-text w-100 justify-content-start">Tracks</h2>
