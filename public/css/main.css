@@ -7,6 +7,23 @@ body {
     flex-direction: column;
     background-color: #202020;
 }
+.modal-content {
+    max-height: 100%;
+    overflow: hidden;
+    background-color: transparent;
+}
+
+.cross-button {
+    background-color: transparent;
+    border: none;
+    font-size: 32px; /* Adjust this value to increase or decrease the size of the cross */
+    width: 32px;
+    height: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
 /* HEADER STYLES */
 .login_buttons {
     width:5%;
@@ -20,13 +37,15 @@ body {
 
 .login_button {
     width: 100%;
-    height: 50px;
+    height: 22px;
     color: white;
     font-size: 15px;
     text-align: center;
     text-decoration: none;
     font-weight: bold;
     font-family: 'Montserrat', sans-serif;
+    background-color: transparent;
+    border: none;
 }
 
 .login_button:hover {
@@ -659,7 +678,7 @@ body {
     border-radius: 5px;
     font-size: 22px;
     color: white;
-    
+    padding-left: 15px;
 }
 
 .form {
@@ -709,6 +728,13 @@ body {
 }
 
 .error-login {
+    margin-top: 0;
+    text-align: center;
+    height: 2%;
+    color: red;
+    /* width: 80%; */
+}
+.error-login-1 {
     margin-top: 0;
     text-align: center;
     height: 2%;
