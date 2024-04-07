@@ -118,4 +118,10 @@ class ArtistController extends Controller
         $artist->delete();
         return redirect()->route('artists.index');
     }
+
+    public function show_artist (Artist $artist)
+    {
+        $albums = DB::table('albums')->where('artist_id', $artist->id)->get();
+        return view('artist_views.artistInfo', compact('artist'));
+    }
 }

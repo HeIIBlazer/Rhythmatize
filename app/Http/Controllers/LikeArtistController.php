@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\LikeArtist;
 use Illuminate\Http\Request;
+use App\Models\Artist;
 
 class LikeArtistController extends Controller
 {
@@ -26,15 +27,28 @@ class LikeArtistController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function like(Artist $artist)
     {
-        $request->validate([
-            'user_id' => 'required',
-            'artist_id' => 'required',
+        $artist_id = $artist->id;
+        $user_id = auth()->user()->id;
+
+        LikeArtist::create([
+            'artist_id' => $artist_id,
+            'user_id' => $user_id
         ]);
 
-        LikeArtist::create($request->all());
-        return redirect()->route('artists.show', $request->artist_id);
+        return redirect()->back();
+    }
+
+    public function unlike(Artist $artist)
+    {
+        $artist_id = $artist->id;
+        $user_id = auth()->user()->id;
+
+        $like = LikeArtist::where('artist_id', $artist_id)->where('user_id', $user_id)->first();
+        $like->delete();
+
+        return redirect()->back();
     }
 
     /**
