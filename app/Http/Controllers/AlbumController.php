@@ -67,6 +67,11 @@ class AlbumController extends Controller
         return view('searchResult', compact('albums', 'artists', 'tracks'));
     }
 
+    public function album_show(Album $album) {
+        $tracks = DB::table('tracks')->where('album_id', $album->id)->get();
+        return view('album_views.albumShow', compact('album', 'tracks'));
+    }
+
     /**
      * Show the form for creating a new resource.
      */
