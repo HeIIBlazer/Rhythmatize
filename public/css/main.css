@@ -526,6 +526,7 @@ body {
     flex-direction: row;
     width: 100%;
     align-items: center;
+    text-decoration: none;
 
 }
 
@@ -607,6 +608,7 @@ body {
     font-size: 25px;
     font-weight: 600;
     color: white;
+    text-decoration: none;
 }
 
 .chart-like-text {

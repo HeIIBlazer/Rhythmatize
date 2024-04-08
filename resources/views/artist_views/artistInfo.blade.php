@@ -16,8 +16,8 @@
     }   
     @endphp
 
-    <div style="width: 100%; height: 300px;">
-        <img src="{{url ($artist -> banner_url)}}" alt="" style="width: 100%; height: 400px; object-fit:cover; object-position: 50% 50%;">
+    <div style="width: 100%; height: 200px;">
+        <img src="{{url ($artist -> banner_url)}}" alt="" style="width: 100%; height: 300px; object-fit:cover; object-position: 50% 50%;">
     </div>
     <div class="container">
     <div class="w-25">

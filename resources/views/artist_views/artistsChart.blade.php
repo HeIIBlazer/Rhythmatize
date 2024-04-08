@@ -1,6 +1,6 @@
-@extends ('layouts.app')
+@extends ('layouts.app', ['title' => 'Artists Chart'])
 
-@section('content', ['title' => 'Artists Chart'])
+@section('content')
 <div class="container">
     <div class="Header-Charts">
         <p>ARTISTS CHART</p>
@@ -18,7 +18,7 @@
                             ->where('like_artists.artist_id', $artist->id)
                             ->count();
         @endphp
-            <div class="chart-line">
+            <a href="/artist/{{$artist-> id}}" class="chart-line">
                 <div class="number">
                     <span class="numbers w-100">{{$i}}.</span>
                 </div>
@@ -32,7 +32,7 @@
                     <img src="{{asset('images/like.png')}}" alt="" style="width: 22px; height: 22px; margin-right: 6px;">
                     <span class="chart-like-text-artist">{{$artist_likes}}</span>
                 </div>
-            </div>
+            </a>
             <hr style="border: 1px white solid; margin-top: 8px">
             @php
             $i++;

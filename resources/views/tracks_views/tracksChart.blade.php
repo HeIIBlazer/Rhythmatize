@@ -31,7 +31,7 @@
                     <span class="chart-text-big">{{$track -> name}}</span>
                 </div>
                 <div class="chart-small">
-                    <span class="chart-small-text">{{$artist -> name}}</span>
+                    <a class="text-decoration-none" href="/artist/{{$artist -> id}}"><span class="chart-small-text">{{$artist -> name}}</span></a>
                 </div>
                 <div class="chart-like">
                     <img src="{{asset('images/like.png')}}" alt="" style="width: 22px; height: 22px; margin-right: 6px;">
