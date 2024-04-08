@@ -34,8 +34,8 @@
             <a class="header_button" href="{{ url ('/album_list')}}">Albums</a>
           </li>
         </ul>
-        <form class="d-flex mt-3 " method="GET" action={{ url('/search') }}>
-          <input class="form-control rounded-0 mr-5" type="search" placeholder="Search" aria-label="Search">
+        <form class="d-flex mt-3 " method="GET" action="{{ url('/search') }}">
+          <input class="form-control rounded-0 mr-5" name="search" type="search" placeholder="Search" aria-label="Search">
           <button class="search_button" type="submit">Search</button>
         </form>
         @if(Auth::guest())

@@ -60,10 +60,22 @@ class AlbumController extends Controller
 
     public function search(Request $request)
     {
-        $search = $request->get('search');
+        $search = $request->input('search');
         $albums = Album::select('albums.*')->where('name', 'like', '%'.$search.'%')->limit(6)->get();
         $artists = Artist::select('artists.*')->where('name', 'like', '%'.$search.'%')->limit(6)->get();
+
+        $artist_id = $artists->first()->id;
+
+        if($albums->count() == 0 || $artists->count() == 1){
+            $albums = Album::select('albums.*')->where('artist_id', 'like', $artist_id)->limit(6)->get();
+        }
+        $album_id = $albums->first()->id;
+
         $tracks = Track::select('tracks.*')->where('name', 'like', '%'.$search.'%')->limit(4)->get();
+
+        if($tracks->count() == 0 || $artists->count() == 1){
+            $albums = Track::select('tracks.*')->where('album_id', 'like', $album_id)->limit(4)->get();
+        }
         return view('searchResult', compact('albums', 'artists', 'tracks'));
     }
 

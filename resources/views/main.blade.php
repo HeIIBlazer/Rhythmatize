@@ -29,7 +29,7 @@
                 @endforeach
                 </div>
                     
-                <div>
+                <div class="mb-3">
                     <a href="/last_added_albums"><button class="see_more_button" type="submit">See more</button></a>
                 </div>
             </div>

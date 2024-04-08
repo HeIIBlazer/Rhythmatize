@@ -242,7 +242,6 @@ body {
     display: flex;
     flex-direction: row;
     width: 100%;
-    height: 100%;
     justify-content: space-evenly;
     margin-top: 20px;
 }
@@ -359,10 +358,8 @@ body {
     text-decoration: none;
     color: white;
     border: 3px solid #864334;
-    /* margin-left: 5px; */
     background-color: transparent;
-    width: 30%;
-    /* width: 160px; */
+    margin-bottom: 8px;
 }
 .see_more_button:hover {
     background-color: #864334;
