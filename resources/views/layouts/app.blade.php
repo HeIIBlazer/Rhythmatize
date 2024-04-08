@@ -73,7 +73,7 @@
                                       <input type="email" class="login-input" name="email" placeholder="Email" required autofocus>
                                   </div>
                                   <div class="w-100 d-flex justify-content-center align-center mt-3 mb-4">
-                                      <input type="password" class="login-input" name="password" placeholder="Password" required autofocus>
+                                      <input type="password" class="login-input" name="password" placeholder="Password" minlength="6" required>
                                   </div>
                                   <div class="w-100 d-flex justify-content-center mt-2">
                                       <button type="submit" class="login-button" name="login">Log in</button>
@@ -121,10 +121,10 @@
                                       <input type="email" class="login-input" name="email" placeholder="Email" required>
                                   </div>
                                   <div class="w-100 d-flex justify-content-center align-center mt-2">
-                                      <input type="password" class="login-input" name="password" placeholder="Password" required>
+                                      <input type="password" class="login-input" name="password" placeholder="Password" minlength="6" required>
                                   </div>
                                   <div class="w-100 d-flex justify-content-center align-center mt-2">
-                                      <input type="password" class="login-input" name="password_confirmation" placeholder="Confirm Password" required>
+                                      <input type="password" class="login-input" name="password_confirmation" placeholder="Confirm Password" minlength="6" required>
                                   </div>
                                   <div class="w-100 d-flex justify-content-center mt-2 mb-0">
                                       <button type="submit" class="login-button" name="login">Sign up</button>
@@ -256,6 +256,10 @@
       }else if($('.error-login-1').length > 0){
           $('#signupModal').modal('show');
       }
+      $('.cross').click(function () {
+        // Close the modal window
+        $(this).closest('.modal').modal('hide');
+    });
   });
 </script>
 

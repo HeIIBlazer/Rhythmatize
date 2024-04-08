@@ -720,6 +720,7 @@ body {
     margin-top: 10px;
     text-decoration: none;
     transition: ease all .3s;
+    cursor: pointer;
 }
 
 .login-undertext-button:hover {
@@ -741,3 +742,8 @@ body {
     color: red;
     /* width: 80%; */
 }
+
+/* ARTIST INFO */
+.artist-img {
+    /* object-fit: fill; */
+}    

@@ -15,35 +15,59 @@
         $like = 2;
     }   
     @endphp
+
     <div style="width: 100%; height: 300px;">
-        <img src="{{url ($artist -> banner_url)}}" alt="" style="width: 100%; height: 300px; object-fit:cover;">
+        <img src="{{url ($artist -> banner_url)}}" alt="" style="width: 100%; height: 400px; object-fit:cover; object-position: 50% 50%;">
     </div>
     <div class="container">
+    <div class="w-25">
         <div>
-            <div>
-                <img src="{{url ($artist -> picture_url)}}" alt="">
+            <div class="border rounded border-light artist-img">
+                <img src="{{url ($artist -> picture_url)}}" alt="" class="w-100 ">
             </div>
         </div>
         <div>
-            <h1>{{$artist -> name}}</h1>
+            <h1 style="font-family: 'Audiowide', sans-serif; color: white">{{$artist -> name}}</h1>
         </div>
-        <div>
-        @if ($like == 0) {
-            <div>
+        <div class="d-flex flex-row">
+            @if ($like == 0) 
+            <div class="d-flex flex-row">
                 <a href="/like_artist/{{$artist -> id}}"><img src="{{asset('images/like.png')}}" alt="" style="width: 22px; height: 22px; margin-right: 6px;"></a>
             </div>
             <div>
-                <span>|{{$artist_likes}}</span>
+                <span>| {{$artist_likes}} </span>
             </div>      
-        }
-        @elseif (Auth::user() == null){
-            <button class="login_button" data-toggle="modal" data-target="#loginModal"><img src="{{asset('images/like.png')}}" alt="" style="width: 22px; height: 22px; margin-right: 6px;"></button>
-        }
-        @else ($like == 1) {
-            <a href="/unlike_artist/{{$artist -> id}}"><img src="{{asset('images/liked.png')}}" alt="" style="width: 22px; height: 22px; margin-right: 6px;"></a>
-        }
-        @endif
+            @elseif (Auth::user() == null)
+            <div>
+                <button class="login_button" data-toggle="modal" data-target="#loginModal"><img src="{{asset('images/like.png')}}" alt="" style="width: 22px; height: 22px; margin-right: 6px;"></button>
+            </div>
+            <div>
+                <span>| {{$artist_likes}} </span>
+            </div>    
+            @else ($like == 1) 
+            <div>
+                <a href="/unlike_artist/{{$artist -> id}}"><img src="{{asset('images/liked.png')}}" alt="" style="width: 22px; height: 22px; margin-right: 6px;"></a>
+            </div>
+            <div>
+                <span>| {{$artist_likes}} </span>
+            </div>    
+            @endif
+        </div>
+        <div>
+            <div>
+                <h2>About {{$artist -> name}}:</h2>
+            </div>
+            <div>
+                <p>{{$artist -> description}}</p>
+            </div>
+        </div>
+        <div>
+            <div>
+                <h1>Comment</h1>
+            </div>
         </div>
     </div>
-
-@endsection
+</div>
+    
+    @endsection
+    
