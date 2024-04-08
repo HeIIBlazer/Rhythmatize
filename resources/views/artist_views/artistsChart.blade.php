@@ -1,6 +1,6 @@
 @extends ('layouts.app')
 
-@section('content')
+@section('content', ['title' => 'Artists Chart'])
 <div class="container">
     <div class="Header-Charts">
         <p>ARTISTS CHART</p>
@@ -23,7 +23,7 @@
                     <span class="numbers w-100">{{$i}}.</span>
                 </div>
                 <div class="chart-pic">
-                    <img src="{{url ($artist -> picture_url)}}" alt="" style="width: 75px; height: 75; object-fit: cover;">
+                    <img src="{{url ($artist -> picture_url)}}" alt="" class="w-100 h-100">
                 </div>
                 <div class="chart-big">
                     <span class="chart-text-big">{{$artist -> name}}</span>

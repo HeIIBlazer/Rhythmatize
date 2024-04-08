@@ -1,3 +1,16 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+  <link rel="icon" style="width: 50px; height: 50px" type="image/x-icon" href="/images/logo_title.png">
+
+  <title>
+    @isset($title)
+        {{ $title }} 
+    @endisset
+  </title>
+
 <!-- Latest compiled and minified CSS -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -6,7 +19,7 @@
 
 <link href="{{ URL::asset('css/main.css') }}" rel="stylesheet" type="text/css" >
 
-
+</head>
 
   <nav class="navbar navbar-expand-lg navbar-black bg-black">
     <div class="container-fluid">
@@ -263,5 +276,8 @@
   });
 </script>
 
+
     <!-- Include the Bootstrap JavaScript file -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+  </html>

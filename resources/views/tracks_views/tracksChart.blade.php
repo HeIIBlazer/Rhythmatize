@@ -1,4 +1,4 @@
-@extends ('layouts.app')
+@extends ('layouts.app', ['title' => 'Tracks Chart'])
 
 @section('content')
 <div class="container">

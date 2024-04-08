@@ -1,4 +1,4 @@
-@extends ('layouts.app')
+@extends ('layouts.app', ['title' => 'Artists List'])
 
 @section('content')
 <div class="container">

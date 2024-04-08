@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app', ['title' => $artist -> name])
 
 @section('content')
     @php
