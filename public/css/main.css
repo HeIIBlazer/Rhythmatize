@@ -7,6 +7,9 @@ body {
     flex-direction: column;
     background-color: #202020;
 }
+.white-text {
+    color: white;
+}
 .modal-content {
     max-height: 100%;
     overflow: hidden;
@@ -609,6 +612,12 @@ body {
     font-weight: 600;
     color: white;
     text-decoration: none;
+    transition: ease all .10s;
+    }
+    
+    .chart-small-text:hover {
+        text-decoration: underline;
+        transition: .5s;
 }
 
 .chart-like-text {

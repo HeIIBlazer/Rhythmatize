@@ -34,8 +34,8 @@
             <div class="d-flex flex-row">
                 <a href="/like_artist/{{$artist -> id}}"><img src="{{asset('images/like.png')}}" alt="" style="width: 22px; height: 22px; margin-right: 6px;"></a>
             </div>
-            <div>
-                <span>| {{$artist_likes}} </span>
+            <div class="white-text">
+                <span style="color: white;">| {{$artist_likes}} </span>
             </div>      
             @elseif (Auth::user() == null)
             <div>
@@ -63,8 +63,19 @@
         </div>
         <div>
             <div>
-                <h1>Comment</h1>
+                <h1>Comments:</h1>
             </div>
+            @foreach($comments as $comment)
+            @php
+                $user = DB::table('users')
+                    ->where('users.id', $comment->user_id)
+                    ->first();
+            @endphp
+            <div>
+                <p>{{$user -> username}}</p>
+            </div>
+            <div>{{$comment -> content}}</div>
+            @endforeach
         </div>
     </div>
 </div>

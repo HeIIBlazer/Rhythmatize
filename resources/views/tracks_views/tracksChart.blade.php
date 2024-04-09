@@ -20,6 +20,7 @@
                             ->where('like_tracks.track_id', $track->id)
                             ->count();
         @endphp
+        
             <div class="chart-line">
                 <div class="number">
                     <span class="numbers w-100">{{$i}}.</span>

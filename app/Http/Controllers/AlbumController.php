@@ -24,7 +24,7 @@ class AlbumController extends Controller
         $albums = DB::table("albums")->select('albums.*', DB::raw('count(like_albums.id) as likes_count'))
                         ->leftJoin('like_albums', 'albums.id', '=', 'like_albums.album_id')
                         ->groupBy('albums.id', 'albums.name' , 'albums.cover_url', 'albums.release_date', 'albums.description', 'albums.youtube_link', 'albums.spotify_link', 'albums.apple_music_link', 'albums.type', 'albums.artist_id')
-                        ->orderBy('likes_count', 'desc')
+                        ->orderBy('likes_count', 'desc',)
                         ->paginate(10);
 
         return view('album_views.albumsChart', compact('albums'));

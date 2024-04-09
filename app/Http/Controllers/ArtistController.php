@@ -79,7 +79,8 @@ class ArtistController extends Controller
      */
     public function show(Artist $artist)
     {
-        return view('artists.show', compact('artist'));
+        $comments = DB::table('comment_artists')->where('artist_id', $artist->id)->get();
+        return view('artists.show', compact('artist', 'comments'));
     }
 
     /**
@@ -122,6 +123,7 @@ class ArtistController extends Controller
     public function show_artist (Artist $artist)
     {
         $albums = DB::table('albums')->where('artist_id', $artist->id)->get();
-        return view('artist_views.artistInfo', compact('artist'));
+        $comments = DB::table('comment_artists')->where('artist_id', $artist->id)->get();
+        return view('artist_views.artistInfo', compact('artist', 'comments', 'albums'));
     }
 }
