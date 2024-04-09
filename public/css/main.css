@@ -750,4 +750,65 @@ body {
 
 /* ARTIST INFO */
 
+.Info-Image {
+    width: 230px;
+    height: 230px;
+    object-fit: cover;
+    border-radius: 5px;
+    border: #808080 3px solid;
+}
 
+.info-header {
+    font-family: 'audiowide', sans-serif;
+    font-size: 35px;
+    color: white;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.background-block {
+    background-color: #373737;
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+    box-shadow: 10px 10px 4px #00000054;
+    color: white;
+    padding: 10px;
+}
+
+.read-more-button {
+    font-family: 'Montserrat', sans-serif;
+    background-color: transparent;
+    border: none;
+    font-size: 16px;
+    color: white;
+    cursor: pointer;
+    font-weight: 700;
+
+    transition: ease all 0.3;
+}
+
+.read-more-button:hover {
+    text-decoration: underline;
+    transition: ease all 0.3;
+}
+
+.desc-header {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 25px;
+    color: white;
+    margin-bottom: 20px;
+}
+
+.desc-text {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 15px;
+    color: white;
+    max-height: 200px;
+    overflow: hidden;
+}
+
+.desc-text.expanded {
+    max-height: 100%;
+    overflow: auto;
+}
