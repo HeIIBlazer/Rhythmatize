@@ -514,7 +514,7 @@ body {
     --bs-pagination-hover-border-color: var(--bs-border-color);
     --bs-pagination-focus-color: var(--bs-link-hover-color);
     --bs-pagination-focus-bg: var(--bs-secondary-bg);
-    --bs-pagination-focus-box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+    --bs-pagination-focus-box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0);
     --bs-pagination-active-color: #fff;
     --bs-pagination-active-bg: #2C2C2C;
     --bs-pagination-active-border-color: white;
