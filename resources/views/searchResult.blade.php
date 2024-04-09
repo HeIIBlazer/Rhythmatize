@@ -39,9 +39,30 @@
     </div>
     <div class="h2-header d-flex justify-content-evenly flex-wrap">
         <h2 class="h2-text w-100 justify-content-start">Tracks</h2>
-        @foreach ($tracks as $track)
-        <div></div>
-        @endforeach
+        <div class="track-list d-flex flex-wrap">
+            @if ($tracks->count() % 4 == 0)
+                @for ($i = 0; $i < $tracks->count()/2; $i+=2)
+                    <div class="column">
+                        @for ($j = $i; $j < $i+2; $j++)
+                            @php
+                                $track = $tracks[$j];
+                                $album = \App\Models\Album::find($track->album_id); 
+                                $artist = \App\Models\Artist::find($album->artist_id);
+                            @endphp
+                            <div class="track-item">
+                                <div class="track-image">
+                                    <img src="{{url ($album->cover_url)}}" alt="" style="width: 185px; height: 185px; border-radius: 5px; object-fit: cover;">
+                                </div>
+                                <div class="track-info">
+                                    <p class="track-name">{{ $track -> name }}</p>
+                                    <p class="track-artist">{{ $artist -> name }}</p>
+                                </div>
+                            </div>
+                        @endfor
+                    </div>
+                @endfor
+            @endif
+        </div>
     </div>
 </div>
 @endsection

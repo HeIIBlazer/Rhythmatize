@@ -741,3 +741,21 @@ body {
     color: red;
     /* width: 80%; */
 }
+
+/* SEARCH RESULT */
+
+.track-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  
+  .column {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+  
+  .track-item {
+    flex: 1;
+  }
