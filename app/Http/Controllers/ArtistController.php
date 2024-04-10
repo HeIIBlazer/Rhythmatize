@@ -124,6 +124,10 @@ class ArtistController extends Controller
     {
         $albums = DB::table('albums')->where('artist_id', $artist->id)->get();
         $comments = DB::table('comment_artists')->where('artist_id', $artist->id)->get();
+        if(count($comments) == 0){
+            $comments= 'NO COMMENTS';
+            return view('artist_views.artistInfo', compact('artist', 'comments', 'albums'));
+        }
         return view('artist_views.artistInfo', compact('artist', 'comments', 'albums'));
     }
 }

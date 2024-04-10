@@ -797,7 +797,6 @@ body {
     font-family: 'Montserrat', sans-serif;
     font-size: 25px;
     color: white;
-    margin-bottom: 20px;
 }
 
 .desc-text {
@@ -811,4 +810,37 @@ body {
 .desc-text.expanded {
     max-height: 100%;
     overflow: auto;
+}
+
+.comments-header {
+    font-size:25px;
+    font-family: 'Montserrat', sans-serif;
+    color: white;
+    font-weight: 600;
+}
+
+hr {
+    border: 1px white solid; margin-top: 8px
+}
+
+.comment-input{
+    word-wrap: normal;
+    width: 100%;
+    padding-left: 15px;
+    height: 35px;
+    border: 1px solid white;
+    border-radius: 5px;
+    background-color: #c1bebe49 ;
+    color:white;
+    max-height: 500px;
+}
+
+.comment-input::placeholder {
+    color: white;
+}
+
+textarea{
+    overflow:auto;
+    resize:vertical;
+    white-space:nowrap;
 }
