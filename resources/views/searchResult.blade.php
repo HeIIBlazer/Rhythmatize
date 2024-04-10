@@ -39,10 +39,10 @@
     </div>
     <div class="h2-header d-flex justify-content-evenly flex-wrap">
         <h2 class="h2-text w-100 justify-content-start">Tracks</h2>
-        <div class="track-list d-flex flex-wrap">
-            <div class="tracks-container" style="display: flex; flex-wrap: wrap;">
+        <div class="track-list d-flex flex-wrap w-100">
+            <div class="tracks-container w-100" style="display: flex; flex-wrap: wrap;">
                 @for ($i = 0; $i < $tracks->count(); $i += 2)
-                    <div class="column" style="display: flex; flex-direction: column; flex-basis: 50%;">
+                    <div class="column">
                         @for ($j = $i; $j < $i + 2; $j += 1)
                             @if ($j < $tracks->count())
                                 @php
@@ -51,14 +51,15 @@
                                     $artist = \App\Models\Artist::find($album->artist_id);
                                 @endphp
                                 <div class="track-item">
-                                    <div class="track-image">
-                                        <img src="{{url ($album->cover_url)}}" alt="" style="width: 185px; height: 185px; border-radius: 5px; object-fit: cover;">
+                                    <div>
+                                        <img src="{{url ($album->cover_url)}}" alt="" style="width: 100px; height: 100px; border-radius: 5px; object-fit: cover;">
                                     </div>
-                                    <div class="track-info">
-                                        <p class="track-name">{{ $track -> name }}</p>
-                                        <p class="track-artist">{{ $artist -> name }}</p>
+                                    <div class="track-info d-flex flex-row w-100 justify-content-between">
+                                        <p class="d-inline-block text-truncate m-3" style="min-width: 100px; max-width: 200px; font-weight: 700;">{{ $track -> name }}</p>
+                                        <p class="d-inline-block text-truncate m-3" style="min-width: 50px;">{{ $artist -> name }}</p>
                                     </div>
                                 </div>
+                                <hr>
                             @endif
                         @endfor
                     </div>
