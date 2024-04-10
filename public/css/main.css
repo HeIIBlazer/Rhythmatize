@@ -16,6 +16,10 @@ body {
     background-color: transparent;
 }
 
+.w-65{
+    width: 65%;
+}
+
 .cross-button {
     background-color: transparent;
     border: none;
@@ -414,6 +418,8 @@ body {
     border: white 1px solid;
 }
 
+
+
 .container {
     max-width: 1440px;
 }
@@ -483,9 +489,6 @@ body {
     transition: ease all .3s;
 }
 
-.d-flex {
-    margin-bottom: 20px;
-}
 
 .card-text-bigger-artist {
     font-size: 20px;
@@ -824,23 +827,99 @@ hr {
 }
 
 .comment-input{
-    word-wrap: normal;
-    width: 100%;
+    padding: 5px;
     padding-left: 15px;
-    height: 35px;
+    height: 60px;
     border: 1px solid white;
     border-radius: 5px;
     background-color: #c1bebe49 ;
     color:white;
-    max-height: 500px;
+    width: 100%;
 }
 
 .comment-input::placeholder {
     color: white;
 }
 
-textarea{
-    overflow:auto;
-    resize:vertical;
-    white-space:nowrap;
+.text-Montserrat {
+    font-family: 'Montserrat', sans-serif;
+}
+
+.line-2 {
+    width: 100%;
+    height: 4px;
+    border: white 1px solid;
+}
+
+.artist-tracks-header {
+    font-family: 'audiowide', sans-serif;
+    font-size: 21px;
+    color: white;
+    text-align: center;
+    padding-top: 7px;
+    text-transform: uppercase;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+.artist-tracks-headers {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    padding-top: 130px;
+}
+
+.track-artist {
+    background-color: #373737;
+    width: 45%;
+    height: 185px;
+    border-radius: 5px;
+    box-shadow: 10px 10px 4px #00000054;
+
+}
+
+.artist-track-name {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 20px;
+    color: white;
+    padding: 5px 10px;
+    padding-top: 10px;
+    font-weight: 700;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 230px;
+    height: 40px;
+}
+
+.track-cover {
+    object-fit: cover;
+    margin-left: 10px;
+    width: 160px;
+    height: 160px;
+}
+
+.artist-track-album {
+    padding: 0px 10px;
+    color: white;
+    font-weight: 500;
+    font-size: 15px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 230px;
+}
+
+.artist-button {
+    background-color: #373737;
+    text-align: center;
+    width: 94%;
+    height: 40px;
+    text-decoration: none;
+    color: white;
+    font-weight: 600;
+    font-size: 20px;
+    font-family: 'Montserrat', sans-serif;
+    padding-top: 5px;
 }

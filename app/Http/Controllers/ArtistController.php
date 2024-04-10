@@ -6,6 +6,7 @@ use App\Models\Artist;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\Track;
 
 
 class ArtistController extends Controller
@@ -124,10 +125,27 @@ class ArtistController extends Controller
     {
         $albums = DB::table('albums')->where('artist_id', $artist->id)->get();
         $comments = DB::table('comment_artists')->where('artist_id', $artist->id)->get();
+        $tracks = collect();
+        foreach ($albums as $album) {
+            $tracksForAlbum = DB::table('tracks')
+                ->select('tracks.*', DB::raw('count(like_tracks.id) as likes_count'))
+                ->leftJoin('like_tracks', 'tracks.id', '=', 'like_tracks.track_id')
+                ->where('tracks.album_id', $album->id)
+                ->groupBy('tracks.id', 'tracks.name', 'tracks.time', 'tracks.youtube_link', 'tracks.spotify_link', 'tracks.apple_music_link', 'tracks.album_id', 'tracks.lyrics', 'tracks.explicit')
+                ->orderBy('likes_count', 'desc')
+                ->limit(4)
+                ->get();
+        
+            $tracks = $tracks->concat($tracksForAlbum);
+        }
         if(count($comments) == 0){
             $comments= 'NO COMMENTS';
-            return view('artist_views.artistInfo', compact('artist', 'comments', 'albums'));
+            return view('artist_views.artistInfo', compact('artist', 'comments', 'albums','tracks'));
         }
-        return view('artist_views.artistInfo', compact('artist', 'comments', 'albums'));
+        
+
+
+        return view('artist_views.artistInfo', compact('artist','tracks', 'comments', 'albums',));
+        // return $tracks;
     }
 }

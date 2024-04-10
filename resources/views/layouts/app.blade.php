@@ -88,12 +88,12 @@
                                   <div class="w-100 d-flex justify-content-center align-center mt-3 mb-4">
                                       <input type="password" class="login-input" name="password" placeholder="Password" minlength="6" required>
                                   </div>
-                                  <div class="w-100 d-flex justify-content-center mt-2">
+                                  <div class="w-100 d-flex justify-content-center mt-2 mb-4">
                                       <button type="submit" class="login-button" name="login">Log in</button>
                                   </div>
                               </form>
                               <hr style="border: 1px solid white; width:80%;">
-                              <div>
+                              <div class="mb-3">
                                   <p class="login-undertext">You don't have an account? <a data-toggle="modal" data-target="#signupModal" data-dismiss="modal" aria-label="Close" class="login-undertext-button">Create account here.</a></p>
                               </div>
                           </div>
@@ -124,27 +124,27 @@
                               {{session()->get('error_signup')}}
                           </div>
                           @endif
-                          <div class="d-flex w-100 flex-column justify-content-center align-items-center h-75">
+                          <div class="d-flex w-100 flex-column justify-content-center align-items-center h-75 ">
                               <form action="{{url('/register')}}" method="POST" class="form">
                                   @csrf
-                                  <div class="w-100 d-flex justify-content-center align-center mt-2">
+                                  <div class="w-100 d-flex justify-content-center align-center mt-3">
                                       <input type="text" class="login-input" name="username" placeholder="Username" required autofocus>
                                   </div>
-                                  <div class="w-100 d-flex justify-content-center align-center mt-2">
+                                  <div class="w-100 d-flex justify-content-center align-center mt-3">
                                       <input type="email" class="login-input" name="email" placeholder="Email" required>
                                   </div>
-                                  <div class="w-100 d-flex justify-content-center align-center mt-2">
+                                  <div class="w-100 d-flex justify-content-center align-center mt-3">
                                       <input type="password" class="login-input" name="password" placeholder="Password" minlength="6" required>
                                   </div>
-                                  <div class="w-100 d-flex justify-content-center align-center mt-2">
+                                  <div class="w-100 d-flex justify-content-center align-center mt-3">
                                       <input type="password" class="login-input" name="password_confirmation" placeholder="Confirm Password" minlength="6" required>
                                   </div>
-                                  <div class="w-100 d-flex justify-content-center mt-2 mb-0">
+                                  <div class="w-100 d-flex justify-content-center mt-3 mb-3">
                                       <button type="submit" class="login-button" name="login">Sign up</button>
                                   </div>
                               </form>
                               <hr style="border: 1px solid white; width:80%; margin-top: 1px;">
-                              <div>
+                              <div class="mb-3">
                                   <p class="login-undertext">You already have an account? <a data-toggle="modal" data-target="#loginModal" data-dismiss="modal" aria-label="Close" class="login-undertext-button">Log in here.</a></p>
                               </div>
                           </div>
@@ -270,6 +270,10 @@
           $('#signupModal').modal('show');
       }
       $('.cross').click(function () {
+        // Close the modal window
+        $(this).closest('.modal').modal('hide');
+    });
+    $('.login-undertext-button').click(function () {
         // Close the modal window
         $(this).closest('.modal').modal('hide');
     });
