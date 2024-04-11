@@ -7,10 +7,21 @@ body {
     flex-direction: column;
     background-color: #202020;
 }
+.white-text {
+    color: white;
+}
 .modal-content {
     max-height: 100%;
     overflow: hidden;
     background-color: transparent;
+}
+
+.w-65{
+    width: 65%;
+}
+
+.w-94 {
+    width: 94%;
 }
 
 .cross-button {
@@ -242,9 +253,9 @@ body {
     display: flex;
     flex-direction: row;
     width: 100%;
-    height: 100%;
     justify-content: space-evenly;
     margin-top: 20px;
+    height: 1025px;
 }
 
 .Header-text {
@@ -258,13 +269,11 @@ body {
 .left_part {
     display: flex;
     flex-direction: column;
-    /* justify-content: center; */
     align-items: center;
     width: 45%;
     height: 100%;
-    /* margin-top: 20px; */
-
 }
+
 .text-part {
     margin-bottom: 20px;
 }
@@ -276,7 +285,6 @@ body {
     justify-content: center;
     align-items: center;
     color: white;
-    /* margin-top: 20px; */
 }
 
 .welcome_p {
@@ -298,7 +306,6 @@ body {
     align-items: center;
     text-align: center;
     width: 100%;
-    /* margin-top: 10px; */
     border-radius: 50px;
 }
 
@@ -324,7 +331,8 @@ body {
     width: 100%;
     height: 100%;
     text-align: center;
-    z-index: 0;
+    z-index: 1;
+    transition: ease all 0.2s;
 }
 
 .hide-text:hover {
@@ -341,7 +349,8 @@ body {
     align-items: center;
     max-width: 80%;
     max-height: 100%;
-    z-index: 2;
+    z-index: -1;
+    text-decoration: none;
 }
 
 .hide-text:hover p{
@@ -357,11 +366,10 @@ body {
     text-decoration: none;
     color: white;
     border: 3px solid #864334;
-    margin-left: 5px;
     background-color: transparent;
     width: 100%;
-    width: 160px;
 }
+
 .see_more_button:hover {
     background-color: #864334;
     transition: 0.3s;
@@ -370,7 +378,6 @@ body {
 .chart_block{
     display: flex;
     flex-direction: column;
-    /* justify-content: center; */
     align-items: center;
     width: 45%;
     height: 90%;
@@ -385,10 +392,10 @@ body {
     font-size: 50px;
     text-align: center;
     justify-content: center;
-    /* align-items: center; */
     color: white;
     margin-top: 5px;
 }
+
 .h2-header {
     display: flex;
     flex-direction: row;
@@ -445,8 +452,6 @@ body {
 .card {
     display: flex;
     flex-direction: column;
-    /* justify-content: space-evenly; */
-    /* align-items: center; */
     width: 15%;
     height: 280px;
     margin: 13px;
@@ -476,6 +481,8 @@ body {
     text-overflow: ellipsis;
     padding: 3px;
     transition:ease all  .3s;
+    cursor: pointer;
+    text-decoration: none;
 }
 
 .card-text:hover {
@@ -484,9 +491,6 @@ body {
     transition: ease all .3s;
 }
 
-.d-flex {
-    margin-bottom: 20px;
-}
 
 .card-text-bigger-artist {
     font-size: 20px;
@@ -530,6 +534,7 @@ body {
     flex-direction: row;
     width: 100%;
     align-items: center;
+    text-decoration: none;
 
 }
 
@@ -611,6 +616,13 @@ body {
     font-size: 25px;
     font-weight: 600;
     color: white;
+    text-decoration: none;
+    transition: ease all .10s;
+    }
+    
+    .chart-small-text:hover {
+        text-decoration: underline;
+        transition: .5s;
 }
 
 .chart-like-text {
@@ -720,6 +732,7 @@ body {
     margin-top: 10px;
     text-decoration: none;
     transition: ease all .3s;
+    cursor: pointer;
 }
 
 .login-undertext-button:hover {
@@ -732,12 +745,245 @@ body {
     text-align: center;
     height: 2%;
     color: red;
-    /* width: 80%; */
 }
 .error-login-1 {
     margin-top: 0;
     text-align: center;
     height: 2%;
     color: red;
-    /* width: 80%; */
+}
+
+/* ARTIST INFO */
+
+.Info-Image {
+    width: 230px;
+    height: 230px;
+    object-fit: cover;
+    border-radius: 5px;
+    border: #808080 3px solid;
+}
+
+.info-header {
+    font-family: 'audiowide', sans-serif;
+    font-size: 35px;
+    color: white;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.background-block {
+    background-color: #373737;
+    width: 100%;
+    border-radius: 5px;
+    box-shadow: 10px 10px 4px #00000054;
+    color: white;
+    padding: 10px;
+}
+
+.read-more-button {
+    font-family: 'Montserrat', sans-serif;
+    background-color: transparent;
+    border: none;
+    font-size: 16px;
+    color: white;
+    cursor: pointer;
+    font-weight: 700;
+
+    transition: ease all 0.3;
+}
+
+.read-more-button:hover {
+    text-decoration: underline;
+    transition: ease all 0.3;
+}
+
+.desc-header {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 25px;
+    color: white;
+}
+
+.desc-text {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 15px;
+    color: white;
+    max-height: 200px;
+    overflow: hidden;
+}
+
+.desc-text.expanded {
+    max-height: 100%;
+    overflow: auto;
+}
+
+.comments-header {
+    font-size:25px;
+    font-family: 'Montserrat', sans-serif;
+    color: white;
+    font-weight: 600;
+}
+
+hr {
+    border: 1px white solid; margin-top: 8px
+}
+
+.comment-input{
+    padding: 5px;
+    padding-left: 15px;
+    height: 60px;
+    border: 1px solid white;
+    border-radius: 5px;
+    background-color: #c1bebe49 ;
+    color:white;
+    width: 100%;
+}
+
+.comment-input::placeholder {
+    color: white;
+}
+
+.text-Montserrat {
+    font-family: 'Montserrat', sans-serif;
+
+}
+
+.line-2 {
+    width: 100%;
+    height: 4px;
+    border: white 1px solid;
+}
+
+.artist-tracks-header {
+    font-family: 'audiowide', sans-serif;
+    font-size: 21px;
+    color: white;
+    text-align: center;
+    padding-top: 7px;
+    text-transform: uppercase;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+.artist-tracks-headers {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    padding-top: 130px;
+}
+
+.artist-tracks-headers-2 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+
+}
+
+.track-artist {
+    background-color: #373737;
+    width: 48%;
+    height: 185px;
+    border-radius: 5px;
+    box-shadow: 10px 10px 4px #00000054;
+
+}
+
+.artist-track-name {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 20px;
+    color: white;
+    padding: 5px 10px;
+    padding-top: 10px;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 245px;
+    height: 40px;
+}
+
+.track-cover {
+    object-fit: cover;
+    margin-left: 10px;
+    width: 160px;
+    height: 160px;
+}
+
+.artist-track-album {
+    padding: 0px 10px;
+    color: white;
+    font-weight: 500;
+    font-size: 15px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 230px;
+}
+
+.artist-button {
+    background-color: #373737;
+    text-align: center;
+    width: 94%;
+    height: 40px;
+    text-decoration: none;
+    color: white;
+    font-weight: 600;
+    font-size: 20px;
+    font-family: 'Montserrat', sans-serif;
+    padding-top: 5px;
+    box-shadow: 10px 10px 4px #00000054;
+    border-radius: 5px ;
+}
+
+.artist-header-line {
+    width: 220px;
+    height: 2px;
+    border: white 1px solid;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 6px;
+} 
+
+  /* Track */
+::-webkit-scrollbar-track {
+    background: #555;
+} 
+
+  /* Handle */
+::-webkit-scrollbar-thumb {
+    background: #2C2C2C;
+}
+
+  /* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #202020;
+}
+
+.artist-album-card {
+    background-color: #373737;
+    border-radius: 5px;
+    box-shadow: 10px 10px 4px #00000054;
+}
+
+.text-Montserrat-light {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 15px;
+    font-weight: 300;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 230px;
+    color: #B8B8B8;
+}
+.text-Montserrat-album {
+    font-family: 'Montserrat', sans-serif;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 230px;
+    font-weight: 600;
+    font-size: 20px;
 }

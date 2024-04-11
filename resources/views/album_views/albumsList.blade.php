@@ -1,4 +1,4 @@
-@extends ('layouts.app')
+@extends ('layouts.app', ['title' => 'Albums List'])
 
 @section('content')
 <div class="container">
@@ -19,7 +19,7 @@
                     </div>
                     <div style="margin-left: 10px; max-width: 100%;">
                         <p class="card-text-bigger">{{$album -> name}}</p>
-                        <p class="card-text">{{$album -> release_date}} | {{$artist->name}}</p>
+                        <a class="text-decoration-none" href="/artist/{{$artist -> id}}"><p class="card-text w-100">{{$album -> release_date}} | {{$artist->name}}</p></a>
                     </div>
                 </div>
             @endif

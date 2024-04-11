@@ -5,7 +5,10 @@ use App\Http\Controllers\AlbumController;
 use App\Http\Controllers\ArtistController;
 use App\Http\Controllers\TrackController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CommentArtistController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\LikeArtistController;
+use App\Models\CommentArtist;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,6 +36,8 @@ Route::get('/last_added_albums', [AlbumController::class, 'last_added']);
 Route::get('/artist_list', [ArtistController::class, 'index']);
 Route::get('/artist_chart', [ArtistController::class, 'charts']);
 Route::get('/last_added_artists', [ArtistController::class, 'last_added']);
+Route::get('/artist/{artist}', [ArtistController::class, 'show_artist']);
+Route::post('/save_comment', [CommentArtistController::class, 'save_comment'])->name('save_comment');
 
 // TRACKS
 Route::get('/track_chart', [TrackController::class, 'charts']);
@@ -44,3 +49,7 @@ Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::get('/registration', [UserController::class, 'form_register']);
 Route::post('/register', [UserController::class, 'store_register']);
+
+//LIKE SYSTEM
+Route::get('/like_artist/{artist}', [LikeArtistController::class, 'like']);
+Route::get('/unlike_artist/{artist}', [LikeArtistController::class, 'unlike']);

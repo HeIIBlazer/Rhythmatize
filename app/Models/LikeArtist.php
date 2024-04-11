@@ -10,6 +10,8 @@ class LikeArtist extends Model
     use HasFactory;
     
     protected $table = 'like_artists';
+    public $timestamps = false;
+
 
     protected $fillable = [
         'user_id',
