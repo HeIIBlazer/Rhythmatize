@@ -19,7 +19,7 @@
     <div style="width: 100%; height: 180px;">
         <img src="{{url ($artist -> banner_url)}}" alt="" style="width: 100%; height: 300px; object-fit:cover; object-position: 50% 50%;">
     </div>
-    <div class="container d-flex flex-row justify-content-between">
+<div class="container d-flex flex-row justify-content-between mb-5">
     <div class="w-25 d-flex flex-column justify-content-center">
         <div>
             <div class="artist-img w-100 d-flex justify-content-center align-items-center">
@@ -74,7 +74,7 @@
             </div>
         </div>
 
-        <div class="background-block ">
+        <div class="background-block">
             <div>
                 <h2 class="desc-header">About {{$artist -> name}}:</h2>
                 <hr>
@@ -95,11 +95,11 @@
             </div>
             @if ($comments == 'NO COMMENTS')
                 <div class="w-100 d-flex flex-column justify-content-center">
-                    <p class="w-100 text-center text-Montserrat">NO COMMENTS</p>
+                    <p class="w-100 text-center text-Montserrat">THIS ARTIST HAS NO COMMENTS</p>
                     <hr>
                 </div>
             @else
-            <div style="max-height: 500px; overflow-y:auto">
+            <div style="max-height: 460px; min-height: 200px; overflow-y:auto">
                 @foreach($comments as $comment)
                 @php
                     $user = DB::table('users')
@@ -111,7 +111,7 @@
                         <img src=" {{url ($user -> avatar_url)}}" alt="" style="width: 20px; height: 20px; margin-right: 5px; border-radius:200px;">
                         <p style="height: 10px">{{$user -> username}}</p>
                     </div>
-                    <div  class="w-100" style="height: 25px">
+                    <div  class="w-100">
                         <p>{{$comment -> content}}</p>
                     </div>
                 </div>
@@ -121,11 +121,11 @@
             @endif
 
             @if ($like == 2)
-                <form data-mdb-input-init>
+                <form data-mdb-input-init class="mt-3">
                     <textarea required placeholder="Add comment" rows="4" wrap="hard" class="comment-input" readonly></textarea>
                 </form>
             @else 
-            <form data-mdb-input-init action="/save_comment" method="post">
+            <form data-mdb-input-init class="mt-3" action="/save_comment" method="post">
                 @csrf
                 <input type="hidden" name="artist_id" value="{{$artist->id}}">
                 <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
@@ -138,19 +138,24 @@
 
     <div class="w-65 d-flex flex-column align-items-center">
         <div class="w-100 d-flex flex-row justify-content-evenly align-content-center">
-            <div class="artist-tracks-headers">
-                <div class="line"></div>
+            <div class="artist-tracks-headers w-94">
+                <div class="artist-header-line"></div>
                 <div>
                     <h2 class="artist-tracks-header">POPULAR {{$artist -> name}} TRACKS</h2>
                 </div>
-                <div class="line"></div>
+                <div class="artist-header-line"></div>
             </div>
         </div>
 
+        @if ($tracks == 'NO TRACKS BY THIS ARTIST')
+            <div class="w-100 d-flex flex-column justify-content-center m-5">
+                <h1 class="w-100 text-center white-text text-Montserrat text-">THIS ARTIST HAS NO TRACKS</h1>
+            </div>
+        @else
 
-        <div class="w-100 d-flex flex-column justify-content-evenly align-items-center mt-3">
+        <div class="w-94 d-flex flex-column justify-content-between align-items-center mt-3">
             @foreach ($tracks->chunk(2) as $chunk)
-                <div class=" d-flex flex-row justify-content-evenly align-items-center mb-4 w-100">
+                <div class=" d-flex flex-row justify-content-between align-items-center mb-4 w-100">
                     @foreach ($chunk as $track)
 
                         @php
@@ -184,11 +189,45 @@
                     @endforeach
                 </div>
             @endforeach
-                <a class="artist-button flex-wrap" href="">Show all tracks by {{$artist -> name}}</a>
-
         </div>
+        <a class="artist-button flex-wrap" href="">Show all tracks by {{$artist -> name}}</a>
+        @endif
+
+        <div class="w-100 d-flex flex-row justify-content-evenly align-content-center">
+            <div class="artist-tracks-headers-2 mt-4 w-94">
+                <div class="artist-header-line"></div>
+                <div>
+                    <h2 class="artist-tracks-header">POPULAR {{$artist -> name}} ALBUMS</h2>
+                </div>
+                <div class="artist-header-line"></div>
+            </div>
+        </div>
+
+        @if ($albums == 'NO ALBUMS BY THIS ARTIST')
+            <div class="w-100 d-flex flex-column justify-content-center m-5">
+                <h1 class="w-100 text-center white-text text-Montserrat text-">THIS ARTIST HAS NO ALBUMS</h1>
+            </div>
+        @else
+        <div class=" row justify-content-between mt-3 w-94 mb-4">
+            @foreach ($albums as $album)
+                <div class="col-auto artist-album-card">
+                    <div >
+                        <img src="{{url ($album -> cover_url)}}" alt="" style="width: 250px; height: 250px; border-radius: 5px; margin-top:10px; padding: 10px 10px;">
+                    </div>
+                    <div class="w-100 d-flex justify-content-center text-center white-text">
+                        <p class="text-truncate text-Montserrat-album">{{$album -> name}}</p>
+                    </div>
+                    <div class="w-100 d-flex justify-content-center text-center white-text">
+                        <p class="text-truncate text-Montserrat-light">{{$album -> type}} | {{$album -> release_date}}</p>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+        <a class="artist-button flex-wrap" href="">Show all albums by {{$artist -> name}}</a>
     </div>
+        @endif
 </div>
+
 
 
 
@@ -229,6 +268,15 @@ textarea.addEventListener('keypress', (e) => {
 
         // Submit the form
         textarea.closest('form').submit();
+    }
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    var descText = document.querySelector('.desc-text');
+    var readMoreButton = document.querySelector('.read-more-button');
+
+    if (descText.offsetHeight < 199) {
+        readMoreButton.style.display = 'none';
     }
 });
 

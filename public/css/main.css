@@ -20,6 +20,10 @@ body {
     width: 65%;
 }
 
+.w-94 {
+    width: 94%;
+}
+
 .cross-button {
     background-color: transparent;
     border: none;
@@ -418,8 +422,6 @@ body {
     border: white 1px solid;
 }
 
-
-
 .container {
     max-width: 1440px;
 }
@@ -772,7 +774,6 @@ body {
 .background-block {
     background-color: #373737;
     width: 100%;
-    height: 100%;
     border-radius: 5px;
     box-shadow: 10px 10px 4px #00000054;
     color: white;
@@ -843,6 +844,7 @@ hr {
 
 .text-Montserrat {
     font-family: 'Montserrat', sans-serif;
+
 }
 
 .line-2 {
@@ -870,9 +872,17 @@ hr {
     padding-top: 130px;
 }
 
+.artist-tracks-headers-2 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+
+}
+
 .track-artist {
     background-color: #373737;
-    width: 45%;
+    width: 48%;
     height: 185px;
     border-radius: 5px;
     box-shadow: 10px 10px 4px #00000054;
@@ -885,11 +895,11 @@ hr {
     color: white;
     padding: 5px 10px;
     padding-top: 10px;
-    font-weight: 700;
+    font-weight: 600;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    max-width: 230px;
+    max-width: 245px;
     height: 40px;
 }
 
@@ -922,4 +932,58 @@ hr {
     font-size: 20px;
     font-family: 'Montserrat', sans-serif;
     padding-top: 5px;
+    box-shadow: 10px 10px 4px #00000054;
+    border-radius: 5px ;
+}
+
+.artist-header-line {
+    width: 220px;
+    height: 2px;
+    border: white 1px solid;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 6px;
+} 
+
+  /* Track */
+::-webkit-scrollbar-track {
+    background: #555;
+} 
+
+  /* Handle */
+::-webkit-scrollbar-thumb {
+    background: #2C2C2C;
+}
+
+  /* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #202020;
+}
+
+.artist-album-card {
+    background-color: #373737;
+    border-radius: 5px;
+    box-shadow: 10px 10px 4px #00000054;
+}
+
+.text-Montserrat-light {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 15px;
+    font-weight: 300;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 230px;
+    color: #B8B8B8;
+}
+.text-Montserrat-album {
+    font-family: 'Montserrat', sans-serif;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 230px;
+    font-weight: 600;
+    font-size: 20px;
 }

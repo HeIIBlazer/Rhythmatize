@@ -123,23 +123,42 @@ class ArtistController extends Controller
 
     public function show_artist (Artist $artist)
     {
-        $albums = DB::table('albums')->where('artist_id', $artist->id)->get();
         $comments = DB::table('comment_artists')->where('artist_id', $artist->id)->get();
-        $tracks = collect();
-        foreach ($albums as $album) {
-            $tracksForAlbum = DB::table('tracks')
-                ->select('tracks.*', DB::raw('count(like_tracks.id) as likes_count'))
-                ->leftJoin('like_tracks', 'tracks.id', '=', 'like_tracks.track_id')
-                ->where('tracks.album_id', $album->id)
-                ->groupBy('tracks.id', 'tracks.name', 'tracks.time', 'tracks.youtube_link', 'tracks.spotify_link', 'tracks.apple_music_link', 'tracks.album_id', 'tracks.lyrics', 'tracks.explicit')
-                ->orderBy('likes_count', 'desc')
-                ->limit(4)
-                ->get();
+
+        $albums = DB::table('albums')->where('artist_id', $artist->id)
+                    ->select('albums.*', DB::raw('count(like_albums.id) as likes_count'))
+                    ->leftJoin('like_albums', 'albums.id', '=', 'like_albums.album_id')
+                    ->groupBy('albums.id', 'albums.name', 'albums.cover_url', 'albums.release_date', 'albums.artist_id', 'albums.description', 'albums.youtube_link', 'albums.spotify_link', 'albums.apple_music_link', 'albums.type')
+                    ->orderBy('likes_count', 'desc')
+                    ->limit(3)
+                    ->get();
+
         
-            $tracks = $tracks->concat($tracksForAlbum);
-        }
-        if(count($comments) == 0){
+
+        $tracks = DB::table('tracks as t')
+                    ->select('t.*', DB::raw('count(lt.id) as likes_count'))
+                    ->leftJoin('like_tracks as lt', 't.id', '=', 'lt.track_id')
+                    ->whereIn('t.album_id', function ($query) use ($artist) {
+                        $query->select('albums.id')
+                            ->from('albums')
+                            ->where('albums.artist_id', $artist->id);
+                    })
+                    ->groupBy('t.id', 't.name', 't.time', 't.youtube_link', 't.spotify_link', 't.apple_music_link', 't.album_id', 't.lyrics', 't.explicit')
+                    ->orderBy('likes_count', 'desc')
+                    ->limit(4)
+                    ->get();
+
+
+
+        if(count($comments) == 0 && count($albums) == 0 && count($tracks) == 0){
             $comments= 'NO COMMENTS';
+            $albums= 'NO ALBUMS BY THIS ARTIST';
+            $tracks= 'NO TRACKS BY THIS ARTIST';
+            return view('artist_views.artistInfo', compact('artist', 'comments', 'albums','tracks'));
+        }elseif(count($comments) == 0 && count($tracks) == 0)
+        {
+            $comments= 'NO COMMENTS';
+            $tracks= 'NO TRACKS BY THIS ARTIST';
             return view('artist_views.artistInfo', compact('artist', 'comments', 'albums','tracks'));
         }
         
