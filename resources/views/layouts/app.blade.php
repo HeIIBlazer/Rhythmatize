@@ -47,8 +47,8 @@
             <a class="header_button" href="{{ url ('/album_list')}}">Albums</a>
           </li>
         </ul>
-        <form class="d-flex mt-3 ">
-          <input class="form-control rounded-0 mr-5" type="search" placeholder="Search" aria-label="Search">
+        <form class="d-flex mt-3 " method="GET" action="{{ url('/search') }}">
+          <input class="form-control rounded-0 mr-5" name="search" type="search" placeholder="Search" aria-label="Search">
           <button class="search_button" type="submit">Search</button>
         </form>
         @if(Auth::guest())
@@ -231,13 +231,10 @@
         </div>
         <div class="Songs_part">
             <div>
-                <p class="links_header">SONG</p>
+                <p class="links_header">TRACKS</p>
             </div>
             <div class="links_buttons">
                 <a href="{{url ('/track_chart')}}" class="links_button">Charts</a>
-            </div>
-            <div class="links_buttons">
-                <a href="#" class="links_button">Last Added</a>
             </div>
         </div>
           @if(Auth::check() && Auth::user()->role)
@@ -253,7 +250,7 @@
 
     <div class="Copyright_part">
         <div class="copyright_text">
-            <p>@ 2024 Copyright: <br>rhythmatize.com</p>
+            <p>&copy; 2024 Copyright: <br>rhythmatize.com</p>
         </div>
     </div>
 </div>

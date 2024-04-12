@@ -32,7 +32,7 @@
                 @endforeach
                 </div>
                     
-                <div style="width: 25%">
+                <div class="mb-3">
                     <a href="/last_added_albums"><button class="see_more_button" type="submit">See more</button></a>
                 </div>
             </div>
@@ -81,6 +81,7 @@
                 <div class="button-div">
                     <a href="{{url ('/artist_chart')}}"><button class="see_more_button" type="submit">See more</button></a>
                 </div>
+            </div>
 
                 <div class="w-100">
                     <div class="h2-header">
