@@ -53,3 +53,6 @@ Route::post('/register', [UserController::class, 'store_register']);
 //LIKE SYSTEM
 Route::get('/like_artist/{artist}', [LikeArtistController::class, 'like']);
 Route::get('/unlike_artist/{artist}', [LikeArtistController::class, 'unlike']);
+
+// SEARCH
+Route::get('/search', [AlbumController::class, 'search']);
