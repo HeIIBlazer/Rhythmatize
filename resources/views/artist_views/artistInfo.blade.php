@@ -280,6 +280,19 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
+function addLineBreaks(text) {
+    return text.replace(/\n/g, '<br>');
+}
+
+// Get the text with the `desc-text` class
+let descText = document.querySelector('.desc-text').textContent;
+
+// Use the `addLineBreaks` function to replace "\n" with "<br>"
+let textWithLineBreaks = addLineBreaks(descText);
+
+// Set the innerHTML of the `desc-text` element to the new text with line breaks
+document.querySelector('.desc-text').innerHTML = textWithLineBreaks;
+
 </script>
     
 @endsection
