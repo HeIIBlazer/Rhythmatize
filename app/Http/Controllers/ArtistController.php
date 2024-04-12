@@ -160,7 +160,11 @@ class ArtistController extends Controller
             $comments= 'NO COMMENTS';
             $tracks= 'NO TRACKS BY THIS ARTIST';
             return view('artist_views.artistInfo', compact('artist', 'comments', 'albums','tracks'));
+        }elseif(count($comments) == 0){
+            $comments= 'NO COMMENTS';
+            return view('artist_views.artistInfo', compact('artist', 'comments', 'albums','tracks'));
         }
+        
         
 
 
