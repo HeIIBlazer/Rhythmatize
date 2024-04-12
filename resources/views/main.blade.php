@@ -100,6 +100,12 @@
                                 <p style="font-size: 15px">{{ $artist-> name }}</p>
                                 <p style="font-size: 18px">{{ $track_name }}</p>
                             </div>
+                            {{-- <div class="pic">
+                                <img src="{{url ($album -> cover_url)}}" alt="Album cover">
+                                <div class="text"><p style="font-size: 15px">{{ $artist-> name }}</p></div>
+                                <div class="text"><p style="font-size: 18px">{{ $track_name }}</p></div>
+
+                            </div> --}}
                         @endforeach
                     </div>
                     <div class="button-div">

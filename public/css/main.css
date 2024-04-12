@@ -16,7 +16,7 @@ body {
     background-color: transparent;
 }
 
-.w-65{
+.w-65 {
     width: 65%;
 }
 
@@ -37,7 +37,7 @@ body {
 }
 /* HEADER STYLES */
 .login_buttons {
-    width:5%;
+    width: 5%;
     display: flex;
     flex-direction: column;
     margin-left: 20px;
@@ -54,7 +54,7 @@ body {
     text-align: center;
     text-decoration: none;
     font-weight: bold;
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
     background-color: transparent;
     border: none;
 }
@@ -65,7 +65,7 @@ body {
 }
 
 .header_button {
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
     font-weight: bold;
     font-size: 25px;
     text-align: center;
@@ -81,7 +81,7 @@ body {
 }
 
 .search_button {
-    font-family: 'Audiowide', sans-serif;
+    font-family: "Audiowide", sans-serif;
     font-size: 15px;
     text-align: center;
     justify-content: center;
@@ -102,7 +102,7 @@ body {
     max-width: 150px;
     text-align: center;
     font-size: 17px;
-    font-family: 'Montserrat'; /* Adjust the width as per your preference */
+    font-family: "Montserrat"; /* Adjust the width as per your preference */
 }
 
 .dropdown-item:active {
@@ -118,9 +118,8 @@ body {
     text-align: center;
     text-decoration: none;
     font-weight: bold;
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
 }
-
 
 /* FOOTER STYLES */
 .footer {
@@ -135,13 +134,13 @@ body {
 }
 
 .socials_text {
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
     font-size: 15px;
     text-align: center;
     justify-content: center;
     align-items: center;
     text-decoration: none;
-    color:#837F7F;
+    color: #837f7f;
     font-weight: 600;
     width: 293px;
 }
@@ -156,26 +155,25 @@ body {
 }
 
 .links_header {
-    font-family: 'audiowide', sans-serif;
+    font-family: "audiowide", sans-serif;
     font-size: 22px;
     text-align: left;
     color: white;
-        text-decoration: none;
+    text-decoration: none;
 }
 
 .links_buttons {
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
     font-size: 22px;
     text-align: left;
     text-decoration: none;
-    color: #837F7F;
+    color: #837f7f;
     font-weight: 600;
 }
 
 .albums_part {
     display: flex;
     flex-direction: column;
-
 }
 
 .links_part {
@@ -202,7 +200,7 @@ body {
 }
 
 .vertical_line {
-    border-left: 2px solid #837F7F;
+    border-left: 2px solid #837f7f;
     height: 150px;
     margin-top: 20px;
     margin-right: 20px;
@@ -220,7 +218,7 @@ body {
 }
 
 .copyright_text {
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
     font-size: 22px;
     text-align: center;
     justify-content: center;
@@ -230,11 +228,11 @@ body {
 }
 
 .links_button {
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
     font-size: 22px;
     text-align: left;
     text-decoration: none;
-    color: #837F7F;
+    color: #837f7f;
     font-weight: 600;
 }
 
@@ -249,13 +247,12 @@ body {
 
 /* MAIN PAGE */
 
-.main-page{
+.main-page {
     display: flex;
     flex-direction: row;
     width: 100%;
     justify-content: space-evenly;
     margin-top: 20px;
-    height: 1025px;
 }
 
 .Header-text {
@@ -279,7 +276,7 @@ body {
 }
 
 .logo_text {
-    font-family: 'audiowide', sans-serif;
+    font-family: "audiowide", sans-serif;
     font-size: 85px;
     text-align: center;
     justify-content: center;
@@ -288,7 +285,7 @@ body {
 }
 
 .welcome_p {
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
     font-size: 23px;
     text-align: center;
     justify-content: center;
@@ -318,10 +315,33 @@ body {
     width: 100%;
     /* height: 36%; */
     /* padding: 1rem; */
-    background-color: #2C2C2C;
+    background-color: #2c2c2c;
     border-radius: 5px;
     box-shadow: 10px 10px 4px #00000054;
 }
+
+/* .pic {
+    position: relative;
+    width: 200px;
+    height: 300px;
+    overflow: hidden;
+}
+
+.text {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 200px;
+    height: 0;
+    text-align: center;    
+    background: rgba(0, 0, 0, 0.5);
+    transition: 0.2s ease all;    
+}
+
+.pic:hover > .text {
+    height: 100%;
+} */
+
 
 .hide-text {
     background-position: center;
@@ -334,18 +354,19 @@ body {
     text-align: center;
     z-index: 1;
     transition: ease all 0.2s;
+    cursor: pointer;
 }
 
 .hide-text:hover {
     filter: brightness(50%);
-    /* text-decoration-color: white; */
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1;
     transition: 0.2s;
 }
 
 .hide-text p {
     display: none;
-    color: white;
-    font-family: 'audiowide', sans-serif;
+    font-family: "audiowide", sans-serif;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -355,12 +376,13 @@ body {
     text-decoration: none;
 }
 
-.hide-text:hover p{
+.hide-text:hover > p {
     display: block;
+    color: white;
 }
 
 .see_more_button {
-    font-family: 'Audiowide', sans-serif;
+    font-family: "Audiowide", sans-serif;
     font-size: 22px;
     text-align: center;
     justify-content: center;
@@ -378,21 +400,20 @@ body {
     transition: 0.3s;
 }
 
-.chart_block{
+.chart_block {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 45%;
     height: 100%;
-    background-color: #2C2C2C;
+    background-color: #2c2c2c;
     border-radius: 5px;
     box-shadow: 10px 10px 4px #00000054;
-
 }
 
 .charts_header {
-    font-family: 'audiowide', sans-serif;
-    font-size: 76px;    
+    font-family: "audiowide", sans-serif;
+    font-size: 76px;
     text-align: center;
     justify-content: center;
     color: white;
@@ -431,9 +452,9 @@ body {
 }
 
 .button-div {
-    width: 100%; 
-    display: flex;  
-    justify-content: center; 
+    width: 100%;
+    display: flex;
+    justify-content: center;
     margin: 3px;
 }
 
@@ -459,14 +480,14 @@ body {
     width: 15%;
     height: 280px;
     margin: 13px;
-    background-color: #2C2C2C;
+    background-color: #2c2c2c;
     border-radius: 5px;
     box-shadow: 10px 10px 4px #00000054;
 }
 
 .card-text-bigger {
     font-size: 16px;
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
     color: white;
     font-weight: 700;
     white-space: nowrap;
@@ -478,13 +499,13 @@ body {
 
 .card-text {
     font-size: 11px;
-    font-family: 'Montserrat', sans-serif;
-    color: #B8B8B8;
+    font-family: "Montserrat", sans-serif;
+    color: #b8b8b8;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     padding: 3px;
-    transition:ease all  .3s;
+    transition: ease all 0.3s;
     cursor: pointer;
     text-decoration: none;
 }
@@ -492,13 +513,12 @@ body {
 .card-text:hover {
     color: white;
     text-decoration: underline;
-    transition: ease all .3s;
+    transition: ease all 0.3s;
 }
-
 
 .card-text-bigger-artist {
     font-size: 20px;
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
     color: white;
     font-weight: 700;
     text-align: center;
@@ -513,7 +533,7 @@ body {
     --bs-pagination-padding-y: 0.375rem;
     --bs-pagination-font-size: 1rem;
     --bs-pagination-color: white;
-    --bs-pagination-bg: #2C2C2C;
+    --bs-pagination-bg: #2c2c2c;
     --bs-pagination-border-width: var(--bs-border-width);
     --bs-pagination-border-color: transparent;
     --bs-pagination-border-radius: var(--bs-border-radius);
@@ -524,37 +544,34 @@ body {
     --bs-pagination-focus-bg: var(--bs-secondary-bg);
     --bs-pagination-focus-box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0);
     --bs-pagination-active-color: #fff;
-    --bs-pagination-active-bg: #2C2C2C;
+    --bs-pagination-active-bg: #2c2c2c;
     --bs-pagination-active-border-color: white;
     --bs-pagination-disabled-color: white;
-    --bs-pagination-disabled-bg: #2C2C2C;
-    --bs-pagination-disabled-border-color: #2C2C2C;
+    --bs-pagination-disabled-bg: #2c2c2c;
+    --bs-pagination-disabled-border-color: #2c2c2c;
 }
 
 /* CHARTS */
 
-.chart-line{
+.chart-line {
     display: flex;
     flex-direction: row;
     width: 100%;
     align-items: center;
     text-decoration: none;
-
 }
 
 .number {
     width: 4%;
     margin-right: 5px;
     margin-left: 5px;
-
 }
 
 .numbers {
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
     font-size: 35px;
     color: white;
     margin-right: 50px;
-
 }
 
 .chart-pic {
@@ -565,7 +582,7 @@ body {
 }
 
 .chart-text-big {
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
     font-size: 25px;
     font-weight: 700;
     white-space: nowrap;
@@ -574,7 +591,6 @@ body {
     padding: 0 6px;
     color: white;
     height: 100%;
-
 }
 
 .chart-big {
@@ -600,7 +616,6 @@ body {
     align-items: center;
 }
 
-
 .Header-Charts {
     font-family: "audiowide", sans-serif;
     color: white;
@@ -616,21 +631,21 @@ body {
 }
 
 .chart-small-text {
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
     font-size: 25px;
     font-weight: 600;
     color: white;
     text-decoration: none;
-    transition: ease all .10s;
-    }
-    
-    .chart-small-text:hover {
-        text-decoration: underline;
-        transition: .5s;
+    transition: ease all 0.1s;
+}
+
+.chart-small-text:hover {
+    text-decoration: underline;
+    transition: 0.5s;
 }
 
 .chart-like-text {
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
     font-size: 23px;
     font-weight: 600;
     color: white;
@@ -639,7 +654,7 @@ body {
 }
 
 .chart-like-text-artist {
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
     font-size: 23px;
     font-weight: 600;
     color: white;
@@ -664,7 +679,7 @@ body {
     align-items: center;
     width: 500px;
     height: 100%;
-    background: #2C2C2C;
+    background: #2c2c2c;
     box-shadow: 10px 10px 4px #00000054;
     border-radius: 10px;
 }
@@ -683,7 +698,7 @@ body {
     color: white;
     text-align: center;
     font-size: 70px;
-    font-family: 'audiowide', sans-serif;
+    font-family: "audiowide", sans-serif;
 }
 
 .login-input {
@@ -703,7 +718,7 @@ body {
     flex-direction: column;
     height: 100%;
     justify-content: center;
-    align-items: center ;
+    align-items: center;
 }
 
 .login-button {
@@ -714,7 +729,7 @@ body {
     border-radius: 4px;
     font-size: 22px;
     color: white;
-    font-family: 'audiowide', sans-serif;
+    font-family: "audiowide", sans-serif;
 }
 
 .login-button:hover {
@@ -725,23 +740,23 @@ body {
 .login-undertext {
     color: white;
     font-size: 17px;
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
     margin-top: 10px;
 }
 
 .login-undertext-button {
     color: white;
     font-size: 17px;
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
     margin-top: 10px;
     text-decoration: none;
-    transition: ease all .3s;
+    transition: ease all 0.3s;
     cursor: pointer;
 }
 
 .login-undertext-button:hover {
     text-decoration: underline;
-    transition: ease all .3s;
+    transition: ease all 0.3s;
 }
 
 .error-login {
@@ -755,7 +770,6 @@ body {
     text-align: center;
     height: 2%;
     color: red;
-
 }
 
 /* ARTIST INFO */
@@ -769,7 +783,7 @@ body {
 }
 
 .info-header {
-    font-family: 'audiowide', sans-serif;
+    font-family: "audiowide", sans-serif;
     font-size: 35px;
     color: white;
     text-align: center;
@@ -786,7 +800,7 @@ body {
 }
 
 .read-more-button {
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
     background-color: transparent;
     border: none;
     font-size: 16px;
@@ -803,13 +817,13 @@ body {
 }
 
 .desc-header {
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
     font-size: 25px;
     color: white;
 }
 
 .desc-text {
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
     font-size: 15px;
     color: white;
     max-height: 200px;
@@ -822,24 +836,25 @@ body {
 }
 
 .comments-header {
-    font-size:25px;
-    font-family: 'Montserrat', sans-serif;
+    font-size: 25px;
+    font-family: "Montserrat", sans-serif;
     color: white;
     font-weight: 600;
 }
 
 hr {
-    border: 1px white solid; margin-top: 8px
+    border: 1px white solid;
+    margin-top: 8px;
 }
 
-.comment-input{
+.comment-input {
     padding: 5px;
     padding-left: 15px;
     height: 60px;
     border: 1px solid white;
     border-radius: 5px;
-    background-color: #c1bebe49 ;
-    color:white;
+    background-color: #c1bebe49;
+    color: white;
     width: 100%;
 }
 
@@ -848,8 +863,7 @@ hr {
 }
 
 .text-Montserrat {
-    font-family: 'Montserrat', sans-serif;
-
+    font-family: "Montserrat", sans-serif;
 }
 
 .line-2 {
@@ -859,7 +873,7 @@ hr {
 }
 
 .artist-tracks-header {
-    font-family: 'audiowide', sans-serif;
+    font-family: "audiowide", sans-serif;
     font-size: 21px;
     color: white;
     text-align: center;
@@ -882,7 +896,6 @@ hr {
     flex-direction: row;
     align-items: center;
     justify-content: space-evenly;
-
 }
 
 .track-artist {
@@ -891,11 +904,10 @@ hr {
     height: 185px;
     border-radius: 5px;
     box-shadow: 10px 10px 4px #00000054;
-
 }
 
 .artist-track-name {
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
     font-size: 20px;
     color: white;
     padding: 5px 10px;
@@ -935,10 +947,10 @@ hr {
     color: white;
     font-weight: 600;
     font-size: 20px;
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
     padding-top: 5px;
     box-shadow: 10px 10px 4px #00000054;
-    border-radius: 5px ;
+    border-radius: 5px;
 }
 
 .artist-header-line {
@@ -950,19 +962,19 @@ hr {
 /* width */
 ::-webkit-scrollbar {
     width: 6px;
-} 
-
-  /* Track */
-::-webkit-scrollbar-track {
-    background: #555;
-} 
-
-  /* Handle */
-::-webkit-scrollbar-thumb {
-    background: #2C2C2C;
 }
 
-  /* Handle on hover */
+/* Track */
+::-webkit-scrollbar-track {
+    background: #555;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #2c2c2c;
+}
+
+/* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
     background: #202020;
 }
@@ -974,17 +986,17 @@ hr {
 }
 
 .text-Montserrat-light {
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
     font-size: 15px;
     font-weight: 300;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     max-width: 230px;
-    color: #B8B8B8;
+    color: #b8b8b8;
 }
 .text-Montserrat-album {
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -998,30 +1010,28 @@ hr {
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
-  }
-  
-  .column {
+}
+
+.column {
     display: flex;
     flex-direction: column;
     flex: 1;
     width: 50%;
-  }
-  
-  .track-item {
+}
+
+.track-item {
     display: flex;
     flex-direction: row;
     align-items: center;
     /* width: 50%; */
     margin: 1em;
     flex: 1;
-  }
+}
 
-  .track-info {
+.track-info {
     margin: 0 auto;
     align-items: center;
     color: white;
     font-size: 1.5em;
     text-align: center;
 }
-
-

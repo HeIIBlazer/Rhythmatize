@@ -208,7 +208,7 @@
                 <h1 class="w-100 text-center white-text text-Montserrat text-">THIS ARTIST HAS NO ALBUMS</h1>
             </div>
         @else
-        <div class=" row justify-content-between mt-3 w-94 mb-4">
+        <div class=" row justify-content-evenly mt-3 w-94 mb-4">
             @foreach ($albums as $album)
                 <div class="col-auto artist-album-card">
                     <div >
