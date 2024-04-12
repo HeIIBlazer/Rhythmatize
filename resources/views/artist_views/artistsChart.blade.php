@@ -23,7 +23,7 @@
                     <span class="numbers w-100">{{$i}}.</span>
                 </div>
                 <div class="chart-pic">
-                    <img src="{{url ($artist -> picture_url)}}" alt="" class="w-100 h-100">
+                    <img src="{{url ($artist -> picture_url)}}"  style="object-fit: cover; width:75px; height: 75px;">
                 </div>
                 <div class="chart-big">
                     <span class="chart-text-big">{{$artist -> name}}</span>

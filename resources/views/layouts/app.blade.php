@@ -173,8 +173,10 @@
       </div>
     </div>
   </nav>
+  <div>
+    @yield('content')
+  </div>
 
-  @yield('content')
 
 <div class="footer">
     <div class="socials_part mt-4 ">
