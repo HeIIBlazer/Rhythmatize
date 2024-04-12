@@ -1,4 +1,5 @@
-@extends ('layouts.app')
+@extends ('layouts.app', ['title' => 'Rhythmatize'])
+
 
 
 @section('content')
@@ -20,11 +21,13 @@
 
                 <div class="albums_3">
                 @foreach ($lastAdded as $album)
-                @php $artist = \App\Models\Artist::find($album->artist_id); @endphp
-                @php $album_name = explode(" ", $album->name); $album_name = array_slice($album_name, 0, 5);  $album_name = implode(" ", $album_name); @endphp
+                @php 
+                    $artist = \App\Models\Artist::find($album->artist_id);
+                    $album_name = explode(" ", $album->name); $album_name = array_slice($album_name, 0, 5);  $album_name = implode(" ", $album_name); 
+                @endphp
                     <div class="hide-text" style="background-image: url({{url ($album->cover_url)}}); height: 230px; width: 30%; background-size: contain; background-repeat: no-repeat;">
-                        <p style="font-size: 12px">{{ $artist-> name }}</p>
-                        <p style="font-size: 15px">{{ $album_name }}</p>
+                        <p style="font-size: 15px">{{ $artist-> name }}</p>
+                        <p style="font-size: 18px">{{ $album_name }}</p>
                     </div>
                 @endforeach
                 </div>
@@ -52,8 +55,8 @@
                             $album_name = explode(" ", $album->name); $album_name = array_slice($album_name, 0, 5);  $album_name = implode(" ", $album_name); 
                         @endphp
                         <div class="hide-text" style="background-image: url({{url ($album->cover_url)}}); height: 170px; width: 29%; background-size: cover; background-position: center center; background-repeat: no-repeat; margin-bottom: 10px;">
-                            <p style="font-size: 12px">{{ $artist-> name }}</p>
-                            <p style="font-size: 15px">{{ $album_name }}</p>
+                            <p style="font-size: 15px">{{ $artist-> name }}</p>
+                            <p style="font-size: 18px">{{ $album_name }}</p>
                         </div>
                     @endforeach
                 </div>
@@ -70,9 +73,9 @@
                 </div>
                 <div class="albums_3">
                     @foreach ($artists as $artist)
-                        <div class="hide-text" style="background-image: url({{url ($artist->picture_url)}}); height: 170px; width: 29%; background-size: cover; background-repeat: no-repeat; margin-bottom: 10px;">
-                            <p style="font-size: 19px">{{ $artist-> name }}</p>
-                        </div>
+                            <a href="/artist/{{$artist -> id}}" class="hide-text" style="background-image: url({{url ($artist->picture_url)}}); height: 170px; width: 29%; background-size: cover; background-repeat: no-repeat; margin-bottom: 10px; text-decoration: none;">
+                                <p style="font-size: 19px;">{{ $artist-> name }}</p>
+                            </a>
                     @endforeach
                 </div>
                 <div class="button-div">
@@ -94,8 +97,8 @@
                             $track_name = explode(" ", $track->name); $track_name = array_slice($track_name, 0, 5);  $track_name = implode(" ", $track_name); 
                         @endphp
                             <div class="hide-text" style="background-image: url({{url ($album->cover_url)}}); height: 170px; width: 29%; background-size: cover; background-position: center center; background-repeat: no-repeat; margin-bottom: 10px;">
-                                <p style="font-size: 12px">{{ $artist-> name }}</p>
-                                <p style="font-size: 15px">{{ $track_name }}</p>
+                                <p style="font-size: 15px">{{ $artist-> name }}</p>
+                                <p style="font-size: 18px">{{ $track_name }}</p>
                             </div>
                         @endforeach
                     </div>

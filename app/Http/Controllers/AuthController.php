@@ -26,7 +26,7 @@ class AuthController extends Controller
         if (auth::attempt($credentials)) {
             redirect()->back();
         }
-        return redirect()->back()->with('error_login', 'Username or password is incorrect');
+        return redirect()->back()->with('error_login', 'Email or password is incorrect');
     }
     public function logout()
     {

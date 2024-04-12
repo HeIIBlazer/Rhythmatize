@@ -1,3 +1,16 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+  <link rel="icon" style="width: 50px; height: 50px" type="image/x-icon" href="/images/logo_title.png">
+
+  <title>
+    @isset($title)
+        {{ $title }} 
+    @endisset
+  </title>
+
 <!-- Latest compiled and minified CSS -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -6,7 +19,7 @@
 
 <link href="{{ URL::asset('css/main.css') }}" rel="stylesheet" type="text/css" >
 
-
+</head>
 
   <nav class="navbar navbar-expand-lg navbar-black bg-black">
     <div class="container-fluid">
@@ -73,14 +86,14 @@
                                       <input type="email" class="login-input" name="email" placeholder="Email" required autofocus>
                                   </div>
                                   <div class="w-100 d-flex justify-content-center align-center mt-3 mb-4">
-                                      <input type="password" class="login-input" name="password" placeholder="Password" required autofocus>
+                                      <input type="password" class="login-input" name="password" placeholder="Password" minlength="6" required>
                                   </div>
-                                  <div class="w-100 d-flex justify-content-center mt-2">
+                                  <div class="w-100 d-flex justify-content-center mt-2 mb-4">
                                       <button type="submit" class="login-button" name="login">Log in</button>
                                   </div>
                               </form>
                               <hr style="border: 1px solid white; width:80%;">
-                              <div>
+                              <div class="mb-3">
                                   <p class="login-undertext">You don't have an account? <a data-toggle="modal" data-target="#signupModal" data-dismiss="modal" aria-label="Close" class="login-undertext-button">Create account here.</a></p>
                               </div>
                           </div>
@@ -111,27 +124,27 @@
                               {{session()->get('error_signup')}}
                           </div>
                           @endif
-                          <div class="d-flex w-100 flex-column justify-content-center align-items-center h-75">
+                          <div class="d-flex w-100 flex-column justify-content-center align-items-center h-75 ">
                               <form action="{{url('/register')}}" method="POST" class="form">
                                   @csrf
-                                  <div class="w-100 d-flex justify-content-center align-center mt-2">
+                                  <div class="w-100 d-flex justify-content-center align-center mt-3">
                                       <input type="text" class="login-input" name="username" placeholder="Username" required autofocus>
                                   </div>
-                                  <div class="w-100 d-flex justify-content-center align-center mt-2">
+                                  <div class="w-100 d-flex justify-content-center align-center mt-3">
                                       <input type="email" class="login-input" name="email" placeholder="Email" required>
                                   </div>
-                                  <div class="w-100 d-flex justify-content-center align-center mt-2">
-                                      <input type="password" class="login-input" name="password" placeholder="Password" required>
+                                  <div class="w-100 d-flex justify-content-center align-center mt-3">
+                                      <input type="password" class="login-input" name="password" placeholder="Password" minlength="6" required>
                                   </div>
-                                  <div class="w-100 d-flex justify-content-center align-center mt-2">
-                                      <input type="password" class="login-input" name="password_confirmation" placeholder="Confirm Password" required>
+                                  <div class="w-100 d-flex justify-content-center align-center mt-3">
+                                      <input type="password" class="login-input" name="password_confirmation" placeholder="Confirm Password" minlength="6" required>
                                   </div>
-                                  <div class="w-100 d-flex justify-content-center mt-2 mb-0">
+                                  <div class="w-100 d-flex justify-content-center mt-3 mb-3">
                                       <button type="submit" class="login-button" name="login">Sign up</button>
                                   </div>
                               </form>
                               <hr style="border: 1px solid white; width:80%; margin-top: 1px;">
-                              <div>
+                              <div class="mb-3">
                                   <p class="login-undertext">You already have an account? <a data-toggle="modal" data-target="#loginModal" data-dismiss="modal" aria-label="Close" class="login-undertext-button">Log in here.</a></p>
                               </div>
                           </div>
@@ -253,8 +266,19 @@
       }else if($('.error-login-1').length > 0){
           $('#signupModal').modal('show');
       }
+      $('.cross').click(function () {
+        // Close the modal window
+        $(this).closest('.modal').modal('hide');
+    });
+    $('.login-undertext-button').click(function () {
+        // Close the modal window
+        $(this).closest('.modal').modal('hide');
+    });
   });
 </script>
 
+
     <!-- Include the Bootstrap JavaScript file -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+  </html>

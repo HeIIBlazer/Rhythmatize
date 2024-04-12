@@ -10,7 +10,7 @@ class Track extends Model
     use HasFactory;
 
     protected $table = 'tracks';
-    public $timestamps = true;
+    public $timestamps = false;
 
     protected $fillable = [
         'name',

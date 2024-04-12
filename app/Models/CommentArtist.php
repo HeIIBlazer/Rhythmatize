@@ -10,7 +10,7 @@ class CommentArtist extends Model
     use HasFactory;
 
     protected $table = 'comment_artists';
-    public $timestamps = true;
+    public $timestamps = false;
 
     protected $fillable = [
         'user_id',
