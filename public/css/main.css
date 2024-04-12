@@ -255,7 +255,6 @@ body {
     width: 100%;
     justify-content: space-evenly;
     margin-top: 20px;
-    height: 1025px;
 }
 
 .Header-text {
@@ -383,7 +382,6 @@ body {
     flex-direction: column;
     align-items: center;
     width: 45%;
-    height: 100%;
     background-color: #2C2C2C;
     border-radius: 5px;
     box-shadow: 10px 10px 4px #00000054;
