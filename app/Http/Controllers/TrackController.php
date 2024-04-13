@@ -20,7 +20,7 @@ class TrackController extends Controller
     {
         $tracks = DB::table("tracks")->select('tracks.*', DB::raw('count(like_tracks.id) as likes_count'))
                         ->leftJoin('like_tracks', 'track_id', '=', 'tracks.id')
-                        ->groupBy('tracks.id','tracks.name', 'tracks.time', 'tracks.spotify_link', 'tracks.youtube_link', 'tracks.apple_music_link', 'tracks.album_id', 'tracks.lyrics', 'tracks.explicit')
+                        ->groupBy('tracks.id','tracks.name', 'tracks.time','tracks.widget_link', 'tracks.spotify_link', 'tracks.youtube_link', 'tracks.apple_music_link', 'tracks.album_id', 'tracks.lyrics', 'tracks.explicit')
                         ->orderBy('likes_count', 'desc')
                         ->paginate(10);
 

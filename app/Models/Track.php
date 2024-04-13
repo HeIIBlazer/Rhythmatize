@@ -15,6 +15,7 @@ class Track extends Model
     protected $fillable = [
         'name',
         'time',
+        'widget_link',
         'spotify_link',
         'youtube_link',
         'apple_music_link',

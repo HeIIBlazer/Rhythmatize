@@ -143,7 +143,7 @@ class ArtistController extends Controller
                             ->from('albums')
                             ->where('albums.artist_id', $artist->id);
                     })
-                    ->groupBy('t.id', 't.name', 't.time', 't.youtube_link', 't.spotify_link', 't.apple_music_link', 't.album_id', 't.lyrics', 't.explicit')
+                    ->groupBy('t.id', 't.name', 't.time','t.widget_link', 't.youtube_link', 't.spotify_link', 't.apple_music_link', 't.album_id', 't.lyrics', 't.explicit')
                     ->orderBy('likes_count', 'desc')
                     ->limit(4)
                     ->get();

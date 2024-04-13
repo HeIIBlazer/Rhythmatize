@@ -255,6 +255,7 @@ body {
     width: 100%;
     justify-content: space-evenly;
     margin-top: 20px;
+    margin-bottom: 30px;
 }
 
 .Header-text {
@@ -791,8 +792,8 @@ body {
     color: white;
     cursor: pointer;
     font-weight: 700;
-
     transition: ease all 0.3;
+    
 }
 
 .read-more-button:hover {

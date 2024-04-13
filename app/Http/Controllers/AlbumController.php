@@ -32,10 +32,10 @@ class AlbumController extends Controller
 
     public function top_3_albums()
     {
-        $albums = Album::select('albums.*', DB::raw('count(like_albums.id) as likes_count'))
-                        ->leftJoin('like_albums', 'albums.id', '=', 'albums.id')
+        $albums = DB::table("albums")->select('albums.*', DB::raw('count(like_albums.id) as likes_count'))
+                        ->leftJoin('like_albums', 'albums.id', '=', 'like_albums.album_id')
                         ->groupBy('albums.id', 'albums.name' , 'albums.cover_url', 'albums.release_date', 'albums.description', 'albums.youtube_link', 'albums.spotify_link', 'albums.apple_music_link', 'albums.type', 'albums.artist_id')
-                        ->orderBy('likes_count', 'desc')
+                        ->orderBy('likes_count', 'desc',)
                         ->limit(3)
                         ->get();
 
@@ -50,7 +50,7 @@ class AlbumController extends Controller
         
         $tracks = Track::select('tracks.*', DB::raw('count(like_tracks.id) as likes_count'))
                         ->leftJoin('like_tracks', 'tracks.id', '=', 'like_tracks.track_id')
-                        ->groupBy('tracks.id', 'tracks.name','tracks.time', 'tracks.spotify_link','tracks.youtube_link',"tracks.apple_music_link", 'tracks.album_id', 'tracks.lyrics', 'tracks.explicit')
+                        ->groupBy('tracks.id', 'tracks.name','tracks.time','tracks.widget_link', 'tracks.spotify_link','tracks.youtube_link',"tracks.apple_music_link", 'tracks.album_id', 'tracks.lyrics', 'tracks.explicit')
                         ->orderBy('likes_count', 'desc')
                         ->limit(3)
                         ->get();
@@ -78,15 +78,6 @@ class AlbumController extends Controller
         } else {
             return view('searchResult', compact('albums', 'artists', 'tracks'));
         }
-     
-        
-        
-        
-        // if($albums->count() == 0 && $artists->count() == 0 && $tracks->count() == 0){
-        //     return view('searchResult', compact('albums', 'artists', 'tracks'));
-        // }
-      
-        // return view('searchResult', compact('albums', 'artists', 'tracks'));
     }
 
     public function album_show(Album $album) {

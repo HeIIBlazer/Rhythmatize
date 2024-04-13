@@ -20,7 +20,7 @@
         <img src="{{url ($artist -> banner_url)}}" alt="" style="width: 100%; height: 300px; object-fit:cover; object-position: 50% 50%;">
     </div>
 <div class="container d-flex flex-row justify-content-between mb-5">
-    <div class="w-25 d-flex flex-column justify-content-center">
+    <div class="w-25 d-flex flex-column  align-items-center">
         <div>
             <div class="artist-img w-100 d-flex justify-content-center align-items-center">
                 <img src="{{url ($artist -> picture_url)}}" alt="" class="Info-Image">
