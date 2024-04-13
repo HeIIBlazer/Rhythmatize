@@ -10,7 +10,7 @@ class Album extends Model
     use HasFactory;
     
     protected $table = 'albums';
-    public $timestamps = true;
+    public $timestamps = false;
     
     protected $fillable = [
         'name',

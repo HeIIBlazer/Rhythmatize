@@ -10,6 +10,8 @@ class AlbumGenre extends Model
     use HasFactory;
     
     protected $table = 'album_genres';
+
+    public $timestamps = false;
     
     protected $fillable = [
         'album_id',

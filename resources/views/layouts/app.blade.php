@@ -47,7 +47,7 @@
             <a class="header_button" href="{{ url ('/album_list')}}">Albums</a>
           </li>
         </ul>
-        <form class="d-flex mt-3 " method="GET" action="{{ url('/search') }}">
+        <form class="d-flex" method="GET" action="{{ url('/search') }}">
           <input class="form-control rounded-0 mr-5" name="search" type="search" placeholder="Search" aria-label="Search">
           <button class="search_button" type="submit">Search</button>
         </form>
@@ -164,7 +164,7 @@
               <a class="header_button" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"><img src="{{url (Auth::user()-> avatar_url)}}" alt="" style="width: 45px; height: 45px; border-radius: 50px; object-fit: cover;"></a>
             @endif
             <ul class="dropdown-menu dropdown-menu-dark slim-dropdown-menu" aria-labelledby="dropdownMenuLink">
-              <li><a class="dropdown-item" href="{{ url('/account')}}">Profile</a></li>
+              <li><a class="dropdown-item" href="/user/{{Auth::user() -> id}}">Profile</a></li>
               <li><a class="dropdown-item" href="{{url ('/logout')}}">Log out</a></li>
             </ul>
           </div>

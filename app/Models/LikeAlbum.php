@@ -10,7 +10,7 @@ class LikeAlbum extends Model
     use HasFactory;
 
     protected $table = 'like_albums';
-
+    public $timestamps = false;
     protected $fillable = [
         'user_id',
         'album_id',

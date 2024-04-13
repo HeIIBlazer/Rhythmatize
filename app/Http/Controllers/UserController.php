@@ -3,9 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use app\Models\Artist;
+use app\Models\Album;
+use app\Models\Track;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+
+
 
 class UserController extends Controller
 {
@@ -32,6 +37,16 @@ class UserController extends Controller
         }
     }
 
+    public function show_user(User $user){
+
+        
+        $artists = $user->likedArtists()->latest('like_artists.id')->take(3)->get();
+        $tracks = $user->likedTracks()->latest('like_tracks.id')->take(4)->get();
+        $albums = $user->likedAlbums()->latest('like_albums.id')->take(3)->get();
+
+        return view('user_views.userInfo', compact('user', 'artists', 'tracks', 'albums'));
+
+    }
     /**
      * Show the form for creating a new resource.
      */
@@ -142,7 +157,6 @@ class UserController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
         ]);
-        if (!isset($request->role)) $request->role = Auth::user()->role;
         if ($request->password) {
             $request->validate([
                 'password' => 'required|string|min:6|confirmed',

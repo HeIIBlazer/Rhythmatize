@@ -316,8 +316,6 @@ body {
     justify-content: center;
     align-items: center;
     width: 100%;
-    /* height: 36%; */
-    /* padding: 1rem; */
     background-color: #2C2C2C;
     border-radius: 5px;
     box-shadow: 10px 10px 4px #00000054;
@@ -661,7 +659,6 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 500px;
     height: 100%;
     background: #2C2C2C;
     box-shadow: 10px 10px 4px #00000054;
@@ -813,6 +810,7 @@ body {
     color: white;
     max-height: 200px;
     overflow: hidden;
+    /* text-align: center; */
 }
 
 .desc-text.expanded {
@@ -881,7 +879,6 @@ hr {
     flex-direction: row;
     align-items: center;
     justify-content: space-evenly;
-
 }
 
 .track-artist {
@@ -916,14 +913,25 @@ hr {
 
 .artist-track-album {
     padding: 0px 10px;
-    color: white;
+    color: #808080;
     font-weight: 500;
     font-size: 15px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     max-width: 230px;
+    text-decoration: none;
+    transition: ease all 0.3s;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
 }
+
+.artist-track-album:hover {
+    color: white;
+
+    transition: ease all 0.3s;
+}
+
 
 .artist-button {
     background-color: #373737;
@@ -940,8 +948,24 @@ hr {
     border-radius: 5px ;
 }
 
+.artist-button-album {
+    background-color: #373737;
+    text-align: center;
+    width: 93%;
+    height: 40px;
+    text-decoration: none;
+    color: white;
+    font-weight: 600;
+    font-size: 20px;
+    font-family: 'Montserrat', sans-serif;
+    padding-top: 5px;
+    box-shadow: 10px 10px 4px #00000054;
+    border-radius: 5px;
+
+}
+
 .artist-header-line {
-    width: 220px;
+    width: 27%;
     height: 2px;
     border: white 1px solid;
 }
@@ -982,6 +1006,7 @@ hr {
     max-width: 230px;
     color: #B8B8B8;
 }
+
 .text-Montserrat-album {
     font-family: 'Montserrat', sans-serif;
     white-space: nowrap;
@@ -997,25 +1022,25 @@ hr {
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
-  }
-  
-  .column {
+}
+
+.column {
     display: flex;
     flex-direction: column;
     flex: 1;
     width: 50%;
-  }
-  
-  .track-item {
+}
+
+.track-item {
     display: flex;
     flex-direction: row;
     align-items: center;
     /* width: 50%; */
     margin: 1em;
     flex: 1;
-  }
+}
 
-  .track-info {
+.track-info {
     margin: 0 auto;
     align-items: center;
     color: white;
@@ -1023,4 +1048,26 @@ hr {
     text-align: center;
 }
 
+/* USER PAGE */
 
+.edit-button{
+    background-color: #373737;
+    text-align: center;
+    text-decoration: none;
+    color: white;
+    font-weight: 600;
+    font-size: 20px;
+    font-family: 'Montserrat', sans-serif;
+    border-radius: 15px;
+    padding: 5px 20px;
+    margin-bottom: 15px;
+    border: #808080 2px solid;
+    transition: ease all 0.3s;
+}
+
+.edit-button:hover {
+    background-color: white;
+    border: black 2px solid;
+    transition: ease all 0.3s;
+    color: black;
+}

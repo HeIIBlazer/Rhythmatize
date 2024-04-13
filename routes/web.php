@@ -42,7 +42,10 @@ Route::post('/save_comment', [CommentArtistController::class, 'save_comment'])->
 // TRACKS
 Route::get('/track_chart', [TrackController::class, 'charts']);
 
-//LOGIN
+// USER
+Route::get('/user/{user}', [UserController::class, 'show_user']); 
+
+//LOGIN & REGISTER
 Route::get('/login', [AuthController::class, 'login']);
 Route::post('/login_auth', [AuthController::class, 'authenticate']);
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');

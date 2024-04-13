@@ -21,6 +21,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'avatar_url',
+        'banner_url',
         'username',
         'email',
         'password',
@@ -46,4 +47,19 @@ class User extends Authenticatable
     // protected $casts = [
     //     'email_verified_at' => 'datetime',
     // ];
+
+    public function likedArtists()
+    {
+        return $this->belongsToMany(Artist::class, 'like_artists', 'user_id', 'artist_id');
+    }
+
+    public function likedAlbums()
+    {
+    return $this->belongsToMany(Album::class, 'like_albums', 'user_id', 'album_id');
+    }
+
+    public function likedTracks()
+    {
+    return $this->belongsToMany(Track::class, 'like_tracks', 'user_id', 'track_id');
+    } 
 }

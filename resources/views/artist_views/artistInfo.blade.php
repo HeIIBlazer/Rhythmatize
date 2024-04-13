@@ -93,7 +93,7 @@
                 <h1 class="comments-header">Comments:</h1>
                 <hr>
             </div>
-            @if ($comments == 'NO COMMENTS')
+            @if (count($comments) == 0)
                 <div class="w-100 d-flex flex-column justify-content-center">
                     <p class="w-100 text-center text-Montserrat">THIS ARTIST HAS NO COMMENTS</p>
                     <hr>
@@ -109,7 +109,7 @@
                 <div class="d-flex flex-column">
                     <div class="d-flex flex-row align-items-center mb-3" style="height: 35px">
                         <img src=" {{url ($user -> avatar_url)}}" alt="" style="width: 20px; height: 20px; margin-right: 5px; border-radius:200px;">
-                        <p style="height: 10px">{{$user -> username}}</p>
+                        <a href="/user/{{$user -> id}}" style="height: 10px">{{$user -> username}}</a>
                     </div>
                     <div  class="w-100">
                         <p>{{$comment -> content}}</p>
@@ -147,7 +147,7 @@
             </div>
         </div>
 
-        @if ($tracks == 'NO TRACKS BY THIS ARTIST')
+        @if (count($tracks) == 0)
             <div class="w-100 d-flex flex-column justify-content-center m-5">
                 <h1 class="w-100 text-center white-text text-Montserrat text-">THIS ARTIST HAS NO TRACKS</h1>
             </div>
@@ -203,12 +203,12 @@
             </div>
         </div>
 
-        @if ($albums == 'NO ALBUMS BY THIS ARTIST')
+        @if (count($albums) == 0)
             <div class="w-100 d-flex flex-column justify-content-center m-5">
                 <h1 class="w-100 text-center white-text text-Montserrat text-">THIS ARTIST HAS NO ALBUMS</h1>
             </div>
         @else
-        <div class=" row justify-content-between mt-3 w-94 mb-4">
+        <div class=" row justify-content-around mt-3 w-94 mb-4">
             @foreach ($albums as $album)
                 <div class="col-auto artist-album-card">
                     <div >
@@ -223,7 +223,7 @@
                 </div>
             @endforeach
         </div>
-        <a class="artist-button flex-wrap" href="">Show all albums by {{$artist -> name}}</a>
+        <a class="artist-button-album flex-wrap" href="">Show all albums by {{$artist -> name}}</a>
     </div>
         @endif
 </div>

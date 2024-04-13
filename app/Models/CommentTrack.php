@@ -10,7 +10,7 @@ class CommentTrack extends Model
     use HasFactory;
 
     protected $table = 'comment_tracks';
-    public $timestamps = true;
+    public $timestamps = false;
 
     protected $fillable = [
         'user_id',

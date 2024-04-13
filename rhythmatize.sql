@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1
--- Время создания: Апр 13 2024 г., 14:47
+-- Время создания: Апр 13 2024 г., 20:24
 -- Версия сервера: 10.4.32-MariaDB
 -- Версия PHP: 8.2.12
 
@@ -255,7 +255,10 @@ CREATE TABLE `like_albums` (
 INSERT INTO `like_albums` (`id`, `user_id`, `album_id`) VALUES
 (1, 3, 3),
 (2, 2, 1),
-(3, 1, 3);
+(3, 1, 3),
+(4, 6, 4),
+(5, 6, 22),
+(10, 6, 16);
 
 -- --------------------------------------------------------
 
@@ -277,7 +280,14 @@ INSERT INTO `like_artists` (`id`, `user_id`, `artist_id`) VALUES
 (1, 3, 3),
 (2, 2, 1),
 (9, 4, 1),
-(11, 4, 2);
+(11, 4, 2),
+(14, 6, 6),
+(15, 6, 4),
+(16, 6, 1),
+(17, 6, 3),
+(18, 6, 112),
+(19, 6, 7),
+(20, 6, 2);
 
 -- --------------------------------------------------------
 
@@ -305,7 +315,10 @@ INSERT INTO `like_tracks` (`id`, `user_id`, `track_id`) VALUES
 (7, 2, 17),
 (8, 2, 29),
 (9, 3, 27),
-(10, 2, 31);
+(10, 2, 31),
+(13, 6, 4),
+(14, 6, 27),
+(15, 6, 8);
 
 -- --------------------------------------------------------
 
@@ -439,6 +452,7 @@ INSERT INTO `tracks` (`id`, `name`, `time`, `widget_link`, `spotify_link`, `yout
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `avatar_url` varchar(255) NOT NULL,
+  `banner_url` text NOT NULL,
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `username` varchar(255) NOT NULL,
@@ -450,13 +464,13 @@ CREATE TABLE `users` (
 -- Дамп данных таблицы `users`
 --
 
-INSERT INTO `users` (`id`, `avatar_url`, `email`, `password`, `username`, `role`, `description`) VALUES
-(1, '', 'admin@test.ee', '$2a$12$nQW8/raaLuNqqgvsS31oy.ixT1PlbS9EdvXcvRo9Ib4CV2vA3wYla', 'Admin', 'admin', ''),
-(2, '', 'Daniel.Monjane@test.ee', '$2a$12$nQW8/raaLuNqqgvsS31oy.ixT1PlbS9EdvXcvRo9Ib4CV2vA3wYla', 'DanMon', 'user', ''),
-(3, '', 'Daniel.Drivissenko@test.ee', '$2a$12$nQW8/raaLuNqqgvsS31oy.ixT1PlbS9EdvXcvRo9Ib4CV2vA3wYla', 'Derevo', 'user', ''),
-(4, 'https://townsquare.media/site/366/files/2014/12/Linkin-Park.jpg?w=980&q=75', 'spammorrow261@gmail.com', '$2y$12$28St9/ZPaeQOC0cWt8NDs.e5rlHCoEqaWf6cZefaPtesDaLDM8t4O', 'Mtalhead', 'admin', 'NO DESCRIPTION'),
-(5, '0', 'robloxben313@gmail.com', '$2y$12$PUoiFzlLcU24BuNDOL0Fg.7vxM5uYZsimoC6Z6OJ2FijKq1R5P1yu', 'asasasas', 'user', 'NO DESCRIPTION'),
-(6, 'https://townsquare.media/site/366/files/2014/12/Linkin-Park.jpg?w=980&q=75', 'asdasda@asdas.asd', '$2y$12$QLYRSPyebfGUQMjnchLIt.r1tiIyepDt4f1dTU/czk2PgND8U9TJu', 'Mororo261', 'user', 'NO DESCRIPTION');
+INSERT INTO `users` (`id`, `avatar_url`, `banner_url`, `email`, `password`, `username`, `role`, `description`) VALUES
+(1, '', '', 'admin@test.ee', '$2a$12$nQW8/raaLuNqqgvsS31oy.ixT1PlbS9EdvXcvRo9Ib4CV2vA3wYla', 'Admin', 'admin', ''),
+(2, '', '', 'Daniel.Monjane@test.ee', '$2a$12$nQW8/raaLuNqqgvsS31oy.ixT1PlbS9EdvXcvRo9Ib4CV2vA3wYla', 'DanMon', 'user', ''),
+(3, '', '', 'Daniel.Drivissenko@test.ee', '$2a$12$nQW8/raaLuNqqgvsS31oy.ixT1PlbS9EdvXcvRo9Ib4CV2vA3wYla', 'Derevo', 'user', ''),
+(4, 'https://townsquare.media/site/366/files/2014/12/Linkin-Park.jpg?w=980&q=75', '', 'spammorrow261@gmail.com', '$2y$12$28St9/ZPaeQOC0cWt8NDs.e5rlHCoEqaWf6cZefaPtesDaLDM8t4O', 'Mtalhead', 'admin', 'NO DESCRIPTION'),
+(5, '0', '', 'robloxben313@gmail.com', '$2y$12$PUoiFzlLcU24BuNDOL0Fg.7vxM5uYZsimoC6Z6OJ2FijKq1R5P1yu', 'asasasas', 'user', 'NO DESCRIPTION'),
+(6, 'https://townsquare.media/site/366/files/2014/12/Linkin-Park.jpg?w=980&q=75', '', 'asdasda@asdas.asd', '$2y$12$QLYRSPyebfGUQMjnchLIt.r1tiIyepDt4f1dTU/czk2PgND8U9TJu', 'Mororo261', 'user', 'NO DESCRIPTION');
 
 --
 -- Индексы сохранённых таблиц
@@ -600,19 +614,19 @@ ALTER TABLE `genres`
 -- AUTO_INCREMENT для таблицы `like_albums`
 --
 ALTER TABLE `like_albums`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT для таблицы `like_artists`
 --
 ALTER TABLE `like_artists`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT для таблицы `like_tracks`
 --
 ALTER TABLE `like_tracks`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT для таблицы `tracks`
