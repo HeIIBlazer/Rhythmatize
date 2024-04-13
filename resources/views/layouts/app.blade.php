@@ -125,8 +125,13 @@
                           </div>
                           @endif
                           <div class="d-flex w-100 flex-column justify-content-center align-items-center h-75 ">
-                              <form action="{{url('/register')}}" method="POST" class="form">
+                              <form action="{{url('/register')}}" method="POST" class="form" enctype="multipart/form-data">
                                   @csrf
+                                  <div class="w-100 d-flex justify-content-center align-items-center flex-column align-center mt-3">
+                                    <img id="imagePreview" src="#" alt="Image preview" style="display: none; width: 45%; height: 45%; border:3px solid #808080; border-radius: 5px;" class="mb-3 mt-0"/>
+                                    <input type="file" id="imageInput" name="avatar_url" class="img-input">
+                                    <label for="imageInput"  id="imageInputLabel" class="edit-button m-0">Insert Avatar</label>
+                                  </div>
                                   <div class="w-100 d-flex justify-content-center align-center mt-3">
                                       <input type="text" class="login-input" name="username" placeholder="Username" required autofocus>
                                   </div>
@@ -158,11 +163,7 @@
         @else
         <li class="avatar-button">
           <div class="dropdown">
-            @if(Auth::user() -> avatar_url == 0)
-              <a class="header_button" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"><img src="{{URL::asset('images/default-user.jpg') }}" alt="" style="width: 45px; height: 45px; border-radius: 50px; object-fit: inherit;"></a>
-            @else
               <a class="header_button" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"><img src="{{url (Auth::user()-> avatar_url)}}" alt="" style="width: 45px; height: 45px; border-radius: 50px; object-fit: cover;"></a>
-            @endif
             <ul class="dropdown-menu dropdown-menu-dark slim-dropdown-menu" aria-labelledby="dropdownMenuLink">
               <li><a class="dropdown-item" href="/user/{{Auth::user() -> id}}">Profile</a></li>
               <li><a class="dropdown-item" href="{{url ('/logout')}}">Log out</a></li>
@@ -277,6 +278,31 @@
         $(this).closest('.modal').modal('hide');
     });
   });
+
+  const imageInput = document.getElementById('imageInput');
+  const imagePreview = document.getElementById('imagePreview');
+  const imageInputLabel = document.getElementById('imageInputLabel');
+
+  imageInput.addEventListener('change', function(event) {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+    const fileName = event.target.files[0].name;
+
+    reader.onload = function(event) {
+      imagePreview.src = event.target.result;
+      imagePreview.style.display = 'block';
+      imageInputLabel.textContent = fileName;
+    };
+    
+    reader.readAsDataURL(file);
+
+    imageInput.addEventListener('change', function(event) {
+    
+    
+});
+  });
+    
+
 </script>
 
 

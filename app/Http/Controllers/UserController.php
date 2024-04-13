@@ -69,16 +69,32 @@ class UserController extends Controller
             'password' => 'required|string|min:6|confirmed',
             'password_conformation' => 'required', // 'password' => 'required|confirmed
             'role' => 'required',
-            'description' => 'required',
+            'avatar_url',
+            'banner_url'
         ]);
+
+        if($request-> avatar_url == null){
+            $avatar_url = asset('images/default_avatar.png');
+
+            User::create([
+                'avatar_url' => $avatar_url,
+                'username' => $request->username,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+                'role' => $request->role,
+                'description' => '',
+                'banner_url' => asset('images/Default_banner.jpg'),
+            ]);
+        }
 
         User::create([
             'avatar_url' => $request->avatar_url,
             'username' => $request->username,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'role' => $request->role,
-            'description' => $request->description,
+            'role' => 'user',
+            'description' => '',
+            'banner_url' => asset('images/Default_banner.jpg'),
 
         ]);
         
@@ -108,21 +124,51 @@ class UserController extends Controller
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|',
             'password_confirmation' => 'required|string|min:6|',
+            'avatar_url' => 'image',
         ]);
 
         if($request->password != $request->password_confirmation){
             return redirect()->back()->with('error_signup', 'Passwords do not match.');
         }
 
+        if($request -> avatar_url == null) {
+            User::create([
+                'username' => $request->username,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+                'role' => 'user',
+                'avatar_url' => asset('images/Default_user.png'),
+                'description' => '',
+                'banner_url' => asset('images/Default_banner.png'),
+            ]);
+    
+            if (auth()->attempt([
+                'email' => $request->email,
+                'password' => $request->password
+            ])) {
+                return redirect()->back();
+        }
+    }
+
         //Запрос на добавление пользователя
+
+
+        $filename = $request->file('avatar_url')->getClientOriginalName();
+        $data = $request->all(); //данные, переданы формой
+        $data['avatar_url'] = '../images/avatars/'.$filename; 
         User::create([
-            'username' => $request->username,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
+            'username' => $data['username'],
+            'email' => $data['email'],
+            'password' => Hash::make($data['password']),
             'role' => 'user',
-            'avatar_url' => '0',
-            'description' => 'NO DESCRIPTION',
+            'avatar_url' => $data['avatar_url'],
+            'description' => '',
+            'banner_url' => asset('images/Default_banner.png'),
         ]);
+        $file = $request->file('avatar_url');
+        if ($filename) {
+            $file->move('../public/images/avatars/', $filename);
+        }
 
         if (auth()->attempt([
             'email' => $request->email,
