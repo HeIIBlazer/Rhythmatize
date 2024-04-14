@@ -43,14 +43,14 @@ Route::post('/save_comment', [CommentArtistController::class, 'save_comment'])->
 Route::get('/track_chart', [TrackController::class, 'charts']);
 
 // USER
-Route::get('/user/{user}', [UserController::class, 'show_user']); 
+Route::get('/user/{user}', [UserController::class, 'show_user']);
+Route::post('/update/{user}', [UserController::class, 'update']); 
 
 //LOGIN & REGISTER
 Route::get('/login', [AuthController::class, 'login']);
 Route::post('/login_auth', [AuthController::class, 'authenticate']);
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::get('/registration', [UserController::class, 'form_register']);
 Route::post('/register', [UserController::class, 'store_register']);
 
 //LIKE SYSTEM

@@ -9,6 +9,8 @@ use app\Models\Track;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+
 
 
 
@@ -101,11 +103,6 @@ class UserController extends Controller
         return redirect('/users');
     }
 
-    public function form_register()
-    {
-        return view('user_views.registration');
-    }
-
     public function store_register(Request $request)
     {
 
@@ -191,7 +188,6 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        $roles = array('admin', 'user');
         return view('users.edit', compact('roles', 'user'));
     }
 
@@ -200,23 +196,60 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-        ]);
-        if ($request->password) {
-            $request->validate([
-                'password' => 'required|string|min:6|confirmed',
-                'password_confirmation' => 'required',
-            ]);
-            $user->update([
-                'name' => $request->name,
-                'password' => Hash::make($request->password),
-                'role' => $request->role,
-                'description' => $request->description,
-                'avatar_url' => $request->avatar_url,          
-            ]);
+        $account = User::;
+
+        if ($request->password == $account -> password) {
+            if ($request->new_password != null) {
+                if($request->new_password != $request->password_conformation) {
+                    return redirect()->back()->with('error', 'New passwords do not match');
+                }
+                $request->validate([
+                    'username' => 'required',
+                    'password' => 'required',
+                    'new_password' => 'required|string|min:6|confirmed',
+                    'description' => 'required',
+                    'avatar_url' => 'required',
+                    'banner_url' => 'required',
+                ]);
+                $filename = $request->file('avatar_url')->getClientOriginalName();
+                $file = $request->file('banner_url')->getClientOriginalName();
+                $data = $request->all(); //данные, переданы формой
+                $data['avatar_url'] = '../images/avatars/'.$filename;
+                $data['banner_url'] = '../images/banners/'.$file; 
+
+                $user->update([
+                    'username' => $data['username'],
+                    'password' => Hash::make($data['new_password']),
+                    'description' => $data['description'],
+                    'avatar_url' => $data['avatar_url'],
+                    'banner_url' => $data['banner_url'],
+                ]);
+            } else {
+                $request->validate([
+                    'name' => 'required',
+                    'password' => 'required',
+                    'description' => 'required',
+                    'avatar_url' => 'required',
+                    'banner_url' => 'required',
+                ]);
+                $filename = $request->file('avatar_url')->getClientOriginalName();
+                $file = $request->file('banner_url')->getClientOriginalName();
+                $data = $request->all(); //данные, переданы формой
+                $data['avatar_url'] = '../images/avatars/'.$filename;
+                $data['banner_url'] = '../images/banners/'.$file; 
+
+                $user->update([
+                    'username' => $data['username'],
+                    'password' => Hash::make($data['password']),
+                    'description' => $data['description'],
+                    'avatar_url' => $data['avatar_url'],
+                    'banner_url' => $data['banner_url'],
+                ]);
+            }
+        } else {
+            return redirect()->back()->with('error', 'Incorrect current password');
         }
-        return redirect('/users');
+        // return redirect()->back();
 
 
     }

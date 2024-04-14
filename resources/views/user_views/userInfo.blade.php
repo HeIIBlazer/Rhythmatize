@@ -176,69 +176,80 @@
     <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content border-b">
-                <div class="login">
+                <div class="edit">
                     <div class="w-100">
                         <div>
-                            <h1 class="login-header">EDIT YOUR PROFILE</h1>
+                            <h1 class="edit-header mt-3">EDIT YOUR PROFILE</h1>
                         </div>
                         
-                        @if (session()->has('error_login'))
+                        @if (session()->has('error'))
                             <div class="alert error-login">
-                                {{session()->get('error_login')}}
+                                {{session()->get('error')}}
                             </div>
                         @endif
                         <div class="d-flex w-100 h-100 flex-column justify-content-center align-items-center">
-                            <form action="{{url('/login_auth')}}" method="POST" class="form">
+                            <form action="/update/{{$user -> id}}" method="Post" class="form" enctype="multipart/form-data">
                                 @csrf
-                                <div class=" w-100 h-100 d-flex flex-row justify-content-center">
+                                <div>
+                                    <div class=" w-100 h-100 d-flex flex-row justify-content-center">
+                                        <div class="d-flex flex-column align-items-center align-content-center justify-content-center w-50">
+                                            <div class="d-flex h-50 align-items-center justify-content-center flex-column align-content-center">
+                                                <img id="imagePreview" src="{{$user -> avatar_url}}" alt="Image preview" style=" none; width: 100%; height: 70%; border:3px solid #808080; border-radius: 5px;" class="mb-2"/>
+                                                <input type="file" id="imageInput" name="avatar_url" class="img-input">
+                                                <label for="imageInput"  id="imageInputLabel" class="edit-change-button m-0">CHANGE AVATAR</label>
+                                            </div>
 
-                                    <div class="d-flex flex-column align-items-center align-content-center justify-content-center w-50">
-                                        <div class="d-flex h-50 align-items-center flex-column align-center">
-                                            <img id="imagePreview" src="{{$user -> avatar_url}}" alt="Image preview" style=" none; width: 80%; height: 80%; border:3px solid #808080; border-radius: 5px;" class=""/>
-                                            <input type="file" id="imageInput" name="avatar_url" class="img-input">
-                                            <label for="imageInput"  id="imageInputLabel" class="edit-button m-0">Change Avatar</label>
+                                            <div class="d-flex h-50 align-items-center flex-column align-center mt-3">
+                                                <img id="bannerPreview" src="{{$user -> banner_url}}" alt="banner preview" style=" width: 80%; height: 70%; border:3px solid #808080; border-radius: 5px; object-fit:contain" class="mb-2"/>
+                                                <input type="file" id="bannerInput" name="banner_url" class="img-input">
+                                                <label for="bannerInput"  id="bannerInputLabel" class="edit-change-button m-0">CHANGE BANNER</label>
+                                            </div>
                                         </div>
 
-                                        <div class="d-flex h-50 align-items-center flex-column align-center mt-3">
-                                            <img id="bannerPreview" src="{{$user -> banner_url}}" alt="banner preview" style=" width: 80%; height: 80%; border:3px solid #808080; border-radius: 5px;" class=""/>
-                                            <input type="file" id="bannerInput" name="banner_url" class="img-input">
-                                            <label for="bannerInput"  id="bannerInputLabel" class="edit-button m-0">Change Banner</label>
+                                        <div class=" w-50 d-flex flex-column align-items-baseline">
+                                            <div class="w-100 d-flex justify-content-center align-center mt-2 flex-column">
+                                                <label class="label-edit" for="username">USERNAME</label>
+                                                <input type="text" class="edit-input" name="username" id="username" placeholder="Username" value="{{$user -> username}}">
+                                            </div>
+
+                                            <div class="w-100 d-flex flex-column mt-2">
+                                                <label class="label-edit" for="description">BIO</label>
+                                                <textarea name="description" id="description" placeholder="Add description" rows="4" wrap="hard" class="edit-input" style="height: 210px">{{$user -> description}}</textarea>
+                                            </div>
+
+                                            <div class="w-100 d-flex flex-column mt-2">
+                                                <label class="label-edit" for="email">EMAIL</label>
+                                                <input type="email" id="email" placeholder="Email" class="edit-input" name="email" value="{{$user -> email}}">
+                                            </div>
+
+                                            <div class="w-100 d-flex flex-column justify-content-center align-center mt-2 ">
+                                                <label class="label-edit" for="">ENTER YOUR PASSWORD TO CONFIRM</label>
+                                                <input type="password" class="edit-input" name="password" placeholder="Current Password" minlength="6" required>
+                                            </div>
+                                            
+                                            <div class="w-100 d-flex flex-column justify-content-center align-center mt-2 ">
+                                                <label class="label-edit" for="">NEW PASSWORD</label>
+                                                <input type="password" class="edit-input" name="new_password" placeholder="New Password" minlength="6">
+                                            </div>
+                                            
+                                            <div class="w-100 d-flex flex-column justify-content-center align-center mt-2 mb-3">
+                                                <label class="label-edit" for="">CONFIRM PASSWORD</label>
+                                                <input type="password" class="edit-input" name="confirm_password" placeholder=" Confirm Password" minlength="6">
+                                            </div>
+
                                         </div>
                                     </div>
 
-                                    <div class=" w-50 d-flex flex-column align-items-baseline">
-                                        <div class="w-100 d-flex justify-content-center align-center mt-2 flex-column">
-                                            <label for="username">USERNAME</label>
-                                            <input type="text" class="login-input" name="username" id="username" placeholder="Username" value="{{$user -> username}}">
+                                    <div class="d-flex flex-row w-100 mt-2 mb-3 justify-content-evenly">
+                                        <div class="">
+                                            <button type="submit" class="save-button">SAVE</button>
                                         </div>
-
-                                        <div class="d-flex flex-column mt-2">
-                                            <label for="description">BIO</label>
-                                            <textarea name="description" id="description" placeholder="Add description" rows="4" wrap="hard" class="" style="height: 220px">{{$user -> description}}</textarea>
+                                        <div class="">
+                                            <button data-dismiss="modal" aria-label="Close" class="cancel-button">CANCEL</button>
                                         </div>
-
-                                        <div class="d-flex flex-column mt-2">
-                                            <label for="email">EMAIL</label>
-                                            <input type="email" id="email" placeholder="Email" class="login-input" name="email" value="{{$user -> email}}">
-                                        </div>
-
-                                        <div class="w-100 d-flex flex-column justify-content-center align-center mt-2 ">
-                                            <label for="">Previous Password</label>
-                                            <input type="password" class="login-input" name="old_password" placeholder="Previous Password" minlength="6" required>
-                                        </div>
-                                        
-                                        <div class="w-100 d-flex flex-column justify-content-center align-center mt-2 ">
-                                            <label for="">New Password</label>
-                                            <input type="password" class="login-input" name="password" placeholder="New Password" minlength="6" required>
-                                        </div>
-                                        
-                                        <div class="w-100 d-flex flex-column justify-content-center align-center mt-2 mb-3">
-                                            <label for="">Confirm Password</label>
-                                            <input type="password" class="login-input" name="confirm_password" placeholder=" Confirm Password" minlength="6" required>
-                                        </div>
-
                                     </div>
                                 </div>
+                                    
                             </form>
                         </div>
                     </div>
@@ -270,26 +281,7 @@ const readMoreButtons = document.querySelectorAll('.read-more-button');
     });
 });
 
-const commentInput = document.querySelector('.comment-input');
-const loginModal = document.querySelector('#loginModal');
 
-commentInput.addEventListener('click', () => {
-    if (commentInput.hasAttribute('readonly')) {
-        $('#loginModal').modal('show');
-    }
-});
-
-const textarea = document.querySelector('.comment-input');
-
-textarea.addEventListener('keypress', (e) => {
-    // Check if the enter key is pressed
-    if (e.which === 13 && !e.shiftKey) {
-        e.preventDefault();
-
-        // Submit the form
-        textarea.closest('form').submit();
-    }
-});
 
 document.addEventListener('DOMContentLoaded', function() {
     var descText = document.querySelector('.desc-text');
@@ -312,6 +304,22 @@ let textWithLineBreaks = addLineBreaks(descText);
 
 // Set the innerHTML of the `desc-text` element to the new text with line breaks
 document.querySelector('.desc-text').innerHTML = textWithLineBreaks;
+
+const bannerInput = document.getElementById('bannerInput');
+const bannerPreview = document.getElementById('bannerPreview');
+const bannerInputLabel = document.getElementById('bannerInputLabel');
+
+bannerInput.addEventListener('change', function(event1) {
+    const file_banner = event1.target.files[0];
+    const reader_banner = new FileReader();
+    const fileName_banner = event1.target.files[0].name;
+
+    reader_banner.onload = function(event1) {
+    bannerPreview.src = event1.target.result;
+    bannerInputLabel.textContent = fileName_banner;
+    };
+    reader_banner.readAsDataURL(file_banner);
+});
 
 </script>
     
