@@ -1066,6 +1066,7 @@ hr {
     margin-bottom: 15px;
     border: #808080 2px solid;
     transition: ease all 0.3s;
+    cursor: pointer;
 }
 
 .edit-button:hover {

@@ -137,9 +137,9 @@ class UserController extends Controller
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
                 'role' => 'user',
-                'avatar_url' => asset('images/Default_user.png'),
+                'avatar_url' => asset('../images/banners/Default_banner.png'),
                 'description' => '',
-                'banner_url' => asset('images/Default_banner.png'),
+                'banner_url' => asset('../images/banners/Default_banner.png'),
             ]);
     
             if (auth()->attempt([
@@ -163,7 +163,7 @@ class UserController extends Controller
             'role' => 'user',
             'avatar_url' => $data['avatar_url'],
             'description' => '',
-            'banner_url' => asset('images/Default_banner.png'),
+            'banner_url' => asset('../images/banners/Default_banner.png'),
         ]);
         $file = $request->file('avatar_url');
         if ($filename) {

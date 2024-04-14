@@ -17,9 +17,8 @@
         </div>
         @if (Auth::check() && Auth::user()->id == $user->id)
             <div class="d-flex flex-row justify-content-center align-items-center">
-                <a class="edit-button">EDIT</a>
+                <button class="edit-button" data-toggle="modal" data-target="#editModal">EDIT</button>
             </div>
-        @else 
         @endif
 
         <div class="background-block">
@@ -132,7 +131,7 @@
 
         @if (count($tracks) == 0)
             <div class="w-100 d-flex flex-column justify-content-center m-5">
-                <h1 class="w-100 text-center white-text text-Montserrat text-">THIS USER DID NOT LIKED A TRACK YET/h1>
+                <h1 class="w-100 text-center white-text text-Montserrat text-">THIS USER DID NOT LIKED A TRACK YET</h1>
             </div>
         @else
         <div class="w-94 d-flex flex-column mt-3">
@@ -174,8 +173,8 @@
         @endif
     </div>
 
-    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content border-b">
                 <div class="login">
                     <div class="w-100">
@@ -188,23 +187,59 @@
                                 {{session()->get('error_login')}}
                             </div>
                         @endif
-                        <div class="d-flex w-100 flex-column justify-content-center align-items-center">
+                        <div class="d-flex w-100 h-100 flex-column justify-content-center align-items-center">
                             <form action="{{url('/login_auth')}}" method="POST" class="form">
                                 @csrf
-                                <div class="w-100 d-flex justify-content-center align-center mt-2">
-                                    <input type="email" class="login-input" name="email" placeholder="Email" required autofocus>
-                                </div>
-                                <div class="w-100 d-flex justify-content-center align-center mt-3 mb-4">
-                                    <input type="password" class="login-input" name="password" placeholder="Password" minlength="6" required>
-                                </div>
-                                <div class="w-100 d-flex justify-content-center mt-2 mb-4">
-                                    <button type="submit" class="login-button" name="login">Log in</button>
+                                <div class=" w-100 h-100 d-flex flex-row justify-content-center">
+
+                                    <div class="d-flex flex-column align-items-center align-content-center justify-content-center w-50">
+                                        <div class="d-flex h-50 align-items-center flex-column align-center">
+                                            <img id="imagePreview" src="{{$user -> avatar_url}}" alt="Image preview" style=" none; width: 80%; height: 80%; border:3px solid #808080; border-radius: 5px;" class=""/>
+                                            <input type="file" id="imageInput" name="avatar_url" class="img-input">
+                                            <label for="imageInput"  id="imageInputLabel" class="edit-button m-0">Change Avatar</label>
+                                        </div>
+
+                                        <div class="d-flex h-50 align-items-center flex-column align-center mt-3">
+                                            <img id="bannerPreview" src="{{$user -> banner_url}}" alt="banner preview" style=" width: 80%; height: 80%; border:3px solid #808080; border-radius: 5px;" class=""/>
+                                            <input type="file" id="bannerInput" name="banner_url" class="img-input">
+                                            <label for="bannerInput"  id="bannerInputLabel" class="edit-button m-0">Change Banner</label>
+                                        </div>
+                                    </div>
+
+                                    <div class=" w-50 d-flex flex-column align-items-baseline">
+                                        <div class="w-100 d-flex justify-content-center align-center mt-2 flex-column">
+                                            <label for="username">USERNAME</label>
+                                            <input type="text" class="login-input" name="username" id="username" placeholder="Username" value="{{$user -> username}}">
+                                        </div>
+
+                                        <div class="d-flex flex-column mt-2">
+                                            <label for="description">BIO</label>
+                                            <textarea name="description" id="description" placeholder="Add description" rows="4" wrap="hard" class="" style="height: 220px">{{$user -> description}}</textarea>
+                                        </div>
+
+                                        <div class="d-flex flex-column mt-2">
+                                            <label for="email">EMAIL</label>
+                                            <input type="email" id="email" placeholder="Email" class="login-input" name="email" value="{{$user -> email}}">
+                                        </div>
+
+                                        <div class="w-100 d-flex flex-column justify-content-center align-center mt-2 ">
+                                            <label for="">Previous Password</label>
+                                            <input type="password" class="login-input" name="old_password" placeholder="Previous Password" minlength="6" required>
+                                        </div>
+                                        
+                                        <div class="w-100 d-flex flex-column justify-content-center align-center mt-2 ">
+                                            <label for="">New Password</label>
+                                            <input type="password" class="login-input" name="password" placeholder="New Password" minlength="6" required>
+                                        </div>
+                                        
+                                        <div class="w-100 d-flex flex-column justify-content-center align-center mt-2 mb-3">
+                                            <label for="">Confirm Password</label>
+                                            <input type="password" class="login-input" name="confirm_password" placeholder=" Confirm Password" minlength="6" required>
+                                        </div>
+
+                                    </div>
                                 </div>
                             </form>
-                            <hr style="border: 1px solid white; width:80%;">
-                            <div class="mb-3">
-                                <p class="login-undertext">You don't have an account? <a data-toggle="modal" data-target="#signupModal" data-dismiss="modal" aria-label="Close" class="login-undertext-button">Create account here.</a></p>
-                            </div>
                         </div>
                     </div>
                 </div>
