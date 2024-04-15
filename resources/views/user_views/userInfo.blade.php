@@ -194,7 +194,7 @@
                                     <div class=" w-100 h-100 d-flex flex-row justify-content-center">
                                         <div class="d-flex flex-column align-items-center align-content-center justify-content-center w-50">
                                             <div class="d-flex h-50 align-items-center justify-content-center flex-column align-content-center">
-                                                <img id="imagePreview" src="{{$user -> avatar_url}}" alt="Image preview" style=" none; width: 100%; height: 70%; border:3px solid #808080; border-radius: 5px;" class="mb-2"/>
+                                                    <img id="imagePreview" src="{{$user -> avatar_url}}" alt="Image preview" style="width: 250px; height: 350px; border:3px solid #808080; border-radius: 5px;" class="mb-2"/>
                                                 <input type="file" id="imageInput" name="avatar_url" class="img-input" value="{{$user -> avatar_url}}">
                                                 <label for="imageInput"  id="imageInputLabel" class="edit-change-button m-0">CHANGE AVATAR</label>
                                             </div>
