@@ -94,6 +94,8 @@
                         @php
                             $album = \App\Models\Album::find($track->album_id); 
                             $artist = \App\Models\Artist::find($album->artist_id);
+                            // $spotify_link = $track -> spotify_link; USE FOR TRACK INFO PAGE!!!!!
+                            // $modified_link = substr($spotify_link, 24);
                             $track_name = explode(" ", $track->name); $track_name = array_slice($track_name, 0, 5);  $track_name = implode(" ", $track_name); 
                         @endphp
                             <div class="hide-text" style="background-image: url({{url ($album->cover_url)}}); height: 170px; width: 29%; background-size: cover; background-position: center center; background-repeat: no-repeat; margin-bottom: 10px;">
@@ -102,6 +104,7 @@
                             </div>
                         @endforeach
                     </div>
+
                     <div class="button-div">
                         <a href="{{ url ('/track_chart') }}"><button class="see_more_button" type="submit">See more</button></a>
                     </div>

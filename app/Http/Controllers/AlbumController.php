@@ -50,7 +50,7 @@ class AlbumController extends Controller
         
         $tracks = Track::select('tracks.*', DB::raw('count(like_tracks.id) as likes_count'))
                         ->leftJoin('like_tracks', 'tracks.id', '=', 'like_tracks.track_id')
-                        ->groupBy('tracks.id', 'tracks.name','tracks.time','tracks.widget_link', 'tracks.spotify_link','tracks.youtube_link',"tracks.apple_music_link", 'tracks.album_id', 'tracks.lyrics', 'tracks.explicit')
+                        ->groupBy('tracks.id', 'tracks.name','tracks.time', 'tracks.spotify_link','tracks.youtube_link',"tracks.apple_music_link", 'tracks.album_id', 'tracks.lyrics', 'tracks.explicit')
                         ->orderBy('likes_count', 'desc')
                         ->limit(3)
                         ->get();
