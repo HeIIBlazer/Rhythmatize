@@ -6,7 +6,7 @@
         <p>ALBUMS</p>
     </div>
 
-    <div class="d-flex">
+    <div class="d-flex justify-content-evenly">
         @foreach ($albums as $album)
             @php
                 $artist = \App\Models\Artist::find($album->artist_id);

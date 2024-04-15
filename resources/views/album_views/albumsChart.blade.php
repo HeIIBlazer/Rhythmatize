@@ -1,6 +1,7 @@
 @extends ('layouts.app', ['title' => 'Albums Chart'])
 
 @section('content')
+<body data-user-name="{{ $user? $user->username : '' }}">
 <div class="container">
     <div class="Header-Charts">
         <p>ALBUMS CHART</p>
@@ -48,4 +49,26 @@
         {!! $albums->links() !!}
     </div>
 </div>
+
+<script>
+    // Get the current URL
+// Get the current URL
+const currentUrl = window.location.href;
+
+// Get the user's name from the data attribute
+const userName = document.body.dataset.userName;
+
+// Check if the URL contains a specific string (e.g. "user-albums")
+if (currentUrl.includes("user-albums")) {
+// Change the Header-Charts
+    if (userName) {
+        document.querySelector(".Header-Charts p").innerHTML = `Albums Like by ${userName}`;
+    } else {
+        document.querySelector(".Header-Charts p").innerHTML = "Albums Like by User";
+    }
+} else {
+// Default Header-Charts
+    document.querySelector(".Header-Charts p").innerHTML = "Albums Chart";
+}
+</script>
 @endsection

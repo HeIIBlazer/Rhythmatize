@@ -26,19 +26,6 @@ class UserController extends Controller
         return view('users.index', compact('users', 'roles'));
     }
 
-    public function userByrole(Request $request)
-    {
-        $roles = array('admin', 'user');
-        $data = $request->all();
-        $selectRole = $data['role'];
-        if ($data['role'] == "0") {
-            return redirect('/users');
-        } else {
-            $users = User::where('role', 'LIKE', $data['role'])->get();
-            return view('users.index', compact('users', 'roles', 'selectRole'));
-        }
-    }
-
     public function show_user(User $user){
 
         
@@ -48,6 +35,12 @@ class UserController extends Controller
 
         return view('user_views.userInfo', compact('user', 'artists', 'tracks', 'albums'));
 
+    }
+
+    public function show_liked_albums(User $user)
+    {
+        $albums = $user->likedAlbums()->latest('like_albums.id')->paginate(12);
+        return view('album_views.albumsList', compact('albums', 'user'));
     }
     /**
      * Show the form for creating a new resource.
