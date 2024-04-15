@@ -3,7 +3,6 @@
 @section('content')
     <div class="container">
         @php
-
             if ($user != null) {
                 $id = $user->id;
                 $username = $user -> username;

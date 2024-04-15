@@ -2,6 +2,15 @@
 
 @section('content')
 <div class="container">
+    @php
+    if ($user != null) {
+        $id = $user->id;
+        $username = $user -> username;
+    }else{
+        $id = 0;
+        $username = "";
+    }
+    @endphp
     <div class="Header-Charts">
         <p>TRACKS CHART</p>
     </div>
@@ -50,4 +59,18 @@
         {!! $tracks->links() !!}
     </div>
 </div>
+
+<script>
+    const currentUrl = window.location.href;
+    
+    let id = {{$id}};
+    const username ="{{$username}}";
+    // Check if the URL contains a specific string (e.g. "user-albums")
+    if (currentUrl.includes("liked-tracks")) {
+        if (id != 0) {
+            document.querySelector(".Header-Charts p").innerHTML = `Tracks Liked by <a href="/user/${id}" class="Header-List-1">${username}</a>`;
+            document.title = `${userName}'s liked tracks`;
+        }
+    }
+    </script>
 @endsection

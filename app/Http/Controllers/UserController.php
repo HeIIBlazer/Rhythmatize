@@ -42,11 +42,15 @@ class UserController extends Controller
         $albums = $user->likedAlbums()->latest('like_albums.id')->paginate(12);
         return view('album_views.albumsList', compact('albums', 'user'));
     }
-
     public function show_liked_artists(User $user)
     {
         $artists = $user->likedArtists()->latest('like_artists.id')->paginate(12);
         return view('artist_views.artistsList', compact('artists', 'user'));
+    }
+    public function show_liked_tracks(User $user)
+    {
+        $tracks = $user->likedTracks()->latest('like_tracks.id')->paginate(12);
+        return view('tracks_views.tracksChart', compact('tracks', 'user'));
     }
     /**
      * Show the form for creating a new resource.

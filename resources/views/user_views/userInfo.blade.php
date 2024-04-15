@@ -161,7 +161,7 @@
                                     <p class="artist-track-album">{{$album -> name}}</p>
                                 </div>
                                 <div class="d-flex flex-row flex-wrap align-content-end pb-3 h-50">
-                                    <a href="/artist/{{$artist -> id}}" class="artist-track-album ">{{$artist -> name}}</a>
+                                    <a href="/artist/{{$artist -> id}}" class="artist-track-album">{{$artist -> name}}</a>
                                 </div>
                             </div>
                         </div>
@@ -169,7 +169,7 @@
                 </div>
             @endforeach
         </div>
-        <a class="artist-button flex-wrap" href="">Show all liked tracks</a>
+        <a class="artist-button flex-wrap" href="/liked-tracks/{{$user ->id}}">Show all liked tracks</a>
         @endif
     </div>
 
