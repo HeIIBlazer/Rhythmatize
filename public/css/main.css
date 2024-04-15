@@ -1088,6 +1088,7 @@ hr {
     flex-direction: column;
     align-items: center;
     height: 100%;
+    width: 100%;
     background: #202020;
     border-radius: 10px;
 }

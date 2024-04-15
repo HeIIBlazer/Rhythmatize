@@ -181,32 +181,36 @@
                         <div>
                             <h1 class="edit-header mt-3">EDIT YOUR PROFILE</h1>
                         </div>
-                        
+                    </div>
                         @if (session()->has('error'))
                             <div class="alert error-login">
                                 {{session()->get('error')}}
                             </div>
                         @endif
-                        <div class="d-flex w-100 h-100 flex-column justify-content-center align-items-center">
-                            <form action="/update/{{$user -> id}}" method="POST" class="form" enctype="multipart/form-data">
+                        <div class="d-flex w-100 flex-column justify-content-between">
+                            <form action="/update/{{$user -> id}}" method="POST" class="form" enctype="multipart/form-data" id="edit">
                                 @csrf
-                                <div>
+                                <div class="w-100">
                                     <div class=" w-100 h-100 d-flex flex-row justify-content-center">
                                         <div class="d-flex flex-column align-items-center align-content-center justify-content-center w-50">
-                                            <div class="d-flex h-50 align-items-center justify-content-center flex-column align-content-center">
-                                                    <img id="imagePreview" src="{{$user -> avatar_url}}" alt="Image preview" style="width: 250px; height: 350px; border:3px solid #808080; border-radius: 5px;" class="mb-2"/>
+                                            <div class="d-flex h-50 align-items-center justify-content-center flex-column align-content-center" >
+                                                <div class="d-flex justify-content-center" style="border:3px solid #808080;border-radius: 5px; height: 200px;">
+                                                    <img id="imagePreview" src="{{$user -> avatar_url}}" alt="Image preview" style="width:100%; height: 100%;  object-fit:fill" class="mb-2"/>
+                                                </div>
                                                 <input type="file" id="imageInput" name="avatar_url" class="img-input" value="{{$user -> avatar_url}}">
                                                 <label for="imageInput"  id="imageInputLabel" class="edit-change-button m-0">CHANGE AVATAR</label>
                                             </div>
 
-                                            <div class="d-flex h-50 align-items-center flex-column align-center mt-3">
-                                                <img id="bannerPreview" src="{{$user -> banner_url}}" alt="banner preview" style=" width: 80%; height: 70%; border:3px solid #808080; border-radius: 5px; object-fit:contain" class="mb-2"/>
+                                            <div class="d-flex w-100 h-50 align-items-center flex-column align-center mt-3" style="padding: 10px">
+                                                <div class="d-flex w-100 justify-content-center" style="border:3px solid #808080;border-radius: 5px; height: 200px; width: 100%;">
+                                                    <img id="bannerPreview" src="{{$user -> banner_url}}" alt="banner preview" style="object-fit:contain" class="mb-2 w-100 h-100"/>
+                                                </div>
                                                 <input type="file" id="bannerInput" name="banner_url" class="img-input" value="{{$user -> banner_url}}">
                                                 <label for="bannerInput"  id="bannerInputLabel" class="edit-change-button m-0">CHANGE BANNER</label>
                                             </div>
                                         </div>
 
-                                        <div class=" w-50 d-flex flex-column align-items-baseline">
+                                        <div class="w-50 d-flex flex-column align-items-baseline">
                                             <div class="w-100 d-flex justify-content-center align-center mt-2 flex-column">
                                                 <label class="label-edit" for="username">USERNAME</label>
                                                 <input type="text" class="edit-input" name="username" id="username" placeholder="Username" value="{{$user -> username}}">
@@ -245,7 +249,7 @@
                                             <button type="submit" class="save-button">SAVE</button>
                                         </div>
                                         <div class="">
-                                            <button data-dismiss="modal" aria-label="Close" class="cancel-button">CANCEL</button>
+                                            <button data-dismiss="modal" form aria-label="Close" class="cancel-button" id="cancel">CANCEL</button>
                                         </div>
                                     </div>
                                 </div>
@@ -280,6 +284,8 @@ const readMoreButtons = document.querySelectorAll('.read-more-button');
         }
     });
 });
+
+
 
 
 
@@ -320,6 +326,20 @@ bannerInput.addEventListener('change', function(event1) {
     };
     reader_banner.readAsDataURL(file_banner);
 });
+
+
+const cancel = document.getElementById("cancel");
+
+cancel.addEventListener('click',() => {
+    bannerPreview.src = '{{$user -> banner_url}}';
+    bannerInputLabel.textContent = 'CHANGE BANNER';
+    imagePreview.src = '{{$user -> avatar_url}}';
+    imageInputLabel.textContent = 'CHANGE AVATAR';
+
+    document.getElementById("edit").reset();
+}); 
+
+
 
 </script>
     
