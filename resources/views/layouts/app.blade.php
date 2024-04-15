@@ -240,7 +240,7 @@
                 <a href="{{url ('/track_chart')}}" class="links_button">Charts</a>
             </div>
         </div>
-          @if(Auth::check() && Auth::user()->role)
+          @if(Auth::check() && Auth::user()->role == 'admin')
           <div class="h-100 d-flex align-items-center justify-content-center">
             <a href="{{url ('/track_chart')}}" class="links_header">ADMIN</a>
           </div>

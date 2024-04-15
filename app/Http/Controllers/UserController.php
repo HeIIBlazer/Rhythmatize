@@ -134,7 +134,7 @@ class UserController extends Controller
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
                 'role' => 'user',
-                'avatar_url' => asset('../images/banners/Default_banner.png'),
+                'avatar_url' => asset('../images/banners/Default_avatar.png'),
                 'description' => '',
                 'banner_url' => asset('../images/banners/Default_banner.png'),
             ]);
@@ -196,21 +196,23 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        $account = User::;
 
-        if ($request->password == $account -> password) {
+        $request->validate([
+            'username' => '',
+            'email' => '',
+            'password' => 'required',
+            'new_password' =>'',
+            'password_confirmation' => '',
+            'avatar_url' => 'image',
+            'banner_url'=> 'image',
+        ]);
+
+
+        if (Hash::check($request->password, $user->password)) {
             if ($request->new_password != null) {
-                if($request->new_password != $request->password_conformation) {
+                if($request->new_password != $request->password_confirmation) {
                     return redirect()->back()->with('error', 'New passwords do not match');
                 }
-                $request->validate([
-                    'username' => 'required',
-                    'password' => 'required',
-                    'new_password' => 'required|string|min:6|confirmed',
-                    'description' => 'required',
-                    'avatar_url' => 'required',
-                    'banner_url' => 'required',
-                ]);
                 $filename = $request->file('avatar_url')->getClientOriginalName();
                 $file = $request->file('banner_url')->getClientOriginalName();
                 $data = $request->all(); //данные, переданы формой
@@ -224,27 +226,68 @@ class UserController extends Controller
                     'avatar_url' => $data['avatar_url'],
                     'banner_url' => $data['banner_url'],
                 ]);
-            } else {
-                $request->validate([
-                    'name' => 'required',
-                    'password' => 'required',
-                    'description' => 'required',
-                    'avatar_url' => 'required',
-                    'banner_url' => 'required',
-                ]);
-                $filename = $request->file('avatar_url')->getClientOriginalName();
-                $file = $request->file('banner_url')->getClientOriginalName();
-                $data = $request->all(); //данные, переданы формой
-                $data['avatar_url'] = '../images/avatars/'.$filename;
-                $data['banner_url'] = '../images/banners/'.$file; 
 
-                $user->update([
-                    'username' => $data['username'],
-                    'password' => Hash::make($data['password']),
-                    'description' => $data['description'],
-                    'avatar_url' => $data['avatar_url'],
-                    'banner_url' => $data['banner_url'],
-                ]);
+                return redirect()->back();
+            } else {
+                $data = $request->all();
+
+                if($request->hasFile('avatar_url') && $request->file('avatar_url')->isValid() && $request->hasFile('banner_url') && $request->file('banner_url')->isValid()) {
+                    $filename = $request->file('avatar_url')->getClientOriginalName();
+                    $file = $request->file('banner_url')->getClientOriginalName();
+                    $data['avatar_url'] = '../images/avatars/'.$filename;
+                    $data['banner_url'] = '../images/banners/'.$file;
+                    
+                    $user->update([
+                        'username' => $data['username'],
+                        'description' => $data['description'],
+                        'avatar_url' => $data['avatar_url'],
+                        'banner_url' => $data['banner_url'],
+                    ]);
+
+                    return redirect()->back();
+
+                } else if($request->hasFile('avatar_url') && $request->file('avatar_url')->isValid()){
+                    $filename = $request->file('avatar_url')->getClientOriginalName();
+                    $data['avatar_url'] = '';
+                    $data['avatar_url'] = '../images/avatars/'.$filename;
+                    
+                    $user->update([
+                        'username' => $data['username'],
+                        'description' => $data['description'],
+                        'avatar_url' => $data['avatar_url'],
+                        'email' => $data['email']
+                    ]);
+
+                    $file = $request->file('avatar_url');
+                    if ($filename) {
+                        $file->move('../public/images/avatars/', $filename);
+                    }
+
+                    return redirect()->back();
+
+                }elseif ($request->hasFile('banner_url') && $request->file('banner_url')->isValid()){
+                    $file = $request->file('banner_url')->getClientOriginalName();
+                    $data['banner_url'] = '../images/banners/'.$file;
+
+                    $user->update([
+                        'username' => $data['username'],
+                        'description' => $data['description'],
+                        'banner_url' => $data['banner_url'],
+                        'email' => $data['email']
+                    ]);
+
+                    return redirect()->back();
+
+                }else{
+                    $user->update([
+                        'username' => $data['username'],
+                        'description' => $data['description'],
+                        'email' => $data['email']
+                    ]);
+                    return redirect()->back();
+                }
+
+
             }
         } else {
             return redirect()->back()->with('error', 'Incorrect current password');

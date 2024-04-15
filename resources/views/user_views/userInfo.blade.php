@@ -188,20 +188,20 @@
                             </div>
                         @endif
                         <div class="d-flex w-100 h-100 flex-column justify-content-center align-items-center">
-                            <form action="/update/{{$user -> id}}" method="Post" class="form" enctype="multipart/form-data">
+                            <form action="/update/{{$user -> id}}" method="POST" class="form" enctype="multipart/form-data">
                                 @csrf
                                 <div>
                                     <div class=" w-100 h-100 d-flex flex-row justify-content-center">
                                         <div class="d-flex flex-column align-items-center align-content-center justify-content-center w-50">
                                             <div class="d-flex h-50 align-items-center justify-content-center flex-column align-content-center">
                                                 <img id="imagePreview" src="{{$user -> avatar_url}}" alt="Image preview" style=" none; width: 100%; height: 70%; border:3px solid #808080; border-radius: 5px;" class="mb-2"/>
-                                                <input type="file" id="imageInput" name="avatar_url" class="img-input">
+                                                <input type="file" id="imageInput" name="avatar_url" class="img-input" value="{{$user -> avatar_url}}">
                                                 <label for="imageInput"  id="imageInputLabel" class="edit-change-button m-0">CHANGE AVATAR</label>
                                             </div>
 
                                             <div class="d-flex h-50 align-items-center flex-column align-center mt-3">
                                                 <img id="bannerPreview" src="{{$user -> banner_url}}" alt="banner preview" style=" width: 80%; height: 70%; border:3px solid #808080; border-radius: 5px; object-fit:contain" class="mb-2"/>
-                                                <input type="file" id="bannerInput" name="banner_url" class="img-input">
+                                                <input type="file" id="bannerInput" name="banner_url" class="img-input" value="{{$user -> banner_url}}">
                                                 <label for="bannerInput"  id="bannerInputLabel" class="edit-change-button m-0">CHANGE BANNER</label>
                                             </div>
                                         </div>
@@ -223,18 +223,18 @@
                                             </div>
 
                                             <div class="w-100 d-flex flex-column justify-content-center align-center mt-2 ">
-                                                <label class="label-edit" for="">ENTER YOUR PASSWORD TO CONFIRM</label>
+                                                <label class="label-edit" for="password">ENTER YOUR PASSWORD TO CONFIRM</label>
                                                 <input type="password" class="edit-input" name="password" placeholder="Current Password" minlength="6" required>
                                             </div>
                                             
                                             <div class="w-100 d-flex flex-column justify-content-center align-center mt-2 ">
-                                                <label class="label-edit" for="">NEW PASSWORD</label>
+                                                <label class="label-edit" for="new_password">NEW PASSWORD</label>
                                                 <input type="password" class="edit-input" name="new_password" placeholder="New Password" minlength="6">
                                             </div>
                                             
                                             <div class="w-100 d-flex flex-column justify-content-center align-center mt-2 mb-3">
-                                                <label class="label-edit" for="">CONFIRM PASSWORD</label>
-                                                <input type="password" class="edit-input" name="confirm_password" placeholder=" Confirm Password" minlength="6">
+                                                <label class="label-edit" for="password_confirmation">CONFIRM PASSWORD</label>
+                                                <input type="password" class="edit-input" name="password_confirmation" placeholder=" Confirm Password" minlength="6">
                                             </div>
 
                                         </div>
