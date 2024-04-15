@@ -134,7 +134,7 @@ class UserController extends Controller
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
                 'role' => 'user',
-                'avatar_url' => asset('../images/banners/Default_avatar.png'),
+                'avatar_url' => asset('../images/avatars/Default_avatar.png'),
                 'description' => '',
                 'banner_url' => asset('../images/banners/Default_banner.png'),
             ]);
@@ -197,6 +197,8 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
 
+        // $2y$12$8g82HaQoJ0mtHAAQK7X1h.MpzZFC9TPx9jRPdMso0WI7WrHiJaqsS
+
         $request->validate([
             'username' => '',
             'email' => '',
@@ -207,17 +209,83 @@ class UserController extends Controller
             'banner_url'=> 'image',
         ]);
 
+        $data = $request->all();
 
         if (Hash::check($request->password, $user->password)) {
             if ($request->new_password != null) {
                 if($request->new_password != $request->password_confirmation) {
                     return redirect()->back()->with('error', 'New passwords do not match');
                 }
-                $filename = $request->file('avatar_url')->getClientOriginalName();
-                $file = $request->file('banner_url')->getClientOriginalName();
-                $data = $request->all(); //данные, переданы формой
-                $data['avatar_url'] = '../images/avatars/'.$filename;
-                $data['banner_url'] = '../images/banners/'.$file; 
+
+                if($request->hasFile('avatar_url') && $request->file('avatar_url')->isValid() && $request->hasFile('banner_url') && $request->file('banner_url')->isValid()) {
+                    $filename = $request->file('avatar_url')->getClientOriginalName();
+                    $filebanner = $request->file('banner_url')->getClientOriginalName();
+                    $data['avatar_url'] = '';
+                    $data['banner_url'] = '';
+                    $data['avatar_url'] = '../images/avatars/'.$filename;
+                    $data['banner_url'] = '../images/banners/'.$filebanner;
+                    
+                    $user->update([
+                        'username' => $data['username'],
+                        'description' => $data['description'],
+                        'password' => Hash::make($data['new_password']),
+                        'avatar_url' => $data['avatar_url'],
+                        'banner_url' => $data['banner_url'],
+                        'email' => $data['email']
+                    ]);
+
+                    $file = $request->file('avatar_url');
+                    $filebannersave = $request->file('banner_url');
+                    if ($filename) {
+                        $file->move('../public/images/avatars/', $filename);
+                    }
+                    if ($filebannersave){
+                        $filebannersave->move('../public/images/banners/', $filebanner);
+                    }
+
+                    return redirect()->back();
+
+                } else if($request->hasFile('avatar_url') && $request->file('avatar_url')->isValid()){
+                    $filename = $request->file('avatar_url')->getClientOriginalName();
+                    $data['avatar_url'] = '';
+                    $data['avatar_url'] = '../images/avatars/'.$filename;
+                    
+                    $user->update([
+                        'username' => $data['username'],
+                        'description' => $data['description'],
+                        'password' => Hash::make($data['new_password']),
+                        'avatar_url' => $data['avatar_url'],
+                        'email' => $data['email']
+                    ]);
+
+                    $file = $request->file('avatar_url');
+                    if ($filename ) {
+                        $file->move('../public/images/avatars/', $filename);
+                    }
+
+                    return redirect()->back();
+
+                }elseif ($request->hasFile('banner_url') && $request->file('banner_url')->isValid()){
+                    $filebanner = $request->file('banner_url')->getClientOriginalName();
+                    $data['banner_url'] = '';
+                    $data['banner_url'] = '../images/banners/'.$filebanner;
+
+                    $user->update([
+                        'username' => $data['username'],
+                        'description' => $data['description'],
+                        'password' => Hash::make($data['new_password']),
+                        'banner_url' => $data['banner_url'],
+                        'email' => $data['email']
+                        
+                    ]);
+
+                    $filebannersave = $request->file('banner_url');
+                    if ($filebanner) {
+                        $filebannersave->move('../public/images/banners/', $filebanner);
+                    }
+
+                    return redirect()->back();
+                }
 
                 $user->update([
                     'username' => $data['username'],
@@ -225,6 +293,7 @@ class UserController extends Controller
                     'description' => $data['description'],
                     'avatar_url' => $data['avatar_url'],
                     'banner_url' => $data['banner_url'],
+                    'email' => $data['email']
                 ]);
 
                 return redirect()->back();
@@ -233,16 +302,27 @@ class UserController extends Controller
 
                 if($request->hasFile('avatar_url') && $request->file('avatar_url')->isValid() && $request->hasFile('banner_url') && $request->file('banner_url')->isValid()) {
                     $filename = $request->file('avatar_url')->getClientOriginalName();
-                    $file = $request->file('banner_url')->getClientOriginalName();
+                    $filebanner = $request->file('banner_url')->getClientOriginalName();
+                    $data['avatar_url'] = '';
+                    $data['banner_url'] = '';
                     $data['avatar_url'] = '../images/avatars/'.$filename;
-                    $data['banner_url'] = '../images/banners/'.$file;
+                    $data['banner_url'] = '../images/banners/'.$filebanner;
                     
                     $user->update([
                         'username' => $data['username'],
                         'description' => $data['description'],
                         'avatar_url' => $data['avatar_url'],
                         'banner_url' => $data['banner_url'],
+                        'email' => $data['email']
                     ]);
+                    $file = $request->file('avatar_url');
+                    $filebannersave = $request->file('banner_url');
+                    if ($filename) {
+                        $file->move('../public/images/avatars/', $filename);
+                    }
+                    if ($filebannersave){
+                        $file->move('../public/images/banners/', $filebanner);
+                    }
 
                     return redirect()->back();
 
@@ -266,8 +346,9 @@ class UserController extends Controller
                     return redirect()->back();
 
                 }elseif ($request->hasFile('banner_url') && $request->file('banner_url')->isValid()){
-                    $file = $request->file('banner_url')->getClientOriginalName();
-                    $data['banner_url'] = '../images/banners/'.$file;
+                    $filebanner = $request->file('banner_url')->getClientOriginalName();
+                    $data['banner_url'] = '';
+                    $data['banner_url'] = '../images/banners/'.$filebanner;
 
                     $user->update([
                         'username' => $data['username'],
@@ -275,6 +356,11 @@ class UserController extends Controller
                         'banner_url' => $data['banner_url'],
                         'email' => $data['email']
                     ]);
+
+                    $filebannersave = $request->file('banner_url');
+                    if ($filebanner) {
+                        $filebannersave->move('../public/images/banners/', $filebanner);
+                    }
 
                     return redirect()->back();
 
@@ -296,6 +382,7 @@ class UserController extends Controller
 
 
     }
+
 
     /**
      * Remove the specified resource from storage.
