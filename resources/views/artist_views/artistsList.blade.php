@@ -1,12 +1,22 @@
 @extends ('layouts.app', ['title' => 'Artists List'])
 
 @section('content')
-<div class="container">
+    <div class="container">
+        @php
+
+            if ($user != null) {
+                $id = $user->id;
+                $username = $user -> username;
+            }else{
+                $id = 0;
+                $username = "";
+            }
+        @endphp
     <div class="Header-List">
         <p>ARTISTS</p>
     </div>
 
-    <div class="d-flex">
+    <div class="d-flex justify-content-evenly">
         @foreach ($artists as $artist)
                 <a href="/artist/{{$artist -> id}}" class="card">
                     <div class="mt-2 mb-3 d-flex justify-content-center">
@@ -26,5 +36,20 @@
         {!! $artists->links() !!}
     </div>
 </div>
+
+<script>
+const currentUrl = window.location.href;
+
+let id = {{$id}};
+const username ="{{$username}}";
+// Check if the URL contains a specific string (e.g. "user-albums")
+if (currentUrl.includes("liked-artists")) {
+    if (id != 0) {
+        document.querySelector(".Header-List p").innerHTML = `Artists Liked by <a href="/user/${id}" class="Header-List-1">${username}</a>`;
+        document.title = `${userName}'s liked artists`;
+    }
+}
+</script>
+    
     
 @endsection

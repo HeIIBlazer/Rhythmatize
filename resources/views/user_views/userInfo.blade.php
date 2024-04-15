@@ -72,7 +72,7 @@
                 </a>
             @endforeach
         </div>
-        <a class="artist-button-album flex-wrap" href="">Show all liked artists</a>
+        <a class="artist-button-album flex-wrap" href="/liked-artists/{{$user -> id}}">Show all liked artists</a>
         @endif
 
         <div class="w-100 d-flex flex-row justify-content-evenly align-content-center">
@@ -116,7 +116,7 @@
                 </div>
             @endforeach
         </div>
-        <a class="artist-button-album flex-wrap" href="">Show all liked albums</a>
+        <a class="artist-button-album flex-wrap" href="/liked-albums/{{$user -> id}}">Show all liked albums</a>
         @endif
 
         <div class="w-100 d-flex flex-row justify-content-evenly align-content-center">

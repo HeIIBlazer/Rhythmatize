@@ -46,6 +46,7 @@ Route::get('/track_chart', [TrackController::class, 'charts']);
 Route::get('/user/{user}', [UserController::class, 'show_user']);
 Route::post('/update/{user}', [UserController::class, 'update']); 
 Route::get('/liked-albums/{user}', [UserController::class, 'show_liked_albums']);
+Route::get('/liked-artists/{user}', [UserController::class, 'show_liked_artists']);
 
 //LOGIN & REGISTER
 Route::get('/login', [AuthController::class, 'login']);

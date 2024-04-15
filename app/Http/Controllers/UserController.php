@@ -42,6 +42,12 @@ class UserController extends Controller
         $albums = $user->likedAlbums()->latest('like_albums.id')->paginate(12);
         return view('album_views.albumsList', compact('albums', 'user'));
     }
+
+    public function show_liked_artists(User $user)
+    {
+        $artists = $user->likedArtists()->latest('like_artists.id')->paginate(12);
+        return view('artist_views.artistsList', compact('artists', 'user'));
+    }
     /**
      * Show the form for creating a new resource.
      */

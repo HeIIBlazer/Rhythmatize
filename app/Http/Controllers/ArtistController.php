@@ -16,8 +16,9 @@ class ArtistController extends Controller
      */
     public function index()
     {
+        $user = null;
         $artists = DB::table("artists")->orderBy('name', 'desc')->paginate(12);
-        return view('artist_views.artistsList', compact('artists'));
+        return view('artist_views.artistsList', compact('artists', 'user'));
     }
 
     public function charts() 
