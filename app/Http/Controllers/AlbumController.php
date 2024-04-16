@@ -89,8 +89,18 @@ class AlbumController extends Controller
 
     public function show_album(Album $album)
     {
+        $genre_album = DB::table('album_genres')->where('album_id', $album->id)->first();
+        $genre = DB::table('genres')->where('id', $genre_album->genre_id)->first();
+
+        $artistId = $album->artist_id;
+        $albums = Album::where('artist_id', $artistId)
+                ->where('id', '!=', $album->id)
+                ->take(2)
+                ->get();
+
+        $tracks = DB::table('tracks')->where('album_id', $album->id)->get();
         $comments = DB::table('comment_albums')->where('album_id', $album->id)->get();
-        return view('album_views.albumInfo', compact('album', 'comments'));
+        return view('album_views.albumInfo', compact('album', 'comments', 'tracks', 'genre', 'albums'));
     }
 
     /**

@@ -1175,3 +1175,13 @@ hr {
     color: white;
     transition: ease all 0.5s;
 }
+
+/* ALBUM INFO */
+
+.artists-lower-text {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 20px;
+    color: white;
+    font-weight: 200;
+    text-align: center;
+}

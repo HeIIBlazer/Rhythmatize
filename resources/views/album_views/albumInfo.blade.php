@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app', ['title' =>  $album -> name ])
 
 @section('content')
     @php
@@ -30,6 +30,9 @@
         </div>
         <div>
             <h1 class="info-header">{{$album -> name}}</h1>
+        </div>
+        <div class="mb-3">
+            <h3 class="artists-lower-text">{{$genre -> name}} | <a href="/artist/{{$artist -> id}}" class="white-text text-decoration-none">{{$artist -> name}}</a></h3>
         </div>
         <div class="d-flex flex-row justify-content-center align-content-center mb-3">
             @if ($like == 0) 
@@ -89,6 +92,22 @@
             </button>
         </div>
 
+        <div class="background-block mt-4">
+            <div>
+                <h2 class="desc-header">Other {{$artist -> name}} albums:</h2>
+                <hr>
+            </div>
+            <div>
+                @foreach ($albums as $artist_album)
+                    <div class="d-flex flex-column justify-content-between align-items-center">
+                        <a href="/album/{{$artist_album -> id}}" class="white-text text-decoration-none">{{$artist_album -> name}}</a>
+                        <a href="/album/{{$artist_album -> id}}"><img src="{{url ($artist_album -> cover_url)}}" alt="" style="width: 50px; height: 50px; object-fit:cover; object-position: 50% 50%;"></a>
+                    </div>
+                    <hr>
+                @endforeach
+            </div>
+        </div>
+
 
         <div class="background-block mt-4 mb-4">
             <div >
@@ -101,7 +120,7 @@
                     <hr>
                 </div>
             @else
-            <div style="max-height: 460px; min-height: 200px; overflow-y:auto">
+            <div style="max-height: 460px; min-height: 60px; overflow-y:auto">
                 @foreach($comments as $comment)
                 @php
                     $user = DB::table('users')
@@ -143,12 +162,16 @@
             <div class="artist-tracks-headers w-94">
                 <div class="artist-header-line"></div>
                 <div>
-                    <h2 class="artist-tracks-header">POPULAR {{$artist -> name}} TRACKS</h2>
+                    <h2 class="artist-tracks-header">{{$album -> name}} Trackslist</h2>
                 </div>
                 <div class="artist-header-line"></div>
             </div>
         </div>
-
+        <div class="w-100 d-flex flex-column">
+            @foreach ($tracks as $track)
+                
+            @endforeach
+        </div>
         
     </div>
 </div>
@@ -204,20 +227,11 @@ document.addEventListener('DOMContentLoaded', function() {
         readMoreButton.style.display = 'none';
     }
 });
-
 function addLineBreaks(text) {
     return text.replace(/\n/g, '<br>');
 }
-
-// Get the text with the `desc-text` class
 let descText = document.querySelector('.desc-text').textContent;
-
-// Use the `addLineBreaks` function to replace "\n" with "<br>"
 let textWithLineBreaks = addLineBreaks(descText);
-
-// Set the innerHTML of the `desc-text` element to the new text with line breaks
 document.querySelector('.desc-text').innerHTML = textWithLineBreaks;
-
 </script>
-    
 @endsection
