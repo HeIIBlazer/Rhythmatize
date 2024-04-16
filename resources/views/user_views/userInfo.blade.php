@@ -26,7 +26,7 @@
                 <h2 class="desc-header">About {{$user -> username}}:</h2>
                 <hr>
             </div>
-            @if ($user -> description == "NO DESCRIPTION" || $user -> description == 0)
+            @if ($user -> description == null)
                 <div>
                     <p class="desc-text text-center">THIS USER DOES NOT HAVE A DESCRIPTION</p>
                 </div>

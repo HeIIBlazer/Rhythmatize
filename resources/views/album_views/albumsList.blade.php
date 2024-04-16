@@ -33,7 +33,7 @@
             @endif
             @if ($loop->iteration % 6 == 0 && $loop->iteration!= $loop->count)
                 </div>
-                <div class="d-flex">
+                <div class="d-flex justify-content-evenly">
             @endif
         @endforeach
     </div>

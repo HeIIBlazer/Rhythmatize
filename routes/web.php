@@ -30,6 +30,7 @@ Route::get('/', [AlbumController::class, 'top_3_albums']);
 Route::get('/album_list', [AlbumController::class, 'index']);
 Route::get('/album_chart', [AlbumController::class, 'charts']);
 Route::get('/last_added_albums', [AlbumController::class, 'last_added']);
+Route::get('/album/{album}', [AlbumController::class, 'show_album']);
 
 
 // ARTISTS

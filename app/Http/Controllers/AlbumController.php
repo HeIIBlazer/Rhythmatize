@@ -87,6 +87,12 @@ class AlbumController extends Controller
         return view('album_views.albumShow', compact('album', 'tracks'));
     }
 
+    public function show_album(Album $album)
+    {
+        $comments = DB::table('comment_albums')->where('album_id', $album->id)->get();
+        return view('album_views.albumInfo', compact('album', 'comments'));
+    }
+
     /**
      * Show the form for creating a new resource.
      */
@@ -126,10 +132,7 @@ class AlbumController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Album $album)
-    {
-        return view('albums.show', compact('album'));
-    }
+
 
     /**
      * Show the form for editing the specified resource.
