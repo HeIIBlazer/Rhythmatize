@@ -1185,3 +1185,71 @@ hr {
     font-weight: 200;
     text-align: center;
 }
+
+.album-cover {
+    position: relative;
+    text-align: center;
+    color: white;
+}
+.album-info {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+
+.album-cover:hover .alb{
+    filter: brightness(25%);
+    transition:ease all .2s;
+}
+
+.album-name {
+    display: none;
+    font-family: 'audiowide', sans-serif;
+    font-size: 20px;
+    color: white;
+    text-align: center;
+    text-overflow: ellipsis;
+    /* white-space: nowrap; */
+    overflow: hidden;
+    font-weight: 400;
+    transition:ease all .5s;
+}
+
+.album-cover:hover .album-name {
+    display: block;
+    transition:ease all .5s;
+}
+
+.album-year {
+    display: none;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 15px;
+    color: white;
+    text-align: center;
+    font-weight: 200;
+    transition:ease all .5s;
+}
+
+.album-cover:hover .album-year {
+    display: block;
+    transition:ease all .5s;
+}
+
+.all-button {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 17px;
+    margin-bottom: 5px;
+    font-weight: 600;
+    color: #808080;
+    text-decoration: none;
+    transition: ease all 0.3s;
+}
+
+.all-button:hover {
+    text-decoration: underline;
+    transition: ease all 0.3s;
+    color: white;
+}

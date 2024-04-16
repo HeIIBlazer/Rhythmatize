@@ -5,7 +5,7 @@
     $album_likes = DB::table('like_albums')
                 ->where('like_albums.album_id', $album->id)
                 ->count();
-
+    $i = 1;
     $artist = \App\Models\Artist::find($album->artist_id);
     
     if (Auth::user() != null) {
@@ -92,19 +92,27 @@
             </button>
         </div>
 
-        <div class="background-block mt-4">
+        <div class=" w-100 background-block mt-4 p-2">
             <div>
                 <h2 class="desc-header">Other {{$artist -> name}} albums:</h2>
                 <hr>
             </div>
-            <div>
+            <div class=" w-100 d-flex flex-row justify-content-evenly mb-3">
                 @foreach ($albums as $artist_album)
-                    <div class="d-flex flex-column justify-content-between align-items-center">
-                        <a href="/album/{{$artist_album -> id}}" class="white-text text-decoration-none">{{$artist_album -> name}}</a>
-                        <a href="/album/{{$artist_album -> id}}"><img src="{{url ($artist_album -> cover_url)}}" alt="" style="width: 50px; height: 50px; object-fit:cover; object-position: 50% 50%;"></a>
+                    <div class="d-flex flex-column justify-content-between align-items-center" style=" width: 45%; height:45%;">
+                        <div class="album-cover">
+                            <img src="{{url ($artist_album -> cover_url)}}" alt="Album Cover" class="img-fluid alb">
+                            <div class="album-info d-flex flex-column justify-content-center align-items-center text-center">
+                                <h2 class="album-name">{{$artist_album -> name}}</h2>
+                                <p class="album-year">{{$artist_album -> release_date}}</p>
+                            </div>
+                        </div>
                     </div>
-                    <hr>
                 @endforeach
+            </div>
+            <hr>
+            <div class="w-100 d-flex justify-content-center">
+                <a href="/all_albums/{{$artist -> id}}" class="all-button">View all {{$artist -> name}} albums</a>
             </div>
         </div>
 
@@ -167,9 +175,36 @@
                 <div class="artist-header-line"></div>
             </div>
         </div>
-        <div class="w-100 d-flex flex-column">
+        <div class="w-100 d-flex flex-column mt-3">
             @foreach ($tracks as $track)
-                
+            @php
+                $track_likes = DB::table('like_tracks')
+                    ->where('like_tracks.track_id', $track->id)
+                    ->count();
+            @endphp
+                <div class=" w-100 d-flex flex-row">
+                    <div class="mr-5">
+                        <p>{{$i}}.</p>
+                    </div>
+                    <div>
+                        <p>{{$track -> name}}</p>
+                    </div>
+                    <div>
+                        <img src="../images/explicit.svg" alt="" style="width:25px; height:25px;">
+                    </div>
+                        @if ($track -> lyrics != null)
+                            <div>
+                                <p>Lyrics</p>
+                            </div>
+                        @endif
+                    <div>
+                        <img src="" alt="">
+                    </div>
+                </div>
+                <hr class="mt-3">
+                @php
+                    $i= $i + 1;
+                @endphp
             @endforeach
         </div>
         
