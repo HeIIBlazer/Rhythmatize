@@ -25,7 +25,7 @@
                     <div class="mt-2 mb-4 d-flex justify-content-center">
                         <img src="{{url ($album -> cover_url)}}" alt="" style="width: 185px; height: 185px; border-radius: 5px; ">
                     </div>
-                    <div style="margin-left: 10px; max-width: 100%;">
+                    <div style="margin-left: 10px; max-width: 100%;" >
                         <p class="card-text-bigger">{{$album -> name}}</p>
                         <a class="text-decoration-none" href="/artist/{{$artist -> id}}"><p class="card-text w-100">{{$album -> release_date}} | {{$artist->name}}</p></a>
                     </div>
@@ -58,8 +58,8 @@ if (currentUrl.includes("liked-albums")) {
     }
 } else {
 // Default Header-Charts
-    document.querySelector(".Header-List p").innerHTML = "Albums";
-    document.title = "Albums";
+    document.querySelector(".Header-List p").innerHTML = "ALBUMS";
+    document.title = "ALBUMS";
 }
 </script>
     

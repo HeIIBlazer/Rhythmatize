@@ -37,7 +37,9 @@
         <div class="d-flex flex-row justify-content-center align-content-center mb-3">
             @if ($like == 0) 
             <div class="d-flex flex-row">
-                <a href="/like_album/{{$album -> id}}"><img src="{{asset('images/like.png')}}" alt="" style="width: 22px; height: 22px; margin-right: 6px;"></a>
+                <a href="/like_album/{{$album -> id}}">
+                    <img src="{{asset('images/like.png')}}" alt="" style="width: 22px; height: 22px; margin-right: 6px;">
+                </a>
             </div>
             <div class="white-text">
                 <span style="color: white; font-size:20px;"> {{$album_likes}}</span>
@@ -177,31 +179,46 @@
         </div>
         <div class="w-100 d-flex flex-column mt-3">
             @foreach ($tracks as $track)
-            @php
-                $track_likes = DB::table('like_tracks')
-                    ->where('like_tracks.track_id', $track->id)
-                    ->count();
-            @endphp
+                @php
+                    $track_likes = DB::table('like_tracks')
+                        ->where('like_tracks.track_id', $track->id)
+                        ->count();
+                @endphp
                 <div class=" w-100 d-flex flex-row">
-                    <div class="mr-5">
-                        <p>{{$i}}.</p>
-                    </div>
-                    <div>
-                        <p>{{$track -> name}}</p>
-                    </div>
-                    <div>
-                        <img src="../images/explicit.svg" alt="" style="width:25px; height:25px;">
-                    </div>
-                        @if ($track -> lyrics != null)
-                            <div>
-                                <p>Lyrics</p>
+                    <div class="w-75 d-flex flex-row justify-content-evenly align-content-center align-items-center">
+                        <div class="">
+                            <p class="number-album">{{$i}}.</p>
+                        </div>
+                        <div class="w-50">
+                            <p class="album-track w-100">{{$track -> name}}</p>
+                        </div>
+                        <div>
+                            @if($track -> explicit != 'NO')
+                                <img src="../images/explicit.svg" alt="" style="width:25px; height:25px;">
+                            @endif
+
+                        </div>
+                        <div>
+                            @if ($track -> lyrics != null)
+                                <p class="number-album">Lyrics</p>
+                            @else
+                                <p class="number-album">No Lyrics</p>
+                            @endif
                             </div>
-                        @endif
-                    <div>
-                        <img src="" alt="">
+                        <div>
+                    </div>
+
+                </div>
+                <div class="d-flex flex-row w-25 justify-content-end" style="margin-right: 10px;">
+                    <div class="d-flex flex-row">
+                            <img src="{{asset('images/like.png')}}" alt="" style="width: 22px; height: 22px; margin-right: 6px;">
+                    </div>
+                    <div class="white-text">
+                        <span style="color: white; font-size:20px;"> {{$track_likes}}</span>
                     </div>
                 </div>
-                <hr class="mt-3">
+                </div>
+                <hr class="mb-4 mt-1">
                 @php
                     $i= $i + 1;
                 @endphp

@@ -19,20 +19,23 @@
                     <h1 class="Header-text">LAST ADDED ALBUMS</h1>
                 </div>
 
-                <div class="albums_3">
+                <div class="albums_3 mt-2 mb-2">
                 @foreach ($lastAdded as $album)
                 @php 
                     $artist = \App\Models\Artist::find($album->artist_id);
                     $album_name = explode(" ", $album->name); $album_name = array_slice($album_name, 0, 5);  $album_name = implode(" ", $album_name); 
                 @endphp
-                    <div class="hide-text" style="background-image: url({{url ($album->cover_url)}}); height: 230px; width: 30%; background-size: contain; background-repeat: no-repeat;">
-                        <p style="font-size: 15px">{{ $artist-> name }}</p>
-                        <p style="font-size: 18px">{{ $album_name }}</p>
+                    <div class="album-cover" style="width: 31.5%; height:20%;">
+                        <img src="{{url ($album->cover_url)}}" alt="Album Cover" class="w-100 h-100 alb">
+                        <div class="album-info d-flex flex-column justify-content-center align-items-center text-center">
+                            <h2 class="album-name">{{ $artist-> name }}</h2>
+                            <p class="album-name">{{ $album_name }}</p>
+                        </div>
                     </div>
                 @endforeach
                 </div>
                     
-                <div class="mb-3">
+                <div class="mb-2 mt-2">
                     <a href="/last_added_albums"><button class="see_more_button" type="submit">See more</button></a>
                 </div>
             </div>
@@ -54,10 +57,13 @@
                             $artist = \App\Models\Artist::find($album->artist_id); 
                             $album_name = explode(" ", $album->name); $album_name = array_slice($album_name, 0, 5);  $album_name = implode(" ", $album_name); 
                         @endphp
-                        <div class="hide-text" style="background-image: url({{url ($album->cover_url)}}); height: 170px; width: 29%; background-size: cover; background-position: center center; background-repeat: no-repeat; margin-bottom: 10px;">
-                            <p style="font-size: 15px">{{ $artist-> name }}</p>
-                            <p style="font-size: 18px">{{ $album_name }}</p>
+                    <div class="album-cover" style="width: 31.5%; height:20%;">
+                        <img src="{{url ($album -> cover_url)}}" alt="Album Cover" class="w-100 h-100 alb">
+                        <div class="album-info d-flex flex-column justify-content-center align-items-center text-center">
+                            <h2 class="album-name">{{ $artist-> name }}</h2>
+                            <p class="album-name">{{ $album_name }}</p>
                         </div>
+                    </div>
                     @endforeach
                 </div>
                 <div class="button-div">
@@ -73,9 +79,12 @@
                 </div>
                 <div class="albums_3">
                     @foreach ($artists as $artist)
-                            <a href="/artist/{{$artist -> id}}" class="hide-text" style="background-image: url({{url ($artist->picture_url)}}); height: 170px; width: 29%; background-size: cover; background-repeat: no-repeat; margin-bottom: 10px; text-decoration: none;">
-                                <p style="font-size: 19px;">{{ $artist-> name }}</p>
-                            </a>
+                    <div class="album-cover" style="width: 31.5%; height:20%;">
+                        <img src="{{url ($artist->picture_url)}}" alt="Album Cover" class="w-100 h-100 alb">
+                        <div class="album-info d-flex flex-column justify-content-center align-items-center text-center">
+                            <h2 class="album-name">{{ $artist-> name }}</h2>
+                        </div>
+                    </div>
                     @endforeach
                 </div>
                 <div class="button-div">
