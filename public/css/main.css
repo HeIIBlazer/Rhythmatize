@@ -574,6 +574,11 @@ body {
 
 /* CHARTS */
 
+.table-separete{
+    padding-top: 15px;
+    padding-bottom: 10px;
+}
+
 .chart-line{
     display: flex;
     flex-direction: row;
@@ -609,20 +614,23 @@ body {
     font-family: 'Montserrat', sans-serif;
     font-size: 25px;
     font-weight: 700;
-    white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    padding: 0 6px;
+    display: -webkit-box;
+    -webkit-line-clamp: 1; /* Specify the number of lines to show */
+    -webkit-box-orient: vertical;
     color: white;
     height: 100%;
-
+    max-width: 100%;
+    width: 100%;
 }
 
 .chart-big {
     display: flex;
     flex-direction: row;
-    width: 50%;
     height: 100%;
+    width: 98%;
+    align-items: center;
 }
 
 .chart-small {

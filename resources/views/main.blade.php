@@ -105,7 +105,6 @@
                             $artist = \App\Models\Artist::find($album->artist_id);
                             // $spotify_link = $track -> spotify_link; USE FOR TRACK INFO PAGE!!!!!
                             // $modified_link = substr($spotify_link, 24);
-                           
                         @endphp
                         <a href="/track/{{$track -> id}}" class="album-cover" style=" height: 180px; width: 30%;">
                             <img src="{{url ($album->cover_url)}}" alt="Album Cover" class="alb">
