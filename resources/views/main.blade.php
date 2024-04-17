@@ -25,13 +25,13 @@
                     $artist = \App\Models\Artist::find($album->artist_id);
                     $album_name = explode(" ", $album->name); $album_name = array_slice($album_name, 0, 5);  $album_name = implode(" ", $album_name); 
                 @endphp
-                    <div class="album-cover" style="width: 31.5%; height:20%;">
+                    <a href="/album/{{$album -> id}}" class="album-cover" style="width: 31.5%; height:20%;">
                         <img src="{{url ($album->cover_url)}}" alt="Album Cover" class="w-100 h-100 alb">
-                        <div class="album-info d-flex flex-column justify-content-center align-items-center text-center">
-                            <h2 class="album-name">{{ $artist-> name }}</h2>
-                            <p class="album-name">{{ $album_name }}</p>
+                        <div class="album-info d-flex flex-column justify-content-center align-items-center h-100 w-100">
+                            <h2 class="artist-name-main">{{ $artist-> name }}</h2>
+                            <p class="album-name-main">{{ $album_name }}</p>
                         </div>
-                    </div>
+                    </a>
                 @endforeach
                 </div>
                     
@@ -55,15 +55,15 @@
                     @foreach ($albums as $album)
                         @php
                             $artist = \App\Models\Artist::find($album->artist_id); 
-                            $album_name = explode(" ", $album->name); $album_name = array_slice($album_name, 0, 5);  $album_name = implode(" ", $album_name); 
+                        
                         @endphp
-                    <div class="album-cover" style="width: 31.5%; height:20%;">
+                    <a href="/album/{{$album -> id}}" class="album-cover" style="width: 31.5%; height:20%;">
                         <img src="{{url ($album -> cover_url)}}" alt="Album Cover" class="w-100 h-100 alb">
-                        <div class="album-info d-flex flex-column justify-content-center align-items-center text-center">
-                            <h2 class="album-name">{{ $artist-> name }}</h2>
-                            <p class="album-name">{{ $album_name }}</p>
+                        <div class="album-info d-flex flex-column justify-content-center align-items-center h-100 w-100">
+                            <h2 class="artist-name-main">{{ $artist-> name }}</h2>
+                            <p class="album-name-main h-25">{{ $album -> name }}</p>
                         </div>
-                    </div>
+                    </a>
                     @endforeach
                 </div>
                 <div class="button-div">
@@ -79,12 +79,12 @@
                 </div>
                 <div class="albums_3">
                     @foreach ($artists as $artist)
-                    <div class="album-cover" style="width: 31.5%; height:20%;">
-                        <img src="{{url ($artist->picture_url)}}" alt="Album Cover" class="w-100 h-100 alb">
-                        <div class="album-info d-flex flex-column justify-content-center align-items-center text-center">
-                            <h2 class="album-name">{{ $artist-> name }}</h2>
+                    <a href="/artist/{{$artist-> id}}" class="album-cover" style=" height: 180px; width: 30%;">
+                            <img src="{{url ($artist->picture_url)}}" alt="Album Cover" class="alb">
+                        <div class="album-info d-flex flex-column justify-content-center align-items-center text-center h-100 w-100">
+                            <h2 class="album-name-main">{{ $artist-> name }}</h2>
                         </div>
-                    </div>
+                    </a>
                     @endforeach
                 </div>
                 <div class="button-div">
@@ -105,12 +105,15 @@
                             $artist = \App\Models\Artist::find($album->artist_id);
                             // $spotify_link = $track -> spotify_link; USE FOR TRACK INFO PAGE!!!!!
                             // $modified_link = substr($spotify_link, 24);
-                            $track_name = explode(" ", $track->name); $track_name = array_slice($track_name, 0, 5);  $track_name = implode(" ", $track_name); 
+                           
                         @endphp
-                            <div class="hide-text" style="background-image: url({{url ($album->cover_url)}}); height: 170px; width: 29%; background-size: cover; background-position: center center; background-repeat: no-repeat; margin-bottom: 10px;">
-                                <p style="font-size: 15px">{{ $artist-> name }}</p>
-                                <p style="font-size: 18px">{{ $track_name }}</p>
-                            </div>
+                        <a href="/track/{{$track -> id}}" class="album-cover" style=" height: 180px; width: 30%;">
+                            <img src="{{url ($album->cover_url)}}" alt="Album Cover" class="alb">
+                        <div class="album-info d-flex flex-column justify-content-center align-items-center text-center h-100 w-100">
+                            <h2 class="artist-name-main">{{ $artist-> name }}</h2>
+                            <p class="album-name-main">{{$track -> name}}</p>
+                        </div>
+                        </a>
                         @endforeach
                     </div>
 
