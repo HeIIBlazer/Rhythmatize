@@ -34,7 +34,7 @@
                         </div>
                     </a>
                 </td>
-                <td style="width:40%;">
+                <td style="width:40%;" class="table-separete">
                     <a href="/album/{{$album -> id}}" class="text-decoration-none">
                         <div class="chart-big">
                             <span class="chart-text-big">{{$album -> name}}</span>

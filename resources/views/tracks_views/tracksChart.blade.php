@@ -19,41 +19,60 @@
         @php
             $i = ($tracks->currentPage() - 1) * $tracks->perPage() + 1;
         @endphp
-
+        <table class="w-100">
         @foreach ($tracks as $track)
 
         @php
             $album = \App\Models\Album::find($track->album_id); 
             $artist = \App\Models\Artist::find($album->artist_id);
-            $tracks_likes = DB::table('like_tracks')
+            $track_likes = DB::table('like_tracks')
                             ->where('like_tracks.track_id', $track->id)
                             ->count();
         @endphp
-        
-            <div class="chart-line">
-                <div class="number">
-                    <span class="numbers w-100">{{$i}}.</span>
-                </div>
-                <div class="chart-pic">
-                    <img src="{{url ($album -> cover_url)}}" alt="" style="width: 75px; height: 75; object-fit: cover;">
-                </div>
-                <div class="chart-big">
-                    <span class="chart-text-big">{{$track -> name}}</span>
-                </div>
-                <div class="chart-small">
-                    <a class="text-decoration-none" href="/artist/{{$artist -> id}}"><span class="chart-small-text">{{$artist -> name}}</span></a>
-                </div>
-                <div class="chart-like">
-                    <img src="{{asset('images/like.png')}}" alt="" style="width: 22px; height: 22px; margin-right: 6px;">
-                    <span class="chart-like-text">{{$tracks_likes}}</span>
-                </div>
-            </div>
-            <hr style="border: 1px white solid; margin-top: 8px">
+            <tr style="border-bottom: white solid 1px" >
+                <td style="width: 6%;" class="table-separete">
+                    <div class="number w-100">
+                        <span class="numbers w-100">{{$i}}.</span>
+                    </div>
+                </td>
+                <td style="width: 8%;" class="table-separete">
+                    <div class="chart-pic">
+                        <a href="/track/{{$track -> id}}">
+                            <div class="chart-pic w-100">
+                                <img src="{{url ($album -> cover_url)}}" alt="" style="width: 75px; height: 75; object-fit: cover;">
+                            </div>
+                        </a>
+                    </div>
+                </td>
+                <td style="width:40%;" class="table-separete">
+                    <div class="chart-big">
+                        <a href="/track/{{$track -> id}}" class="text-decoration-none">
+                            <div class="chart-big t">
+                                <span class="chart-text-big">{{$track -> name}}</span>
+                            </div>
+                        </a>
+                    </div>
+                </td>
+                <td style="width:40%;" class="table-separete">
+                    <a class="text-decoration-none" href="/artist/{{$artist -> id}}">
+                        <div class="chart-small w-100 ">
+                            <span class="chart-small-text">{{$artist -> name}}</span>
+                        </div>
+                    </a>
+                </td>
+                <td style="width:8%;" class="table-separete">
+                    <div class="chart-like w-100 d-flex">
+                        <img src="{{asset('images/like.png')}}" alt="" style="width: 22px; height: 22px; margin-right: 6px;">
+                        <span class="chart-like-text">{{$track_likes}}</span>
+                    </div>
+                </td>
+            </tr>
             @php
             $i++;
             @endphp
 
         @endforeach
+        </table>
     </div>
     <div class="d-flex w-100 justify-content-center align-content-center mt-5">
         {!! $tracks->links() !!}
