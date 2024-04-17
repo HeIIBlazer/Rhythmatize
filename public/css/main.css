@@ -623,6 +623,12 @@ body {
     height: 100%;
     max-width: 100%;
     width: 100%;
+    transition: ease all .3s;
+}
+
+.chart-text-big:hover {
+    text-decoration: underline;
+    transition: ease all .3s;
 }
 
 .chart-big {
@@ -685,6 +691,7 @@ body {
     color: white;
     text-align: end;
     width: 10%;
+    margin-right: 15px;
 }
 
 .chart-like-text-artist {
