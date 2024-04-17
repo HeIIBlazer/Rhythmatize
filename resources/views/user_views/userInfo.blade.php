@@ -98,22 +98,28 @@
         @else
         <div class="row justify-content-evenly mt-3 w-94 mb-4">
             @foreach ($albums as $album)
+            {{-- <a href="/album/{{$album -> id}}" class="text-decoration-none"> --}}
             @php
             $artist = DB::table('artists')
                         ->where('artists.id', $album->artist_id)
                         ->first();  
             @endphp
-                <div class="col-auto artist-album-card pb-3">
-                    <div >
+                <a class="col-auto artist-album-card pb-3">
+                    <div>
                         <img src="{{url ($album -> cover_url)}}" alt="" style="width: 250px; height: 250px; border-radius: 5px; margin-top:10px; padding: 10px 10px;">
                     </div>
                     <div class="w-100 d-flex justify-content-center text-center white-text">
                         <p class="text-truncate text-Montserrat-album">{{$album -> name}}</p>
                     </div>
                     <div class="w-100 d-flex justify-content-center text-center white-text">
-                        <a href="/artist/{{$artist -> id}}" class="text-truncate artist-track-album ">{{$album -> type}} | {{$album -> release_date}} | {{$artist -> name}}</a>
+                        <a href="/artist/{{$artist -> id}}" class="text-truncate artist-track-album">
+                            <p>
+                                {{$album -> type}} | {{$album -> release_date}} | {{$artist -> name}}
+                            </p>
+                        </a>
                     </div>
-                </div>
+                </a>
+            {{-- </a> --}}
             @endforeach
         </div>
         <a class="artist-button-album flex-wrap" href="/liked-albums/{{$user -> id}}">Show all liked albums</a>

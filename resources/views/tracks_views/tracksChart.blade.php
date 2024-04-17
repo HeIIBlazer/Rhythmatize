@@ -47,7 +47,7 @@
                 <td style="width:40%;" class="table-separete">
                     <div class="chart-big">
                         <a href="/track/{{$track -> id}}" class="text-decoration-none">
-                            <div class="chart-big t">
+                            <div class="chart-big">
                                 <span class="chart-text-big">{{$track -> name}}</span>
                             </div>
                         </a>
@@ -55,7 +55,7 @@
                 </td>
                 <td style="width:40%;" class="table-separete">
                     <a class="text-decoration-none" href="/artist/{{$artist -> id}}">
-                        <div class="chart-small w-100 ">
+                        <div class="chart-small w-100">
                             <span class="chart-small-text">{{$artist -> name}}</span>
                         </div>
                     </a>

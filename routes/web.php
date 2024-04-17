@@ -6,8 +6,12 @@ use App\Http\Controllers\ArtistController;
 use App\Http\Controllers\TrackController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CommentArtistController;
+use App\Http\Controllers\CommentAlbumController;
+use App\Http\Controllers\CommentTrackController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LikeArtistController;
+use App\Http\Controllers\LikeAlbumController;
+use App\Http\Controllers\LikeTrackController;
 use App\Models\CommentArtist;
 
 /*
@@ -31,6 +35,7 @@ Route::get('/album_list', [AlbumController::class, 'index']);
 Route::get('/album_chart', [AlbumController::class, 'charts']);
 Route::get('/last_added_albums', [AlbumController::class, 'last_added']);
 Route::get('/album/{album}', [AlbumController::class, 'show_album']);
+Route::post('/save_comment_album', [CommentAlbumController::class, 'save_comment'])->name('save_comment');
 
 
 // ARTISTS
@@ -38,10 +43,12 @@ Route::get('/artist_list', [ArtistController::class, 'index']);
 Route::get('/artist_chart', [ArtistController::class, 'charts']);
 Route::get('/last_added_artists', [ArtistController::class, 'last_added']);
 Route::get('/artist/{artist}', [ArtistController::class, 'show_artist']);
-Route::post('/save_comment', [CommentArtistController::class, 'save_comment'])->name('save_comment');
+Route::post('/save_comment_artist', [CommentArtistController::class, 'save_comment'])->name('save_comment');
 
 // TRACKS
 Route::get('/track_chart', [TrackController::class, 'charts']);
+Route::get('/track/{track}', [TrackController::class, 'show_track']);
+Route::post('/save_comment_track', [CommentTrackController::class, 'save_comment'])->name('save_comment');
 
 // USER
 Route::get('/user/{user}', [UserController::class, 'show_user']);
@@ -60,6 +67,10 @@ Route::post('/register', [UserController::class, 'store_register']);
 //LIKE SYSTEM
 Route::get('/like_artist/{artist}', [LikeArtistController::class, 'like']);
 Route::get('/unlike_artist/{artist}', [LikeArtistController::class, 'unlike']);
+Route::get('/like_album/{album}', [LikeAlbumController::class, 'like']);
+Route::get('/unlike_album/{album}', [LikeAlbumController::class, 'unlike']);
+Route::get('/like_track/{track}', [LikeTrackController::class, 'like']);
+Route::get('/unlike_track/{track}', [LikeTrackController::class, 'unlike']);
 
 // SEARCH
 Route::get('/search', [AlbumController::class, 'search']);

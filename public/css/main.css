@@ -612,7 +612,7 @@ body {
 
 .chart-text-big {
     font-family: 'Montserrat', sans-serif;
-    font-size: 25px;
+    font-size: 24px;
     font-weight: 700;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -635,8 +635,9 @@ body {
     display: flex;
     flex-direction: row;
     height: 100%;
-    width: 98%;
+    /* width: 98%; */
     align-items: center;
+    margin-right: 5px;
 }
 
 .chart-small {
@@ -1312,7 +1313,15 @@ hr {
     font-weight: 700;
     color: white;
     font-size: 26px;
-    text-overflow: ellipsis;
     overflow: hidden;
-    white-space: nowrap;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1; /* Specify the number of lines to show */
+    -webkit-box-orient: vertical;
+    width: 100%;
+}
+
+.album-track:hover {
+    text-decoration: underline;
+    transition: ease all 0.3s;
 }

@@ -10,7 +10,7 @@
     
     if (Auth::user() != null) {
         $like = DB::table('like_albums')
-            ->where('like_albumss.album_id', $album->id)
+            ->where('like_albums.album_id', $album->id)
             ->where('like_albums.user_id', Auth::user()->id)
             ->count();
     } else {
@@ -56,7 +56,7 @@
                 <a href="/unlike_album/{{$album -> id}}"><img src="{{asset('images/liked.png')}}" alt="" style="width: 22px; height: 22px; margin-right: 6px;"></a>
             </div>
             <div>
-                <span style="color: white; font-size:20px;"> {{$$album_likes}} </span>
+                <span style="color: white; font-size:20px;"> {{$album_likes}} </span>
             </div>    
             @endif
         </div>
@@ -156,7 +156,7 @@
                     <textarea required placeholder="Add comment" rows="4" wrap="hard" class="comment-input" readonly></textarea>
                 </form>
             @else 
-            <form data-mdb-input-init class="mt-3" action="/save_comment" method="post">
+            <form data-mdb-input-init class="mt-3" action="/save_comment_album" method="post">
                 @csrf
                 <input type="hidden" name="album_id" value="{{$album->id}}">
                 <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
@@ -177,52 +177,63 @@
                 <div class="artist-header-line"></div>
             </div>
         </div>
-        <div class="w-100 d-flex flex-column mt-3">
+        <div class="w-100 mt-3">
+            <table class="w-100">
             @foreach ($tracks as $track)
                 @php
                     $track_likes = DB::table('like_tracks')
                         ->where('like_tracks.track_id', $track->id)
                         ->count();
                 @endphp
-                <div class=" w-100 d-flex flex-row">
-                    <div class="w-75 d-flex flex-row justify-content-evenly align-content-center align-items-center">
-                        <div class="">
-                            <p class="number-album">{{$i}}.</p>
-                        </div>
-                        <div class="w-50">
-                            <p class="album-track w-100">{{$track -> name}}</p>
-                        </div>
-                        <div>
+                <tr href="/track/{{$track -> id}}" style="border-bottom: white solid 1px">
+                        <td style="width: 5%;" class="table-separete">
+                            <a href="/track/{{$track -> id}}" class="text-decoration-none">    
+                                <div class="number w-100">
+                                    <span class="number-album w-100">{{$i}}.</span>
+                                </div>
+                            </a>
+                        </td>
+                        <td style="width: 50%;" class="table-separete">
+                            <a href="/track/{{$track -> id}}" class="text-decoration-none">  
+                                <div class="w-100">
+                                    <span class="album-track w-100">{{$track -> name}}</span>
+                                </div>
+                            </a>
+                        </td>
+                        <td style="width: 15%;" class="table-separete">
+                            <a href="/track/{{$track -> id}}" class="text-decoration-none">
                             @if($track -> explicit != 'NO')
-                                <img src="../images/explicit.svg" alt="" style="width:25px; height:25px;">
+                                <img src="{{asset('images/explicit.svg')}}" alt="" style="width:25px; height:25px; margin-left: 5px;">
                             @endif
-
-                        </div>
-                        <div>
+                            </a>
+                        </td>
+                        <td style="width: 15%;" class="table-separete">
+                            <a href="/track/{{$track -> id}}" class="text-decoration-none">
                             @if ($track -> lyrics != null)
-                                <p class="number-album">Lyrics</p>
+                                <span class="number-album">Lyrics</span>
                             @else
-                                <p class="number-album">No Lyrics</p>
+                                <span class="number-album">No Lyrics</span>
                             @endif
-                            </div>
-                        <div>
-                    </div>
-
-                </div>
-                <div class="d-flex flex-row w-25 justify-content-end" style="margin-right: 10px;">
-                    <div class="d-flex flex-row">
-                            <img src="{{asset('images/like.png')}}" alt="" style="width: 22px; height: 22px; margin-right: 6px;">
-                    </div>
-                    <div class="white-text">
-                        <span style="color: white; font-size:20px;"> {{$track_likes}}</span>
-                    </div>
-                </div>
-                </div>
-                <hr class="mb-4 mt-1">
+                            </a>
+                        </td>
+                        <td style="width: 10%;" class="table-separete">
+                            <a href="/track/{{$track -> id}}" class="text-decoration-none">
+                                <div class="d-flex flex-row justify-content-end">
+                                    <div class="d-flex flex-row justify-content-center align-content-center align-items-center w-50">
+                                        <img src="{{asset('images/like.png')}}" alt="" style="width: 22px; height: 22px; margin-right: 6px;">
+                                    </div>
+                                    <div class="white-text d-flex flex-row w-25">
+                                        <span style="color: white; font-size:25px;"> {{$track_likes}}</span>
+                                    </div>
+                                </div>
+                            </a>
+                        </td>
+                    </tr>
                 @php
-                    $i= $i + 1;
+                    $i++;
                 @endphp
             @endforeach
+            </table>
         </div>
         
     </div>
