@@ -20,8 +20,8 @@
             @php
                 $artist = \App\Models\Artist::find($album->artist_id);
             @endphp
-            <a href="/album/{{$album -> id}}" class="text-decoration-none">
                 <div class="card">
+                    <a href="/album/{{$album -> id}}" class="text-decoration-none">
                     <div class="mt-2 mb-4 d-flex justify-content-center">
                         <img src="{{url ($album -> cover_url)}}" alt="" style="width: 185px; height: 185px; border-radius: 5px; ">
                     </div>
@@ -30,9 +30,9 @@
                         <a class="text-decoration-none" href="/artist/{{$artist -> id}}">
                             <p class="card-text w-100">{{$album -> release_date}} | {{$artist->name}}</p>
                         </a>
+                    </a>
                     </div>
                 </div>
-            </a>
                 @if ($loop->iteration % 6 == 0 && $loop->iteration!= $loop->count)
                 </div>
                 <div class="d-flex justify-content-evenly">

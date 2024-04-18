@@ -124,7 +124,6 @@ body {
 
 /* FOOTER STYLES */
 .footer {
-    /* position: absolute; */
     width: 100%;
     background-color: black;
     color: white;
@@ -908,7 +907,10 @@ hr {
 
 .text-Montserrat {
     font-family: 'Montserrat', sans-serif;
-
+    width: 98%;
+    max-width: 100%;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 .line-2 {
@@ -1100,6 +1102,8 @@ hr {
     /* width: 50%; */
     margin: 1em;
     flex: 1;
+    padding: 10px;
+
 }
 
 .track-info {
@@ -1322,6 +1326,22 @@ hr {
 }
 
 .album-track:hover {
+    text-decoration: underline;
+    transition: ease all 0.3s;
+}
+
+.comment-user {
+    color: #837F7F;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    text-decoration: none;
+    transition: ease all 0.3s;
+    padding-top: 3px;
+}
+
+.comment-user:hover {
+    color: white;
     text-decoration: underline;
     transition: ease all 0.3s;
 }

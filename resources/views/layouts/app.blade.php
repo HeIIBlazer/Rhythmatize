@@ -179,7 +179,7 @@
   </div>
 
 
-<div class="footer">
+<div class="footer mt-5">
     <div class="socials_part mt-4 ">
         <div>
             <img src="{{asset('images/logo.png')}}" alt="">

@@ -104,22 +104,21 @@
                         ->where('artists.id', $album->artist_id)
                         ->first();  
             @endphp
-                <a class="col-auto artist-album-card pb-3">
-                    <div>
-                        <img src="{{url ($album -> cover_url)}}" alt="" style="width: 250px; height: 250px; border-radius: 5px; margin-top:10px; padding: 10px 10px;">
-                    </div>
-                    <div class="w-100 d-flex justify-content-center text-center white-text">
-                        <p class="text-truncate text-Montserrat-album">{{$album -> name}}</p>
-                    </div>
-                    <div class="w-100 d-flex justify-content-center text-center white-text">
-                        <a href="/artist/{{$artist -> id}}" class="text-truncate artist-track-album">
-                            <p>
+                <div class="col-auto artist-album-card pb-3">
+                    <a href="/album/{{$album -> id}}" class="text-decoration-none">
+                        <div>
+                            <img src="{{url ($album -> cover_url)}}" alt="" style="width: 250px; height: 250px; border-radius: 5px; margin-top:10px; padding: 10px 10px;">
+                        </div>
+                        <div class="w-100 d-flex justify-content-center text-center white-text">
+                            <p class="text-truncate text-Montserrat-album">{{$album -> name}}</p>
+                        </div>
+                        <div class="w-100 d-flex justify-content-center text-center white-text">
+                            <a href="/artist/{{$artist -> id}}" class="text-truncate artist-track-album">
                                 {{$album -> type}} | {{$album -> release_date}} | {{$artist -> name}}
-                            </p>
-                        </a>
-                    </div>
-                </a>
-            {{-- </a> --}}
+                            </a>
+                        </div>
+                    </a>
+                </div>
             @endforeach
         </div>
         <a class="artist-button-album flex-wrap" href="/liked-albums/{{$user -> id}}">Show all liked albums</a>
@@ -155,21 +154,22 @@
                         @endphp
 
                         <div class="d-flex flex-row track-artist mr-2">
-
-                            <div class="d-flex  align-items-center">
-                                <img src="{{url ($album -> cover_url)}}" alt="" class="track-cover">
-                            </div>
-
-                            <div class="w-100">
-                                <div class="w-100 d-flex flex-column justify-content-evenly">
-                                    <p class="artist-track-name">{{$track -> name}}</p>
-
-                                    <p class="artist-track-album">{{$album -> name}}</p>
+                            <a href="/track/{{$track -> id}}">
+                                <div class="d-flex  align-items-center">
+                                    <img src="{{url ($album -> cover_url)}}" alt="" class="track-cover">
                                 </div>
-                                <div class="d-flex flex-row flex-wrap align-content-end pb-3 h-50">
-                                    <a href="/artist/{{$artist -> id}}" class="artist-track-album">{{$artist -> name}}</a>
+
+                                <div class="w-100">
+                                    <div class="w-100 d-flex flex-column justify-content-evenly">
+                                        <p class="artist-track-name">{{$track -> name}}</p>
+
+                                        <p class="artist-track-album">{{$album -> name}}</p>
+                                    </div>
+                                    <div class="d-flex flex-row flex-wrap align-content-end pb-3 h-50">
+                                        <a href="/artist/{{$artist -> id}}" class="artist-track-album">{{$artist -> name}}</a>
+                                    </div>
                                 </div>
-                            </div>
+                            </a>
                         </div>
                     @endforeach
                 </div>

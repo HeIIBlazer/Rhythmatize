@@ -99,20 +99,20 @@
                     <hr>
                 </div>
             @else
-            <div style="max-height: 460px; min-height: 200px; overflow-y:auto">
+            <div style="max-height: 460px; min-height: 200px; overflow-y:auto; max-width:450px;">
                 @foreach($comments as $comment)
                 @php
                     $user = DB::table('users')
                         ->where('users.id', $comment->user_id)
                         ->first();
                 @endphp
-                <div class="d-flex flex-column">
+                <div class=" w-100 d-flex flex-column">
                     <div class="d-flex flex-row align-items-center mb-3" style="height: 35px">
-                        <img src=" {{url ($user -> avatar_url)}}" alt="" style="width: 20px; height: 20px; margin-right: 5px; border-radius:200px;">
-                        <a href="/user/{{$user -> id}}" style="height: 10px">{{$user -> username}}</a>
+                        <img src=" {{url ($user -> avatar_url)}}" alt="" style="width: 35px; height: 35px; margin-right: 5px; border-radius:200px;">
+                        <a href="/user/{{$user -> id}}" class="comment-user">{{$user -> username}}</a>
                     </div>
                     <div  class="w-100">
-                        <p>{{$comment -> content}}</p>
+                        <p class="text-Montserrat">{{$comment -> content}}</p>
                     </div>
                 </div>
                 <hr>
@@ -125,7 +125,7 @@
                     <textarea required placeholder="Add comment" rows="4" wrap="hard" class="comment-input" readonly></textarea>
                 </form>
             @else 
-            <form data-mdb-input-init class="mt-3" action="/save_comment" method="post">
+            <form data-mdb-input-init class="mt-3" action="/save_comment_artist" method="post">
                 @csrf
                 <input type="hidden" name="artist_id" value="{{$artist->id}}">
                 <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
@@ -174,7 +174,7 @@
                                 <div class="w-100 d-flex flex-column justify-content-evenly">
                                     <p class="artist-track-name">{{$track -> name}}</p>
 
-                                    <p class="artist-track-album">{{$album -> name}}</p>
+                                    <a href="/album/{{$album -> id}}" class="text-decoration-none"><p class="artist-track-album">{{$album -> name}}</p></a>
                                 </div>
                                 <div class="d-flex flex-row flex-wrap align-content-end" style="padding: 10px 10px; height:45%;">
                                     <div class="d-flex flex-column justify-content-around">
@@ -211,15 +211,17 @@
         <div class=" row justify-content-around mt-3 w-94 mb-4">
             @foreach ($albums as $album)
                 <div class="col-auto artist-album-card">
-                    <div >
-                        <img src="{{url ($album -> cover_url)}}" alt="" style="width: 250px; height: 250px; border-radius: 5px; margin-top:10px; padding: 10px 10px;">
-                    </div>
-                    <div class="w-100 d-flex justify-content-center text-center white-text">
-                        <p class="text-truncate text-Montserrat-album">{{$album -> name}}</p>
-                    </div>
-                    <div class="w-100 d-flex justify-content-center text-center white-text">
-                        <p class="text-truncate text-Montserrat-light">{{$album -> type}} | {{$album -> release_date}}</p>
-                    </div>
+                    <a href="/album/{{$album -> id}}" class="text-decoration-none">
+                        <div>
+                            <img src="{{url ($album -> cover_url)}}" alt="" style="width: 250px; height: 250px; border-radius: 5px; margin-top:10px; padding: 10px 10px;">
+                        </div>
+                        <div class="w-100 d-flex justify-content-center text-center white-text">
+                            <p class="text-truncate text-Montserrat-album">{{$album -> name}}</p>
+                        </div>
+                        <div class="w-100 d-flex justify-content-center text-center white-text">
+                            <p class="text-truncate text-Montserrat-light">{{$album -> type}} | {{$album -> release_date}}</p>
+                        </div>
+                    </a>
                 </div>
             @endforeach
         </div>

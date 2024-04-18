@@ -5,34 +5,42 @@
 <div class="container">
     <div class="h2-header d-flex justify-content-evenly flex-column">
         <h2 class="h2-text w-100">Albums</h2>
-        <div class="d-flex flex-row w-100">
+        <div class="d-flex flex-row w-100 justify-content-evenly">
             @foreach ($albums as $album)
             @php
                 $artist = \App\Models\Artist::find($album->artist_id);
             @endphp
             <div class="card">
-                <div class="mt-2 mb-4 d-flex justify-content-center">
-                    <img src="{{url ($album -> cover_url)}}" alt="" style="width: 185px; height: 185px; border-radius: 5px; ">
-                </div>
-                <div style="margin-left: 10px;max-width: 100%;">
-                    <p class="card-text-bigger">{{ $album -> name }}</p>
-                    <p class="card-text">{{ $album -> release_date }} | {{ $artist -> name }}</p>
-                </div>
+                <a href="/album/{{$album -> id}}" class="text-decoration-none">
+                    <div class="mt-2 mb-4 d-flex justify-content-center">
+                        <img src="{{url ($album -> cover_url)}}" alt="" style="width: 185px; height: 185px; border-radius: 5px; ">
+                    </div>
+                    <div style="margin-left: 10px;max-width: 100%;">
+                        <p class="card-text-bigger">{{ $album -> name }}</p>
+                        <a href="/artist/{{$artist -> id}}" class="text-decoration-none">
+                            <p class="card-text">
+                                {{ $album -> release_date }} | {{ $artist -> name }}
+                            </p>
+                        </a>
+                    </div>
+                </a>
             </div>
             @endforeach
         </div>
     </div>
     <div class="h2-header d-flex justify-content-evenly flex-column">
         <h2 class="h2-text w-100">Artists</h2>
-        <div class="d-flex flex-row w-100">
+        <div class="d-flex flex-row w-100 justify-content-evenly">
             @foreach ($artists as $artist)
             <div class="card">
-                <div class="mt-2 mb-4 d-flex justify-content-center">
-                    <img src="{{url ($artist -> picture_url)}}" alt="" style="width: 185px; height: 185px; border-radius: 5px; object-fit: cover;">
-                </div>
-                <div style="margin-left: 10px; max-width: 100%;">
-                    <p class="card-text-bigger-artist">{{$artist -> name}}</p>
-                </div>
+                <a href="/artist/{{$artist -> id}}" class="text-decoration-none">
+                    <div class="mt-2 mb-4 d-flex justify-content-center">
+                        <img src="{{url ($artist -> picture_url)}}" alt="" style="width: 185px; height: 185px; border-radius: 5px; object-fit: cover;">
+                    </div>
+                    <div style="margin-left: 10px; max-width: 100%;">
+                        <p class="card-text-bigger-artist">{{$artist -> name}}</p>
+                    </div>
+                </a>
             </div>
             @endforeach
         </div>
@@ -59,7 +67,7 @@
                                         <p class="d-inline-block text-truncate m-3" style="min-width: 50px;">{{ $artist -> name }}</p>
                                     </div>
                                 </div>
-                                <hr>
+                                <hr class="me-3">
                             @endif
                         @endfor
                     </div>

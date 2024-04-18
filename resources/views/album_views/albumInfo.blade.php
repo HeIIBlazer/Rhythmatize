@@ -130,7 +130,7 @@
                     <hr>
                 </div>
             @else
-            <div style="max-height: 460px; min-height: 60px; overflow-y:auto">
+            <div style="max-height: 460px; min-height: 60px; overflow-y:auto; max-width:600px;">
                 @foreach($comments as $comment)
                 @php
                     $user = DB::table('users')
@@ -140,7 +140,7 @@
                 <div class="d-flex flex-column">
                     <div class="d-flex flex-row align-items-center mb-3" style="height: 35px">
                         <img src=" {{url ($user -> avatar_url)}}" alt="" style="width: 20px; height: 20px; margin-right: 5px; border-radius:200px;">
-                        <a href="/user/{{$user -> id}}" style="height: 10px">{{$user -> username}}</a>
+                        <a href="/user/{{$user -> id}}" class="comment-user">{{$user -> username}}</a>
                     </div>
                     <div  class="w-100">
                         <p>{{$comment -> content}}</p>
