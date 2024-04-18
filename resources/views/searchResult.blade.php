@@ -9,15 +9,17 @@
             @foreach ($albums as $album)
             @php
                 $artist = \App\Models\Artist::find($album->artist_id);
+                $crypt_album = Crypt::encrypt($album->id);
+                $crypt_artist = Crypt::encrypt($artist->id);
             @endphp
             <div class="card">
-                <a href="/album/{{$album -> id}}" class="text-decoration-none">
+                <a href="/album/{{$crypt_album}}" class="text-decoration-none">
                     <div class="mt-2 mb-4 d-flex justify-content-center">
                         <img src="{{url ($album -> cover_url)}}" alt="" style="width: 185px; height: 185px; border-radius: 5px; ">
                     </div>
                     <div style="margin-left: 10px;max-width: 100%;">
                         <p class="card-text-bigger">{{ $album -> name }}</p>
-                        <a href="/artist/{{$artist -> id}}" class="text-decoration-none">
+                        <a href="/artist/{{$crypt_artist}}" class="text-decoration-none">
                             <p class="card-text">
                                 {{ $album -> release_date }} | {{ $artist -> name }}
                             </p>
@@ -32,8 +34,11 @@
         <h2 class="h2-text w-100">Artists</h2>
         <div class="d-flex flex-row w-100 justify-content-evenly">
             @foreach ($artists as $artist)
+            @php
+                $crypt_artist = Crypt::encrypt($artist->id);
+            @endphp
             <div class="card">
-                <a href="/artist/{{$artist -> id}}" class="text-decoration-none">
+                <a href="/artist/{{$crypt_artist}}" class="text-decoration-none">
                     <div class="mt-2 mb-4 d-flex justify-content-center">
                         <img src="{{url ($artist -> picture_url)}}" alt="" style="width: 185px; height: 185px; border-radius: 5px; object-fit: cover;">
                     </div>

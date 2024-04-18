@@ -122,9 +122,9 @@ class ArtistController extends Controller
         return redirect()->route('artists.index');
     }
 
-    public function show_artist ($crypt)
+    public function show_artist ($crypt_artist)
     {
-        $cryptId = Crypt::decrypt($crypt);
+        $cryptId = Crypt::decrypt($crypt_artist);
 
         $artist = Artist::find($cryptId);
 

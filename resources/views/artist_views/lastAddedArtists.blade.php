@@ -9,9 +9,9 @@
     <div class="d-flex">
         @foreach ($artists as $artist)
         @php
-            $crypt = Crypt::encrypt($artist->id);
+            $crypt_artist = Crypt::encrypt($artist->id);
         @endphp
-                <a href="/artist/{{$crypt}}" class="card">
+                <a href="/artist/{{$crypt_artist}}" class="card">
                     <div class="mt-2 mb-3 d-flex justify-content-center">
                         <img src="{{url ($artist -> picture_url)}}" alt="" style="width: 185px; height: 185px; border-radius: 5px; object-fit: cover;">
                     </div>

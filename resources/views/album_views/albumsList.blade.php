@@ -19,9 +19,10 @@
         @foreach ($albums as $album)
             @php
                 $artist = \App\Models\Artist::find($album->artist_id);
+                $crypt = Crypt::encrypt($album->id);
             @endphp
                 <div class="card">
-                    <a href="/album/{{$album -> id}}" class="text-decoration-none">
+                    <a href="/album/{{$crypt}}" class="text-decoration-none">
                     <div class="mt-2 mb-4 d-flex justify-content-center">
                         <img src="{{url ($album -> cover_url)}}" alt="" style="width: 185px; height: 185px; border-radius: 5px; ">
                     </div>

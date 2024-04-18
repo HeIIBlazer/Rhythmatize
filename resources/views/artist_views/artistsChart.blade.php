@@ -20,7 +20,7 @@
                             ->where('like_artists.artist_id', $artist->id)
                             ->count();
 
-            $crypt = Crypt::encrypt($artist->id);
+            $crypt_artist = Crypt::encrypt($artist->id);
 
         @endphp
 
@@ -31,14 +31,14 @@
                     </div>
                 </td>
                 <td style="width: 8%;" class="table-separete">
-                    <a href="/artist/{{$crypt}}" class="text-decoration-none">
+                    <a href="/artist/{{$crypt_artist}}" class="text-decoration-none">
                         <div class="chart-pic w-100">
                             <img src="{{url ($artist -> picture_url)}}" alt="" style="width: 75px; height: 75px; object-fit: cover;">
                         </div>
                     </a>
                 </td>
                 <td style="width:80%;">
-                    <a href="/artist/{{$crypt}}" class="text-decoration-none">
+                    <a href="/artist/{{$crypt_artist}}" class="text-decoration-none">
                         <div class="chart-big">
                             <span class="chart-text-big">{{$artist -> name}}</span>
                         </div>

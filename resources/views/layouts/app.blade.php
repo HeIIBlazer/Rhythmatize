@@ -172,9 +172,9 @@
               <a class="header_button" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"><img src="{{url (Auth::user()-> avatar_url)}}" alt="" style="width: 45px; height: 45px; border-radius: 50px; object-fit: cover;"></a>
             <ul class="dropdown-menu dropdown-menu-dark slim-dropdown-menu" aria-labelledby="dropdownMenuLink">
               @php
-                $crypt = Crypt::encrypt(Auth::user() -> id);
+                $crypt_user = Crypt::encrypt(Auth::user() -> id);
               @endphp
-              <li><a class="dropdown-item" href="/user/{{$crypt}}">Profile</a></li>
+              <li><a class="dropdown-item" href="/user/{{$crypt_user}}">Profile</a></li>
               <li><a class="dropdown-item" href="{{url ('/logout')}}">Log out</a></li>
             </ul>
           </div>

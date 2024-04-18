@@ -28,6 +28,8 @@
             $track_likes = DB::table('like_tracks')
                             ->where('like_tracks.track_id', $track->id)
                             ->count();
+            $crypt_track = Crypt::encrypt($track->id);
+            $crypt_artist = Crypt::encrypt($artist->id);
         @endphp
             <tr style="border-bottom: white solid 1px" >
                 <td style="width: 6%;" class="table-separete">
@@ -37,7 +39,7 @@
                 </td>
                 <td style="width: 8%;" class="table-separete">
                     <div class="chart-pic">
-                        <a href="/track/{{$track -> id}}">
+                        <a href="/track/{{$crypt_track}}">
                             <div class="chart-pic w-100">
                                 <img src="{{url ($album -> cover_url)}}" alt="" style="width: 75px; height: 75; object-fit: cover;">
                             </div>
@@ -46,7 +48,7 @@
                 </td>
                 <td style="width:40%;" class="table-separete">
                     <div class="chart-big">
-                        <a href="/track/{{$track -> id}}" class="text-decoration-none">
+                        <a href="/track/{{$crypt_track}}" class="text-decoration-none">
                             <div class="chart-big">
                                 <span class="chart-text-big">{{$track -> name}}</span>
                             </div>
@@ -54,7 +56,7 @@
                     </div>
                 </td>
                 <td style="width:40%;" class="table-separete">
-                    <a class="text-decoration-none" href="/artist/{{$artist -> id}}">
+                    <a class="text-decoration-none" href="/artist/{{$crypt_artist}}">
                         <div class="chart-small w-100">
                             <span class="chart-small-text">{{$artist -> name}}</span>
                         </div>

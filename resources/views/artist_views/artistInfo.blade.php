@@ -163,6 +163,8 @@
                             $album = DB::table('albums')
                                         ->where('albums.id', $track->album_id)
                                         ->first();
+                            $crypt_track = Crypt::encrypt($track->id);
+                            $crypt_album = Crypt::encrypt($album->id);
                         @endphp
 
                         <div class="d-flex flex-row track-artist">
@@ -175,7 +177,7 @@
                                 <div class="w-100 d-flex flex-column justify-content-evenly">
                                     <p class="artist-track-name">{{$track -> name}}</p>
 
-                                    <a href="/album/{{$album -> id}}" class="text-decoration-none"><p class="artist-track-album">{{$album -> name}}</p></a>
+                                    <a href="/album/{{$crypt_album}}" class="text-decoration-none"><p class="artist-track-album">{{$album -> name}}</p></a>
                                 </div>
                                 <div class="d-flex flex-row flex-wrap align-content-end" style="padding: 10px 10px; height:45%;">
                                     <div class="d-flex flex-column justify-content-around">
@@ -211,8 +213,11 @@
         @else
         <div class=" row justify-content-around mt-3 w-94 mb-4">
             @foreach ($albums as $album)
+            @php
+                $crypt_album = Crypt::encrypt($album->id);
+            @endphp
                 <div class="col-auto artist-album-card">
-                    <a href="/album/{{$album -> id}}" class="text-decoration-none">
+                    <a href="/album/{{$crypt_album}}" class="text-decoration-none">
                         <div>
                             <img src="{{url ($album -> cover_url)}}" alt="" style="width: 250px; height: 250px; border-radius: 5px; margin-top:10px; padding: 10px 10px;">
                         </div>

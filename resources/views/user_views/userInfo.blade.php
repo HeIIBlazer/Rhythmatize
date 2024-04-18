@@ -67,9 +67,9 @@
         <div class="row justify-content-evenly mt-3 w-94 mb-4">
             @foreach ($artists as $artist)
             @php
-                $crypt = Crypt::encrypt($artist -> id);
+                $crypt_artist = Crypt::encrypt($artist -> id);
             @endphp
-                <a href="/artist/{{$crypt}}" class=" text-decoration-none col-auto artist-album-card pb-3">
+                <a href="/artist/{{$crypt_artist}}" class=" text-decoration-none col-auto artist-album-card pb-3">
                     <div class="mb-3">
                         <img src="{{url ($artist -> picture_url)}}" alt="" style="width: 250px; height: 250px; border-radius: 5px; margin-top:10px; padding: 10px 10px; object-fit:cover;">
                     </div>
@@ -110,10 +110,11 @@
             $artist = DB::table('artists')
                         ->where('artists.id', $album->artist_id)
                         ->first();
-            $crypt = Crypt::encrypt($album-> id);
+            $crypt_album = Crypt::encrypt($album-> id);
+            $crypt_artist = Crypt::encrypt($artist -> id);
             @endphp
                 <div class="col-auto artist-album-card pb-3">
-                    <a href="/album/{{$crypt}}" class="text-decoration-none">
+                    <a href="/album/{{$crypt_album}}" class="text-decoration-none">
                         <div>
                             <img src="{{url ($album -> cover_url)}}" alt="" style="width: 250px; height: 250px; border-radius: 5px; margin-top:10px; padding: 10px 10px;">
                         </div>
@@ -121,7 +122,7 @@
                             <p class="text-truncate text-Montserrat-album">{{$album -> name}}</p>
                         </div>
                         <div class="w-100 d-flex justify-content-center text-center white-text">
-                            <a href="/artist/{{$artist -> id}}" class="text-truncate artist-track-album">
+                            <a href="/artist/{{$crypt_artist}}" class="text-truncate artist-track-album">
                                 {{$album -> type}} | {{$album -> release_date}} | {{$artist -> name}}
                             </a>
                         </div>
@@ -160,11 +161,11 @@
                                         ->where('artists.id', $album->artist_id)
                                         ->first();
 
-                            $crypt = Crypt::encrypt($track -> id);
+                            $crypt_track = Crypt::encrypt($track -> id);
                         @endphp
 
                         <div class="d-flex flex-row track-artist mr-2">
-                            <a href="/track/{{$crypt}}">
+                            <a href="/track/{{$crypt_track}}">
                                 <div class="d-flex  align-items-center">
                                     <img src="{{url ($album -> cover_url)}}" alt="" class="track-cover">
                                 </div>

@@ -16,6 +16,8 @@
     } else {
         $like = 2;
     }   
+
+    $crypt_artist = Crypt::encrypt($album->artist_id);
     @endphp
 
     <div style="width: 100%; height: 180px;">
@@ -32,7 +34,7 @@
             <h1 class="info-header">{{$album -> name}}</h1>
         </div>
         <div class="mb-3">
-            <h3 class="artists-lower-text">{{$genre -> name}} | <a href="/artist/{{$artist -> id}}" class="white-text text-decoration-none">{{$artist -> name}}</a></h3>
+            <h3 class="artists-lower-text">{{$genre -> name}} | <a href="/artist/{{$crypt_artist}}" class="white-text text-decoration-none">{{$artist -> name}}</a></h3>
         </div>
         <div class="d-flex flex-row justify-content-center align-content-center mb-3">
             @if ($like == 0) 
@@ -101,20 +103,25 @@
             </div>
             <div class=" w-100 d-flex flex-row justify-content-evenly mb-3">
                 @foreach ($albums as $artist_album)
+                @php
+                    $crypt_album = Crypt::encrypt($artist_album->id);
+                @endphp
                     <div class="d-flex flex-column justify-content-between align-items-center" style=" width: 45%; height:45%;">
-                        <div class="album-cover">
-                            <img src="{{url ($artist_album -> cover_url)}}" alt="Album Cover" class="img-fluid alb">
-                            <div class="album-info d-flex flex-column justify-content-center align-items-center text-center">
-                                <h2 class="album-name">{{$artist_album -> name}}</h2>
-                                <p class="album-year">{{$artist_album -> release_date}}</p>
+                        <a href="/album/{{$crypt_album}}">
+                            <div class="album-cover">
+                                <img src="{{url ($artist_album -> cover_url)}}" alt="Album Cover" class="img-fluid alb">
+                                <div class="album-info d-flex flex-column justify-content-center align-items-center text-center">
+                                    <h2 class="album-name">{{$artist_album -> name}}</h2>
+                                    <p class="album-year">{{$artist_album -> release_date}}</p>
+                                </div>
                             </div>
-                        </div>
+                        </a>
                     </div>
                 @endforeach
             </div>
             <hr>
             <div class="w-100 d-flex justify-content-center">
-                <a href="/all_albums/{{$artist -> id}}" class="all-button">View all {{$artist -> name}} albums</a>
+                <a href="/all_albums/{{$crypt_artist}}" class="all-button">View all {{$artist -> name}} albums</a>
             </div>
         </div>
 
@@ -136,11 +143,12 @@
                     $user = DB::table('users')
                         ->where('users.id', $comment->user_id)
                         ->first();
+                    $crypt_user = Crypt::encrypt($user->id);
                 @endphp
                 <div class="d-flex flex-column">
                     <div class="d-flex flex-row align-items-center mb-3" style="height: 35px">
                         <img src=" {{url ($user -> avatar_url)}}" alt="" style="width: 20px; height: 20px; margin-right: 5px; border-radius:200px;">
-                        <a href="/user/{{$user -> id}}" class="comment-user">{{$user -> username}}</a>
+                        <a href="/user/{{$user -> id}}" class="comment-user">{{$crypt_user}}</a>
                     </div>
                     <div  class="w-100">
                         <p>{{$comment -> content}}</p>
@@ -184,31 +192,32 @@
                     $track_likes = DB::table('like_tracks')
                         ->where('like_tracks.track_id', $track->id)
                         ->count();
+                    $crypt_track = Crypt::encrypt($track->id);
                 @endphp
-                <tr href="/track/{{$track -> id}}" style="border-bottom: white solid 1px">
+                <tr href="/track/{{$crypt_track}}" style="border-bottom: white solid 1px">
                         <td style="width: 5%;" class="table-separete">
-                            <a href="/track/{{$track -> id}}" class="text-decoration-none">    
+                            <a href="/track/{{$crypt_track}}" class="text-decoration-none">    
                                 <div class="number w-100">
                                     <span class="number-album w-100">{{$i}}.</span>
                                 </div>
                             </a>
                         </td>
                         <td style="width: 50%;" class="table-separete">
-                            <a href="/track/{{$track -> id}}" class="text-decoration-none">  
+                            <a href="/track/{{$crypt_track}}" class="text-decoration-none">  
                                 <div class="w-100">
                                     <span class="album-track w-100">{{$track -> name}}</span>
                                 </div>
                             </a>
                         </td>
                         <td style="width: 15%;" class="table-separete">
-                            <a href="/track/{{$track -> id}}" class="text-decoration-none">
+                            <a href="/track/{{$crypt_track}}" class="text-decoration-none">
                             @if($track -> explicit != 'NO')
                                 <img src="{{asset('images/explicit.svg')}}" alt="" style="width:25px; height:25px; margin-left: 5px;">
                             @endif
                             </a>
                         </td>
                         <td style="width: 15%;" class="table-separete">
-                            <a href="/track/{{$track -> id}}" class="text-decoration-none">
+                            <a href="/track/{{$crypt_track}}" class="text-decoration-none">
                             @if ($track -> lyrics != null)
                                 <span class="number-album">Lyrics</span>
                             @else
@@ -217,7 +226,7 @@
                             </a>
                         </td>
                         <td style="width: 10%;" class="table-separete">
-                            <a href="/track/{{$track -> id}}" class="text-decoration-none">
+                            <a href="/track/{{$crypt_track}}" class="text-decoration-none">
                                 <div class="d-flex flex-row justify-content-end">
                                     <div class="d-flex flex-row justify-content-center align-content-center align-items-center w-50">
                                         <img src="{{asset('images/like.png')}}" alt="" style="width: 22px; height: 22px; margin-right: 6px;">

@@ -22,9 +22,9 @@ class UserController extends Controller
         return view('users.index', compact('users', 'roles'));
     }
 
-    public function show_user($crypt){
+    public function show_user($crypt_user){
 
-        $crypt = Crypt::decrypt($crypt);
+        $crypt = Crypt::decrypt($crypt_user);
         $user = User::find($crypt);
 
         $artists = $user->likedArtists()->latest('like_artists.id')->take(3)->get();

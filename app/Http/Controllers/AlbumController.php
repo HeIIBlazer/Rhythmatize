@@ -88,9 +88,9 @@ class AlbumController extends Controller
         return view('album_views.albumShow', compact('album', 'tracks'));
     }
 
-    public function show_album($crypt)
+    public function show_album($crypt_album)
     {
-        $cryptId = Crypt::decrypt($crypt);
+        $cryptId = Crypt::decrypt($crypt_album);
         $album = Album::find($cryptId);
 
         $genre_album = DB::table('album_genres')->where('album_id', $album->id)->first();
