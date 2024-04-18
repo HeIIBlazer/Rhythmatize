@@ -7,7 +7,7 @@ use App\Models\Artist;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Track;
-
+use Illuminate\Support\Facades\Crypt;
 
 class ArtistController extends Controller
 {
@@ -122,8 +122,12 @@ class ArtistController extends Controller
         return redirect()->route('artists.index');
     }
 
-    public function show_artist (Artist $artist)
+    public function show_artist ($crypt)
     {
+        $cryptId = Crypt::decrypt($crypt);
+
+        $artist = Artist::find($cryptId);
+
         $comments = DB::table('comment_artists')->where('artist_id', $artist->id)->get();
 
         $albums = DB::table('albums')->where('artist_id', $artist->id)

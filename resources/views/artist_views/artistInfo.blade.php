@@ -105,11 +105,12 @@
                     $user = DB::table('users')
                         ->where('users.id', $comment->user_id)
                         ->first();
+                    $crypt = Crypt::encrypt($user->id);
                 @endphp
                 <div class=" w-100 d-flex flex-column">
                     <div class="d-flex flex-row align-items-center mb-3" style="height: 35px">
                         <img src=" {{url ($user -> avatar_url)}}" alt="" style="width: 35px; height: 35px; margin-right: 5px; border-radius:200px;">
-                        <a href="/user/{{$user -> id}}" class="comment-user">{{$user -> username}}</a>
+                        <a href="/user/{{$crypt}}" class="comment-user">{{$user -> username}}</a>
                     </div>
                     <div  class="w-100">
                         <p class="text-Montserrat">{{$comment -> content}}</p>

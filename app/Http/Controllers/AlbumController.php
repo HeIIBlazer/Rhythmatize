@@ -7,6 +7,7 @@ use App\Models\Artist;
 use App\Models\Track;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Crypt;
 
 class AlbumController extends Controller
 {
@@ -87,8 +88,11 @@ class AlbumController extends Controller
         return view('album_views.albumShow', compact('album', 'tracks'));
     }
 
-    public function show_album(Album $album)
+    public function show_album($crypt)
     {
+        $cryptId = Crypt::decrypt($crypt);
+        $album = Album::find($cryptId);
+
         $genre_album = DB::table('album_genres')->where('album_id', $album->id)->first();
         $genre = DB::table('genres')->where('id', $genre_album->genre_id)->first();
 

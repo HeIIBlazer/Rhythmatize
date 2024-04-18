@@ -23,9 +23,10 @@
                 @foreach ($lastAdded as $album)
                 @php 
                     $artist = \App\Models\Artist::find($album->artist_id);
-                    $album_name = explode(" ", $album->name); $album_name = array_slice($album_name, 0, 5);  $album_name = implode(" ", $album_name); 
+                    $album_name = explode(" ", $album->name); $album_name = array_slice($album_name, 0, 5);  $album_name = implode(" ", $album_name);
+                    $crypt = Crypt::encrypt($album->id); 
                 @endphp
-                    <a href="/album/{{$album -> id}}" class="album-cover" style="width: 31.5%; height:20%;">
+                    <a href="/album/{{$crypt}}" class="album-cover" style="width: 31.5%; height:20%;">
                         <img src="{{url ($album->cover_url)}}" alt="Album Cover" class="w-100 h-100 alb">
                         <div class="album-info d-flex flex-column justify-content-center align-items-center h-100 w-100">
                             <h2 class="artist-name-main">{{ $artist-> name }}</h2>
@@ -55,9 +56,9 @@
                     @foreach ($albums as $album)
                         @php
                             $artist = \App\Models\Artist::find($album->artist_id); 
-                        
+                            $crypt = Crypt::encrypt($album->id);
                         @endphp
-                    <a href="/album/{{$album -> id}}" class="album-cover" style="width: 31.5%; height:20%;">
+                    <a href="/album/{{$crypt}}" class="album-cover" style="width: 31.5%; height:20%;">
                         <img src="{{url ($album -> cover_url)}}" alt="Album Cover" class="w-100 h-100 alb">
                         <div class="album-info d-flex flex-column justify-content-center align-items-center h-100 w-100">
                             <h2 class="artist-name-main">{{ $artist-> name }}</h2>
@@ -79,7 +80,10 @@
                 </div>
                 <div class="albums_3">
                     @foreach ($artists as $artist)
-                    <a href="/artist/{{$artist-> id}}" class="album-cover" style=" height: 180px; width: 30%;">
+                    @php
+                        $crypt = Crypt::encrypt($artist->id);
+                    @endphp
+                    <a href="/artist/{{$crypt}}" class="album-cover" style=" height: 180px; width: 30%;">
                             <img src="{{url ($artist->picture_url)}}" alt="Album Cover" class="alb">
                         <div class="album-info d-flex flex-column justify-content-center align-items-center text-center h-100 w-100">
                             <h2 class="album-name-main">{{ $artist-> name }}</h2>
@@ -103,10 +107,11 @@
                         @php
                             $album = \App\Models\Album::find($track->album_id); 
                             $artist = \App\Models\Artist::find($album->artist_id);
+                            $crypt = Crypt::encrypt($track->id);
                             // $spotify_link = $track -> spotify_link; USE FOR TRACK INFO PAGE!!!!!
                             // $modified_link = substr($spotify_link, 24);
                         @endphp
-                        <a href="/track/{{$track -> id}}" class="album-cover" style=" height: 180px; width: 30%;">
+                        <a href="/track/{{$crypt}}" class="album-cover" style=" height: 180px; width: 30%;">
                             <img src="{{url ($album->cover_url)}}" alt="Album Cover" class="alb">
                         <div class="album-info d-flex flex-column justify-content-center align-items-center text-center h-100 w-100">
                             <h2 class="artist-name-main">{{ $artist-> name }}</h2>

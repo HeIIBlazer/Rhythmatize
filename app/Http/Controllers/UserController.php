@@ -3,13 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use app\Models\Artist;
-use app\Models\Album;
-use app\Models\Track;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Crypt;
 
 
 
@@ -26,9 +22,11 @@ class UserController extends Controller
         return view('users.index', compact('users', 'roles'));
     }
 
-    public function show_user(User $user){
+    public function show_user($crypt){
 
-        
+        $crypt = Crypt::decrypt($crypt);
+        $user = User::find($crypt);
+
         $artists = $user->likedArtists()->latest('like_artists.id')->take(3)->get();
         $tracks = $user->likedTracks()->latest('like_tracks.id')->take(4)->get();
         $albums = $user->likedAlbums()->latest('like_albums.id')->take(3)->get();

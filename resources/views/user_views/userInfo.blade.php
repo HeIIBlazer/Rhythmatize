@@ -2,6 +2,10 @@
 
 @section('content')
 
+@php
+    $crypt_user = Crypt::encrypt($user -> id);
+@endphp
+
 <div style="width: 100%; height: 180px;">
     <img src="{{url ($user -> banner_url)}}" alt="" style="width: 100%; height: 300px; object-fit:cover; object-position: 50% 50%;">
 </div>
@@ -62,7 +66,10 @@
         @else
         <div class="row justify-content-evenly mt-3 w-94 mb-4">
             @foreach ($artists as $artist)
-                <a href="/artist/{{$artist -> id}}" class=" text-decoration-none col-auto artist-album-card pb-3">
+            @php
+                $crypt = Crypt::encrypt($artist -> id);
+            @endphp
+                <a href="/artist/{{$crypt}}" class=" text-decoration-none col-auto artist-album-card pb-3">
                     <div class="mb-3">
                         <img src="{{url ($artist -> picture_url)}}" alt="" style="width: 250px; height: 250px; border-radius: 5px; margin-top:10px; padding: 10px 10px; object-fit:cover;">
                     </div>
@@ -72,7 +79,7 @@
                 </a>
             @endforeach
         </div>
-        <a class="artist-button-album flex-wrap" href="/liked-artists/{{$user -> id}}">Show all liked artists</a>
+        <a class="artist-button-album flex-wrap" href="/liked-artists/{{$crypt_user}}">Show all liked artists</a>
         @endif
 
         <div class="w-100 d-flex flex-row justify-content-evenly align-content-center">
@@ -88,7 +95,8 @@
         @php
             $artist = DB::table('artists')
                         ->where('artists.id', $user->id)
-                        ->first();  
+                        ->first();
+            
         @endphp
 
         @if (count($albums) == 0)
@@ -98,14 +106,14 @@
         @else
         <div class="row justify-content-evenly mt-3 w-94 mb-4">
             @foreach ($albums as $album)
-            {{-- <a href="/album/{{$album -> id}}" class="text-decoration-none"> --}}
             @php
             $artist = DB::table('artists')
                         ->where('artists.id', $album->artist_id)
-                        ->first();  
+                        ->first();
+            $crypt = Crypt::encrypt($album-> id);
             @endphp
                 <div class="col-auto artist-album-card pb-3">
-                    <a href="/album/{{$album -> id}}" class="text-decoration-none">
+                    <a href="/album/{{$crypt}}" class="text-decoration-none">
                         <div>
                             <img src="{{url ($album -> cover_url)}}" alt="" style="width: 250px; height: 250px; border-radius: 5px; margin-top:10px; padding: 10px 10px;">
                         </div>
@@ -121,7 +129,7 @@
                 </div>
             @endforeach
         </div>
-        <a class="artist-button-album flex-wrap" href="/liked-albums/{{$user -> id}}">Show all liked albums</a>
+        <a class="artist-button-album flex-wrap" href="/liked-albums/{{$crypt_user}}">Show all liked albums</a>
         @endif
 
         <div class="w-100 d-flex flex-row justify-content-evenly align-content-center">
@@ -151,10 +159,12 @@
                             $artist = DB::table('artists')
                                         ->where('artists.id', $album->artist_id)
                                         ->first();
+
+                            $crypt = Crypt::encrypt($track -> id);
                         @endphp
 
                         <div class="d-flex flex-row track-artist mr-2">
-                            <a href="/track/{{$track -> id}}">
+                            <a href="/track/{{$crypt}}">
                                 <div class="d-flex  align-items-center">
                                     <img src="{{url ($album -> cover_url)}}" alt="" class="track-cover">
                                 </div>
@@ -175,7 +185,7 @@
                 </div>
             @endforeach
         </div>
-        <a class="artist-button flex-wrap" href="/liked-tracks/{{$user ->id}}">Show all liked tracks</a>
+        <a class="artist-button flex-wrap" href="/liked-tracks/{{$crypt_user}}">Show all liked tracks</a>
         @endif
     </div>
 
