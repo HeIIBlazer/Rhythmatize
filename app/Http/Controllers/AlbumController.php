@@ -76,9 +76,9 @@ class AlbumController extends Controller
                 $tracks = Track::select('tracks.*')->where('album_id', 'like', $album_id)->limit(4)->get();
             }
             // return $album;
-            return view('searchResult', compact('albums', 'artists', 'tracks'));
+            return view('searchResult', compact('albums', 'artists', 'tracks', 'search'));
         } else {
-            return view('searchResult', compact('albums', 'artists', 'tracks'));
+            return view('searchResult', compact('albums', 'artists', 'tracks', 'search'));
         }
     }
 

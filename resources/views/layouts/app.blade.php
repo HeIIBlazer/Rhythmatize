@@ -88,6 +88,12 @@
                                   <div class="w-100 d-flex justify-content-center align-center mt-3 mb-4">
                                       <input type="password" class="login-input" name="password" placeholder="Password" minlength="6" required>
                                   </div>
+                                  <div class="w-100 d-flex remember mb-3">
+                                    <input type="checkbox" id="remember" name="remember" class="ms-5 form-check-input">
+                                    <label for="remember" class="remember-me">
+                                      Remember me
+                                    </label>
+                                  </div>
                                   <div class="w-100 d-flex justify-content-center mt-2 mb-4">
                                       <button type="submit" class="login-button" name="login">Log in</button>
                                   </div>

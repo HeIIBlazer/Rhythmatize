@@ -815,6 +815,35 @@ body {
     display: none;
 }
 
+.remember-me {
+    color: white;
+    font-size: 17px;
+    font-family: 'Montserrat', sans-serif;
+    padding-top: 1px;
+    font-weight: 400;
+}
+
+.form-check-input {
+    background-color: transparent;
+    margin-right: 10px;
+    border: 2px solid white;
+    border-radius: 5px;
+    width: 20px;
+    height: 20px;
+    box-shadow: none;
+}
+
+.form-check-input:checked {
+    background-color: transparent;
+    border: 2px solid white;
+    box-shadow: none;
+}
+
+.form-check-input:focus {
+    box-shadow: none;
+    border: 2px solid white;
+}
+
 /* ARTIST INFO */
 
 .Info-Image {

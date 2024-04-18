@@ -1,4 +1,4 @@
-@extends ('layouts.app')
+@extends ('layouts.app', ['title' => 'Search - ' . $search])
 
 @section('content')
 <h1 class="Header-text text-center">SEARCH</h1>
