@@ -12,7 +12,7 @@
             </div>
         
         @else
-        <div class="d-flex flex-row w-100 justify-content-evenly">
+        <div class="d-flex flex-row w-100 justify-content-evenly mb-5">
             @foreach ($albums as $album)
             @php
                 $artist = \App\Models\Artist::find($album->artist_id);
@@ -40,7 +40,7 @@
         </div>
         @endif
     </div>
-    <div class="h2-header d-flex justify-content-evenly flex-column">
+    <div class="h2-header d-flex justify-content-evenly flex-column mb-5">
         <h2 class="h2-text w-100">Artists</h2>
         @if ($artists == null || $artists->count() == 0)
     
@@ -68,7 +68,7 @@
         </div>
         @endif
     </div>
-    <div class="h2-header d-flex justify-content-evenly flex-wrap">
+    <div class="h2-header d-flex justify-content-evenly flex-wrap mb-5">
         <h2 class="h2-text w-100 justify-content-start">Tracks</h2>
         @if ($tracks == null || $tracks->count() == 0)
     
@@ -87,14 +87,18 @@
                                     $track = $tracks[$j];
                                     $album = \App\Models\Album::find($track->album_id); 
                                     $artist = \App\Models\Artist::find($album->artist_id);
+                                    $crypt_track = Crypt::encrypt($track->id);
+                                    $crypt_artist = Crypt::encrypt($artist->id);
                                 @endphp
                                 <div class="track-item">
                                     <div>
                                         <img src="{{url ($album->cover_url)}}" alt="" style="width: 100px; height: 100px; border-radius: 5px; object-fit: cover;">
                                     </div>
-                                    <div class="track-info d-flex flex-row w-100 justify-content-between">
-                                        <p class="d-inline-block text-truncate m-3" style="min-width: 100px; max-width: 200px; font-weight: 700;">{{ $track -> name }}</p>
-                                        <p class="d-inline-block text-truncate m-3" style="min-width: 50px;">{{ $artist -> name }}</p>
+                                    <div class="track-info w-50 pt-4">
+                                        <a href="/track/{{$crypt_track}}" class="text-decoration-none"><span class="chart-text-big">{{ $track -> name }}</span></a>
+                                    </div>
+                                    <div class="w-25 pt-4">
+                                        <a href="/artist/{{$crypt_artist}}" class="text-decoration-none"><span class="chart-small-text">{{ $artist -> name }}</span></a>
                                     </div>
                                 </div>
                                 <hr class="me-3">

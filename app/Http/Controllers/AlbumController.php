@@ -26,7 +26,7 @@ class AlbumController extends Controller
         
         $albums = DB::table("albums")->select('albums.*', DB::raw('count(like_albums.id) as likes_count'))
                         ->leftJoin('like_albums', 'albums.id', '=', 'like_albums.album_id')
-                        ->groupBy('albums.id', 'albums.name' , 'albums.cover_url', 'albums.release_date', 'albums.description', 'albums.youtube_link', 'albums.spotify_link', 'albums.apple_music_link', 'albums.type', 'albums.artist_id')
+                        ->groupBy('albums.id', 'albums.name' , 'albums.cover_url', 'albums.release_date', 'albums.description', 'albums.youtube_link', 'albums.spotify_link', 'albums.apple_music_link', 'albums.type', 'albums.artist_id', 'albums.genre_id')
                         ->orderBy('likes_count', 'desc',)
                         ->paginate(10);
 
@@ -37,7 +37,7 @@ class AlbumController extends Controller
     {
         $albums = DB::table("albums")->select('albums.*', DB::raw('count(like_albums.id) as likes_count'))
                         ->leftJoin('like_albums', 'albums.id', '=', 'like_albums.album_id')
-                        ->groupBy('albums.id', 'albums.name' , 'albums.cover_url', 'albums.release_date', 'albums.description', 'albums.youtube_link', 'albums.spotify_link', 'albums.apple_music_link', 'albums.type', 'albums.artist_id')
+                        ->groupBy('albums.id', 'albums.name' , 'albums.cover_url', 'albums.release_date', 'albums.description', 'albums.youtube_link', 'albums.spotify_link', 'albums.apple_music_link', 'albums.type', 'albums.artist_id', 'albums.genre_id')
                         ->orderBy('likes_count', 'desc',)
                         ->limit(3)
                         ->get();
@@ -96,8 +96,7 @@ class AlbumController extends Controller
         $cryptId = Crypt::decrypt($crypt_album);
         $album = Album::find($cryptId);
 
-        $genre_album = DB::table('album_genres')->where('album_id', $album->id)->first();
-        $genre = DB::table('genres')->where('id', $genre_album->genre_id)->first();
+        $genre = DB::table('genres')->where('id', $album->genre_id)->first();
 
         $artistId = $album->artist_id;
         $albums = Album::where('artist_id', $artistId)

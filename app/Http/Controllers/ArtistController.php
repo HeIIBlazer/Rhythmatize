@@ -133,7 +133,7 @@ class ArtistController extends Controller
         $albums = DB::table('albums')->where('artist_id', $artist->id)
                     ->select('albums.*', DB::raw('count(like_albums.id) as likes_count'))
                     ->leftJoin('like_albums', 'albums.id', '=', 'like_albums.album_id')
-                    ->groupBy('albums.id', 'albums.name', 'albums.cover_url', 'albums.release_date', 'albums.artist_id', 'albums.description', 'albums.youtube_link', 'albums.spotify_link', 'albums.apple_music_link', 'albums.type')
+                    ->groupBy('albums.id', 'albums.name', 'albums.cover_url', 'albums.release_date', 'albums.artist_id', 'albums.description', 'albums.youtube_link', 'albums.spotify_link', 'albums.apple_music_link', 'albums.type', 'albums.genre_id')
                     ->orderBy('likes_count', 'desc')
                     ->limit(3)
                     ->get();

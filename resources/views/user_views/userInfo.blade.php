@@ -165,8 +165,8 @@
                         @endphp
 
                         <div class="d-flex flex-row track-artist mr-2">
-                            <a href="/track/{{$crypt_track}}">
-                                <div class="d-flex  align-items-center">
+                            <a href="/track/{{$crypt_track}}" class="text-decoration-none">
+                                <div class="d-flex  align-items-center h-100">
                                     <img src="{{url ($album -> cover_url)}}" alt="" class="track-cover">
                                 </div>
 

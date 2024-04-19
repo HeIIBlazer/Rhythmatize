@@ -22,5 +22,6 @@ class Album extends Model
         'apple_music_link',
         'type',
         'artist_id',
+        'genre_id'
     ];
 }
