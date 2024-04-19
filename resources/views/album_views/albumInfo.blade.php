@@ -148,7 +148,7 @@
                 <div class="d-flex flex-column">
                     <div class="d-flex flex-row align-items-center mb-3" style="height: 35px">
                         <img src=" {{url ($user -> avatar_url)}}" alt="" style="width: 20px; height: 20px; margin-right: 5px; border-radius:200px;">
-                        <a href="/user/{{$user -> id}}" class="comment-user">{{$crypt_user}}</a>
+                        <a href="/user/{{$crypt_user}}" class="comment-user">{{$user -> username}}</a>
                     </div>
                     <div  class="w-100">
                         <p>{{$comment -> content}}</p>

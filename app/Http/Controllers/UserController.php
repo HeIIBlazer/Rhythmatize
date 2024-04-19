@@ -35,8 +35,10 @@ class UserController extends Controller
 
     }
 
-    public function show_liked_albums(User $user)
+    public function show_liked_albums($crypt_user)
     {
+        $crypt = Crypt::decrypt($crypt_user);
+        $user = User::find($crypt);
         $albums = $user->likedAlbums()->latest('like_albums.id')->paginate(12);
         return view('album_views.albumsList', compact('albums', 'user'));
     }

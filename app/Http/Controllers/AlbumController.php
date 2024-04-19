@@ -72,6 +72,9 @@ class AlbumController extends Controller
         if($albums->count() == 0 && $artists->count() == 1){
             $artist_id = $artists->first()->id;
             $albums = Album::select('albums.*')->where('artist_id', 'like', $artist_id)->limit(6)->get();
+            if ($albums->count() == 0){
+                return view('searchResult', compact('albums', 'artists', 'tracks', 'search'));
+            }
             $album_id = $albums->first()->id;
             if($tracks->count() == 0 && $artists->count() == 1){
                 $tracks = Track::select('tracks.*')->where('album_id', 'like', $album_id)->limit(4)->get();

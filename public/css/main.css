@@ -131,6 +131,9 @@ body {
     display: flex;
     flex-direction: row;
     margin-top: auto;
+    bottom: 0;
+    left: 0;
+    position: relative;
 }
 
 .socials_text {
@@ -1110,6 +1113,14 @@ hr {
     font-size: 20px;
 }
 /* SEARCH RESULT */
+
+.no-info {
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 60px;
+    text-align: center;
+    font-weight: 500;
+}
 
 .track-list {
     display: flex;

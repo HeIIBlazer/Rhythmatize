@@ -5,6 +5,13 @@
 <div class="container">
     <div class="h2-header d-flex justify-content-evenly flex-column">
         <h2 class="h2-text w-100">Albums</h2>
+        @if ($albums == null || $albums->count() == 0)
+    
+            <div class="d-flex justify-content-center align-items-center" style="height: 150px;">
+                <p class="no-info">NO ALBUMS FOUND</p>
+            </div>
+        
+        @else
         <div class="d-flex flex-row w-100 justify-content-evenly">
             @foreach ($albums as $album)
             @php
@@ -27,11 +34,21 @@
                     </div>
                 </a>
             </div>
+            
             @endforeach
+            
         </div>
+        @endif
     </div>
     <div class="h2-header d-flex justify-content-evenly flex-column">
         <h2 class="h2-text w-100">Artists</h2>
+        @if ($artists == null || $artists->count() == 0)
+    
+        <div class="d-flex justify-content-center align-items-center" style="height: 150px;">
+            <p class="no-info">NO ARTISTS FOUND</p>
+        </div>
+    
+        @else
         <div class="d-flex flex-row w-100 justify-content-evenly">
             @foreach ($artists as $artist)
             @php
@@ -49,9 +66,17 @@
             </div>
             @endforeach
         </div>
+        @endif
     </div>
     <div class="h2-header d-flex justify-content-evenly flex-wrap">
         <h2 class="h2-text w-100 justify-content-start">Tracks</h2>
+        @if ($tracks == null || $tracks->count() == 0)
+    
+        <div class="d-flex justify-content-center align-items-center" style="height: 150px;">
+            <p class="no-info">NO TRACKS FOUND</p>
+        </div>
+    
+        @else   
         <div class="track-list d-flex flex-wrap w-100">
             <div class="tracks-container w-100" style="display: flex; flex-wrap: wrap;">
                 @for ($i = 0; $i < $tracks->count(); $i += 2)
@@ -79,6 +104,7 @@
                 @endfor
             </div>
         </div>
+        @endif
     </div>
 </div>
 @endsection
