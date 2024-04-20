@@ -124,7 +124,6 @@ body {
 
 /* FOOTER STYLES */
 .footer {
-    /* position: absolute; */
     width: 100%;
     background-color: black;
     color: white;
@@ -132,6 +131,9 @@ body {
     display: flex;
     flex-direction: row;
     margin-top: auto;
+    bottom: 0;
+    left: 0;
+    position: relative;
 }
 
 .socials_text {
@@ -255,7 +257,7 @@ body {
     width: 100%;
     justify-content: space-evenly;
     margin-top: 20px;
-    height: 1025px;
+    margin-bottom: 30px;
 }
 
 .Header-text {
@@ -307,6 +309,7 @@ body {
     text-align: center;
     width: 100%;
     border-radius: 50px;
+    margin-bottom: 15px;
 }
 
 .Last_added_albums_part {
@@ -316,8 +319,6 @@ body {
     justify-content: center;
     align-items: center;
     width: 100%;
-    /* height: 36%; */
-    /* padding: 1rem; */
     background-color: #2C2C2C;
     border-radius: 5px;
     box-shadow: 10px 10px 4px #00000054;
@@ -342,17 +343,42 @@ body {
     transition: 0.2s;
 }
 
-.hide-text p {
-    display: none;
-    color: white;
-    font-family: 'audiowide', sans-serif;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    max-width: 80%;
-    max-height: 100%;
-    z-index: -1;
+.album-name-main {
     text-decoration: none;
+    display: none;
+    font-family: 'audiowide', sans-serif;
+    font-size: 17px;
+    color: white;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    transition:ease all .5s;
+    padding: 5px;
+    width: 100%;
+}
+
+.artist-name-main {
+    text-decoration: none;
+    display: none;
+    font-family: 'audiowide', sans-serif;
+    font-size: 14px;
+    color: white;
+    text-align: center;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    font-weight: 400;
+    transition:ease all .5s;
+    width: 100%;
+    vertical-align: bottom;
+}
+
+.album-cover:hover .artist-name-main {
+    display: block;
+    transition:ease all .5s;
+}
+
+.album-cover:hover .album-name-main {
+    display: block;
+    transition:ease all .5s;
 }
 
 .hide-text:hover p{
@@ -383,7 +409,6 @@ body {
     flex-direction: column;
     align-items: center;
     width: 45%;
-    height: 100%;
     background-color: #2C2C2C;
     border-radius: 5px;
     box-shadow: 10px 10px 4px #00000054;
@@ -451,6 +476,24 @@ body {
     justify-content: center;
     align-items: center;
     -webkit-text-stroke: 2px black;
+}
+
+.Header-List-1 {
+    font-family: "audiowide", sans-serif;
+    color: white;
+    font-size: 60px;
+    margin-bottom: 0px;
+    margin-top: 10px;
+    list-style-type: none;
+    -webkit-text-stroke: 2px black;
+    text-decoration: underline 2px white;
+    transition: ease all 0.3s;
+}
+
+.Header-List-1:hover {
+    color: grey;
+    text-decoration: underline 2px grey;
+    transition: ease all 0.3s;
 }
 
 .card {
@@ -533,6 +576,11 @@ body {
 
 /* CHARTS */
 
+.table-separete{
+    padding-top: 15px;
+    padding-bottom: 10px;
+}
+
 .chart-line{
     display: flex;
     flex-direction: row;
@@ -566,22 +614,32 @@ body {
 
 .chart-text-big {
     font-family: 'Montserrat', sans-serif;
-    font-size: 25px;
+    font-size: 24px;
     font-weight: 700;
-    white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    padding: 0 6px;
+    display: -webkit-box;
+    -webkit-line-clamp: 1; /* Specify the number of lines to show */
+    -webkit-box-orient: vertical;
     color: white;
     height: 100%;
+    max-width: 100%;
+    width: 100%;
+    transition: ease all .3s;
+}
 
+.chart-text-big:hover {
+    text-decoration: underline;
+    transition: ease all .3s;
 }
 
 .chart-big {
     display: flex;
     flex-direction: row;
-    width: 50%;
     height: 100%;
+    /* width: 98%; */
+    align-items: center;
+    margin-right: 5px;
 }
 
 .chart-small {
@@ -636,6 +694,7 @@ body {
     color: white;
     text-align: end;
     width: 10%;
+    margin-right: 15px;
 }
 
 .chart-like-text-artist {
@@ -662,10 +721,8 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 500px;
     height: 100%;
     background: #2C2C2C;
-    box-shadow: 10px 10px 4px #00000054;
     border-radius: 10px;
 }
 
@@ -755,7 +812,46 @@ body {
     text-align: center;
     height: 2%;
     color: red;
+}
 
+.error-login {
+    margin-top: 0;
+    text-align: center;
+    height: 2%;
+    color: red;
+}
+
+.img-input {
+    display: none;
+}
+
+.remember-me {
+    color: white;
+    font-size: 17px;
+    font-family: 'Montserrat', sans-serif;
+    padding-top: 1px;
+    font-weight: 400;
+}
+
+.form-check-input {
+    background-color: transparent;
+    margin-right: 10px;
+    border: 2px solid white;
+    border-radius: 5px;
+    width: 20px;
+    height: 20px;
+    box-shadow: none;
+}
+
+.form-check-input:checked {
+    background-color: transparent;
+    border: 2px solid white;
+    box-shadow: none;
+}
+
+.form-check-input:focus {
+    box-shadow: none;
+    border: 2px solid white;
 }
 
 /* ARTIST INFO */
@@ -783,6 +879,7 @@ body {
     box-shadow: 10px 10px 4px #00000054;
     color: white;
     padding: 10px;
+
 }
 
 .read-more-button {
@@ -793,8 +890,8 @@ body {
     color: white;
     cursor: pointer;
     font-weight: 700;
-
     transition: ease all 0.3;
+    
 }
 
 .read-more-button:hover {
@@ -814,6 +911,7 @@ body {
     color: white;
     max-height: 200px;
     overflow: hidden;
+    /* text-align: center; */
 }
 
 .desc-text.expanded {
@@ -849,7 +947,10 @@ hr {
 
 .text-Montserrat {
     font-family: 'Montserrat', sans-serif;
-
+    width: 98%;
+    max-width: 100%;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 .line-2 {
@@ -882,7 +983,6 @@ hr {
     flex-direction: row;
     align-items: center;
     justify-content: space-evenly;
-
 }
 
 .track-artist {
@@ -917,14 +1017,25 @@ hr {
 
 .artist-track-album {
     padding: 0px 10px;
-    color: white;
+    color: #808080;
     font-weight: 500;
     font-size: 15px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     max-width: 230px;
+    text-decoration: none;
+    transition: ease all 0.3s;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
 }
+
+.artist-track-album:hover {
+    color: white;
+
+    transition: ease all 0.3s;
+}
+
 
 .artist-button {
     background-color: #373737;
@@ -941,8 +1052,24 @@ hr {
     border-radius: 5px ;
 }
 
+.artist-button-album {
+    background-color: #373737;
+    text-align: center;
+    width: 93%;
+    height: 40px;
+    text-decoration: none;
+    color: white;
+    font-weight: 600;
+    font-size: 20px;
+    font-family: 'Montserrat', sans-serif;
+    padding-top: 5px;
+    box-shadow: 10px 10px 4px #00000054;
+    border-radius: 5px;
+
+}
+
 .artist-header-line {
-    width: 220px;
+    width: 27%;
     height: 2px;
     border: white 1px solid;
 }
@@ -983,6 +1110,7 @@ hr {
     max-width: 230px;
     color: #B8B8B8;
 }
+
 .text-Montserrat-album {
     font-family: 'Montserrat', sans-serif;
     white-space: nowrap;
@@ -994,29 +1122,39 @@ hr {
 }
 /* SEARCH RESULT */
 
+.no-info {
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 60px;
+    text-align: center;
+    font-weight: 500;
+}
+
 .track-list {
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
-  }
-  
-  .column {
+}
+
+.column {
     display: flex;
     flex-direction: column;
     flex: 1;
     width: 50%;
-  }
-  
-  .track-item {
+}
+
+.track-item {
     display: flex;
     flex-direction: row;
     align-items: center;
     /* width: 50%; */
     margin: 1em;
     flex: 1;
-  }
+    padding: 10px;
 
-  .track-info {
+}
+
+.track-info {
     margin: 0 auto;
     align-items: center;
     color: white;
@@ -1024,4 +1162,349 @@ hr {
     text-align: center;
 }
 
+/* USER PAGE */
 
+.edit-button{
+    background-color: #373737;
+    text-align: center;
+    text-decoration: none;
+    color: white;
+    font-weight: 600;
+    font-size: 20px;
+    font-family: 'Montserrat', sans-serif;
+    border-radius: 15px;
+    padding: 5px 20px;
+    margin-bottom: 15px;
+    border: #808080 2px solid;
+    transition: ease all 0.3s;
+    cursor: pointer;
+}
+
+.edit-button:hover {
+    background-color: white;
+    border: black 2px solid;
+    transition: ease all 0.3s;
+    color: black;
+}
+
+.edit-header {
+    color: white;
+    text-align: center;
+    font-size: 35px;
+    font-family: 'audiowide', sans-serif;
+    margin-bottom: 15px;
+}
+
+.edit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    background: #202020;
+    border-radius: 10px;
+}
+
+.label-edit {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 17px;
+    color: #837F7F;
+    font-weight: 500;
+}
+
+.edit-input {
+    width: 95%;
+    height: 40px;
+    background-color: #373737;
+    border-radius: 5px;
+    font-size: 22px;
+    color: white;
+    padding-left: 15px;
+    border: none;
+    box-shadow: 10px 10px 4px #00000054;
+    resize: none;
+}
+
+.save-button {
+    background-color: transparent;
+    border: 2px solid green;
+    border-radius: 15px;
+    font-size: 20px;
+    color: green;
+    font-family: 'audiowide', sans-serif;
+    padding: 10px 100px;
+}
+
+.cancel-button {
+    background-color: transparent;
+    border: 2px solid red;
+    border-radius: 15px;
+    font-size: 20px;
+    color: red;
+    font-family: 'audiowide', sans-serif;
+    padding: 10px 100px;
+}
+
+.save-button:hover {
+    background-color: green;
+    color: black;
+    transition: ease all 0.5s;
+}
+
+.cancel-button:hover {
+    background-color: red;
+    color: black;
+    transition: ease all 0.5s;
+}
+
+.edit-change-button {
+    background-color: transparent;
+    font-size: 25px;
+    color: #837F7F;
+    font-family: 'Montserrat', sans-serif;
+    cursor: pointer;
+}
+
+.edit-change-button:hover {
+    color: white;
+    transition: ease all 0.5s;
+}
+
+/* ALBUM INFO */
+
+.artists-lower-text {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 20px;
+    color: white;
+    font-weight: 200;
+    text-align: center;
+    text-decoration: none;
+    transition: ease all 0.1s;
+}
+
+.artists-lower-text:hover {
+    text-decoration: underline;
+    font-weight: 300;
+    transition: ease all 0.05s;
+}
+
+.album-cover {
+    position: relative;
+    text-align: center;
+    color: white;
+}
+.album-info {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.alb {
+    width: 100%;
+    height:100%;
+    object-fit: cover;
+    transition: ease all .2s;
+}
+
+
+.album-cover:hover .alb{
+    filter: brightness(25%);
+    transition: ease all .2s;
+}
+
+.album-name {
+    display: none;
+    font-family: 'audiowide', sans-serif;
+    font-size: 20px;
+    color: white;
+    text-align: center;
+    text-overflow: ellipsis;
+    /* white-space: nowrap; */
+    overflow: hidden;
+    font-weight: 400;
+    transition:ease all .5s;
+}
+
+.album-cover:hover .album-name {
+    display: block;
+    transition:ease all .5s;
+}
+
+.album-year {
+    display: none;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 15px;
+    color: white;
+    text-align: center;
+    font-weight: 200;
+    transition:ease all .5s;
+}
+
+.album-cover:hover .album-year {
+    display: block;
+    transition:ease all .5s;
+}
+
+.all-button {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 17px;
+    margin-bottom: 5px;
+    font-weight: 600;
+    color: #808080;
+    text-decoration: none;
+    transition: ease all 0.3s;
+}
+
+.all-button:hover {
+    text-decoration: underline;
+    transition: ease all 0.3s;
+    color: white;
+}
+.number-album {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    color: #606060;
+    font-size: 26px;
+}
+
+.album-track {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    color: white;
+    font-size: 26px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1; /* Specify the number of lines to show */
+    -webkit-box-orient: vertical;
+    width: 100%;
+}
+
+.album-track:hover {
+    text-decoration: underline;
+    transition: ease all 0.3s;
+}
+
+.comment-user {
+    color: #837F7F;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    text-decoration: none;
+    transition: ease all 0.3s;
+    padding-top: 3px;
+}
+
+.comment-user:hover {
+    color: white;
+    text-decoration: underline;
+    transition: ease all 0.3s;
+}
+
+/* TRACK INFO PAGE */
+
+.track-like-text {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    color: white;
+    text-align: center;
+    width: 10%;
+    margin-right: 15px;
+}
+
+.other-tracks-heading {
+    font-family: ';Montserrat', sans-serif;
+    font-size: 15px;
+    color: white;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.other-tracks {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 17px;
+    font-weight: 500;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1; /* Specify the number of lines to show */
+    -webkit-box-orient: vertical;
+    color: white;
+    height: 100%;
+    max-width: 100%;
+    width: 100%;
+    transition: ease all .1s;
+    cursor: pointer;
+}
+
+.other-tracks:hover {
+    text-decoration: underline;
+    transition: ease all .1s;
+}
+
+.other-tracks-link {
+    color: white;
+    text-decoration: none;
+    font-family: 'Montserrat', sans-serif;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1; /* Specify the number of lines to show */
+    -webkit-box-orient: vertical;
+    text-align: center;
+    margin-top: 15px;
+    font-size: 17px;
+    font-weight: 500;
+}
+
+.other-tracks-link:hover {
+    text-decoration: underline;
+    transition: ease all .1s;
+}
+
+.track-lyrics-background {
+    background-color: #373737;
+    border-radius: 5px;
+    box-shadow: 10px 10px 4px #00000054;
+    padding: 20px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+.tracks-lyrics-headers {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.pt-130 {
+    padding-top: 130px;
+}
+
+.track-lyrics {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 22px;
+    color: white;
+    font-weight: 500;
+}
+
+.no-track-lyrics {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 35px;
+    color: white;
+    font-weight: 600;
+    text-align: center;
+}
+
+.found-nothing {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 18px;
+    color: white;
+    font-weight: 500;
+    text-align: center;
+}

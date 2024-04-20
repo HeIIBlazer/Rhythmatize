@@ -9,7 +9,7 @@ class CommentAlbum extends Model
 {
     use HasFactory;
     protected $table = 'comment_albums';
-    public $timestamps = true;
+    public $timestamps = false;
 
     protected $fillable = [
         'user_id',

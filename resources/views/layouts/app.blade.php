@@ -47,7 +47,7 @@
             <a class="header_button" href="{{ url ('/album_list')}}">Albums</a>
           </li>
         </ul>
-        <form class="d-flex mt-3 " method="GET" action="{{ url('/search') }}">
+        <form class="d-flex" method="GET" action="{{ url('/search') }}">
           <input class="form-control rounded-0 mr-5" name="search" type="search" placeholder="Search" aria-label="Search">
           <button class="search_button" type="submit">Search</button>
         </form>
@@ -88,6 +88,12 @@
                                   <div class="w-100 d-flex justify-content-center align-center mt-3 mb-4">
                                       <input type="password" class="login-input" name="password" placeholder="Password" minlength="6" required>
                                   </div>
+                                  <div class="w-100 d-flex remember mb-3">
+                                    <input type="checkbox" id="remember" name="remember" class="ms-5 form-check-input">
+                                    <label for="remember" class="remember-me">
+                                      Remember me
+                                    </label>
+                                  </div>
                                   <div class="w-100 d-flex justify-content-center mt-2 mb-4">
                                       <button type="submit" class="login-button" name="login">Log in</button>
                                   </div>
@@ -125,8 +131,13 @@
                           </div>
                           @endif
                           <div class="d-flex w-100 flex-column justify-content-center align-items-center h-75 ">
-                              <form action="{{url('/register')}}" method="POST" class="form">
+                              <form action="{{url('/register')}}" method="POST" class="form" enctype="multipart/form-data">
                                   @csrf
+                                  <div class="w-100 d-flex justify-content-center align-items-center flex-column align-center mt-3">
+                                    <img id="imagePreview" src="#" alt="Image preview" style="display: none; width: 45%; height: 45%; border:3#808080px solid #808080; border-radius: 5px;" class="mb-3 mt-0"/>
+                                    <input type="file" id="imageInput" name="avatar_url" class="img-input">
+                                    <label for="imageInput"  id="imageInputLabel" class="edit-button m-0">Insert Avatar</label>
+                                  </div>
                                   <div class="w-100 d-flex justify-content-center align-center mt-3">
                                       <input type="text" class="login-input" name="username" placeholder="Username" required autofocus>
                                   </div>
@@ -158,13 +169,12 @@
         @else
         <li class="avatar-button">
           <div class="dropdown">
-            @if(Auth::user() -> avatar_url == 0)
-              <a class="header_button" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"><img src="{{URL::asset('images/default-user.jpg') }}" alt="" style="width: 45px; height: 45px; border-radius: 50px; object-fit: inherit;"></a>
-            @else
               <a class="header_button" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"><img src="{{url (Auth::user()-> avatar_url)}}" alt="" style="width: 45px; height: 45px; border-radius: 50px; object-fit: cover;"></a>
-            @endif
             <ul class="dropdown-menu dropdown-menu-dark slim-dropdown-menu" aria-labelledby="dropdownMenuLink">
-              <li><a class="dropdown-item" href="{{ url('/account')}}">Profile</a></li>
+              @php
+                $crypt_user = Crypt::encrypt(Auth::user() -> id);
+              @endphp
+              <li><a class="dropdown-item" href="/user/{{$crypt_user}}">Profile</a></li>
               <li><a class="dropdown-item" href="{{url ('/logout')}}">Log out</a></li>
             </ul>
           </div>
@@ -173,8 +183,10 @@
       </div>
     </div>
   </nav>
+  <div>
+    @yield('content')
+  </div>
 
-  @yield('content')
 
 <div class="footer">
     <div class="socials_part mt-4 ">
@@ -237,7 +249,7 @@
                 <a href="{{url ('/track_chart')}}" class="links_button">Charts</a>
             </div>
         </div>
-          @if(Auth::check() && Auth::user()->role)
+          @if(Auth::check() && Auth::user()->role == 'admin')
           <div class="h-100 d-flex align-items-center justify-content-center">
             <a href="{{url ('/track_chart')}}" class="links_header">ADMIN</a>
           </div>
@@ -263,22 +275,52 @@
       if ($('.error-login').length > 0) {
           // Open the modal window
           $('#loginModal').modal('show');
+
       }else if($('.error-login-1').length > 0){
           $('#signupModal').modal('show');
+          
+      }else if ($('.error-login-2').length > 0){
+          $('#editModal').modal('show');
       }
+
       $('.cross').click(function () {
         // Close the modal window
         $(this).closest('.modal').modal('hide');
     });
+
+    $('.cancel-button').click(function () {
+        // Close the modal window
+        $(this).closest('.modal').modal('hide');
+    });
+
     $('.login-undertext-button').click(function () {
         // Close the modal window
         $(this).closest('.modal').modal('hide');
     });
   });
+
+  const imageInput = document.getElementById('imageInput');
+  const imagePreview = document.getElementById('imagePreview');
+  const imageInputLabel = document.getElementById('imageInputLabel');
+
+  imageInput.addEventListener('change', function(event) {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+    const fileName = event.target.files[0].name;
+
+    reader.onload = function(event) {
+      imagePreview.src = event.target.result;
+      imagePreview.style.display = 'block';
+      imageInputLabel.textContent = fileName;
+    };
+    reader.readAsDataURL(file);
+});
+    
+
 </script>
 
 
     <!-- Include the Bootstrap JavaScript file -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 
-  </html>
+</html>

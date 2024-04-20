@@ -10,7 +10,7 @@ class Artist extends Model
     use HasFactory;
     
     protected $table = 'artists';
-    public $timestamps = true;
+    public $timestamps = false;
 
     protected $fillable = [
         'name',

@@ -7,6 +7,7 @@ use App\Models\Artist;
 use App\Models\Track;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Crypt;
 
 class AlbumController extends Controller
 {
@@ -15,15 +16,17 @@ class AlbumController extends Controller
      */
     public function index()
     {
+        $user = null;
         $albums = DB::table("albums")->orderBy('name', 'desc')->paginate(12);
-        return view('album_views.albumsList', compact('albums'));
+        return view('album_views.albumsList', compact('albums', 'user'));
     }
 
     public function charts() 
     {
+        
         $albums = DB::table("albums")->select('albums.*', DB::raw('count(like_albums.id) as likes_count'))
                         ->leftJoin('like_albums', 'albums.id', '=', 'like_albums.album_id')
-                        ->groupBy('albums.id', 'albums.name' , 'albums.cover_url', 'albums.release_date', 'albums.description', 'albums.youtube_link', 'albums.spotify_link', 'albums.apple_music_link', 'albums.type', 'albums.artist_id')
+                        ->groupBy('albums.id', 'albums.name' , 'albums.cover_url', 'albums.release_date', 'albums.description', 'albums.youtube_link', 'albums.spotify_link', 'albums.apple_music_link', 'albums.type', 'albums.artist_id', 'albums.genre_id')
                         ->orderBy('likes_count', 'desc',)
                         ->paginate(10);
 
@@ -32,10 +35,10 @@ class AlbumController extends Controller
 
     public function top_3_albums()
     {
-        $albums = Album::select('albums.*', DB::raw('count(like_albums.id) as likes_count'))
-                        ->leftJoin('like_albums', 'albums.id', '=', 'albums.id')
-                        ->groupBy('albums.id', 'albums.name' , 'albums.cover_url', 'albums.release_date', 'albums.description', 'albums.youtube_link', 'albums.spotify_link', 'albums.apple_music_link', 'albums.type', 'albums.artist_id')
-                        ->orderBy('likes_count', 'desc')
+        $albums = DB::table("albums")->select('albums.*', DB::raw('count(like_albums.id) as likes_count'))
+                        ->leftJoin('like_albums', 'albums.id', '=', 'like_albums.album_id')
+                        ->groupBy('albums.id', 'albums.name' , 'albums.cover_url', 'albums.release_date', 'albums.description', 'albums.youtube_link', 'albums.spotify_link', 'albums.apple_music_link', 'albums.type', 'albums.artist_id', 'albums.genre_id')
+                        ->orderBy('likes_count', 'desc',)
                         ->limit(3)
                         ->get();
 
@@ -69,29 +72,41 @@ class AlbumController extends Controller
         if($albums->count() == 0 && $artists->count() == 1){
             $artist_id = $artists->first()->id;
             $albums = Album::select('albums.*')->where('artist_id', 'like', $artist_id)->limit(6)->get();
+            if ($albums->count() == 0){
+                return view('searchResult', compact('albums', 'artists', 'tracks', 'search'));
+            }
             $album_id = $albums->first()->id;
             if($tracks->count() == 0 && $artists->count() == 1){
                 $tracks = Track::select('tracks.*')->where('album_id', 'like', $album_id)->limit(4)->get();
             }
             // return $album;
-            return view('searchResult', compact('albums', 'artists', 'tracks'));
+            return view('searchResult', compact('albums', 'artists', 'tracks', 'search'));
         } else {
-            return view('searchResult', compact('albums', 'artists', 'tracks'));
+            return view('searchResult', compact('albums', 'artists', 'tracks', 'search'));
         }
-     
-        
-        
-        
-        // if($albums->count() == 0 && $artists->count() == 0 && $tracks->count() == 0){
-        //     return view('searchResult', compact('albums', 'artists', 'tracks'));
-        // }
-      
-        // return view('searchResult', compact('albums', 'artists', 'tracks'));
     }
 
     public function album_show(Album $album) {
         $tracks = DB::table('tracks')->where('album_id', $album->id)->get();
         return view('album_views.albumShow', compact('album', 'tracks'));
+    }
+
+    public function show_album($crypt_album)
+    {
+        $cryptId = Crypt::decrypt($crypt_album);
+        $album = Album::find($cryptId);
+
+        $genre = DB::table('genres')->where('id', $album->genre_id)->first();
+
+        $artistId = $album->artist_id;
+        $albums = Album::where('artist_id', $artistId)
+                ->where('id', '!=', $album->id)
+                ->take(2)
+                ->get();
+
+        $tracks = DB::table('tracks')->where('album_id', $album->id)->get();
+        $comments = DB::table('comment_albums')->where('album_id', $album->id)->get();
+        return view('album_views.albumInfo', compact('album', 'comments', 'tracks', 'genre', 'albums'));
     }
 
     /**
@@ -133,10 +148,7 @@ class AlbumController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Album $album)
-    {
-        return view('albums.show', compact('album'));
-    }
+
 
     /**
      * Show the form for editing the specified resource.

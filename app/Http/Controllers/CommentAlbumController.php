@@ -18,9 +18,15 @@ class CommentAlbumController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
-    {
-        
+    public function save_comment(Request $request)
+    {   
+        $request->validate([
+            'content' => 'required',
+            'user_id' => 'required',
+            'album_id' => 'required',
+        ]);
+        CommentAlbum::create($request->all());
+        return redirect()->back();
     }
 
     /**

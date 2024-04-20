@@ -7,7 +7,7 @@ use App\Models\Artist;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Track;
-
+use Illuminate\Support\Facades\Crypt;
 
 class ArtistController extends Controller
 {
@@ -16,8 +16,9 @@ class ArtistController extends Controller
      */
     public function index()
     {
+        $user = null;
         $artists = DB::table("artists")->orderBy('name', 'desc')->paginate(12);
-        return view('artist_views.artistsList', compact('artists'));
+        return view('artist_views.artistsList', compact('artists', 'user'));
     }
 
     public function charts() 
@@ -121,20 +122,22 @@ class ArtistController extends Controller
         return redirect()->route('artists.index');
     }
 
-    public function show_artist (Artist $artist)
+    public function show_artist ($crypt_artist)
     {
+        $cryptId = Crypt::decrypt($crypt_artist);
+
+        $artist = Artist::find($cryptId);
+
         $comments = DB::table('comment_artists')->where('artist_id', $artist->id)->get();
 
         $albums = DB::table('albums')->where('artist_id', $artist->id)
                     ->select('albums.*', DB::raw('count(like_albums.id) as likes_count'))
                     ->leftJoin('like_albums', 'albums.id', '=', 'like_albums.album_id')
-                    ->groupBy('albums.id', 'albums.name', 'albums.cover_url', 'albums.release_date', 'albums.artist_id', 'albums.description', 'albums.youtube_link', 'albums.spotify_link', 'albums.apple_music_link', 'albums.type')
+                    ->groupBy('albums.id', 'albums.name', 'albums.cover_url', 'albums.release_date', 'albums.artist_id', 'albums.description', 'albums.youtube_link', 'albums.spotify_link', 'albums.apple_music_link', 'albums.type', 'albums.genre_id')
                     ->orderBy('likes_count', 'desc')
                     ->limit(3)
                     ->get();
-
-        
-
+                    
         $tracks = DB::table('tracks as t')
                     ->select('t.*', DB::raw('count(lt.id) as likes_count'))
                     ->leftJoin('like_tracks as lt', 't.id', '=', 'lt.track_id')
@@ -146,23 +149,7 @@ class ArtistController extends Controller
                     ->groupBy('t.id', 't.name', 't.time', 't.youtube_link', 't.spotify_link', 't.apple_music_link', 't.album_id', 't.lyrics', 't.explicit')
                     ->orderBy('likes_count', 'desc')
                     ->limit(4)
-                    ->get();
-
-
-
-        if(count($comments) == 0 && count($albums) == 0 && count($tracks) == 0){
-            $comments= 'NO COMMENTS';
-            $albums= 'NO ALBUMS BY THIS ARTIST';
-            $tracks= 'NO TRACKS BY THIS ARTIST';
-            return view('artist_views.artistInfo', compact('artist', 'comments', 'albums','tracks'));
-        }elseif(count($comments) == 0 && count($tracks) == 0)
-        {
-            $comments= 'NO COMMENTS';
-            $tracks= 'NO TRACKS BY THIS ARTIST';
-            return view('artist_views.artistInfo', compact('artist', 'comments', 'albums','tracks'));
-        }
-        
-
+                    ->get(); 
 
         return view('artist_views.artistInfo', compact('artist','tracks', 'comments', 'albums',));
         // return $tracks;

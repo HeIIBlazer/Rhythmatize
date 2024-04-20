@@ -18,9 +18,15 @@ class CommentTrackController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
-    {
-        //
+    public function save_comment(Request $request)
+    {   
+        $request->validate([
+            'content' => 'required',
+            'user_id' => 'required',
+            'track_id' => 'required',
+        ]);
+        CommentTrack::create($request->all());
+        return redirect()->back();
     }
 
     /**
