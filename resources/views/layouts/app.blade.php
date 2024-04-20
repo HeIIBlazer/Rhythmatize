@@ -275,13 +275,24 @@
       if ($('.error-login').length > 0) {
           // Open the modal window
           $('#loginModal').modal('show');
+
       }else if($('.error-login-1').length > 0){
           $('#signupModal').modal('show');
+          
+      }else if ($('.error-login-2').length > 0){
+          $('#editModal').modal('show');
       }
+
       $('.cross').click(function () {
         // Close the modal window
         $(this).closest('.modal').modal('hide');
     });
+
+    $('.cancel-button').click(function () {
+        // Close the modal window
+        $(this).closest('.modal').modal('hide');
+    });
+
     $('.login-undertext-button').click(function () {
         // Close the modal window
         $(this).closest('.modal').modal('hide');
@@ -312,4 +323,4 @@
     <!-- Include the Bootstrap JavaScript file -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 
-  </html>
+</html>

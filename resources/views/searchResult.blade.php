@@ -87,20 +87,23 @@
                                     $track = $tracks[$j];
                                     $album = \App\Models\Album::find($track->album_id); 
                                     $artist = \App\Models\Artist::find($album->artist_id);
+
                                     $crypt_track = Crypt::encrypt($track->id);
                                     $crypt_artist = Crypt::encrypt($artist->id);
                                 @endphp
-                                <div class="track-item">
-                                    <div>
-                                        <img src="{{url ($album->cover_url)}}" alt="" style="width: 100px; height: 100px; border-radius: 5px; object-fit: cover;">
+                                <a href="/track/{{$crypt_track}}" class="text-decoration-none">
+                                    <div class="track-item">
+                                        <div>
+                                            <img src="{{url ($album->cover_url)}}" alt="" style="width: 100px; height: 100px; border-radius: 5px; object-fit: cover;">
+                                        </div>
+                                        <div class="track-info w-50 pt-4">
+                                            <a href="/track/{{$crypt_track}}" class="text-decoration-none"><span class="chart-text-big">{{ $track -> name }}</span></a>
+                                        </div>
+                                        <div class="w-25 pt-4">
+                                            <a href="/artist/{{$crypt_artist}}" class="text-decoration-none"><span class="chart-small-text">{{ $artist -> name }}</span></a>
+                                        </div>
                                     </div>
-                                    <div class="track-info w-50 pt-4">
-                                        <a href="/track/{{$crypt_track}}" class="text-decoration-none"><span class="chart-text-big">{{ $track -> name }}</span></a>
-                                    </div>
-                                    <div class="w-25 pt-4">
-                                        <a href="/artist/{{$crypt_artist}}" class="text-decoration-none"><span class="chart-small-text">{{ $artist -> name }}</span></a>
-                                    </div>
-                                </div>
+                                </a>
                                 <hr class="me-3">
                             @endif
                         @endfor

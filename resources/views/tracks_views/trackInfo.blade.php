@@ -48,7 +48,7 @@
         </div>
         @endif
         <div class="mb-3">
-            <h3 class="artists-lower-text"><a href="/album/{{$album -> id}}">{{$album -> name}}</a> | <a href="/artist/{{$crypt_artist}}" class="white-text text-decoration-none">{{$artist -> name}}</a></h3>
+            <a href="/artist/{{$crypt_artist}}" class="white-text text-decoration-none"><h3 class="artists-lower-text">Track length: {{$track -> time}} | {{$artist -> name}}</a></h3>
         </div>
         <div class="d-flex flex-row justify-content-center align-content-center mb-3">
             @if ($like == 0) 
@@ -97,8 +97,58 @@
             </div>
         </div>
 
-        <div class="background-block">
+        <div class="w-100 mt-3 mb-0">
+            <iframe style="border-radius:12px; margin-bottom: 0px; height: 80px; box-shadow: 10px 10px 4px #00000054;" src="https://open.spotify.com/embed/{{$modified_link}}?utm_source=generator&theme=0" width="100%" height="150" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        </div>
 
+        <div class="background-block mt-3 pb-0">
+            <div>
+                <p class="other-tracks-heading">
+                    OTHER TRACKS FROM {{$album -> name}}
+                </p>
+                <hr class="mt-0">
+            </div>
+            @if (count($other_tracks) == 0)
+            <div>
+                <p class="w-100 found-nothing">NO OTHER TRACKS FROM THIS ALBUM</p>
+                <hr>
+            </div>
+            <div class="w-100">
+                <p class="text-center mb-3">
+                    <a href="/album/{{$crypt_album}}" class="all-button">Return to album</a>
+                </p>
+            </div>
+
+
+            @else
+            <table class="w-100">
+            @foreach ($other_tracks as $tracks)
+                @php
+                    $tracks_likes = DB::table('like_tracks')
+                        ->where('like_tracks.track_id', $tracks->id)
+                        ->count();
+
+                    $crypt_track = Crypt::encrypt($tracks->id);
+                @endphp
+                <tr style="border-bottom: white solid 1px">
+                    <td style="width: 85%:" class="table-separete-tracks">
+                        <a href="/track/{{$crypt_track}}" class="text-decoration-none"><span class="other-tracks">{{$tracks -> name}}</span></a>
+                    </td>
+                    <td style="width: 15%" class="table-separete-tracks">
+                        <div class="chart-like w-100 d-flex justify-content-center">
+                            <img src="{{asset('images/like.png')}}" alt="" style="width: 17px; height: 17px; margin-right: 4px;">
+                    <span class="track-like-text">{{$tracks_likes}}</span>
+                        </div>
+                    </td>
+                </tr>
+            @endforeach
+            </table>
+            <div>
+                <p class="text-center mb-3 mt-3">
+                    <a href="/album/{{$crypt_album}}" class="all-button text-center">View all tracks from {{$album -> name}}</a>
+                </p>
+            </div>
+            @endif
         </div>
 
 
@@ -140,7 +190,7 @@
                     <textarea required placeholder="Add comment" rows="4" wrap="hard" class="comment-input" readonly></textarea>
                 </form>
             @else 
-            <form data-mdb-input-init class="mt-3" action="/save_comment_album" method="post">
+            <form data-mdb-input-init class="mt-3" action="/save_comment_track" method="post">
                 @csrf
                 <input type="hidden" name="track_id" value="{{$track->id}}">
                 <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
@@ -149,26 +199,37 @@
             </form>
             @endif
         </div>
-        <div class="w-100">
-            <iframe style="border-radius:12px" src="https://open.spotify.com/embed/{{$modified_link}}?utm_source=generator&theme=0" width="100%" height="150" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-        </div>
+
     </div>
 
-    <div class="w-65 d-flex flex-column align-items-center">
-        <div class="w-100 d-flex flex-row justify-content-evenly align-content-center">
-            <div class="artist-tracks-headers w-94">
-                <div class="artist-header-line"></div>
-                <div>
-                    <h2 class="artist-tracks-header">{{$track -> name}} LYRICS</h2>
+    <div class="w-65 d-flex flex-column align-items-center pt-130 ">
+        <div class="track-lyrics-background w-100">
+            <div class="w-100 d-flex flex-row justify-content-evenly align-content-center">
+                <div class="tracks-lyrics-headers w-94">
+                    <div class="artist-header-line"></div>
+                    <div>
+                        <h2 class="artist-tracks-header">{{$track -> name}} LYRICS</h2>
+                    </div>
+                    <div class="artist-header-line"></div>
                 </div>
-                <div class="artist-header-line"></div>
             </div>
+            @if ($track -> lyrics == null || $track -> lyrics == "NO LYRICS")
+            <div>
+                <p class="no-track-lyrics w-100 white-text mt-2">
+                    THIS TRACK HAS NO LYRICS
+                </p>
+            </div>
+
+            @else
+                <div class="w-100 mt-3">
+                    <p class="track-lyrics white-text">
+                        {{$track -> lyrics}}
+                    </p>
+                </div>
+            @endif
+
         </div>
-        <div class="w-100 mt-3">
-            <p class="desc-text-1 white-text">
-                {{$track -> lyrics}}
-            </p>
-        </div>
+
         
     </div>
 </div>
@@ -199,8 +260,8 @@ textarea.addEventListener('keypress', (e) => {
 function addLineBreaks(text) {
     return text.replace(/\n/g, '<br>');
 }
-let descText = document.querySelector('.desc-text-1').textContent;
+let descText = document.querySelector('.track-lyrics').textContent;
 let textWithLineBreaks = addLineBreaks(descText);
-document.querySelector('.desc-text-1').innerHTML = textWithLineBreaks;
+document.querySelector('.track-lyrics').innerHTML = textWithLineBreaks;
 </script>
 @endsection

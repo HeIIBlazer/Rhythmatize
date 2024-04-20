@@ -814,6 +814,13 @@ body {
     color: red;
 }
 
+.error-login {
+    margin-top: 0;
+    text-align: center;
+    height: 2%;
+    color: red;
+}
+
 .img-input {
     display: none;
 }
@@ -872,6 +879,7 @@ body {
     box-shadow: 10px 10px 4px #00000054;
     color: white;
     padding: 10px;
+
 }
 
 .read-more-button {
@@ -1270,6 +1278,14 @@ hr {
     color: white;
     font-weight: 200;
     text-align: center;
+    text-decoration: none;
+    transition: ease all 0.1s;
+}
+
+.artists-lower-text:hover {
+    text-decoration: underline;
+    font-weight: 300;
+    transition: ease all 0.05s;
 }
 
 .album-cover {
@@ -1384,4 +1400,111 @@ hr {
     color: white;
     text-decoration: underline;
     transition: ease all 0.3s;
+}
+
+/* TRACK INFO PAGE */
+
+.track-like-text {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    color: white;
+    text-align: center;
+    width: 10%;
+    margin-right: 15px;
+}
+
+.other-tracks-heading {
+    font-family: ';Montserrat', sans-serif;
+    font-size: 15px;
+    color: white;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.other-tracks {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 17px;
+    font-weight: 500;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1; /* Specify the number of lines to show */
+    -webkit-box-orient: vertical;
+    color: white;
+    height: 100%;
+    max-width: 100%;
+    width: 100%;
+    transition: ease all .1s;
+    cursor: pointer;
+}
+
+.other-tracks:hover {
+    text-decoration: underline;
+    transition: ease all .1s;
+}
+
+.other-tracks-link {
+    color: white;
+    text-decoration: none;
+    font-family: 'Montserrat', sans-serif;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1; /* Specify the number of lines to show */
+    -webkit-box-orient: vertical;
+    text-align: center;
+    margin-top: 15px;
+    font-size: 17px;
+    font-weight: 500;
+}
+
+.other-tracks-link:hover {
+    text-decoration: underline;
+    transition: ease all .1s;
+}
+
+.track-lyrics-background {
+    background-color: #373737;
+    border-radius: 5px;
+    box-shadow: 10px 10px 4px #00000054;
+    padding: 20px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+.tracks-lyrics-headers {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.pt-130 {
+    padding-top: 130px;
+}
+
+.track-lyrics {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 22px;
+    color: white;
+    font-weight: 500;
+}
+
+.no-track-lyrics {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 35px;
+    color: white;
+    font-weight: 600;
+    text-align: center;
+}
+
+.found-nothing {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 18px;
+    color: white;
+    font-weight: 500;
+    text-align: center;
 }

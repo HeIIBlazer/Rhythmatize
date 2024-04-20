@@ -34,7 +34,7 @@
             <h1 class="info-header">{{$album -> name}}</h1>
         </div>
         <div class="mb-3">
-            <h3 class="artists-lower-text">{{$genre -> name}} | <a href="/artist/{{$crypt_artist}}" class="white-text text-decoration-none">{{$artist -> name}}</a></h3>
+            <a href="/artist/{{$crypt_artist}}" class="white-text text-decoration-none"><h3 class="artists-lower-text">{{$genre -> name}} | {{$artist -> name}}</a></h3>
         </div>
         <div class="d-flex flex-row justify-content-center align-content-center mb-3">
             @if ($like == 0) 
@@ -84,16 +84,27 @@
         </div>
 
         <div class="background-block">
-            <div>
-                <h2 class="desc-header">About {{$album -> name}}:</h2>
-                <hr>
-            </div>
-            <div>
-                <p class="desc-text" id="desc-text">{{$album -> description}}</p>
-            </div>
-            <button class="read-more-button m-0 p-0" data-target="#desc-text" >
-                Read more...
-            </button>
+            @if ($album -> description == 'NO INFO')
+                <div>
+                    <h2 class="desc-header">About {{$album -> name}}:</h2>
+                    <hr>
+                </div>
+                <div>
+                    <p class="w-100 found-nothing">THERE IS NO INFO ABOUT THIS ALBUM</p>
+                </div>
+            @else
+                <div>
+                    <h2 class="desc-header">About {{$album -> name}}:</h2>
+                    <hr>
+                </div>
+                <div>
+                    <p class="desc-text" id="desc-text">{{$album -> description}}</p>
+                </div>
+                <button class="read-more-button m-0 p-0" data-target="#desc-text" >
+                    Read more...
+                </button>
+            @endif
+
         </div>
 
         <div class=" w-100 background-block mt-4 p-2">
@@ -101,6 +112,17 @@
                 <h2 class="desc-header">Other {{$artist -> name}} albums:</h2>
                 <hr>
             </div>
+            @if ( $albums->count() == 0)
+            <div>
+                <p class="w-100 found-nothing">THERE IS NO OTHER ALBUMS</p>
+                <hr>
+            </div>
+            <div class="w-100">
+                <p class="text-center mb-3">
+                    <a href="/album/{{$crypt_album}}" class="all-button">Return to artist</a>
+                </p>
+            </div>
+            @else
             <div class=" w-100 d-flex flex-row justify-content-evenly mb-3">
                 @foreach ($albums as $artist_album)
                 @php
@@ -123,6 +145,7 @@
             <div class="w-100 d-flex justify-content-center">
                 <a href="/all_albums/{{$crypt_artist}}" class="all-button">View all {{$artist -> name}} albums</a>
             </div>
+            @endif
         </div>
 
 

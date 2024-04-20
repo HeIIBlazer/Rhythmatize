@@ -74,7 +74,7 @@
                         <img src="{{url ($artist -> picture_url)}}" alt="" style="width: 250px; height: 250px; border-radius: 5px; margin-top:10px; padding: 10px 10px; object-fit:cover;">
                     </div>
                     <div class="w-100 d-flex justify-content-center  text-center white-text">
-                        <p class="text-truncate  text-Montserrat-album">{{$artist -> name}}</p>
+                        <p class="text-truncate text-Montserrat-album">{{$artist -> name}}</p>
                     </div>
                 </a>
             @endforeach
@@ -200,7 +200,7 @@
                         </div>
                     </div>
                         @if (session()->has('error'))
-                            <div class="alert error-login">
+                            <div class="alert error-login-2">
                                 {{session()->get('error')}}
                             </div>
                         @endif
@@ -302,10 +302,6 @@ const readMoreButtons = document.querySelectorAll('.read-more-button');
     });
 });
 
-
-
-
-
 document.addEventListener('DOMContentLoaded', function() {
     var descText = document.querySelector('.desc-text');
     var readMoreButton = document.querySelector('.read-more-button');
@@ -355,8 +351,6 @@ cancel.addEventListener('click',() => {
 
     document.getElementById("edit").reset();
 }); 
-
-
 
 </script>
     

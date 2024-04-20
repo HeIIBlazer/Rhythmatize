@@ -200,8 +200,6 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
 
-        // $2y$12$8g82HaQoJ0mtHAAQK7X1h.MpzZFC9TPx9jRPdMso0WI7WrHiJaqsS
-
         $request->validate([
             'username' => '',
             'email' => '',
@@ -319,12 +317,13 @@ class UserController extends Controller
                         'email' => $data['email']
                     ]);
                     $file = $request->file('avatar_url');
-                    $filebannersave = $request->file('banner_url');
                     if ($filename) {
                         $file->move('../public/images/avatars/', $filename);
                     }
-                    if ($filebannersave){
-                        $file->move('../public/images/banners/', $filebanner);
+                    
+                    $filebannersave = $request->file('banner_url');
+                    if ($filebanner) {
+                        $filebannersave->move('../public/images/banners/', $filebanner);
                     }
 
                     return redirect()->back();
@@ -381,11 +380,9 @@ class UserController extends Controller
         } else {
             return redirect()->back()->with('error', 'Incorrect current password');
         }
-        // return redirect()->back();
-
 
     }
-
+        
 
     /**
      * Remove the specified resource from storage.

@@ -166,10 +166,10 @@
                             $crypt_track = Crypt::encrypt($track->id);
                             $crypt_album = Crypt::encrypt($album->id);
                         @endphp
-
+                        <a href="/track/{{$crypt_track}}" class="text-decoration-none">
                         <div class="d-flex flex-row track-artist">
 
-                            <div class="d-flex justify-content-center align-items-center">
+                            <div class="d-flex justify-content-center align-items-center h-100">
                                 <img src="{{url ($album -> cover_url)}}" alt="" class="track-cover">
                             </div>
 
@@ -189,6 +189,7 @@
                                 </div>
                             </div>
                         </div>
+                    </a>
                     @endforeach
                 </div>
             @endforeach
