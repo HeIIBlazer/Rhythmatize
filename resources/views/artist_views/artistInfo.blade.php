@@ -6,6 +6,8 @@
                 ->where('like_artists.artist_id', $artist->id)
                 ->count();
 
+    $crypt_artist = Crypt::encrypt($artist->id);
+
     if (Auth::user() != null) {
         $like = DB::table('like_artists')
             ->where('like_artists.artist_id', $artist->id)
@@ -158,7 +160,6 @@
             @foreach ($tracks->chunk(2) as $chunk)
                 <div class=" d-flex flex-row justify-content-between align-items-center mb-4 w-100">
                     @foreach ($chunk as $track)
-
                         @php
                             $album = DB::table('albums')
                                         ->where('albums.id', $track->album_id)
@@ -194,7 +195,7 @@
                 </div>
             @endforeach
         </div>
-        <a class="artist-button flex-wrap" href="">Show all tracks by {{$artist -> name}}</a>
+        <a class="artist-button flex-wrap" href="/all_tracks/{{$crypt_artist}}">Show all tracks by {{$artist -> name}}</a>
         @endif
 
         <div class="w-100 d-flex flex-row justify-content-evenly align-content-center">
