@@ -12,7 +12,6 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\LikeArtistController;
 use App\Http\Controllers\LikeAlbumController;
 use App\Http\Controllers\LikeTrackController;
-use App\Models\CommentArtist;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,6 +35,7 @@ Route::get('/album_chart', [AlbumController::class, 'charts']);
 Route::get('/last_added_albums', [AlbumController::class, 'last_added']);
 Route::get('/album/{album}', [AlbumController::class, 'show_album']);
 Route::post('/save_comment_album', [CommentAlbumController::class, 'save_comment'])->name('save_comment');
+Route::get('/all_albums/{artist}', [AlbumController::class, 'all_albums']);
 
 
 // ARTISTS

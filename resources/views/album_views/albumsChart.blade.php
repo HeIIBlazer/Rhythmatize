@@ -22,6 +22,11 @@
                             ->count();
             $crypt_album = Crypt::encrypt($album->id);
             $crypt_artist = Crypt::encrypt($artist->id);
+
+            $album_liked = DB::table('like_albums')
+                            ->where('like_albums.album_id', $album->id)
+                            ->where('like_albums.user_id', Auth::id())
+                            ->count();
         @endphp
             <tr style="border-bottom: white solid 1px" >
                 <td style="width: 6%;" class="table-separete">
@@ -50,13 +55,18 @@
                 </td>
                 <td style="width:8%;" class="table-separete">
                     <div class="chart-like w-100 d-flex">
+                        @if ($album_liked ==1)
+                            <img src="{{asset('images/liked.png')}}" alt="" style="width: 22px; height: 22px; margin-right: 6px;">
+                        @else
                         <img src="{{asset('images/like.png')}}" alt="" style="width: 22px; height: 22px; margin-right: 6px;">
+                        @endif
                         <span class="chart-like-text">{{$album_likes}}</span>
                     </div>
                 </td>
             </tr>
             @php
                 $i++;
+                $album_liked = 0;
             @endphp
 
             @endforeach

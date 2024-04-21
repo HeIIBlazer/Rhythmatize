@@ -166,6 +166,11 @@
                                         ->first();
                             $crypt_track = Crypt::encrypt($track->id);
                             $crypt_album = Crypt::encrypt($album->id);
+
+                            $track_liked = DB::table('like_tracks')
+                                        ->where('like_tracks.track_id', $track->id)
+                                        ->where('like_tracks.user_id', Auth::id())
+                                        ->count();
                         @endphp
                         <a href="/track/{{$crypt_track}}" class="text-decoration-none">
                         <div class="d-flex flex-row track-artist">
@@ -182,7 +187,11 @@
                                 </div>
                                 <div class="d-flex flex-row flex-wrap align-content-end" style="padding: 10px 10px; height:45%;">
                                     <div class="d-flex flex-column justify-content-around">
-                                        <img src="{{asset('images/like.png')}}" alt="" style="width: 25px; height: 25px; margin-right: 6px;">
+                                        @if ($track_liked == 1)
+                                            <img src="{{asset('images/liked.png')}}" alt="" style="width: 25px; height: 25px; margin-right: 6px;">
+                                        @else
+                                            <img src="{{asset('images/like.png')}}" alt="" style="width: 25px; height: 25px; margin-right: 6px;">
+                                        @endif
                                     </div>
                                     <div>
                                         <span style="color: white; font-size:25px; vertical-align: bottom;"> {{$track -> likes_count}} </span>
@@ -233,7 +242,7 @@
                 </div>
             @endforeach
         </div>
-        <a class="artist-button-album flex-wrap" href="">Show all albums by {{$artist -> name}}</a>
+        <a class="artist-button-album flex-wrap" href="/all_albums/{{$crypt_artist}}">Show all albums by {{$artist -> name}}</a>
     </div>
         @endif
 </div>

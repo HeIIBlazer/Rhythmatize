@@ -1007,11 +1007,13 @@ hr {
     padding: 5px 10px;
     padding-top: 10px;
     font-weight: 600;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
     max-width: 245px;
     height: 40px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1; /* Specify the number of lines to show */
+    -webkit-box-orient: vertical;
 }
 
 .track-cover {
@@ -1531,7 +1533,13 @@ hr {
     color: white;
     text-align: center;
     margin-top: 10px;
+    transition: ease all 0.3s;
+}
+
+
+.all-header:hover {
     text-decoration: underline;
+    transition: ease all 0.3s;
 }
 
 .all-button-pressed {
