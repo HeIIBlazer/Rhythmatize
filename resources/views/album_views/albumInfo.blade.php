@@ -65,19 +65,19 @@
 
         <div class="w-100 d-flex flex-row justify-content-center mb-4">
             <div class="w-25 h-25 d-flex justify-content-center">           
-                <a href="{{$album -> spotify_link}}">
+                <a href="{{$album -> spotify_link}}" target=”_blank”>
                     <img src="{{asset('images/links_images/spotify.png')}}" alt="" style="width: 36px; height:36px;">
                 </a>
             </div>
 
             <div class="w-25 h-25 d-flex justify-content-center">           
-                <a href="{{$album -> apple_music_link}}">
+                <a href="{{$album -> apple_music_link}}" target=”_blank”>
                     <img src="{{asset('images/links_images/apple.png')}}" alt="" style="width: 36px; height:36px;">
                 </a>
             </div>
 
             <div class="w-25 h-25 d-flex justify-content-center">           
-                <a href="{{$album -> youtube_link}}">
+                <a href="{{$album -> youtube_link}}" target=”_blank”>
                     <img src="{{asset('images/links_images/youtube.png')}}" alt="" style="width: 36px; height:36px;">
                 </a>
             </div>

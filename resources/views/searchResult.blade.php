@@ -81,7 +81,7 @@
             <div class="tracks-container w-100" style="display: flex; flex-wrap: wrap;">
                 @for ($i = 0; $i < $tracks->count(); $i += 2)
                     <div class="column">
-                        @for ($j = $i; $j < $i + 2; $j += 1)
+                        @for ($j = $i; $js < $i + 2; $j += 1)
                             @if ($j < $tracks->count())
                                 @php
                                     $track = $tracks[$j];

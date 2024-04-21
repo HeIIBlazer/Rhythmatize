@@ -680,6 +680,11 @@ body {
     color: white;
     text-decoration: none;
     transition: ease all .10s;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1; /* Specify the number of lines to show */
+    -webkit-box-orient: vertical;
     }
     
     .chart-small-text:hover {

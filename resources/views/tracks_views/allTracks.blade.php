@@ -1,4 +1,4 @@
-@extends('layouts.app', ['title' => 'All Tracks By'])
+@extends('layouts.app', ['title' => 'All Tracks By '.$artist -> name])
 
 @section('content')
     @php
