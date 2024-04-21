@@ -3,10 +3,11 @@
 @section('content')
     @php
         $crypt_artist = Crypt::encrypt($artist -> id);
+
     @endphp
     <div class="container">
         <div class="w-100">
-            <h2 class="w-100 all-header text-uppercase">{{$artist -> name}} TRACKS</h2>
+            <a href="/artist/{{$crypt_artist}}" class="text-decoration-none"><h2 class="w-100 all-header text-uppercase">{{$artist -> name}} TRACKS</h2></a>
         </div>
 
         <div class="w-100 d-flex flex-row justify-content-center mb-3 mt-3">

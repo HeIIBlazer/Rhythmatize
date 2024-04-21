@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\DB;
 
 
 
@@ -383,7 +384,6 @@ class UserController extends Controller
         }
     }
 
-
     /**
      * Remove the specified resource from storage.
      */
@@ -391,5 +391,15 @@ class UserController extends Controller
     {
         $user->delete();
         return redirect('/users');
+    }
+
+    public function dashboard()
+    {
+        if(auth()->user()->role == 'admin'){
+            $artists = DB::table('artists')->get();
+            return view('admin_views.dashboard', compact('artists'));
+        } else {
+            return redirect()->back();
+        }
     }
 }

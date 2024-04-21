@@ -4,6 +4,8 @@
 <head>
 
   <link rel="icon" style="width: 50px; height: 50px" type="image/x-icon" href="/images/logo_title.png">
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
   <title>
     @isset($title)
@@ -251,7 +253,7 @@
         </div>
           @if(Auth::check() && Auth::user()->role == 'admin')
           <div class="h-100 d-flex align-items-center justify-content-center">
-            <a href="{{url ('/track_chart')}}" class="links_header">ADMIN</a>
+            <a href="{{url ('/admin-panel')}}" class="links_header">ADMIN</a>
           </div>
           @else
           @endif
