@@ -17,7 +17,7 @@ class AlbumController extends Controller
     public function index()
     {
         $user = null;
-        $albums = DB::table("albums")->orderBy('name', 'desc')->paginate(12);
+        $albums = DB::table("albums")->orderBy('name', 'asc')->paginate(12);
         return view('album_views.albumsList', compact('albums', 'user'));
     }
 
@@ -182,9 +182,35 @@ class AlbumController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Album $album)
-    {
+    public function destroy(Album $album){
         $album->delete();
         return redirect()->route('albums.index');
+    }
+
+    public function all_albums($crypt_artist){
+
+        $artist_id = Crypt::decrypt($crypt_artist);
+        $artist = Artist::find($artist_id);
+
+        $albums = DB::table('albums')->where('artist_id', $artist_id)
+                ->leftJoin('like_albums as la', 'albums.id', '=', 'la.album_id')
+                ->select('albums.*', DB::raw('count(la.id) as likes_count'))
+                ->groupBy('albums.id', 'albums.name', 'albums.cover_url', 'albums.release_date', 'albums.description', 'albums.youtube_link', 'albums.spotify_link', 'albums.apple_music_link', 'albums.type', 'albums.artist_id', 'albums.genre_id')
+                ->orderBy('likes_count', 'desc')
+                ->limit(3)
+                ->get();
+
+        $albumsIds = [];
+        $albumsIds = $albums->pluck('id')->toArray();
+
+        $all_albums = DB::table('albums')->where('artist_id', $artist_id)
+                    ->leftJoin('like_albums as la', 'albums.id', '=', 'la.album_id')
+                    ->select('albums.*', DB::raw('count(la.id) as likes_count'))
+                    ->groupBy('albums.id', 'albums.name', 'albums.cover_url', 'albums.release_date', 'albums.description', 'albums.youtube_link', 'albums.spotify_link', 'albums.apple_music_link', 'albums.type', 'albums.artist_id', 'albums.genre_id')
+                    ->whereNotIn('albums.id', $albumsIds)
+                    ->orderBy('likes_count', 'desc')
+                    ->get();
+
+        return view('album_views.allAlbums', compact('albums', 'artist', 'all_albums'));
     }
 }

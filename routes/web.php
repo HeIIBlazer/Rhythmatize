@@ -12,7 +12,6 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\LikeArtistController;
 use App\Http\Controllers\LikeAlbumController;
 use App\Http\Controllers\LikeTrackController;
-use App\Models\CommentArtist;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,6 +35,7 @@ Route::get('/album_chart', [AlbumController::class, 'charts']);
 Route::get('/last_added_albums', [AlbumController::class, 'last_added']);
 Route::get('/album/{album}', [AlbumController::class, 'show_album']);
 Route::post('/save_comment_album', [CommentAlbumController::class, 'save_comment'])->name('save_comment');
+Route::get('/all_albums/{artist}', [AlbumController::class, 'all_albums']);
 
 
 // ARTISTS
@@ -49,6 +49,7 @@ Route::post('/save_comment_artist', [CommentArtistController::class, 'save_comme
 Route::get('/track_chart', [TrackController::class, 'charts']);
 Route::get('/track/{track}', [TrackController::class, 'show_track']);
 Route::post('/save_comment_track', [CommentTrackController::class, 'save_comment'])->name('save_comment');
+Route::get('/all_tracks/{artist}', [TrackController::class, 'all_tracks']);
 
 // USER
 Route::get('/user/{user}', [UserController::class, 'show_user']);
@@ -61,7 +62,6 @@ Route::get('/liked-tracks/{user}', [UserController::class,'show_liked_tracks']);
 Route::get('/login', [AuthController::class, 'login']);
 Route::post('/login_auth', [AuthController::class, 'authenticate']);
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
-
 Route::post('/register', [UserController::class, 'store_register']);
 
 //LIKE SYSTEM

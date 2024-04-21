@@ -6,6 +6,7 @@ use App\Models\Track;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Crypt;
+use App\Models\Album;
 
 class TrackController extends Controller
 {
@@ -14,17 +15,17 @@ class TrackController extends Controller
      */
     public function index()
     {
-        return view('tracks.index');   
+        return view('tracks.index');
     }
 
-    public function charts() 
+    public function charts()
     {
         $user = null;
         $tracks = DB::table("tracks")->select('tracks.*', DB::raw('count(like_tracks.id) as likes_count'))
-                        ->leftJoin('like_tracks', 'track_id', '=', 'tracks.id')
-                        ->groupBy('tracks.id','tracks.name', 'tracks.time', 'tracks.spotify_link', 'tracks.youtube_link', 'tracks.apple_music_link', 'tracks.album_id', 'tracks.lyrics', 'tracks.explicit')
-                        ->orderBy('likes_count', 'desc')
-                        ->paginate(10);
+            ->leftJoin('like_tracks', 'track_id', '=', 'tracks.id')
+            ->groupBy('tracks.id', 'tracks.name', 'tracks.time', 'tracks.spotify_link', 'tracks.youtube_link', 'tracks.apple_music_link', 'tracks.album_id', 'tracks.lyrics', 'tracks.explicit')
+            ->orderBy('likes_count', 'desc')
+            ->paginate(10);
 
         return view('tracks_views.tracksChart', compact('tracks', 'user'));
     }
@@ -105,5 +106,48 @@ class TrackController extends Controller
         $track->delete();
 
         return redirect()->route('albums.show', $track->album_id);
+    }
+
+    public function all_tracks($crypt_artist)
+    {
+        $artistId = Crypt::decrypt($crypt_artist);
+        $artist = DB::table('artists')->where('id', $artistId)->first();
+        
+
+        // Get all albums by the artist
+        $albums = Album::where('artist_id', $artist -> id)->get();
+
+        $tracks = DB::table('tracks as t')
+            ->select('t.*', DB::raw('count(lt.id) as likes_count'))
+            ->leftJoin('like_tracks as lt', 't.id', '=', 'lt.track_id')
+            ->whereIn('t.album_id', function ($query) use ($artist) {
+                $query->select('albums.id')
+                    ->from('albums')
+                    ->where('albums.artist_id', $artist->id);
+            })
+            ->groupBy('t.id', 't.name', 't.time', 't.youtube_link', 't.spotify_link', 't.apple_music_link', 't.album_id', 't.lyrics', 't.explicit')
+            ->orderBy('likes_count', 'desc')
+            ->limit(3)
+            ->get();
+
+        $trackIds = [];
+        $trackIds = $tracks->pluck('id')->toArray();
+
+        $all_tracks = DB::table('tracks as t')
+            ->select('t.*', DB::raw('count(lt.id) as likes_count'))
+            ->leftJoin('like_tracks as lt', 't.id', '=', 'lt.track_id')
+            ->whereIn('t.album_id', function ($query) use ($artist) {
+                $query->select('albums.id')
+                    ->from('albums')
+                    ->where('albums.artist_id', $artist->id);
+            })
+            ->whereNotIn('t.id', $trackIds)
+            ->groupBy('t.id', 't.name', 't.time', 't.youtube_link', 't.spotify_link', 't.apple_music_link', 't.album_id', 't.lyrics', 't.explicit')
+            ->orderBy('likes_count', 'desc')
+            ->get();
+
+
+
+        return view('tracks_views.allTracks', compact('tracks', 'all_tracks', 'artist'));
     }
 }

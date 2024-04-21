@@ -1,4 +1,4 @@
-@extends('layouts.app', ['title' =>  $album -> name ])
+@extends('layouts.app', ['title' => 'All Tracks By '.$artist -> name])
 
 @section('content')
     @php
@@ -65,19 +65,19 @@
 
         <div class="w-100 d-flex flex-row justify-content-center mb-4">
             <div class="w-25 h-25 d-flex justify-content-center">           
-                <a href="{{$album -> spotify_link}}">
+                <a href="{{$album -> spotify_link}}" target=”_blank”>
                     <img src="{{asset('images/links_images/spotify.png')}}" alt="" style="width: 36px; height:36px;">
                 </a>
             </div>
 
             <div class="w-25 h-25 d-flex justify-content-center">           
-                <a href="{{$album -> apple_music_link}}">
+                <a href="{{$album -> apple_music_link}}" target=”_blank”>
                     <img src="{{asset('images/links_images/apple.png')}}" alt="" style="width: 36px; height:36px;">
                 </a>
             </div>
 
             <div class="w-25 h-25 d-flex justify-content-center">           
-                <a href="{{$album -> youtube_link}}">
+                <a href="{{$album -> youtube_link}}" target=”_blank”>
                     <img src="{{asset('images/links_images/youtube.png')}}" alt="" style="width: 36px; height:36px;">
                 </a>
             </div>
@@ -119,7 +119,7 @@
             </div>
             <div class="w-100">
                 <p class="text-center mb-3">
-                    <a href="/album/{{$crypt_album}}" class="all-button">Return to artist</a>
+                    <a href="/artist/{{$crypt_artist}}" class="all-button">Return to artist</a>
                 </p>
             </div>
             @else
@@ -167,6 +167,8 @@
                         ->where('users.id', $comment->user_id)
                         ->first();
                     $crypt_user = Crypt::encrypt($user->id);
+
+
                 @endphp
                 <div class="d-flex flex-column">
                     <div class="d-flex flex-row align-items-center mb-3" style="height: 35px">
@@ -216,6 +218,11 @@
                         ->where('like_tracks.track_id', $track->id)
                         ->count();
                     $crypt_track = Crypt::encrypt($track->id);
+
+                    $liked_tracks = DB::table('like_tracks')
+                        ->where('like_tracks.track_id', $track->id)
+                        ->where('like_tracks.user_id', Auth::id())
+                        ->count();
                 @endphp
                 <tr href="/track/{{$crypt_track}}" style="border-bottom: white solid 1px">
                         <td style="width: 5%;" class="table-separete">
@@ -252,7 +259,11 @@
                             <a href="/track/{{$crypt_track}}" class="text-decoration-none">
                                 <div class="d-flex flex-row justify-content-end">
                                     <div class="d-flex flex-row justify-content-center align-content-center align-items-center w-50">
-                                        <img src="{{asset('images/like.png')}}" alt="" style="width: 22px; height: 22px; margin-right: 6px;">
+                                        @if ($liked_tracks == 1)
+                                            <img src="{{asset('images/liked.png')}}" alt="" style="width: 22px; height: 22px; margin-right: 6px;">
+                                        @else
+                                            <img src="{{asset('images/like.png')}}" alt="" style="width: 22px; height: 22px; margin-right: 6px;">
+                                        @endif
                                     </div>
                                     <div class="white-text d-flex flex-row w-25">
                                         <span style="color: white; font-size:25px;"> {{$track_likes}}</span>
@@ -263,6 +274,7 @@
                     </tr>
                 @php
                     $i++;
+                    $liked_tracks = 0;
                 @endphp
             @endforeach
             </table>

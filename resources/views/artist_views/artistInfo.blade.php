@@ -6,6 +6,8 @@
                 ->where('like_artists.artist_id', $artist->id)
                 ->count();
 
+    $crypt_artist = Crypt::encrypt($artist->id);
+
     if (Auth::user() != null) {
         $like = DB::table('like_artists')
             ->where('like_artists.artist_id', $artist->id)
@@ -56,19 +58,19 @@
 
         <div class="w-100 d-flex flex-row justify-content-center mb-4">
             <div class="w-25 h-25 d-flex justify-content-center">           
-                <a href="{{$artist-> spotify_link}}">
+                <a href="{{$artist-> spotify_link}}" target=”_blank”>
                     <img src="{{asset('images/links_images/spotify.png')}}" alt="" style="width: 36px; height:36px;">
                 </a>
             </div>
 
             <div class="w-25 h-25 d-flex justify-content-center">           
-                <a href="{{$artist-> apple_music_link}}">
+                <a href="{{$artist-> apple_music_link}}" target=”_blank”>
                     <img src="{{asset('images/links_images/apple.png')}}" alt="" style="width: 36px; height:36px;">
                 </a>
             </div>
 
             <div class="w-25 h-25 d-flex justify-content-center">           
-                <a href="{{$artist-> youtube_link}}">
+                <a href="{{$artist-> youtube_link}}" target=”_blank”>
                     <img src="{{asset('images/links_images/youtube.png')}}" alt="" style="width: 36px; height:36px;">
                 </a>
             </div>
@@ -158,13 +160,17 @@
             @foreach ($tracks->chunk(2) as $chunk)
                 <div class=" d-flex flex-row justify-content-between align-items-center mb-4 w-100">
                     @foreach ($chunk as $track)
-
                         @php
                             $album = DB::table('albums')
                                         ->where('albums.id', $track->album_id)
                                         ->first();
                             $crypt_track = Crypt::encrypt($track->id);
                             $crypt_album = Crypt::encrypt($album->id);
+
+                            $track_liked = DB::table('like_tracks')
+                                        ->where('like_tracks.track_id', $track->id)
+                                        ->where('like_tracks.user_id', Auth::id())
+                                        ->count();
                         @endphp
                         <a href="/track/{{$crypt_track}}" class="text-decoration-none">
                         <div class="d-flex flex-row track-artist">
@@ -181,7 +187,11 @@
                                 </div>
                                 <div class="d-flex flex-row flex-wrap align-content-end" style="padding: 10px 10px; height:45%;">
                                     <div class="d-flex flex-column justify-content-around">
-                                        <img src="{{asset('images/like.png')}}" alt="" style="width: 25px; height: 25px; margin-right: 6px;">
+                                        @if ($track_liked == 1)
+                                            <img src="{{asset('images/liked.png')}}" alt="" style="width: 25px; height: 25px; margin-right: 6px;">
+                                        @else
+                                            <img src="{{asset('images/like.png')}}" alt="" style="width: 25px; height: 25px; margin-right: 6px;">
+                                        @endif
                                     </div>
                                     <div>
                                         <span style="color: white; font-size:25px; vertical-align: bottom;"> {{$track -> likes_count}} </span>
@@ -194,7 +204,7 @@
                 </div>
             @endforeach
         </div>
-        <a class="artist-button flex-wrap" href="">Show all tracks by {{$artist -> name}}</a>
+        <a class="artist-button flex-wrap" href="/all_tracks/{{$crypt_artist}}">Show all tracks by {{$artist -> name}}</a>
         @endif
 
         <div class="w-100 d-flex flex-row justify-content-evenly align-content-center">
@@ -232,7 +242,7 @@
                 </div>
             @endforeach
         </div>
-        <a class="artist-button-album flex-wrap" href="">Show all albums by {{$artist -> name}}</a>
+        <a class="artist-button-album flex-wrap" href="/all_albums/{{$crypt_artist}}">Show all albums by {{$artist -> name}}</a>
     </div>
         @endif
 </div>
