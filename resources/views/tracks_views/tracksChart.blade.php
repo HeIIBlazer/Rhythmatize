@@ -4,11 +4,11 @@
 <div class="container">
     @php
     if ($user != null) {
-        $id = $user->id;
+        $crypt_user = Crypt::encrypt($user -> id);
         $username = $user -> username;
     }else{
-        $id = 0;
         $username = "";
+        $crypt_user = 0;
     }
     @endphp
     <div class="Header-Charts">
@@ -93,13 +93,13 @@
 
 <script>
     const currentUrl = window.location.href;
-    
-    let id = {{$id}};
+    if 
+    let crypt = "{{$crypt_user}}";
     const username ="{{$username}}";
     // Check if the URL contains a specific string (e.g. "user-albums")
     if (currentUrl.includes("liked-tracks")) {
-        if (id != 0) {
-            document.querySelector(".Header-Charts p").innerHTML = `Tracks Liked by <a href="/user/${id}" class="Header-List-1">${username}</a>`;
+        if (crypt != 0) {
+            document.querySelector(".Header-Charts p").innerHTML = `Tracks Liked by <a href="/user/${crypt}" class="Header-List-1">${username}</a>`;
             document.title = `${userName}'s liked tracks`;
         }
     }

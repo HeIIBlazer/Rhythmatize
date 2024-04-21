@@ -42,13 +42,17 @@ class UserController extends Controller
         $albums = $user->likedAlbums()->latest('like_albums.id')->paginate(12);
         return view('album_views.albumsList', compact('albums', 'user'));
     }
-    public function show_liked_artists(User $user)
+    public function show_liked_artists($crypt_user)
     {
+        $crypt = Crypt::decrypt($crypt_user);
+        $user = User::find($crypt);
         $artists = $user->likedArtists()->latest('like_artists.id')->paginate(12);
         return view('artist_views.artistsList', compact('artists', 'user'));
     }
-    public function show_liked_tracks(User $user)
+    public function show_liked_tracks($crypt_user)
     {
+        $crypt = Crypt::decrypt($crypt_user);
+        $user = User::find($crypt);
         $tracks = $user->likedTracks()->latest('like_tracks.id')->paginate(12);
         return view('tracks_views.tracksChart', compact('tracks', 'user'));
     }

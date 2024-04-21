@@ -4,10 +4,10 @@
     <div class="container">
         @php
             if ($user != null) {
-                $id = $user->id;
+                $crypt_user = Crypt::encrypt($user -> id);
                 $username = $user -> username;
             }else{
-                $id = 0;
+                $crypt_user = 0;
                 $username = "";
             }
         @endphp
@@ -30,7 +30,7 @@
                 </a>
             @if ($loop->iteration % 6 == 0 && $loop->iteration!= $loop->count)
                 </div>
-                <div class="d-flex">
+                <div class="d-flex justify-content-evenly">
             @endif
         @endforeach
     </div>
@@ -42,12 +42,12 @@
 <script>
 const currentUrl = window.location.href;
 
-let id = {{$id}};
+let crypt = "{{$crypt_user}};"
 const username ="{{$username}}";
 // Check if the URL contains a specific string (e.g. "user-albums")
 if (currentUrl.includes("liked-artists")) {
-    if (id != 0) {
-        document.querySelector(".Header-List p").innerHTML = `Artists Liked by <a href="/user/${id}" class="Header-List-1">${username}</a>`;
+    if (crypt != 0) {
+        document.querySelector(".Header-List p").innerHTML = `Artists Liked by <a href="/user/${crypt}" class="Header-List-1">${username}</a>`;
         document.title = `${userName}'s liked artists`;
     }
 }
