@@ -4,6 +4,7 @@
 <head>
 
   <link rel="icon" style="width: 50px; height: 50px" type="image/x-icon" href="/images/logo_title.png">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
   <title>
     @isset($title)
@@ -251,7 +252,7 @@
         </div>
           @if(Auth::check() && Auth::user()->role == 'admin')
           <div class="h-100 d-flex align-items-center justify-content-center">
-            <a href="{{url ('/track_chart')}}" class="links_header">ADMIN</a>
+            <a href="{{url ('/admin-panel')}}" class="links_header">ADMIN</a>
           </div>
           @else
           @endif
@@ -323,4 +324,5 @@
     <!-- Include the Bootstrap JavaScript file -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </html>

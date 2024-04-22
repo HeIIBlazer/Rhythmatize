@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\DB;
 
 
 
@@ -42,13 +43,17 @@ class UserController extends Controller
         $albums = $user->likedAlbums()->latest('like_albums.id')->paginate(12);
         return view('album_views.albumsList', compact('albums', 'user'));
     }
-    public function show_liked_artists(User $user)
+    public function show_liked_artists($crypt_user)
     {
+        $crypt = Crypt::decrypt($crypt_user);
+        $user = User::find($crypt);
         $artists = $user->likedArtists()->latest('like_artists.id')->paginate(12);
         return view('artist_views.artistsList', compact('artists', 'user'));
     }
-    public function show_liked_tracks(User $user)
+    public function show_liked_tracks($crypt_user)
     {
+        $crypt = Crypt::decrypt($crypt_user);
+        $user = User::find($crypt);
         $tracks = $user->likedTracks()->latest('like_tracks.id')->paginate(12);
         return view('tracks_views.tracksChart', compact('tracks', 'user'));
     }
@@ -379,7 +384,6 @@ class UserController extends Controller
         }
     }
 
-
     /**
      * Remove the specified resource from storage.
      */
@@ -387,5 +391,17 @@ class UserController extends Controller
     {
         $user->delete();
         return redirect('/users');
+    }
+
+    public function dashboard()
+    {
+        if(auth()->user()->role == 'admin'){
+            $artists = DB::table('artists')->get();
+            $albums = DB::table('albums')->get();
+            $tracks = DB::table('tracks')->get();
+            return view('admin_views.dashboard', compact('artists', 'albums', 'tracks'));
+        } else {
+            return redirect()->back();
+        }
     }
 }
