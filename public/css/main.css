@@ -1599,3 +1599,18 @@ hr {
     border-radius: 5px;
     box-shadow: 10px 10px 4px #00000054;
 }
+
+/* DASHBOARD & ADMIN */
+
+.dashboard-input {
+    width: 50%;
+    height: 50px;
+    padding: 15px;
+    border: none;
+    border-radius: 15px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    background-color: #373737;
+    color: white;
+    font-size: 25px;
+}
