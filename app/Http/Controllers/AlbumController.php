@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Crypt;
 class AlbumController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Show 12 albums per page for album list page.
      */
     public function index()
     {
@@ -21,6 +21,9 @@ class AlbumController extends Controller
         return view('album_views.albumsList', compact('albums', 'user'));
     }
 
+    /**
+     *  Show the albums in a chart.
+     */
     public function charts() 
     {
         
@@ -33,6 +36,9 @@ class AlbumController extends Controller
         return view('album_views.albumsChart', compact('albums'));
     }
 
+    /**
+     * Shows the top 3 albums, artists and tracks.
+     */
     public function top_3_albums()
     {
         $albums = DB::table("albums")->select('albums.*', DB::raw('count(like_albums.id) as likes_count'))
@@ -61,6 +67,9 @@ class AlbumController extends Controller
         return view('main', compact('albums', 'lastAdded', 'artists', 'tracks'));
     }
 
+    /**
+     * Search for albums, artists and tracks.
+     */
     public function search(Request $request)
     {
         $search = $request->input('search');
@@ -86,6 +95,9 @@ class AlbumController extends Controller
         }
     }
 
+    /**
+     * Shows info about album with the tracks from it.
+     */
     public function album_show(Album $album) {
         $tracks = DB::table('tracks')->where('album_id', $album->id)->get();
         return view('album_views.albumShow', compact('album', 'tracks'));
@@ -110,73 +122,12 @@ class AlbumController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show last added albums in album list page.
      */
-
     public function last_added()
     {
         $albums = DB::table("albums")->orderBy('id', 'desc')->paginate(12);
         return view('album_views.lastAddedAlbums', compact('albums'));
-    }
-
-    public function create()
-    {
-        
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        $request->validate([
-            'name' => 'required',
-            'cover_url' => 'required',
-            'release_date' => 'required',
-            'description' => 'required',
-            'youtube_link' => 'required',
-            'spotify_link' => 'required',
-            'apple_music_link' => 'required',
-            'type' => 'required',
-            'artist_id' => 'required',
-        ]);
-
-        Album::create($request->all());
-        return redirect()->route('albums.index');
-    }
-
-    /**
-     * Display the specified resource.
-     */
-
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Album $album)
-    {
-        return view('albums.edit', compact('album'));
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Album $album)
-    {
-        $request->validate([
-            'name' => 'required',
-            'cover_url' => 'required',
-            'release_date' => 'required',
-            'description' => 'required',
-            'youtube_link' => 'required',
-            'spotify_link' => 'required',
-            'apple_music_link' => 'required',
-            'type' => 'required',
-            'artist_id' => 'required',
-        ]);
-
-        $album->update($request->all());
-        return redirect()->route('albums.index');
     }
 
     /**
@@ -187,6 +138,10 @@ class AlbumController extends Controller
         return redirect()->route('albums.index');
     }
 
+
+    /**
+     * Show all albums for one artist.
+     */
     public function all_albums($crypt_artist){
 
         $artist_id = Crypt::decrypt($crypt_artist);
