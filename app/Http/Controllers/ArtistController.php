@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Track;
 use Illuminate\Support\Facades\Crypt;
+use App\Models\Album;
 
 class ArtistController extends Controller
 {
@@ -113,14 +114,7 @@ class ArtistController extends Controller
         return redirect()->route('artists.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Artist $artist)
-    {
-        $artist->delete();
-        return redirect()->route('artists.index');
-    }
+
 
     public function show_artist ($crypt_artist)
     {
@@ -152,6 +146,79 @@ class ArtistController extends Controller
                     ->get(); 
 
         return view('artist_views.artistInfo', compact('artist','tracks', 'comments', 'albums',));
-        // return $tracks;
+    }
+
+    /**
+     * Deletes artist, comments and likes
+     */
+    public function delete_artist($crypt_artist)
+    {
+        $artist_id = Crypt::decrypt($crypt_artist);
+
+        $albums = DB::table('albums')->where('artist_id', $artist_id)->get();
+
+        if  ($albums->count() != 0){
+            foreach($albums as $album)
+            {
+                
+                $tracks = DB::table('tracks')->where('album_id', $album->id)->get();
+                if ($tracks->count() != 0){
+                    foreach($tracks as $track)
+                    {
+                        $comments = DB::table('comment_tracks')->where('track_id', $track->id)->get();
+                        if ($comments->count() != 0){
+                            foreach($comments as $comment)
+                            {
+                                $comment->delete();
+                            }
+                        }
+
+                        $likes = DB::table('like_tracks')->where('track_id', $track->id)->get();
+                        if ($likes->count() != 0){
+                            foreach($likes as $like)
+                            {
+                                $like->delete();
+                            }
+                        }
+
+                        $track_delete = Track::find($track->id)->delete();
+                    }
+                }
+
+                $comments = DB::table('comment_albums')->where('album_id', $album->id)->get();
+                foreach($comments as $comment)
+                {
+                    $comment->delete();
+                }
+
+                $likes = DB::table('like_albums')->where('album_id', $album->id)->get();
+                foreach($likes as $like)
+                {
+                    $like->delete();
+                }
+
+                $album_delete = Album::find($album->id)->delete();
+            }
+        }
+
+        $comments = DB::table('comment_artists')->where('artist_id', $artist_id)->get();
+        foreach($comments as $comment)
+        {
+            $comment->delete();
+        }
+
+        $likes = DB::table('like_artists')->where('artist_id', $artist_id)->get();
+        foreach($likes as $like)
+        {
+            $like_delete = 
+        }
+
+        $artist = Artist::find($artist_id);
+
+        $artist->delete();
+
+        return redirect()->back();
     }
 }
+
+

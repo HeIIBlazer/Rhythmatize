@@ -1640,3 +1640,87 @@ hr {
     color: black;
     transition: ease all 0.3s;
 }
+
+.confirmation-header {
+    color: white;
+    text-align: center;
+    font-size: 35px;
+    font-family: 'audiowide', sans-serif;
+}
+
+.confirmation-text {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 25px;
+    color: #837F7F;
+    text-align: center;
+    font-weight: 600;
+}
+
+.save-button-confirmation {
+    background-color: transparent;
+    border: 2px solid green;
+    border-radius: 15px;
+    font-size: 20px;
+    color: green;
+    font-family: 'audiowide', sans-serif;
+    width: 30%;
+    display: flex;
+    justify-content: center;
+    transition: ease all 0.3s;
+}
+
+.save-button-confirmation:hover {
+    background-color: green;
+    color: black;
+    transition: ease all 0.3s;
+}
+
+.cancel-button-confirmation {
+    background-color: transparent;
+    border: 2px solid red;
+    border-radius: 15px;
+    font-size: 20px;
+    color: red;
+    font-family: 'audiowide', sans-serif;
+    width: 30%;
+    display: flex;
+    justify-content: center;
+    transition: ease all 0.3s;
+}
+
+.cancel-button-confirmation:hover {
+    background-color: red;
+    color: black;
+    transition: ease all 0.3s;
+}
+
+.buttons-inside-confirm {
+    background-color: transparent;
+    border: none;
+    color: white;
+    color: green;
+    transition: ease all 0.3s;
+}
+
+.save-button-confirmation:hover .buttons-inside-confirm{
+    background-color: transparent;
+    border: none;
+    color: black;
+    transition: ease all 0.3s;
+}
+
+.buttons-inside-cancel {
+    background-color: transparent;
+    border: none;
+    color: red;
+    transition: ease all 0.3s;
+}
+
+.cancel-button-confirmation:hover .buttons-inside-cancel {
+    background-color: transparent;
+    border: none;
+    color: black;
+    transition: ease all 0.3s;
+}
+
+

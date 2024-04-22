@@ -75,3 +75,6 @@ Route::get('/unlike_track/{track}', [LikeTrackController::class, 'unlike']);
 
 // SEARCH
 Route::get('/search', [AlbumController::class, 'search']);
+
+// ADMIN PANEL
+Route::get('/delete_artist/{artist}', [ArtistController::class, 'delete_artist']);
