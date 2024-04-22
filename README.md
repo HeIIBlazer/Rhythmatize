@@ -2,7 +2,10 @@
 
 <p align="center">Rhythmize is a music-centric website that serves as a hub for music enthusiasts and fans. It offers a comprehensive database of artists and their music, complete with links to various music streaming services. Visitors can access song lyrics, detailed artist information, and explore the rich world of music, all in one convenient platform.</p>
 
-<hr>
+## AUTHORS
+- [Daniil Vassiljev](https://github.com/HeIIBlazer) - backend & frontend
+- [Daniil Divissenko](https://github.com/ayayaa-dev) - design & frontend
+
 
 <h2 align="center">USED TECHNOLOGIES:</h2>
 
@@ -13,7 +16,7 @@
 - JavaScript - for frontend
 - HTML - for frontend
 
-<hr>
+
 <h1 align="center">HOW TO RUN PROJECT:</h1>
 
 ## Prerequisites
@@ -22,10 +25,10 @@ To run this project, you must have the following installed on your system:
 
 - composer
   - [Download Composer](https://getcomposer.org/download/)
+  
 - xampp
   - [Download Xampp](https://www.apachefriends.org/download.html)
 
-<hr>
 
 ## Steps:
 
@@ -50,7 +53,6 @@ To run this project, you must have the following installed on your system:
     ```
 11. Open the browser and go to `http://localhost:8000/`.
 12. You can now view the website.
-<hr>
 
 ## Admin & User Credentials:
 
@@ -63,7 +65,7 @@ To run this project, you must have the following installed on your system:
   - Email: user@test.com
   - Password: User123!
 
-<hr>
+
 
 ## Features:
 
