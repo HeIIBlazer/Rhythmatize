@@ -26,13 +26,11 @@
             </div>
             <div>
                 <div>
-                    <a href="/add_artist/" id="add_artist">ADD</a>
+                    <a href="" id="add_artist">ADD</a>
                 </div>
                 <div>
-
                 </div>
                 <div>
-                    
                 </div>
             </div>
         </div>
@@ -40,15 +38,14 @@
     </div>
 
 <script>
-    $(document).ready(function() {
-        $('input[list="artist-list"]').on('input', function() {
-            var artistName = $(this).val();
-            var artistOption = $('option[value="' + artistName + '"]', this.list);
-            var artistId = artistOption.data('hidden-value');
-            var link = '/artist/' + artistId;
-            $('a[href="/add_artist/"').attr('href', link);
-            artistOption.prop('selected', true);
-        });
+$(document).ready(function() {
+    $('input[list="artist-list"]').on('change', function() {
+        var artistName = $(this).val();
+        var artistOption = $('option[value="' + artistName + '"]', this.list);
+        var artistId = artistOption.data('hidden-value');
+        var link = '/artist/' + artistId; // Declare and assign the link variable inside the change event handler
+        document.querySelector("#add_artist").innerHTML = `<a href="${link}" id="add_artist">ADD</a>`;
     });
+});
 </script>
 @endsection
