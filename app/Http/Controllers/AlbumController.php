@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Album;
 use App\Models\Artist;
 use App\Models\Track;
+use App\Models\CommentTrack;
+use App\Models\CommentAlbum;
+use App\Models\LikeTrack;
+use App\Models\LikeAlbum;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Crypt;
@@ -167,5 +171,53 @@ class AlbumController extends Controller
                     ->get();
 
         return view('album_views.allAlbums', compact('albums', 'artist', 'all_albums'));
+    }
+
+    /**
+     * Deletes Album and all it's comments, likes and tracks.
+     */
+    public function delete_album($crypt_album){
+
+        $album_id = Crypt::decrypt($crypt_album);
+
+        $album = Album::find($album_id);
+
+        $tracks = DB::table('tracks')->where('album_id', $album->id)->get();
+        if ($tracks->count() != 0) {
+            foreach ($tracks as $track) {
+                $comments = DB::table('comment_tracks')->where('track_id', $track->id)->get();
+                if ($comments->count() != 0) {
+                    foreach ($comments as $comment) {
+                        $comment_delete = CommentTrack::find($comment->id)->delete;
+                    }
+                }
+
+                $likes = DB::table('like_tracks')->where('track_id', $track->id)->get();
+                if ($likes->count() != 0) {
+                    foreach ($likes as $like) {
+                        $like_delete = LikeTrack::find($like->id)->delete();
+                    }
+                }
+
+                $track_delete = Track::find($track->id)->delete();
+            }
+        }
+        
+        $comments = DB::table('comment_albums')->where('album_id', $album->id)->get();
+        if ($comments->count() != 0) {
+            foreach ($comments as $comment) {
+                $comment_delete = CommentAlbum::find($comment->id)->delete();
+            }
+        }
+
+        if ($likes->count() != 0) {
+            foreach ($likes as $like) {
+                $like_delete = LikeAlbum::find($like->id)->delete();
+            }
+        }
+
+        $album_delete = Album::find($album->id)->delete();
+
+        return redirect()->back();
     }
 }

@@ -317,6 +317,12 @@
     reader.readAsDataURL(file);
 });
     
+$(document).ready(function() {
+    @if (session('showLoginModal'))
+      $('#loginModal').modal('show');
+    @endif
+
+});
 
 </script>
 

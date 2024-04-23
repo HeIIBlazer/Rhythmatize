@@ -45,8 +45,7 @@ class AuthController extends Controller
     
         $request->session()->regenerateToken();
     
-        return redirect('/');
+        return redirect('/')->with('showLoginModal', true);
     }
 
-    // <a href="/delete_artist/eyJpdiI6IlByZk9YTVh2ZWxGbG92WjB5eWw5dEE9PSIsInZhbHVlIjoiVHBwdHE0VlRsMk9QeEp2MHNXUlJ3dz09IiwibWFjIjoiMTFkZjRhYTUxMjMyYTZmYjlkODZiMzk5MTQyYjc2NDcwMmJmMjI4MTdmODllYWQxMzlhN2JkZmIxNDlmZGNiNyIsInRhZyI6IiJ9" class="save-button-confirmation text-decoration-none"><button type="submit" class="buttons-inside-confirm">DELETE</button></a>
 }
