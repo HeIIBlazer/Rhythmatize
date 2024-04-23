@@ -7,8 +7,16 @@ use App\Models\Artist;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Track;
-use Illuminate\Support\Facades\Crypt;
 use App\Models\Album;
+use App\Models\CommentAlbum;
+use App\Models\CommentTrack;
+use App\Models\CommentArtist;
+use App\Models\LikeAlbum;
+use App\Models\LikeArtist;
+use App\Models\LikeTrack;
+use Illuminate\Support\Facades\Crypt;
+
+
 
 class ArtistController extends Controller
 {
@@ -169,7 +177,7 @@ class ArtistController extends Controller
                         if ($comments->count() != 0){
                             foreach($comments as $comment)
                             {
-                                $comment->delete();
+                                $comment_delete = CommentTrack::find($comment->id)->delete;
                             }
                         }
 
@@ -177,7 +185,7 @@ class ArtistController extends Controller
                         if ($likes->count() != 0){
                             foreach($likes as $like)
                             {
-                                $like->delete();
+                                $like_delete = LikeTrack::find( $like->id )->delete();
                             }
                         }
 
@@ -188,13 +196,13 @@ class ArtistController extends Controller
                 $comments = DB::table('comment_albums')->where('album_id', $album->id)->get();
                 foreach($comments as $comment)
                 {
-                    $comment->delete();
+                    $comment_delete = CommentAlbum::find( $comment->id )->delete();
                 }
 
                 $likes = DB::table('like_albums')->where('album_id', $album->id)->get();
                 foreach($likes as $like)
                 {
-                    $like->delete();
+                    $like_delete = LikeAlbum::find($like->id)->delete();
                 }
 
                 $album_delete = Album::find($album->id)->delete();
@@ -204,13 +212,13 @@ class ArtistController extends Controller
         $comments = DB::table('comment_artists')->where('artist_id', $artist_id)->get();
         foreach($comments as $comment)
         {
-            $comment->delete();
+            $comment_delete = CommentArtist::find($comment->id)->delete();
         }
 
         $likes = DB::table('like_artists')->where('artist_id', $artist_id)->get();
         foreach($likes as $like)
         {
-            $like_delete = 
+            $like_delete = LikeArtist::find( $like->id )->delete();
         }
 
         $artist = Artist::find($artist_id);
