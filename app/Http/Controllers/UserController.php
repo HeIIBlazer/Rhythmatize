@@ -395,13 +395,9 @@ class UserController extends Controller
 
     public function dashboard()
     {
-        if(auth()->user()->role == 'admin'){
             $artists = DB::table('artists')->get();
             $albums = DB::table('albums')->get();
             $tracks = DB::table('tracks')->get();
             return view('admin_views.dashboard', compact('artists', 'albums', 'tracks'));
-        } else {
-            return redirect()->back();
-        }
     }
 }

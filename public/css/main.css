@@ -1663,7 +1663,7 @@ hr {
     font-size: 20px;
     color: green;
     font-family: 'audiowide', sans-serif;
-    width: 30%;
+    width: 50%;
     display: flex;
     justify-content: center;
     transition: ease all 0.3s;

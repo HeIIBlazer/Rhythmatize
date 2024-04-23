@@ -57,7 +57,7 @@ Route::post('/update/{user}', [UserController::class, 'update']);
 Route::get('/liked-albums/{user}', [UserController::class, 'show_liked_albums']);
 Route::get('/liked-artists/{user}', [UserController::class, 'show_liked_artists']);
 Route::get('/liked-tracks/{user}', [UserController::class,'show_liked_tracks']);
-Route::get('/admin-panel', [UserController::class,'dashboard']);
+
 
 //LOGIN & REGISTER
 Route::get('/login', [AuthController::class, 'login']);
@@ -77,4 +77,19 @@ Route::get('/unlike_track/{track}', [LikeTrackController::class, 'unlike']);
 Route::get('/search', [AlbumController::class, 'search']);
 
 // ADMIN PANEL
-Route::get('/delete_artist/{artist}', [ArtistController::class, 'delete_artist']);
+Route::middleware('admin')->group(function () {
+
+    Route::get('/admin-panel', [UserController::class,'dashboard']);
+
+    Route::get('/add_artist', [ArtistController::class, 'create']);
+    Route::get('/edit_artist/{artist}', [ArtistController::class, 'edit']);
+    Route::get('/delete_artist/{artist}', [ArtistController::class, 'delete_artist']);
+
+    Route::get('/add_album', [AlbumController::class, 'create']);
+    Route::get('/edit_album/{album}', [AlbumController::class, 'edit']);
+    Route::get('/delete_album/{album}', [AlbumController::class, 'delete_album']);
+
+    Route::get('/add_track', [TrackController::class, 'create']);
+    Route::get('/edit_track/{track}', [TrackController::class, 'edit']);
+    Route::get('/delete_track/{track}', [TrackController::class, 'delete_track']);
+});

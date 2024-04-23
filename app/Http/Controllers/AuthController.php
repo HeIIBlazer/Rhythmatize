@@ -37,9 +37,16 @@ class AuthController extends Controller
         }
         return redirect()->back()->with('error_login', 'Email or password is incorrect');
     }
-    public function logout()
+    public function logout(Request $request)
     {
-        auth::logout();
-        return redirect()->back();
+        Auth::logout();
+    
+        $request->session()->invalidate();
+    
+        $request->session()->regenerateToken();
+    
+        return redirect('/');
     }
+
+    // <a href="/delete_artist/eyJpdiI6IlByZk9YTVh2ZWxGbG92WjB5eWw5dEE9PSIsInZhbHVlIjoiVHBwdHE0VlRsMk9QeEp2MHNXUlJ3dz09IiwibWFjIjoiMTFkZjRhYTUxMjMyYTZmYjlkODZiMzk5MTQyYjc2NDcwMmJmMjI4MTdmODllYWQxMzlhN2JkZmIxNDlmZGNiNyIsInRhZyI6IiJ9" class="save-button-confirmation text-decoration-none"><button type="submit" class="buttons-inside-confirm">DELETE</button></a>
 }
