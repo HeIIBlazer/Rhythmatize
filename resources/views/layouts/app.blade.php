@@ -311,6 +311,7 @@
 
     reader.onload = function(event) {
       imagePreview.src = event.target.result;
+      imagePreview.style.padding = '0';
       imagePreview.style.display = 'block';
       imageInputLabel.textContent = fileName;
     };

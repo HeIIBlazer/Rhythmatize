@@ -16,8 +16,6 @@ use App\Models\LikeArtist;
 use App\Models\LikeTrack;
 use Illuminate\Support\Facades\Crypt;
 
-
-
 class ArtistController extends Controller
 {
     /**
@@ -58,36 +56,6 @@ class ArtistController extends Controller
         return view('artist_views.lastAddedArtists', compact('artists'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        return view('artists.create');
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        $request->validate([
-            'name' => 'required',
-            'picture_url' => 'required',
-            'banner_url' => 'required',
-            'description' => 'required',
-            'youtube_link' => 'required',
-            'spotify_link' => 'required',
-            'apple_music_link' => 'required',
-        ]);
-
-        Artist::create($request->all());
-        return redirect()->route('artists.index');
-    }
-
-    /**
-     * Display the specified resource.
-     */
     public function show(Artist $artist)
     {
         $comments = DB::table('comment_artists')->where('artist_id', $artist->id)->get();
@@ -154,6 +122,62 @@ class ArtistController extends Controller
                     ->get(); 
 
         return view('artist_views.artistInfo', compact('artist','tracks', 'comments', 'albums',));
+    }
+
+    /**
+     * Shows add artist form.
+     */
+    public function add_artist_page ()
+    {
+        return view('admin_views.addArtist');
+    }
+
+    /**
+     * Add new artist to database
+     */
+    public function add_artist(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'picture_url' => 'image',
+            'banner_url' => 'image',
+            'description' => 'string',
+            'youtube_link' => 'required',
+            'spotify_link' => 'required',
+            'apple_music_link' => 'required|string',
+        ]);
+    
+        $ExistArtist = Artist::where('name', $request->name)->first();
+    
+        if ($request->hasFile('picture_url')) {
+            $file = $request->file('picture_url');
+            $filename = time() . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path('images/artist_images'), $filename);
+            $picture_url = 'images/artist_images/' . $filename;
+        } else {
+            $picture_url = 'public/default/default_artist.jpg';
+        }
+        
+        if ($request->hasFile('banner_url')) {
+            $file = $request->file('banner_url');
+            $filename = time() . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path('images/banners_images'), $filename);
+            $banner_url = 'images/banners_images/' . $filename;
+        } else {
+            $banner_url = 'public/default/default_artist.jpg';
+        }
+        
+        Artist::create([
+            'name' => $request->name,
+            'description' => $request->description,
+            'youtube_link' => $request->youtube_link,
+            'spotify_link' => $request->spotify_link,
+            'apple_music_link' => $request->apple_music_link,
+            'picture_url' => $picture_url,
+            'banner_url' => $banner_url,
+        ]);
+        
+        return redirect('/admin-panel');
     }
 
     /**

@@ -81,7 +81,8 @@ Route::middleware('admin')->group(function () {
 
     Route::get('/admin-panel', [UserController::class,'dashboard']);
 
-    Route::get('/add_artist', [ArtistController::class, 'create']);
+    Route::get('/add_artist', [ArtistController::class, 'add_artist_page']);
+    Route::post('/add_artist_to_database', [ArtistController::class, 'add_artist']);
     Route::get('/edit_artist/{artist}', [ArtistController::class, 'edit']);
     Route::get('/delete_artist/{artist}', [ArtistController::class, 'delete_artist']);
 

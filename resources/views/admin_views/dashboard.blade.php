@@ -25,10 +25,10 @@
                 </datalist>
             </div>
             <div class="d-flex flex-row justify-content-center w-100">
-                <div style="width: 15%; cursor: pointer;" class="me-5">
-                    <div id="add_artist" class="dashboard-button ">
+                <div style="width: 15%;" class="me-5">
+                    <a href="/add_artist" class="dashboard-button ">
                         <p class="w-100 h-100 pt-1">ADD</p>
-                    </div>
+                    </a>
                 </div>
                 <div id="edit_artist" style="width: 15%; cursor: pointer;" class="me-5" >
                     <div class="dashboard-button me-5">
@@ -60,7 +60,7 @@
                             <div class="d-flex flex-row w-100 mt-2 mb-3 justify-content-evenly">
                                 <div id="submit_delete_artist" class="w-50">
                                     <a class="save-button-confirmation">
-                                        <button type="submit" class="buttons-inside-confirm">DELETE</button>
+                                        <button class="buttons-inside-confirm">DELETE</button>
                                     </a>
                                 </div>
                                 <div class="cancel-button-confirmation">

@@ -43,6 +43,7 @@ class UserController extends Controller
         $albums = $user->likedAlbums()->latest('like_albums.id')->paginate(12);
         return view('album_views.albumsList', compact('albums', 'user'));
     }
+    
     public function show_liked_artists($crypt_user)
     {
         $crypt = Crypt::decrypt($crypt_user);
@@ -50,6 +51,7 @@ class UserController extends Controller
         $artists = $user->likedArtists()->latest('like_artists.id')->paginate(12);
         return view('artist_views.artistsList', compact('artists', 'user'));
     }
+
     public function show_liked_tracks($crypt_user)
     {
         $crypt = Crypt::decrypt($crypt_user);
@@ -57,59 +59,7 @@ class UserController extends Controller
         $tracks = $user->likedTracks()->latest('like_tracks.id')->paginate(12);
         return view('tracks_views.tracksChart', compact('tracks', 'user'));
     }
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        $roles = array('admin', 'user');
-        return view('users.create', compact('roles'));
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        $roles = array('admin', 'user');
-        $request->validate([
-            'avatar_url' => 'required',
-            'username' => 'required',
-            'email' => 'required|sting|email|unique:users',
-            'password' => 'required|string|min:6|confirmed',
-            'password_conformation' => 'required', // 'password' => 'required|confirmed
-            'role' => 'required',
-            'avatar_url',
-            'banner_url'
-        ]);
-
-        if ($request->avatar_url == null) {
-            $avatar_url = asset('images/default_avatar.png');
-
-            User::create([
-                'avatar_url' => $avatar_url,
-                'username' => $request->username,
-                'email' => $request->email,
-                'password' => Hash::make($request->password),
-                'role' => $request->role,
-                'description' => '',
-                'banner_url' => asset('images/Default_banner.jpg'),
-            ]);
-        }
-
-        User::create([
-            'avatar_url' => $request->avatar_url,
-            'username' => $request->username,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-            'role' => 'user',
-            'description' => '',
-            'banner_url' => asset('images/Default_banner.jpg'),
-
-        ]);
-
-        return redirect('/users');
-    }
 
     public function store_register(Request $request)
     {

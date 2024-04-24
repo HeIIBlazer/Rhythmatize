@@ -469,7 +469,7 @@ body {
     color: white;
     font-size: 60px;
     margin-bottom: 0px;
-    margin-top: 10px;
+    margin-top: 15px;
     list-style-type: none;
     width: 100%;
     display: flex;
@@ -1723,4 +1723,79 @@ hr {
     transition: ease all 0.3s;
 }
 
+.add-input {
+    width: 95%;
+    height: 50px;
+    padding: 15px;
+    border: none;
+    border-radius: 15px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    background-color: #373737;
+    color: white;
+    font-size: 25px;
+    box-shadow: 10px 10px 4px #00000054;
+}
 
+.add_input_label {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 17px;
+    color: #837F7F;
+    font-weight: 500;
+}
+
+.add_textarea {
+    width: 95%;
+    height: 300px;
+    padding: 15px;
+    border: none;
+    border-radius: 15px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    background-color: #373737;
+    color: white;
+    font-size: 25px;
+    box-shadow: 10px 10px 4px #00000054;
+}
+
+.add-save-button {
+    background-color: transparent;
+    border: 2px solid green;
+    border-radius: 15px;
+    font-size: 25px;
+    color: green;
+    font-family: 'audiowide', sans-serif;
+    width: 15%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: ease all 0.3s;
+    height: 55px;
+}
+
+.add-save-button:hover {
+    background-color: green;
+    color: black;
+    transition: ease all 0.3s;
+}
+
+.add-cancel-button {
+    background-color: transparent;
+    border: 2px solid red;
+    border-radius: 15px;
+    font-size: 25px;
+    color: red;
+    font-family: 'audiowide', sans-serif;
+    width: 15%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: ease all 0.3s;
+    height: 55px;
+}
+
+.add-cancel-button:hover {
+    background-color: red;
+    color: black;
+    transition: ease all 0.3s;
+}
