@@ -147,6 +147,65 @@ class ArtistController extends Controller
     }
 
     /**
+     * Shows edit artist form.
+     */
+    public function edit_artist_page($crypt_artist){
+        $artist_id = Crypt::decrypt($crypt_artist);
+        $artist = Artist::find($artist_id);
+        return view('admin_views.editArtist', compact('artist'));
+    }
+
+    /**
+     * Updates artist info.
+     */
+
+    public function edit_artist(Request $request) {
+        $request->validate([
+            'id' => 'required',
+            'name' => 'required',
+            'picture_url' => 'image',
+            'banner_url' => 'image',
+            'description' => 'string',
+            'youtube_link' => 'required',
+            'spotify_link' => 'required',
+            'apple_music_link' => 'required|string',
+        ]);
+
+        $artist_id = Crypt::decrypt($request->id);
+        $artist = Artist::find($artist_id);
+
+        if ($request->hasFile('picture_url')) {
+            $file = $request->file('picture_url');
+            $filename = time() . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path('images/artist_images'), $filename);
+            $picture_url = 'images/artist_images/' . $filename;
+        } else {
+            $picture_url = $artist->picture_url;
+        }
+        
+        if ($request->hasFile('banner_url')) {
+            $file = $request->file('banner_url');
+            $filename = time() . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path('images/artist_banners'), $filename);
+            $banner_url = 'images/artist_banners/' . $filename;
+        } else {
+            $banner_url = $artist->banner_url;
+        }
+
+        $artist->update([
+            'name' => $request->name,
+            'description' => $request->description,
+            'youtube_link' => $request->youtube_link,
+            'spotify_link' => $request->spotify_link,
+            'apple_music_link' => $request->apple_music_link,
+            'picture_url' => $picture_url,
+            'banner_url' => $banner_url,
+        ]);
+
+        return redirect('/admin-panel');
+    }
+
+    /**
      * Deletes artist, comments, likes, albums and tracks.
      */
     public function delete_artist($crypt_artist, $user)

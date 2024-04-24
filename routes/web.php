@@ -83,7 +83,8 @@ Route::middleware('admin')->group(function () {
 
     Route::get('/add_artist', [ArtistController::class, 'add_artist_page']);
     Route::post('/add_artist_to_database', [ArtistController::class, 'add_artist']);
-    Route::get('/edit_artist/{artist}', [ArtistController::class, 'edit']);
+    Route::get('/edit_artist/{artist}', [ArtistController::class, 'edit_artist_page']);
+    Route::post('/save_edited_artist', [ArtistController::class, 'edit_artist']);
     Route::get('/delete_artist/{artist}', [ArtistController::class, 'delete_artist']);
 
     Route::get('/add_album', [AlbumController::class, 'create']);
