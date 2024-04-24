@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Crypt;
 class ArtistController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Shows List of artists.
      */
     public function index()
     {
@@ -28,6 +28,9 @@ class ArtistController extends Controller
         return view('artist_views.artistsList', compact('artists', 'user'));
     }
 
+    /**
+     * Shows Chart of artists.
+     */
     public function charts() 
     {
         $artists = DB::table("artists")->select('artists.*', DB::raw('count(like_artists.id) as likes_count'))
@@ -39,59 +42,18 @@ class ArtistController extends Controller
         return view('artist_views.artistsChart', compact('artists'));
     }
 
-    public function top_3_artists()
-    {
-    $artists = Artist::select('artists.*', DB::raw('count(like_artists.id) as likes_count'))
-                    ->leftJoin('like_artists', 'artists.id', '=', 'like_artists.artist_id')
-                    ->groupBy('artists.id', 'artists.name', 'artists.picture_url', 'artists.banner_url', 'artists.description', 'artists.youtube_link', 'artists.spotify_link', 'artists.apple_music_link')
-                    ->orderBy('likes_count', 'desc')
-                    ->limit(3)
-                    ->get();
-    return view('main', compact('artists'));
-    }
-    
+    /**
+     * Shows last added artists.
+     */
     public function last_added()
     {
         $artists = DB::table("artists")->orderBy('id', 'desc')->paginate(12);
         return view('artist_views.lastAddedArtists', compact('artists'));
     }
 
-    public function show(Artist $artist)
-    {
-        $comments = DB::table('comment_artists')->where('artist_id', $artist->id)->get();
-        return view('artists.show', compact('artist', 'comments'));
-    }
-
     /**
-     * Show the form for editing the specified resource.
+     * Shows all info about artist.
      */
-    public function edit(Artist $artist)
-    {
-        return view('artists.edit', compact('artist'));
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Artist $artist)
-    {
-        $request->validate([
-            'name' => 'required',
-            'picture_url' => 'required',
-            'banner_url' => 'required',
-            'description' => 'required',
-            'youtube_link' => 'required',
-            'spotify_link' => 'required',
-            'apple_music_link' => 'required',
-        ]);
-
-        $artist->update($request->all());
-
-        return redirect()->route('artists.index');
-    }
-
-
-
     public function show_artist ($crypt_artist)
     {
         $cryptId = Crypt::decrypt($crypt_artist);
@@ -148,6 +110,10 @@ class ArtistController extends Controller
         ]);
     
         $ExistArtist = Artist::where('name', $request->name)->first();
+
+        if ($ExistArtist) {
+            return redirect()->back()->with('error', 'Artist already exists');
+        }
     
         if ($request->hasFile('picture_url')) {
             $file = $request->file('picture_url');
@@ -155,16 +121,16 @@ class ArtistController extends Controller
             $file->move(public_path('images/artist_images'), $filename);
             $picture_url = 'images/artist_images/' . $filename;
         } else {
-            $picture_url = 'public/default/default_artist.jpg';
+            $picture_url = 'public/avatars/Default_avatar.png';
         }
         
         if ($request->hasFile('banner_url')) {
             $file = $request->file('banner_url');
             $filename = time() . '.' . $file->getClientOriginalExtension();
-            $file->move(public_path('images/banners_images'), $filename);
-            $banner_url = 'images/banners_images/' . $filename;
+            $file->move(public_path('images/artist_banners'), $filename);
+            $banner_url = 'images/artist_banners/' . $filename;
         } else {
-            $banner_url = 'public/default/default_artist.jpg';
+            $banner_url = 'public/banners/Default_banner.png';
         }
         
         Artist::create([
@@ -181,7 +147,7 @@ class ArtistController extends Controller
     }
 
     /**
-     * Deletes artist, comments and likes
+     * Deletes artist, comments, likes, albums and tracks.
      */
     public function delete_artist($crypt_artist, $user)
     {
