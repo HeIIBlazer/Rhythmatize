@@ -174,6 +174,15 @@ class AlbumController extends Controller
     }
 
     /**
+     * Show add album page
+     */
+
+    public function add_album_page(){
+        
+        return view('admin_views.album.addAlbum');
+    }
+
+    /**
      * Deletes Album and all it's comments, likes and tracks.
      */
     public function delete_album($crypt_album){

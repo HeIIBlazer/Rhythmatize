@@ -91,7 +91,7 @@ class ArtistController extends Controller
      */
     public function add_artist_page ()
     {
-        return view('admin_views.addArtist');
+        return view('admin_views.artist.addArtist');
     }
 
     /**
@@ -152,7 +152,7 @@ class ArtistController extends Controller
     public function edit_artist_page($crypt_artist){
         $artist_id = Crypt::decrypt($crypt_artist);
         $artist = Artist::find($artist_id);
-        return view('admin_views.editArtist', compact('artist'));
+        return view('admin_views.artist.editArtist', compact('artist'));
     }
 
     /**

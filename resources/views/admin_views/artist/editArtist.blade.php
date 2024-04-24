@@ -1,4 +1,4 @@
-@extends('layouts.app', ['title' => 'Edit Artist'])
+@extends('layouts.app', ['title' => 'Edit - '.$artist -> name])
 
 @section('content')
     <div class="container">

@@ -87,11 +87,15 @@ Route::middleware('admin')->group(function () {
     Route::post('/save_edited_artist', [ArtistController::class, 'edit_artist']);
     Route::get('/delete_artist/{artist}', [ArtistController::class, 'delete_artist']);
 
-    Route::get('/add_album', [AlbumController::class, 'create']);
-    Route::get('/edit_album/{album}', [AlbumController::class, 'edit']);
+    Route::get('/add_album', [AlbumController::class, 'add_album_page']);
+    Route::post('/add_album_to_database', [AlbumController::class, 'add_album']);
+    Route::get('/edit_album/{album}', [AlbumController::class, 'edit_album']);
+    Route::post('/save_edited_album', [AlbumController::class, 'save_edited_album']);
     Route::get('/delete_album/{album}', [AlbumController::class, 'delete_album']);
 
-    Route::get('/add_track', [TrackController::class, 'create']);
-    Route::get('/edit_track/{track}', [TrackController::class, 'edit']);
+    Route::get('/add_track', [TrackController::class, 'add_track_page']);
+    Route::post('/add_track_to_database', [TrackController::class, 'add_track']);
+    Route::get('/edit_track/{track}', [TrackController::class, 'edit_track_page']);
+    Route::post('/save_edited_track', [TrackController::class, 'save_edited_track']);
     Route::get('/delete_track/{track}', [TrackController::class, 'delete_track']);
 });
