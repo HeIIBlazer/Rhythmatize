@@ -251,6 +251,18 @@ class AlbumController extends Controller
     }
 
     /**
+     * Show edit album page
+     */
+    public function edit_album($crypt_album)
+    {
+        $album_id = Crypt::decrypt($crypt_album);
+        $album = Album::find($album_id);
+        $artists = Artist::all();
+        $genres = Genre::all();
+        return view('admin_views.album.editAlbum', compact('album', 'artists', 'genres'));
+    }
+
+    /**
      * Deletes Album and all it's comments, likes and tracks.
      */
     public function delete_album($crypt_album){
