@@ -208,7 +208,7 @@ class ArtistController extends Controller
     /**
      * Deletes artist, comments, likes, albums and tracks.
      */
-    public function delete_artist($crypt_artist, $user)
+    public function delete_artist($crypt_artist)
     {
             $artist_id = Crypt::decrypt($crypt_artist);
 

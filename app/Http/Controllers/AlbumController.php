@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Album;
 use App\Models\Artist;
 use App\Models\Track;
+use App\Models\Genre;
 use App\Models\CommentTrack;
 use App\Models\CommentAlbum;
 use App\Models\LikeTrack;
@@ -178,8 +179,9 @@ class AlbumController extends Controller
      */
 
     public function add_album_page(){
-        
-        return view('admin_views.album.addAlbum');
+        $artists = Artist::all();
+        $genres = Genre::all();
+        return view('admin_views.album.addAlbum', compact('artists','genres'));
     }
 
     /**

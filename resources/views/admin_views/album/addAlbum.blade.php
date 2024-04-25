@@ -23,7 +23,7 @@
                         <label for="photoInput"  id="photoInputLabel" class="edit-change-button m-0">
                             <img id="photoPreview" src="{{ URL::asset('images/camera.svg') }}" alt="Image preview" style=" width: 230px; height: 230px; border:3px solid #BDBDBD; border-radius: 10px; padding: 50px" class="mb-3 mt-0"/>
                             <p id="photoInputText" class="text-center">
-                                ADD ALBUM
+                                ADD COVER
                             </p> 
                         </label>
                     </div>
@@ -43,21 +43,42 @@
                             </div>
     
                             <div>
-                                <label for="description" class="mb-0 mt-2 add_input_label">ADD APPLE MUSIC LINK</label>
+                                <label for="apple_music_link" class="mb-0 mt-2 add_input_label">ADD APPLE MUSIC LINK</label>
                                 <input type="text" class="add-input" id="apple_music_link" name="apple_music_link" required>
                             </div>
     
                             <div>
-                                <label for="description" class="mb-0 mt-2 add_input_label">ADD YOUTUBE MUSIC LINK</label>
+                                <label for="youtube_link" class="mb-0 mt-2 add_input_label">ADD YOUTUBE MUSIC LINK</label>
                                 <input type="text" class="add-input" id="youtube_link" name="youtube_link" required>
                             </div>
                         </div>
                     </div>
 
                     <div class="w-50 h-100 d-flex flex-column justify-content-end">
-                        <div>
-                            
+                        <div class="d-flex flex-row align-content-center">
+                            <div>
+                                <label for="description" class="mb-0 mt-2 add_input_label">CHOOSE GENRE</label>
+                                <input type="text" class="add-input" id="youtube_link" list="genres-list" name="genre_id" required>
+                            </div>
+                            <a href="/add_genre">
+                                +
+                            </a>
                         </div>
+                        <datalist id="genres-list">
+                            @foreach ($genres as $genre)
+                                <option value="{{$genre -> name}}" data-hidden-value="{{$genre -> id}}"></option>
+                            @endforeach
+                        </datalist>
+
+                        <div>
+                            <label for="description" class="mb-0 mt-2 add_input_label">CHOOSE ARTIST</label>
+                            <input type="text" class="add-input" id="youtube_link" list="artists-list" name="genre_id" required>
+                        </div>
+                        <datalist id="artist-list">
+                            @foreach ($artists as $artist)
+                                <option value="{{$artist -> name}}" data-hidden-value="{{$artist -> id}}"></option>
+                            @endforeach
+                        </datalist>
 
                         <div class=" w-100">
                             <label for="description" class="mb-0 mt-2 add_input_label">ADD DESCRIPTION</label>
