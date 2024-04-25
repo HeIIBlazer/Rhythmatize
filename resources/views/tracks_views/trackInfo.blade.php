@@ -190,7 +190,7 @@
                     <textarea required placeholder="Add comment" rows="4" wrap="hard" class="comment-input" readonly></textarea>
                 </form>
             @else 
-            <form data-mdb-input-init class="mt-3" action="/save_comment_track" method="post">
+            <form data-mdb-input-init class="mt-3" action="/save-comment-track" method="post">
                 @csrf
                 <input type="hidden" name="track_id" value="{{$track->id}}">
                 <input type="hidden" name="user_id" value="{{Auth::user()->id}}">

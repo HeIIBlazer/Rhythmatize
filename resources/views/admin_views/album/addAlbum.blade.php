@@ -1,4 +1,4 @@
-@extends('layouts.app', ['title' => 'Add Artist'])
+@extends('layouts.app', ['title' => 'Add Album'])
 
 @section('content')
     <div class="container">
@@ -14,13 +14,13 @@
         @endif
 
         <div>
-            <form method="POST" action="{{url('/add-artist-to-database')}}" enctype="multipart/form-data">
+            <form method="POST" action="{{url('/add-album-to-database')}}" enctype="multipart/form-data">
                 @csrf
 
                 <div class="mt-2 mb-5">
                     <div class="w-100 d-flex justify-content-center align-items-center flex-column align-center mt-3">
-                        <input type="file" id="photoInput" name="picture_url" class="img-input">
-                        <label for="photoInput"  id="photoInputLabel" class="edit-change-button m-0">
+                        <input type="file" id="photoInput" name="cover_url" class="img-input">
+                        <label for="photoInput"  id="photoInputLabel" class="edit-change-button m-0 d-flex flex-column align-items-center">
                             <img id="photoPreview" src="{{ URL::asset('images/camera.svg') }}" alt="Image preview" style=" width: 230px; height: 230px; border:3px solid #BDBDBD; border-radius: 10px; padding: 50px" class="mb-3 mt-0"/>
                             <p id="photoInputText" class="text-center">
                                 ADD COVER
@@ -39,7 +39,7 @@
     
                             <div>
                                 <label for="description" class="mb-0 mt-2 add_input_label">ADD SPOTIFY LINK</label>
-                                <input type="text" class="add-input" id="sporify_link" name="spotify_link" required>
+                                <input type="text" class="add-input" id="spotify_link" name="spotify_link" required>
                             </div>
     
                             <div>
@@ -51,14 +51,28 @@
                                 <label for="youtube_link" class="mb-0 mt-2 add_input_label">ADD YOUTUBE MUSIC LINK</label>
                                 <input type="text" class="add-input" id="youtube_link" name="youtube_link" required>
                             </div>
+
+                            <div>
+                                <label for="release_date" class="mb-0 mt-2 add_input_label">ADD RELEASE YEAR</label>
+                                <input type="text" class="add-input" id="release_date" name="release_date" required>
+                            </div>
                         </div>
                     </div>
 
                     <div class="w-50 h-100 d-flex flex-column justify-content-end">
+                        <div>
+                            <label for="type" class="mb-0 mt-2 add_input_label">CHOOSE TYPE</label>
+                            <select class="add-input" id="type" name="type" required>
+                                <option value="ALBUM" selected>ALBUM</option>
+                                <option value="EP">EP</option>
+                                <option value="SINGLE">SINGLE</option>
+                            </select>
+                        </div>
+
                         <div class="w-100 d-flex flex-row">
                             <div class="w-95">
                                 <label for="description" class="mb-0 mt-2 add_input_label">CHOOSE GENRE</label>
-                                <input type="text" class="add-input-genre" id="youtube_link" list="genres-list" name="genre_id" required>
+                                <input type="text" class="add-input-genre" id="genre_name" list="genres-list" name="genre_name" required>
                             </div>
 
                                 <a href="/add-genre" class="plus-button">
@@ -67,17 +81,23 @@
                         </div>
                         <datalist id="genres-list">
                             @foreach ($genres as $genre)
-                                <option value="{{$genre -> name}}" data-hidden-value="{{$genre -> id}}"></option>
+                                <option value="{{$genre -> name}}"></option>
                             @endforeach
                         </datalist>
 
-                        <div>
-                            <label for="description" class="mb-0 mt-2 add_input_label">CHOOSE ARTIST</label>
-                            <input type="text" class="add-input" id="youtube_link" list="artists-list" name="genre_id" required>
+                        <div class="w-100 d-flex flex-row">
+                            <div class="w-95">
+                                <label for="description" class="mb-0 mt-2 add_input_label">CHOOSE ARTIST</label>
+                                <input type="text" class="add-input-genre" id="artist_name" list="artists-list" name="artist_name" required>
+                            </div>
+
+                                <a href="/add-artist" class="plus-button">
+                                    +
+                                </a>
                         </div>
                         <datalist id="artists-list">
                             @foreach ($artists as $artist)
-                                <option value="{{$artist -> name}}" data-hidden-value="{{$artist -> id}}"></option>
+                                <option value="{{$artist -> name}}"></option>
                             @endforeach
                         </datalist>
 

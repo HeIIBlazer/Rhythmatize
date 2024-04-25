@@ -185,6 +185,72 @@ class AlbumController extends Controller
     }
 
     /**
+     * Add album to database
+     */
+
+    public function add_album(Request $request){
+        
+        $request->validate([
+            'name' => 'required',
+            'cover_url' => 'image',
+            'release_date' => 'required',
+            'description' => '',
+            'youtube_link' => 'required',
+            'spotify_link' => 'required',
+            'apple_music_link' => 'required',
+            'type' => 'required',
+            'artist_name' => 'required',
+            'genre_name' => 'required',
+        ]);
+
+        $artist = Artist::where('name', $request->artist_name)->first();
+        $genre = Genre::where('name', $request->genre_name)->first();
+
+
+        
+        
+        if ($artist == null) {
+            return redirect()->back()->with('error', 'Artist does not exist');
+        }
+        
+        $artist_albums = Album::where('artist_id', $artist->id)->get();
+        foreach($artist_albums as $artist_album){
+            if($artist_album->name == $request->name){
+                return redirect()->back()->with('error', 'Album already exists');
+            }
+        }
+
+        if ($genre == null) {
+            return redirect()->back()->with('error', 'Genre does not exist');
+        }
+
+        if ($request->hasFile('cover_url')) {
+            $file = $request->file('cover_url');
+            $filename = time() . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path('images/album_covers'), $filename);
+            $album_cover = 'images/album_covers/' . $filename;
+        } else {
+            $album_cover = 'public/avatars/Default_avatar.png';
+        }
+
+
+        Album::create([
+            'name' => $request->name,
+            'cover_url' => $album_cover,
+            'release_date' => $request->release_date,
+            'description' => $request->description,
+            'youtube_link' => $request->youtube_link,
+            'spotify_link' => $request->spotify_link,
+            'apple_music_link' => $request->apple_music_link,
+            'type' => $request->type,
+            'artist_id' => $artist->id,
+            'genre_id' => $genre->id,
+        ]);
+
+        return redirect('/admin-panel');
+    }
+
+    /**
      * Deletes Album and all it's comments, likes and tracks.
      */
     public function delete_album($crypt_album){

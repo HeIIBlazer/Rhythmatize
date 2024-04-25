@@ -109,7 +109,7 @@
                 $i = 4;
             @endphp
             <table class="w-100">
-            @foreach ($all_albums as $albums)
+            @foreach ($all_albums as $album)
                 
             @php
                 $artist = \App\Models\Artist::find($album->artist_id);
@@ -121,7 +121,7 @@
 
                 $album_liked = DB::table('like_albums')
                         ->where('like_albums.album_id', $album->id)
-                        ->where('like_album.user_id', Auth::id())
+                        ->where('like_albums.user_id', Auth::id())
                         ->count();
             @endphp
                 <tr style="border-bottom: white solid 1px" >
@@ -132,7 +132,7 @@
                     </td>
                     <td style="width: 8%;" class="table-separete">
                         <div class="chart-pic">
-                            <a href="/track/{{$crypt_track}}">
+                            <a href="/album/{{$crypt_album}}">
                                 <div class="chart-pic w-100">
                                     <img src="{{url ($album -> cover_url)}}" alt="" style="width: 75px; height: 75; object-fit: cover;">
                                 </div>

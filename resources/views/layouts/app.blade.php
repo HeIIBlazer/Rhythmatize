@@ -78,7 +78,7 @@
                               </div>
                           @endif
                           <div class="d-flex w-100 flex-column justify-content-center align-items-center">
-                              <form action="{{url('/login_auth')}}" method="POST" class="form">
+                              <form action="{{url('/login-auth')}}" method="POST" class="form">
                                   @csrf
                                   <div class="w-100 d-flex justify-content-center align-center mt-2">
                                       <input type="email" class="login-input" name="email" placeholder="Email" required autofocus>

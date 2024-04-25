@@ -189,7 +189,7 @@
                     <textarea required placeholder="Add comment" rows="4" wrap="hard" class="comment-input" readonly></textarea>
                 </form>
             @else 
-            <form data-mdb-input-init class="mt-3" action="/save_comment_album" method="post">
+            <form data-mdb-input-init class="mt-3" action="/save-comment-album" method="post">
                 @csrf
                 <input type="hidden" name="album_id" value="{{$album->id}}">
                 <input type="hidden" name="user_id" value="{{Auth::user()->id}}">

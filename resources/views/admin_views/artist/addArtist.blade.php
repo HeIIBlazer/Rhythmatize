@@ -20,7 +20,7 @@
                 <div class="d-flex flex-row justify-content-evenly mt-2 mb-5">
                     <div class="w-50 d-flex justify-content-center align-items-center flex-column align-center mt-3">
                         <input type="file" id="photoInput" name="picture_url" class="img-input">
-                        <label for="photoInput"  id="photoInputLabel" class="edit-change-button m-0">
+                        <label for="photoInput"  id="photoInputLabel" class="edit-change-button m-0 d-flex flex-column align-items-center">
                             <img id="photoPreview" src="{{ URL::asset('images/camera.svg') }}" alt="Image preview" style=" width: 230px; height: 230px; border:3px solid #BDBDBD; border-radius: 10px; padding: 50px" class="mb-3 mt-0"/>
                             <p id="photoInputText" class="text-center">
                                 ADD PHOTO
@@ -30,7 +30,7 @@
 
                     <div class="w-50 d-flex justify-content-center align-items-center flex-column align-center mt-3">
                         <input type="file" id="coverInput" name="banner_url" class="img-input">
-                        <label for="coverInput"  id="coverInputLabel" class="edit-change-button m-0">
+                        <label for="coverInput"  id="coverInputLabel" class="edit-change-button m-0 d-flex flex-column align-items-center">
                             <img id="coverPreview" src="{{ URL::asset('images/camera.svg') }}" alt="Image preview" style=" width: 230px; height: 230px; border:3px solid #BDBDBD; border-radius: 10px; padding: 50px" class="mb-3 mt-0"/>
                             <p id="coverInputText" class="text-center">
                                 ADD BANNER
@@ -49,7 +49,7 @@
     
                             <div>
                                 <label for="description" class="mb-0 mt-2 add_input_label">ADD SPOTIFY LINK</label>
-                                <input type="text" class="add-input" id="sporify_link" name="spotify_link" required>
+                                <input type="text" class="add-input" id="spotify_link" name="spotify_link" required>
                             </div>
     
                             <div>

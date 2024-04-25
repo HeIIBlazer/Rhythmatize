@@ -1477,7 +1477,7 @@ hr {
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
-    -webkit-line-clamp: 1; /* Specify the number of lines to show */
+    -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
     text-align: center;
     margin-top: 15px;
@@ -1734,7 +1734,7 @@ hr {
 .add-input {
     width: 95%;
     height: 50px;
-    padding: 15px;
+    padding-left: 15px;
     border: none;
     border-radius: 15px;
     font-family: 'Montserrat', sans-serif;
@@ -1755,7 +1755,8 @@ hr {
 .add_textarea {
     width: 95%;
     height: 300px;
-    padding: 15px;
+    padding-left: 15px;
+    padding-top:5px;
     border: none;
     border-radius: 15px;
     font-family: 'Montserrat', sans-serif;
@@ -1811,7 +1812,8 @@ hr {
 .add_textarea-small {
     width: 95%;
     height: 135px;
-    padding: 15px;
+    padding-left: 15px;
+    padding-top:5px;
     border: none;
     border-radius: 15px;
     font-family: 'Montserrat', sans-serif;
@@ -1848,7 +1850,7 @@ hr {
     color: white;
     font-size: 30px;
     box-shadow: 10px 10px 4px #00000054;
-    margin-top: 33px;
+    margin-top: 33.5px;
     text-align: center;
     text-decoration: none;
     transition: ease all 0.3s;

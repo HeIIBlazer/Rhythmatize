@@ -128,7 +128,7 @@
                     <textarea required placeholder="Add comment" rows="4" wrap="hard" class="comment-input" readonly></textarea>
                 </form>
             @else 
-            <form data-mdb-input-init class="mt-3" action="/save_comment_artist" method="post">
+            <form data-mdb-input-init class="mt-3" action="/save-comment-artist" method="post">
                 @csrf
                 <input type="hidden" name="artist_id" value="{{$artist->id}}">
                 <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
@@ -204,7 +204,7 @@
                 </div>
             @endforeach
         </div>
-        <a class="artist-button flex-wrap" href="/all_tracks/{{$crypt_artist}}">Show all tracks by {{$artist -> name}}</a>
+        <a class="artist-button flex-wrap" href="/all-tracks/{{$crypt_artist}}">Show all tracks by {{$artist -> name}}</a>
         @endif
 
         <div class="w-100 d-flex flex-row justify-content-evenly align-content-center">
