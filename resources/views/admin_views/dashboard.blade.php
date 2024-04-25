@@ -185,6 +185,7 @@
                             <div cl>
                                 <h1 class="confirmation-header mt-3 mb-3">CONFIRMATION</h1>
                             </div>
+                            
                             <div id="confirmation_text_track" class="d-flex w-100 flex-column justify-content-center align-items-center mt-5 mb-5">
                                 <p class="confirmation-text">
                                     Are you sure you want to delete this track?

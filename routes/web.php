@@ -12,6 +12,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\LikeArtistController;
 use App\Http\Controllers\LikeAlbumController;
 use App\Http\Controllers\LikeTrackController;
+use App\Http\Controllers\GenreController;
 
 /*
 |--------------------------------------------------------------------------
@@ -80,6 +81,8 @@ Route::get('/search', [AlbumController::class, 'search']);
 Route::middleware('admin')->group(function () {
 
     Route::get('/admin-panel', [UserController::class,'dashboard']);
+
+    Route::post('/add-genre', [GenreController::class, 'add_genre']);
 
     Route::get('/add-artist', [ArtistController::class, 'add_artist_page']);
     Route::post('/add-artist-to-database', [ArtistController::class, 'add_artist']);

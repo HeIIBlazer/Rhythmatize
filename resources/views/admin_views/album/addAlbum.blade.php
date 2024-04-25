@@ -75,7 +75,7 @@
                                 <input type="text" class="add-input-genre" id="genre_name" list="genres-list" name="genre_name" required>
                             </div>
 
-                                <a href="/add-genre" class="plus-button">
+                                <a class="plus-button" data-toggle="modal" data-target="#addGenreModal">
                                     +
                                 </a>
                         </div>
@@ -115,9 +115,49 @@
             </form>
         </div>
 
+        <div class="modal fade" id="addGenreModal" tabindex="-1" role="dialog" aria-labelledby="addGenreLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content border-b">
+                    <div class="login">
+                        <div class="w-100">
+                            <div cl>
+                                <h1 class="confirmation-header mt-3 mb-3">ADD GENRE</h1>
+                            </div>
+                            @if (session()->has('error_genre'))
+                                <div class="alert error-genre">
+                                    {{session()->get('error_genre')}}
+                                </div>
+                            @endif
+                            <form method="POST" action="{{url('/add-genre')}}">
+                                @csrf
+                                <div class="w-100 d-flex flex-column align-items-center">
+                                    <label for="name_genre" class="mb-0 mt-2 add_input_label">ADD GENRE NAME</label>
+                                    <input type="text" class="add-input" id="name_genre" name="name_genre" required>
+                                </div>
+                                <div class="d-flex w-100 flex-row justify-content-evenly mt-5 mb-3">
+                                    <button type="submit" class="add-save-button w-25 me-3">SAVE</button>
+                                    <button type="button" class="add-cancel-button w-25" data-bs-dismiss="modal">CANCEL</button>
+                                </div>
+                            </form>
+                            
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 
     <script>
+
+        $(document).ready(function () {
+            if ($('.error-genre').length > 0) {
+            // Open the modal window
+                $('#addGenreModal').modal('show');
+            }
+        });
+        
         document.getElementById('photoInput').addEventListener('change', function(event) {
             const file = event.target.files[0];
             const reader = new FileReader();
@@ -145,6 +185,7 @@
 
             reader.readAsDataURL(file);
         });
+
     </script>
 
 @endsection

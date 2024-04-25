@@ -1854,10 +1854,18 @@ hr {
     text-align: center;
     text-decoration: none;
     transition: ease all 0.3s;
+    cursor: pointer;
 }
 
 .plus-button:hover {
     color: black;
     background-color: white;
     transition: ease all 0.3s;
+}
+
+.error-genre {
+    margin-top: 0;
+    text-align: center;
+    height: 2%;
+    color: red;
 }
