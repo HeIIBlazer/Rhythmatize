@@ -14,7 +14,7 @@
                 <span>All Albums</a>
             </div>
             <div class="all-button-unpressed">
-                <a href="/all_tracks/{{$crypt_artist}}" class="text-decoration-none white-text">All Tracks</a>
+                <a href="/all-tracks/{{$crypt_artist}}" class="text-decoration-none white-text">All Tracks</a>
             </div>
         </div>
 

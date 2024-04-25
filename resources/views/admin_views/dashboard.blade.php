@@ -26,7 +26,7 @@
             </div>
             <div class="d-flex flex-row justify-content-center w-100">
                 <div style="width: 15%;" class="me-5">
-                    <a href="/add_artist" class="dashboard-button ">
+                    <a href="/add-artist" class="dashboard-button ">
                         <p class="w-100 h-100 pt-1">ADD</p>
                     </a>
                 </div>
@@ -36,7 +36,7 @@
                     </div>
                 </div>
                 <div style="width: 15%; cursor: pointer;" id="delete_artist">
-                    <a id="delete_artist" class="dashboard-button">
+                    <a id="delete-artist" class="dashboard-button">
                         <p class="w-100 h-100 pt-1">DELETE</p>
                     </a>
                 </div>
@@ -93,7 +93,7 @@
             </div>
             <div class="d-flex flex-row justify-content-center w-100">
                 <div style="width: 15%; cursor: pointer;" class="me-5">
-                    <a href="/add_album" id="add_album" class="dashboard-button">
+                    <a href="/add-album" id="add_album" class="dashboard-button">
                         <p class="w-100 h-100 pt-1">ADD</p>
                     </a>
                 </div>
@@ -160,7 +160,7 @@
             </div>
             <div class="d-flex flex-row justify-content-center w-100">
                 <div style="width: 15%; cursor: pointer;" class="me-5">
-                    <a href="/add_track" id="add_track" class="dashboard-button">
+                    <a href="/add-track" id="add_track" class="dashboard-button">
                         <p class="w-100 h-100 pt-1">ADD</p>
                     </a>
                 </div>
@@ -216,10 +216,10 @@
             var trackName = $(this).val();
             var trackOption = $('option[value="' + trackName + '"]', this.list);
             var trackId = trackOption.data('hidden-value');
-            document.querySelector("#edit_track").innerHTML = `<a href="/edit_track/${trackId}" id="edit_track" class="dashboard-button me-5"><p class="w-100 h-100 pt-1">EDIT</p></a>`;
+            document.querySelector("#edit_track").innerHTML = `<a href="/edit-track/${trackId}" id="edit_track" class="dashboard-button me-5"><p class="w-100 h-100 pt-1">EDIT</p></a>`;
             document.querySelector("#delete_track").innerHTML = `<a data-toggle="modal" data-target="#trackDeleteModal" id="delete_track" class="dashboard-button"><p class="w-100 h-100 pt-1">DELETE</p></a>`;
             document.querySelector("#confirmation_text_track").innerHTML = `<p class="confirmation-text">Are you sure you want to delete <br>"${trackName}"?</p>`
-            document.querySelector("#submit_delete_track").innerHTML = `<a href="/delete_track/${trackId}" class="save-button-confirmation text-decoration-none"><button type="submit" class="buttons-inside-confirm">DELETE</button></a>`;
+            document.querySelector("#submit_delete_track").innerHTML = `<a href="/delete-track/${trackId}" class="save-button-confirmation text-decoration-none"><button type="submit" class="buttons-inside-confirm">DELETE</button></a>`;
         });
     });
     
@@ -228,10 +228,10 @@
             var artistName = $(this).val();
             var artistOption = $('option[value="' + artistName + '"]', this.list);
             var artistId = artistOption.data('hidden-value');
-            document.querySelector("#edit_artist").innerHTML = `<a href="/edit_artist/${artistId}" id="edit_artist" class="dashboard-button me-5"><p class="w-100 h-100 pt-1">EDIT</p></a>`;
+            document.querySelector("#edit_artist").innerHTML = `<a href="/edit-artist/${artistId}" id="edit_artist" class="dashboard-button me-5"><p class="w-100 h-100 pt-1">EDIT</p></a>`;
             document.querySelector("#delete_artist").innerHTML = `<a data-toggle="modal" data-target="#artistDeleteModal" id="delete_artist" class="dashboard-button"><p class="w-100 h-100 pt-1">DELETE</p></a>`;
             document.querySelector("#confirmation_text").innerHTML = `<p class="confirmation-text">Are you sure you want to delete <br>"${artistName}"?</p>`
-            document.querySelector("#submit_delete_artist").innerHTML = `<a href="/delete_artist/${artistId}" class="save-button-confirmation text-decoration-none"><button type="submit" class="buttons-inside-confirm">DELETE</button></a>`;
+            document.querySelector("#submit_delete_artist").innerHTML = `<a href="/delete-artist/${artistId}" class="save-button-confirmation text-decoration-none"><button type="submit" class="buttons-inside-confirm">DELETE</button></a>`;
         });
     });
 
@@ -242,10 +242,10 @@
             var albumName = $(this).val();
             var albumOption = $('option[value="' + albumName + '"]', this.list);
             var albumId = albumOption.data('hidden-value');
-            document.querySelector("#edit_album").innerHTML = `<a href="/edit_album/${albumId}" id="edit_album" class="dashboard-button me-5"><p class="w-100 h-100 pt-1">EDIT</p></a>`;
+            document.querySelector("#edit_album").innerHTML = `<a href="/edit-album/${albumId}" id="edit_album" class="dashboard-button me-5"><p class="w-100 h-100 pt-1">EDIT</p></a>`;
             document.querySelector("#delete_album").innerHTML = `<a data-toggle="modal" data-target="#albumDeleteModal" id="delete_album" class="dashboard-button"><p class="w-100 h-100 pt-1">DELETE</p></a>`;
             document.querySelector("#confirmation_text_album").innerHTML = `<p class="confirmation-text">Are you sure you want to delete <br>"${albumName}"?</p>`
-            document.querySelector("#submit_delete_album").innerHTML = `<a href="/delete_album/${albumId}" class="save-button-confirmation text-decoration-none"><button type="submit" class="buttons-inside-confirm">DELETE</button></a>`;
+            document.querySelector("#submit_delete_album").innerHTML = `<a href="/delete-album/${albumId}" class="save-button-confirmation text-decoration-none"><button type="submit" class="buttons-inside-confirm">DELETE</button></a>`;
         });
     });
 

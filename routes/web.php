@@ -30,26 +30,26 @@ Route::get('/', function () {
 
 // ALBUMS
 Route::get('/', [AlbumController::class, 'top_3_albums']);
-Route::get('/album_list', [AlbumController::class, 'index']);
-Route::get('/album_chart', [AlbumController::class, 'charts']);
-Route::get('/last_added_albums', [AlbumController::class, 'last_added']);
+Route::get('/album-list', [AlbumController::class, 'index']);
+Route::get('/album-chart', [AlbumController::class, 'charts']);
+Route::get('/last-added-albums', [AlbumController::class, 'last_added']);
 Route::get('/album/{album}', [AlbumController::class, 'show_album']);
-Route::post('/save_comment_album', [CommentAlbumController::class, 'save_comment'])->name('save_comment');
-Route::get('/all_albums/{artist}', [AlbumController::class, 'all_albums']);
+Route::post('/save-comment-album', [CommentAlbumController::class, 'save_comment'])->name('save_comment');
+Route::get('/all-albums/{artist}', [AlbumController::class, 'all_albums']);
 
 
 // ARTISTS
-Route::get('/artist_list', [ArtistController::class, 'index']);
-Route::get('/artist_chart', [ArtistController::class, 'charts']);
-Route::get('/last_added_artists', [ArtistController::class, 'last_added']);
+Route::get('/artist-list', [ArtistController::class, 'index']);
+Route::get('/artist-chart', [ArtistController::class, 'charts']);
+Route::get('/last-added-artists', [ArtistController::class, 'last_added']);
 Route::get('/artist/{artist}', [ArtistController::class, 'show_artist']);
-Route::post('/save_comment_artist', [CommentArtistController::class, 'save_comment'])->name('save_comment');
+Route::post('/save-comment-artist', [CommentArtistController::class, 'save_comment'])->name('save_comment');
 
 // TRACKS
-Route::get('/track_chart', [TrackController::class, 'charts']);
+Route::get('/track-chart', [TrackController::class, 'charts']);
 Route::get('/track/{track}', [TrackController::class, 'show_track']);
-Route::post('/save_comment_track', [CommentTrackController::class, 'save_comment'])->name('save_comment');
-Route::get('/all_tracks/{artist}', [TrackController::class, 'all_tracks']);
+Route::post('/save-comment-track', [CommentTrackController::class, 'save_comment'])->name('save_comment');
+Route::get('/all-tracks/{artist}', [TrackController::class, 'all_tracks']);
 
 // USER
 Route::get('/user/{user}', [UserController::class, 'show_user']);
@@ -61,17 +61,17 @@ Route::get('/liked-tracks/{user}', [UserController::class,'show_liked_tracks']);
 
 //LOGIN & REGISTER
 Route::get('/login', [AuthController::class, 'login']);
-Route::post('/login_auth', [AuthController::class, 'authenticate']);
+Route::post('/login-auth', [AuthController::class, 'authenticate']);
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::post('/register', [UserController::class, 'store_register']);
 
 //LIKE SYSTEM
-Route::get('/like_artist/{artist}', [LikeArtistController::class, 'like']);
-Route::get('/unlike_artist/{artist}', [LikeArtistController::class, 'unlike']);
-Route::get('/like_album/{album}', [LikeAlbumController::class, 'like']);
-Route::get('/unlike_album/{album}', [LikeAlbumController::class, 'unlike']);
-Route::get('/like_track/{track}', [LikeTrackController::class, 'like']);
-Route::get('/unlike_track/{track}', [LikeTrackController::class, 'unlike']);
+Route::get('/like-artist/{artist}', [LikeArtistController::class, 'like']);
+Route::get('/unlike-artist/{artist}', [LikeArtistController::class, 'unlike']);
+Route::get('/like-album/{album}', [LikeAlbumController::class, 'like']);
+Route::get('/unlike-album/{album}', [LikeAlbumController::class, 'unlike']);
+Route::get('/like-track/{track}', [LikeTrackController::class, 'like']);
+Route::get('/unlike-track/{track}', [LikeTrackController::class, 'unlike']);
 
 // SEARCH
 Route::get('/search', [AlbumController::class, 'search']);
@@ -81,21 +81,21 @@ Route::middleware('admin')->group(function () {
 
     Route::get('/admin-panel', [UserController::class,'dashboard']);
 
-    Route::get('/add_artist', [ArtistController::class, 'add_artist_page']);
-    Route::post('/add_artist_to_database', [ArtistController::class, 'add_artist']);
-    Route::get('/edit_artist/{artist}', [ArtistController::class, 'edit_artist_page']);
-    Route::post('/save_edited_artist', [ArtistController::class, 'edit_artist']);
-    Route::get('/delete_artist/{artist}', [ArtistController::class, 'delete_artist']);
+    Route::get('/add-artist', [ArtistController::class, 'add_artist_page']);
+    Route::post('/add-artist-to-database', [ArtistController::class, 'add_artist']);
+    Route::get('/edit-artist/{artist}', [ArtistController::class, 'edit_artist_page']);
+    Route::post('/save-edited-artist', [ArtistController::class, 'edit_artist']);
+    Route::get('/delete-artist/{artist}', [ArtistController::class, 'delete_artist']);
 
-    Route::get('/add_album', [AlbumController::class, 'add_album_page']);
-    Route::post('/add_album_to_database', [AlbumController::class, 'add_album']);
-    Route::get('/edit_album/{album}', [AlbumController::class, 'edit_album']);
-    Route::post('/save_edited_album', [AlbumController::class, 'save_edited_album']);
-    Route::get('/delete_album/{album}', [AlbumController::class, 'delete_album']);
+    Route::get('/add-album', [AlbumController::class, 'add_album_page']);
+    Route::post('/add-album-to-database', [AlbumController::class, 'add_album']);
+    Route::get('/edit-album/{album}', [AlbumController::class, 'edit_album']);
+    Route::post('/save-edited_album', [AlbumController::class, 'save_edited_album']);
+    Route::get('/delete-album/{album}', [AlbumController::class, 'delete_album']);
 
-    Route::get('/add_track', [TrackController::class, 'add_track_page']);
-    Route::post('/add_track_to_database', [TrackController::class, 'add_track']);
-    Route::get('/edit_track/{track}', [TrackController::class, 'edit_track_page']);
-    Route::post('/save_edited_track', [TrackController::class, 'save_edited_track']);
-    Route::get('/delete_track/{track}', [TrackController::class, 'delete_track']);
+    Route::get('/add-track', [TrackController::class, 'add_track_page']);
+    Route::post('/add-track-to-database', [TrackController::class, 'add_track']);
+    Route::get('/edit-track/{track}', [TrackController::class, 'edit_track_page']);
+    Route::post('/save-edited-track', [TrackController::class, 'save_edited_track']);
+    Route::get('/delete-track/{track}', [TrackController::class, 'delete_track']);
 });

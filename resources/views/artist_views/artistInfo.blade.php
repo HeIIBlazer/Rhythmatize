@@ -34,7 +34,7 @@
         <div class="d-flex flex-row justify-content-center align-content-center mb-3">
             @if ($like == 0) 
             <div class="d-flex flex-row">
-                <a href="/like_artist/{{$artist -> id}}"><img src="{{asset('images/like.png')}}" alt="" style="width: 22px; height: 22px; margin-right: 6px;"></a>
+                <a href="/like-artist/{{$artist -> id}}"><img src="{{asset('images/like.png')}}" alt="" style="width: 22px; height: 22px; margin-right: 6px;"></a>
             </div>
             <div class="white-text">
                 <span style="color: white; font-size:20px;"> {{$artist_likes}}</span>
@@ -48,7 +48,7 @@
             </div>    
             @else ($like == 1) 
             <div>
-                <a href="/unlike_artist/{{$artist -> id}}"><img src="{{asset('images/liked.png')}}" alt="" style="width: 22px; height: 22px; margin-right: 6px;"></a>
+                <a href="/unlike-artist/{{$artist -> id}}"><img src="{{asset('images/liked.png')}}" alt="" style="width: 22px; height: 22px; margin-right: 6px;"></a>
             </div>
             <div>
                 <span style="color: white; font-size:20px;"> {{$artist_likes}} </span>
@@ -242,7 +242,7 @@
                 </div>
             @endforeach
         </div>
-        <a class="artist-button-album flex-wrap" href="/all_albums/{{$crypt_artist}}">Show all albums by {{$artist -> name}}</a>
+        <a class="artist-button-album flex-wrap" href="/all-albums/{{$crypt_artist}}">Show all albums by {{$artist -> name}}</a>
     </div>
         @endif
 </div>

@@ -24,6 +24,14 @@ body {
     width: 94%;
 }
 
+.w-95 {
+    width: 90%;
+}
+
+.w-5 {
+    width: 5%;
+}
+
 .cross-button {
     background-color: transparent;
     border: none;
@@ -1797,5 +1805,57 @@ hr {
 .add-cancel-button:hover {
     background-color: red;
     color: black;
+    transition: ease all 0.3s;
+}
+
+.add_textarea-small {
+    width: 95%;
+    height: 135px;
+    padding: 15px;
+    border: none;
+    border-radius: 15px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    background-color: #373737;
+    color: white;
+    font-size: 25px;
+    box-shadow: 10px 10px 4px #00000054;
+}
+
+.add-input-genre {
+    width: 100%;
+    height: 50px;
+    padding: 15px;
+    border: none;
+    border-radius: 15px 0px 0px 15px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    background-color: #373737;
+    color: white;
+    font-size: 25px;
+    box-shadow: 10px 10px 4px #00000054;
+}
+
+.plus-button{
+    width: 5%;
+    height: 50px;
+    border-left: 2px solid white;
+    padding-top: 2px;
+    border-radius: 0px 15px 15px 0px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    background-color: #373737;
+    color: white;
+    font-size: 30px;
+    box-shadow: 10px 10px 4px #00000054;
+    margin-top: 33px;
+    text-align: center;
+    text-decoration: none;
+    transition: ease all 0.3s;
+}
+
+.plus-button:hover {
+    color: black;
+    background-color: white;
     transition: ease all 0.3s;
 }

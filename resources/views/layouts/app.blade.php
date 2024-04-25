@@ -34,18 +34,18 @@
             <div class="dropdown">
               <a class="header_button" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">Charts</a>
               <ul class="dropdown-menu dropdown-menu-dark slim-dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <li><a class="dropdown-item" href="{{ url('/artist_chart')}}">Artists</a></li>
-                <li><a class="dropdown-item" href="{{ url('/album_chart')}}">Albums</a></li>
-                <li><a class="dropdown-item" href="{{url ('/track_chart')}}">Tracks</a></li>
+                <li><a class="dropdown-item" href="{{ url('/artist-chart')}}">Artists</a></li>
+                <li><a class="dropdown-item" href="{{ url('/album-chart')}}">Albums</a></li>
+                <li><a class="dropdown-item" href="{{url ('/track-chart')}}">Tracks</a></li>
               </ul>
             </div>
           </li>
           </li> 
           <li class="nav-item">
-            <a class="header_button" href="{{ url ('/artist_list')}}">Artists</a>
+            <a class="header_button" href="{{ url ('/artist-list')}}">Artists</a>
           </li> 
           <li class="nav-item">
-            <a class="header_button" href="{{ url ('/album_list')}}">Albums</a>
+            <a class="header_button" href="{{ url ('/album-list')}}">Albums</a>
           </li>
         </ul>
         <form class="d-flex" method="GET" action="{{ url('/search') }}">
@@ -54,9 +54,6 @@
         </form>
         @if(Auth::guest())
         <div class="login_buttons">
-          {{-- <div class="mb-2">
-            <a class="login_button" href="{{url ('/login')}}">LOG IN</a>
-          </div> --}}
         <div class="mb-2">
           <button class="login_button" data-toggle="modal" data-target="#loginModal">
           LOG IN
@@ -219,13 +216,13 @@
                 <p class="links_header">ALBUM</p>
             </div>
             <div class="links_buttons">
-                <a href="{{ url('/album_chart')}}" class="links_button">Charts</a>
+                <a href="{{ url('/album-chart')}}" class="links_button">Charts</a>
             </div>
             <div class="links_buttons">
-                <a href="{{ url('/last_added_albums')}}" class="links_button">Last Added</a>
+                <a href="{{ url('/last-added-albums')}}" class="links_button">Last Added</a>
             </div>
             <div class="links_buttons">
-                <a href="{{ url('/album_list')}}" class="links_button">List</a>
+                <a href="{{ url('/album-list')}}" class="links_button">List</a>
             </div>
         </div>
         <div class="Artists_part">
@@ -233,13 +230,13 @@
                 <p class="links_header">ARTIST</p>
             </div>
             <div class="links_buttons">
-                <a href="{{ url('/artist_chart')}}" class="links_button">Charts</a>
+                <a href="{{ url('/artist-chart')}}" class="links_button">Charts</a>
             </div>
             <div class="links_buttons">
-                <a href="{{ url('/last_added_artists')}}" class="links_button">Last Added</a>
+                <a href="{{ url('/last-added-artists')}}" class="links_button">Last Added</a>
             </div>
             <div class="links_buttons">
-                <a href="{{ url('/artist_list')}}" class="links_button">List</a>
+                <a href="{{ url('/artist-list')}}" class="links_button">List</a>
             </div>
         </div>
         <div class="Songs_part">
@@ -247,7 +244,7 @@
                 <p class="links_header">TRACKS</p>
             </div>
             <div class="links_buttons">
-                <a href="{{url ('/track_chart')}}" class="links_button">Charts</a>
+                <a href="{{url ('/track-chart')}}" class="links_button">Charts</a>
             </div>
         </div>
           @if(Auth::check() && Auth::user()->role == 'admin')

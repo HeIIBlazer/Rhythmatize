@@ -18,7 +18,7 @@
         @endif
 
         <div>
-            <form method="POST" action="{{url('/save_edited_artist')}}" enctype="multipart/form-data">
+            <form method="POST" action="{{url('/save-edited-artist')}}" enctype="multipart/form-data">
                 @csrf
                 <input type="hidden" name="id" value="{{$crypt_artist}}">
                 <div class="d-flex flex-row justify-content-evenly mt-2 mb-5">

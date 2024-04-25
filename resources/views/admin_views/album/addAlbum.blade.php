@@ -4,7 +4,7 @@
     <div class="container">
 
         <div class="Header-List">
-            <p>ADD ARTIST</p>
+            <p>ADD ALBUM</p>
         </div>
 
         @if (session()->has('error'))
@@ -14,7 +14,7 @@
         @endif
 
         <div>
-            <form method="POST" action="{{url('/add_artist_to_database')}}" enctype="multipart/form-data">
+            <form method="POST" action="{{url('/add-artist-to-database')}}" enctype="multipart/form-data">
                 @csrf
 
                 <div class="mt-2 mb-5">
@@ -55,14 +55,15 @@
                     </div>
 
                     <div class="w-50 h-100 d-flex flex-column justify-content-end">
-                        <div class="d-flex flex-row align-content-center">
-                            <div>
+                        <div class="w-100 d-flex flex-row">
+                            <div class="w-95">
                                 <label for="description" class="mb-0 mt-2 add_input_label">CHOOSE GENRE</label>
-                                <input type="text" class="add-input" id="youtube_link" list="genres-list" name="genre_id" required>
+                                <input type="text" class="add-input-genre" id="youtube_link" list="genres-list" name="genre_id" required>
                             </div>
-                            <a href="/add_genre">
-                                +
-                            </a>
+
+                                <a href="/add-genre" class="plus-button">
+                                    +
+                                </a>
                         </div>
                         <datalist id="genres-list">
                             @foreach ($genres as $genre)
@@ -74,7 +75,7 @@
                             <label for="description" class="mb-0 mt-2 add_input_label">CHOOSE ARTIST</label>
                             <input type="text" class="add-input" id="youtube_link" list="artists-list" name="genre_id" required>
                         </div>
-                        <datalist id="artist-list">
+                        <datalist id="artists-list">
                             @foreach ($artists as $artist)
                                 <option value="{{$artist -> name}}" data-hidden-value="{{$artist -> id}}"></option>
                             @endforeach
@@ -82,7 +83,7 @@
 
                         <div class=" w-100">
                             <label for="description" class="mb-0 mt-2 add_input_label">ADD DESCRIPTION</label>
-                            <textarea class="add_textarea" id="description" name="description"></textarea>
+                            <textarea class="add_textarea-small" id="description" name="description"></textarea>
                         </div>
                     </div>
                 </div>

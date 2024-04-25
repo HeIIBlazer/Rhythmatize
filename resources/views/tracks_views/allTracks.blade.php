@@ -12,7 +12,7 @@
 
         <div class="w-100 d-flex flex-row justify-content-center mb-3 mt-3">
             <div class="me-4 all-button-unpressed">
-                <a href="/all_albums/{{$crypt_artist}}" class="text-decoration-none white-text">All Albums</a>
+                <a href="/all-albums/{{$crypt_artist}}" class="text-decoration-none white-text">All Albums</a>
             </div>
             <div class="all-button-pressed">
                 <span>All Tracks</span>
@@ -144,7 +144,7 @@
                         </div>
                     </td>
                     <td style="width:40%;" class="table-separete">
-                        <a class="text-decoration-none" href="/crypt/{{$crypt_album}}">
+                        <a class="text-decoration-none" href="/album/{{$crypt_album}}">
                             <div class="chart-small w-100">
                                 <span class="chart-small-text">{{$album -> name}}</span>
                             </div>

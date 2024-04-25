@@ -14,7 +14,7 @@
         @endif
 
         <div>
-            <form method="POST" action="{{url('/add_artist_to_database')}}" enctype="multipart/form-data">
+            <form method="POST" action="{{url('/add-artist-to-database')}}" enctype="multipart/form-data">
                 @csrf
 
                 <div class="d-flex flex-row justify-content-evenly mt-2 mb-5">
