@@ -136,15 +136,6 @@ class AlbumController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Album $album){
-        $album->delete();
-        return redirect()->route('albums.index');
-    }
-
-
-    /**
      * Show all albums for one artist.
      */
     public function all_albums($crypt_artist){
@@ -230,7 +221,13 @@ class AlbumController extends Controller
             $file->move(public_path('images/album_covers'), $filename);
             $album_cover = 'images/album_covers/' . $filename;
         } else {
-            $album_cover = 'public/avatars/Default_avatar.png';
+            $album_cover = '../images/avatars/Default_avatar.png';
+        }
+
+        if($request -> description == null){
+            $description = "NO INFO";
+        }else{
+            $description = $request -> description;
         }
 
 
@@ -238,7 +235,7 @@ class AlbumController extends Controller
             'name' => $request->name,
             'cover_url' => $album_cover,
             'release_date' => $request->release_date,
-            'description' => $request->description,
+            'description' => $description,
             'youtube_link' => $request->youtube_link,
             'spotify_link' => $request->spotify_link,
             'apple_music_link' => $request->apple_music_link,
@@ -253,13 +250,93 @@ class AlbumController extends Controller
     /**
      * Show edit album page
      */
-    public function edit_album($crypt_album)
+    public function edit_album_page($crypt_album)
     {
         $album_id = Crypt::decrypt($crypt_album);
         $album = Album::find($album_id);
         $artists = Artist::all();
         $genres = Genre::all();
         return view('admin_views.album.editAlbum', compact('album', 'artists', 'genres'));
+    }
+
+    /**
+     * Updates albums info
+     */
+
+    public function edit_album(Request $request){
+
+        
+        $request->validate([
+            'crypt_album' => 'required',
+            'name' => 'required',
+            'cover_url' => 'image',
+            'release_date' => 'required',
+            'description' => '',
+            'youtube_link' => 'required',
+            'spotify_link' => 'required',
+            'apple_music_link' => 'required',
+            'type' => 'required',
+            'artist_name' => 'required',
+            'genre_name' => 'required',
+        ]);
+
+        $album_id = Crypt::decrypt($request->crypt_album);
+        $album = Album::find($album_id);
+
+        $artist = Artist::where('name', $request->artist_name)->first();
+        $genre = Genre::where('name', $request->genre_name)->first();
+
+
+        
+        
+        if ($artist == null) {
+            return redirect()->back()->with('error', 'Artist does not exist');
+        }
+        
+        $artist_albums = Album::where('artist_id', $artist->id)->get();
+        
+        if($album->name != $request->name){
+            foreach($artist_albums as $artist_album){
+                if($artist_album->name == $request->name){
+                    return redirect()->back()->with('error', 'Album already exists');
+                }
+            }
+        }
+    
+
+        if ($genre == null) {
+            return redirect()->back()->with('error', 'Genre does not exist');
+        }
+
+        if ($request->hasFile('cover_url')) {
+            $file = $request->file('cover_url');
+            $filename = time() . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path('images/album_covers'), $filename);
+            $album_cover = 'images/album_covers/' . $filename;
+        } else {
+            $album_cover = '../images/avatars/Default_avatar.png';
+        }
+
+        if($request -> description == null){
+            $description = "NO INFO";
+        }else{
+            $description = $request -> description;
+        }
+
+        $album->update([
+            'name' => $request->name,
+            'cover_url' => $album_cover,
+            'release_date' => $request->release_date,
+            'description' => $description,
+            'youtube_link' => $request->youtube_link,
+            'spotify_link' => $request->spotify_link,
+            'apple_music_link' => $request->apple_music_link,
+            'type' => $request->type,
+            'artist_id' => $artist->id,
+            'genre_id' => $genre->id,
+        ]);
+
+        return redirect('/admin-panel');
     }
 
     /**

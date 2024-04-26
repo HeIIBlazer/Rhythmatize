@@ -33,8 +33,13 @@
         <div>
             <h1 class="info-header">{{$album -> name}}</h1>
         </div>
-        <div class="mb-3">
-            <a href="/artist/{{$crypt_artist}}" class="white-text text-decoration-none"><h3 class="artists-lower-text">{{$genre -> name}} | {{$artist -> name}}</a></h3>
+        <div class="mb-0">
+            <p class="artists-lower-text ">
+                {{$genre -> name}} | {{$album -> type}} 
+            </p>
+        </div>
+        <div class="mb-3 mt-0">
+            <a href="/artist/{{$crypt_artist}}" class="white-text text-decoration-none"><h3 class="artists-lower-text">{{$artist -> name}}</a></h3>
         </div>
         <div class="d-flex flex-row justify-content-center align-content-center mb-3">
             @if ($like == 0) 
@@ -210,6 +215,11 @@
                 <div class="artist-header-line"></div>
             </div>
         </div>
+        @if (count($tracks) == 0)
+            <div class="w-100 d-flex flex-column justify-content-center">
+                <h1 class="w-100 text-center white-text text-Montserrat mt-2">THIS ALBUM HAS NO TRACKS FOR NOW</h1>
+            </div>
+        @else
         <div class="w-100 mt-3">
             <table class="w-100">
             @foreach ($tracks as $track)
@@ -278,6 +288,8 @@
                 @endphp
             @endforeach
             </table>
+        @endif
+        
         </div>
         
     </div>

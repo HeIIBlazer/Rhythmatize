@@ -219,7 +219,7 @@
 
         @if (count($albums) == 0)
             <div class="w-100 d-flex flex-column justify-content-center m-5">
-                <h1 class="w-100 text-center white-text text-Montserrat text-">THIS ARTIST HAS NO ALBUMS</h1>
+                <h1 class="w-100 text-center white-text text-Montserrat">THIS ARTIST HAS NO ALBUMS</h1>
             </div>
         @else
         <div class=" row justify-content-around mt-3 w-94 mb-4">

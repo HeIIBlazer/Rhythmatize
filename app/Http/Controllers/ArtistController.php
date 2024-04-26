@@ -132,10 +132,16 @@ class ArtistController extends Controller
         } else {
             $banner_url = 'public/banners/Default_banner.png';
         }
+
+        if($request -> description == null){
+            $description = "NO INFO";
+        }else{
+            $description = $request -> description;
+        }
         
         Artist::create([
             'name' => $request->name,
-            'description' => $request->description,
+            'description' => $description,
             'youtube_link' => $request->youtube_link,
             'spotify_link' => $request->spotify_link,
             'apple_music_link' => $request->apple_music_link,

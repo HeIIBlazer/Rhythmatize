@@ -44,6 +44,8 @@
 
                     $number_albums = 0;
 
+                    $genre = \App\Models\Genre::find($album->genre_id);
+
                     if($all_albums -> count() == 0)
                         $number_albums = $albums -> count();
                     else
@@ -59,7 +61,7 @@
                             <div class="w-100 d-flex flex-column justify-content-evenly">
                                 <p class="artist-track-name">{{$album -> name}}</p>
 
-                                <p class="artist-track-album">{{$album -> type}} | {{$album -> release_date}}</p>
+                                <p class="artist-track-album">{{$album -> type}} | {{$genre -> name}} | {{$album -> release_date}}</p>
                             </div>
                             <div class="d-flex flex-row flex-wrap align-content-end" style="padding: 10px 10px; height:45%;">
                                 @if ($album_liked == 1)
@@ -123,6 +125,8 @@
                         ->where('like_albums.album_id', $album->id)
                         ->where('like_albums.user_id', Auth::id())
                         ->count();
+
+                $genre = \App\Models\Genre::find($album->genre_id);
             @endphp
                 <tr style="border-bottom: white solid 1px" >
                     <td style="width: 6%;" class="table-separete">
@@ -139,11 +143,20 @@
                             </a>
                         </div>
                     </td>
-                    <td style="width:80%;" class="table-separete">
+                    <td style="width:40%;" class="table-separete">
                         <div class="chart-big">
                             <a href="/album/{{$crypt_album}}" class="text-decoration-none">
                                 <div class="chart-big">
                                     <span class="chart-text-big">{{$album -> name}}</span>
+                                </div>
+                            </a>
+                        </div>
+                    </td>
+                    <td style="width:40%;" class="table-separete">
+                        <div class="chart-big">
+                            <a href="/album/{{$crypt_album}}" class="text-decoration-none">
+                                <div class="chart-big">
+                                    <span class="chart-small-text">{{$album -> type}} | {{$genre -> name}} | {{$album -> release_date}}</span>
                                 </div>
                             </a>
                         </div>

@@ -478,13 +478,11 @@ body {
     font-size: 60px;
     margin-bottom: 0px;
     margin-top: 15px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 1; /* Specify the number of lines to show */
-    -webkit-box-orient: vertical;
-    width: 100%;
+    display: flex;
+        flex-direction: column;
+        align-items: center;
     -webkit-text-stroke: 2px black;
+
 }
 
 .Header-List-1 {
@@ -1036,7 +1034,7 @@ hr {
     padding: 0px 10px;
     color: #808080;
     font-weight: 500;
-    font-size: 15px;
+    font-size: 14px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -1305,6 +1303,7 @@ hr {
     text-align: center;
     text-decoration: none;
     transition: ease all 0.1s;
+    cursor: pointer;
 }
 
 .artists-lower-text:hover {
@@ -1869,4 +1868,20 @@ hr {
     text-align: center;
     height: 2%;
     color: red;
+}
+.Header-List-edit {
+    font-family: "audiowide", sans-serif;
+    color: white;
+    font-size: 60px;
+    margin-bottom: 0px;
+    margin-top: 15px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    /* Specify the number of lines to show */
+    -webkit-box-orient: vertical;
+    width: 100%;
+    -webkit-text-stroke: 2px black;
+    text-align: center;
 }

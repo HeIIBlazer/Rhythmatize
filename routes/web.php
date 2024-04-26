@@ -92,8 +92,8 @@ Route::middleware('admin')->group(function () {
 
     Route::get('/add-album', [AlbumController::class, 'add_album_page']);
     Route::post('/add-album-to-database', [AlbumController::class, 'add_album']);
-    Route::get('/edit-album/{album}', [AlbumController::class, 'edit_album']);
-    Route::post('/save-edited_album', [AlbumController::class, 'save_edited_album']);
+    Route::get('/edit-album/{album}', [AlbumController::class, 'edit_album_page']);
+    Route::post('/save-edited-album', [AlbumController::class, 'edit_album']);
     Route::get('/delete-album/{album}', [AlbumController::class, 'delete_album']);
 
     Route::get('/add-track', [TrackController::class, 'add_track_page']);

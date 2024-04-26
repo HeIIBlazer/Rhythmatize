@@ -5,11 +5,12 @@
     @php
     $genre_album = App\Models\Genre::find($album -> genre_id);
     $artist_album = App\Models\Artist::find($album -> artist_id);
+    $crypt_album = Crypt::encrypt($album -> id);
     @endphp
     <div class="container">
 
-        <div class="w-100 d-flex align-items-center">
-            <p class="Header-List">EDIT {{$album -> name}}</p>
+        <div class="w-100 d-flex align-items-center justify-content-center">
+            <p class="Header-List-edit">EDIT {{$album -> name}}</p>
         </div>
 
         @if (session()->has('error'))
@@ -24,6 +25,7 @@
 
                 <div class="mt-2 mb-5">
                     <div class="w-100 d-flex justify-content-center align-items-center flex-column align-center mt-3">
+                        <input type="hidden" name="crypt_album" value="{{$crypt_album}}">
                         <input type="file" id="photoInput" name="cover_url" class="img-input">
                         <label for="photoInput"  id="photoInputLabel" class="edit-change-button m-0 d-flex flex-column align-items-center">
                             <img id="photoPreview" src="{{url ($album -> cover_url) }}" alt="Image preview" style=" width: 230px; height: 230px; border:3px solid #BDBDBD; border-radius: 10px;" class="mb-3 mt-0"/>
@@ -141,7 +143,7 @@
                                 </div>
                                 <div class="d-flex w-100 flex-row justify-content-evenly mt-5 mb-3">
                                     <button type="submit" class="add-save-button w-25 me-3">SAVE</button>
-                                    <button type="button" class="add-cancel-button w-25" data-bs-dismiss="modal">CANCEL</button>
+                                    <button type="button" class="add-cancel-button w-25" data-dismiss="modal" form aria-label="Close">CANCEL</button>
                                 </div>
                             </form>
                             
