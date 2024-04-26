@@ -5,6 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Album;
 use App\Models\Artist;
 use App\Models\Track;
+use App\Models\Genre;
+use App\Models\CommentTrack;
+use App\Models\CommentAlbum;
+use App\Models\LikeTrack;
+use App\Models\LikeAlbum;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Crypt;
@@ -12,7 +17,7 @@ use Illuminate\Support\Facades\Crypt;
 class AlbumController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Show 12 albums per page for album list page.
      */
     public function index()
     {
@@ -21,6 +26,9 @@ class AlbumController extends Controller
         return view('album_views.albumsList', compact('albums', 'user'));
     }
 
+    /**
+     *  Show the albums in a chart.
+     */
     public function charts() 
     {
         
@@ -33,6 +41,9 @@ class AlbumController extends Controller
         return view('album_views.albumsChart', compact('albums'));
     }
 
+    /**
+     * Shows the top 3 albums, artists and tracks.
+     */
     public function top_3_albums()
     {
         $albums = DB::table("albums")->select('albums.*', DB::raw('count(like_albums.id) as likes_count'))
@@ -61,6 +72,9 @@ class AlbumController extends Controller
         return view('main', compact('albums', 'lastAdded', 'artists', 'tracks'));
     }
 
+    /**
+     * Search for albums, artists and tracks.
+     */
     public function search(Request $request)
     {
         $search = $request->input('search');
@@ -86,6 +100,9 @@ class AlbumController extends Controller
         }
     }
 
+    /**
+     * Shows info about album with the tracks from it.
+     */
     public function album_show(Album $album) {
         $tracks = DB::table('tracks')->where('album_id', $album->id)->get();
         return view('album_views.albumShow', compact('album', 'tracks'));
@@ -110,83 +127,17 @@ class AlbumController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show last added albums in album list page.
      */
-
     public function last_added()
     {
         $albums = DB::table("albums")->orderBy('id', 'desc')->paginate(12);
         return view('album_views.lastAddedAlbums', compact('albums'));
     }
 
-    public function create()
-    {
-        
-    }
-
     /**
-     * Store a newly created resource in storage.
+     * Show all albums for one artist.
      */
-    public function store(Request $request)
-    {
-        $request->validate([
-            'name' => 'required',
-            'cover_url' => 'required',
-            'release_date' => 'required',
-            'description' => 'required',
-            'youtube_link' => 'required',
-            'spotify_link' => 'required',
-            'apple_music_link' => 'required',
-            'type' => 'required',
-            'artist_id' => 'required',
-        ]);
-
-        Album::create($request->all());
-        return redirect()->route('albums.index');
-    }
-
-    /**
-     * Display the specified resource.
-     */
-
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Album $album)
-    {
-        return view('albums.edit', compact('album'));
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Album $album)
-    {
-        $request->validate([
-            'name' => 'required',
-            'cover_url' => 'required',
-            'release_date' => 'required',
-            'description' => 'required',
-            'youtube_link' => 'required',
-            'spotify_link' => 'required',
-            'apple_music_link' => 'required',
-            'type' => 'required',
-            'artist_id' => 'required',
-        ]);
-
-        $album->update($request->all());
-        return redirect()->route('albums.index');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Album $album){
-        $album->delete();
-        return redirect()->route('albums.index');
-    }
-
     public function all_albums($crypt_artist){
 
         $artist_id = Crypt::decrypt($crypt_artist);
@@ -212,5 +163,228 @@ class AlbumController extends Controller
                     ->get();
 
         return view('album_views.allAlbums', compact('albums', 'artist', 'all_albums'));
+    }
+
+    /**
+     * Show add album page
+     */
+
+    public function add_album_page(){
+        $artists = Artist::all();
+        $genres = Genre::all();
+        return view('admin_views.album.addAlbum', compact('artists','genres'));
+    }
+
+    /**
+     * Add album to database
+     */
+
+    public function add_album(Request $request){
+        
+        $request->validate([
+            'name' => 'required',
+            'cover_url' => 'image',
+            'release_date' => 'required',
+            'description' => '',
+            'youtube_link' => 'required',
+            'spotify_link' => 'required',
+            'apple_music_link' => 'required',
+            'type' => 'required',
+            'artist_name' => 'required',
+            'genre_name' => 'required',
+        ]);
+
+        $artist = Artist::where('name', $request->artist_name)->first();
+        $genre = Genre::where('name', $request->genre_name)->first();
+
+
+        
+        
+        if ($artist == null) {
+            return redirect()->back()->with('error', 'Artist does not exist');
+        }
+        
+        $artist_albums = Album::where('artist_id', $artist->id)->get();
+        foreach($artist_albums as $artist_album){
+            if($artist_album->name == $request->name){
+                return redirect()->back()->with('error', 'Album already exists');
+            }
+        }
+
+        if ($genre == null) {
+            return redirect()->back()->with('error', 'Genre does not exist');
+        }
+
+        if ($request->hasFile('cover_url')) {
+            $file = $request->file('cover_url');
+            $filename = time() . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path('images/album_covers'), $filename);
+            $album_cover = 'images/album_covers/' . $filename;
+        } else {
+            $album_cover = '../images/avatars/Default_avatar.png';
+        }
+
+        if($request -> description == null){
+            $description = "NO INFO";
+        }else{
+            $description = $request -> description;
+        }
+
+
+        Album::create([
+            'name' => $request->name,
+            'cover_url' => $album_cover,
+            'release_date' => $request->release_date,
+            'description' => $description,
+            'youtube_link' => $request->youtube_link,
+            'spotify_link' => $request->spotify_link,
+            'apple_music_link' => $request->apple_music_link,
+            'type' => $request->type,
+            'artist_id' => $artist->id,
+            'genre_id' => $genre->id,
+        ]);
+
+        return redirect('/admin-panel');
+    }
+
+    /**
+     * Show edit album page
+     */
+    public function edit_album_page($crypt_album)
+    {
+        $album_id = Crypt::decrypt($crypt_album);
+        $album = Album::find($album_id);
+        $artists = Artist::all();
+        $genres = Genre::all();
+        return view('admin_views.album.editAlbum', compact('album', 'artists', 'genres'));
+    }
+
+    /**
+     * Updates albums info
+     */
+
+    public function edit_album(Request $request){
+
+        
+        $request->validate([
+            'crypt_album' => 'required',
+            'name' => 'required',
+            'cover_url' => 'image',
+            'release_date' => 'required',
+            'description' => '',
+            'youtube_link' => 'required',
+            'spotify_link' => 'required',
+            'apple_music_link' => 'required',
+            'type' => 'required',
+            'artist_name' => 'required',
+            'genre_name' => 'required',
+        ]);
+
+        $album_id = Crypt::decrypt($request->crypt_album);
+        $album = Album::find($album_id);
+
+        $artist = Artist::where('name', $request->artist_name)->first();
+        $genre = Genre::where('name', $request->genre_name)->first();
+
+
+        
+        
+        if ($artist == null) {
+            return redirect()->back()->with('error', 'Artist does not exist');
+        }
+        
+        $artist_albums = Album::where('artist_id', $artist->id)->get();
+        
+        if($album->name != $request->name){
+            foreach($artist_albums as $artist_album){
+                if($artist_album->name == $request->name){
+                    return redirect()->back()->with('error', 'Album already exists');
+                }
+            }
+        }
+    
+
+        if ($genre == null) {
+            return redirect()->back()->with('error', 'Genre does not exist');
+        }
+
+        if ($request->hasFile('cover_url')) {
+            $file = $request->file('cover_url');
+            $filename = time() . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path('images/album_covers'), $filename);
+            $album_cover = 'images/album_covers/' . $filename;
+        } else {
+            $album_cover = '../images/avatars/Default_avatar.png';
+        }
+
+        if($request -> description == null){
+            $description = "NO INFO";
+        }else{
+            $description = $request -> description;
+        }
+
+        $album->update([
+            'name' => $request->name,
+            'cover_url' => $album_cover,
+            'release_date' => $request->release_date,
+            'description' => $description,
+            'youtube_link' => $request->youtube_link,
+            'spotify_link' => $request->spotify_link,
+            'apple_music_link' => $request->apple_music_link,
+            'type' => $request->type,
+            'artist_id' => $artist->id,
+            'genre_id' => $genre->id,
+        ]);
+
+        return redirect('/admin-panel');
+    }
+
+    /**
+     * Deletes Album and all it's comments, likes and tracks.
+     */
+    public function delete_album($crypt_album){
+
+        $album_id = Crypt::decrypt($crypt_album);
+
+        $album = Album::find($album_id);
+
+        $tracks = DB::table('tracks')->where('album_id', $album->id)->get();
+        if ($tracks->count() != 0) {
+            foreach ($tracks as $track) {
+                $comments = DB::table('comment_tracks')->where('track_id', $track->id)->get();
+                if ($comments->count() != 0) {
+                    foreach ($comments as $comment) {
+                        $comment_delete = CommentTrack::find($comment->id)->delete;
+                    }
+                }
+
+                $likes = DB::table('like_tracks')->where('track_id', $track->id)->get();
+                if ($likes->count() != 0) {
+                    foreach ($likes as $like) {
+                        $like_delete = LikeTrack::find($like->id)->delete();
+                    }
+                }
+
+                $track_delete = Track::find($track->id)->delete();
+            }
+        }
+        
+        $comments = DB::table('comment_albums')->where('album_id', $album->id)->get();
+        if ($comments->count() != 0) {
+            foreach ($comments as $comment) {
+                $comment_delete = CommentAlbum::find($comment->id)->delete();
+            }
+        }
+
+        $likes = DB::table('like_albums')->where('album_id', $album->id)->get();
+        if ($likes->count() != 0) {
+            foreach ($likes as $like) {
+                $like_delete = LikeAlbum::find($like->id)->delete();
+            }
+        }
+
+        $album_delete = Album::find($album->id)->delete();
+
+        return redirect()->back();
     }
 }

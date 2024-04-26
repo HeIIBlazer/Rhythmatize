@@ -14,7 +14,7 @@
                 <span>All Albums</a>
             </div>
             <div class="all-button-unpressed">
-                <a href="/all_tracks/{{$crypt_artist}}" class="text-decoration-none white-text">All Tracks</a>
+                <a href="/all-tracks/{{$crypt_artist}}" class="text-decoration-none white-text">All Tracks</a>
             </div>
         </div>
 
@@ -44,6 +44,8 @@
 
                     $number_albums = 0;
 
+                    $genre = \App\Models\Genre::find($album->genre_id);
+
                     if($all_albums -> count() == 0)
                         $number_albums = $albums -> count();
                     else
@@ -59,7 +61,7 @@
                             <div class="w-100 d-flex flex-column justify-content-evenly">
                                 <p class="artist-track-name">{{$album -> name}}</p>
 
-                                <p class="artist-track-album">{{$album -> type}} | {{$album -> release_date}}</p>
+                                <p class="artist-track-album">{{$album -> type}} | {{$genre -> name}} | {{$album -> release_date}}</p>
                             </div>
                             <div class="d-flex flex-row flex-wrap align-content-end" style="padding: 10px 10px; height:45%;">
                                 @if ($album_liked == 1)
@@ -109,7 +111,7 @@
                 $i = 4;
             @endphp
             <table class="w-100">
-            @foreach ($all_albums as $albums)
+            @foreach ($all_albums as $album)
                 
             @php
                 $artist = \App\Models\Artist::find($album->artist_id);
@@ -121,8 +123,10 @@
 
                 $album_liked = DB::table('like_albums')
                         ->where('like_albums.album_id', $album->id)
-                        ->where('like_album.user_id', Auth::id())
+                        ->where('like_albums.user_id', Auth::id())
                         ->count();
+
+                $genre = \App\Models\Genre::find($album->genre_id);
             @endphp
                 <tr style="border-bottom: white solid 1px" >
                     <td style="width: 6%;" class="table-separete">
@@ -132,18 +136,27 @@
                     </td>
                     <td style="width: 8%;" class="table-separete">
                         <div class="chart-pic">
-                            <a href="/track/{{$crypt_track}}">
+                            <a href="/album/{{$crypt_album}}">
                                 <div class="chart-pic w-100">
                                     <img src="{{url ($album -> cover_url)}}" alt="" style="width: 75px; height: 75; object-fit: cover;">
                                 </div>
                             </a>
                         </div>
                     </td>
-                    <td style="width:80%;" class="table-separete">
+                    <td style="width:40%;" class="table-separete">
                         <div class="chart-big">
                             <a href="/album/{{$crypt_album}}" class="text-decoration-none">
                                 <div class="chart-big">
                                     <span class="chart-text-big">{{$album -> name}}</span>
+                                </div>
+                            </a>
+                        </div>
+                    </td>
+                    <td style="width:40%;" class="table-separete">
+                        <div class="chart-big">
+                            <a href="/album/{{$crypt_album}}" class="text-decoration-none">
+                                <div class="chart-big">
+                                    <span class="chart-small-text">{{$album -> type}} | {{$genre -> name}} | {{$album -> release_date}}</span>
                                 </div>
                             </a>
                         </div>

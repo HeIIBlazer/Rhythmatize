@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Track;
+use App\Models\CommentTrack;
+use App\Models\LikeTrack;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Crypt;
@@ -11,13 +13,8 @@ use App\Models\Album;
 class TrackController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Charts of tracks.
      */
-    public function index()
-    {
-        return view('tracks.index');
-    }
-
     public function charts()
     {
         $user = null;
@@ -31,33 +28,7 @@ class TrackController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        return view('tracks.create');
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        $request->validate([
-            'name' => 'required',
-            'duration' => 'required',
-            'youtube_link' => 'required',
-            'spotify_link' => 'required',
-            'apple_music_link' => 'required',
-            'album_id' => 'required',
-        ]);
-
-        Track::create($request->all());
-        return redirect()->route('albums.show', $request->album_id);
-    }
-
-    /**
-     * Display the specified resource.
+     * Shows info about track.
      */
     public function show_track($crypt_track)
     {
@@ -73,41 +44,8 @@ class TrackController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Shows all tracks by one artist.
      */
-    public function edit(Track $track)
-    {
-        return view('tracks.edit', compact('track'));
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Track $track)
-    {
-        $request->validate([
-            'name' => 'required',
-            'duration' => 'required',
-            'youtube_link' => 'required',
-            'spotify_link' => 'required',
-            'apple_music_link' => 'required',
-            'album_id' => 'required',
-        ]);
-
-        $track->update($request->all());
-        return redirect()->route('albums.show', $request->album_id);
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Track $track)
-    {
-        $track->delete();
-
-        return redirect()->route('albums.show', $track->album_id);
-    }
-
     public function all_tracks($crypt_artist)
     {
         $artistId = Crypt::decrypt($crypt_artist);
@@ -147,7 +85,171 @@ class TrackController extends Controller
             ->get();
 
 
-
         return view('tracks_views.allTracks', compact('tracks', 'all_tracks', 'artist'));
     }
+
+    /**
+     * Show track add page
+     */
+    public function add_track_page(){
+        $albums = Album::all();
+        return view('admin_views.track.addTrack', compact('albums'));
+    }
+
+    /**
+     * Add track.
+     */
+    public function add_track(Request $request){
+        $request->validate([
+            'name' => 'required',
+            'time' => 'required',
+            'spotify_link' => 'required',
+            'youtube_link' => 'required',
+            'apple_music_link' => 'required',
+            'album_name' => 'required',
+            'lyrics' => 'required',
+        ]);
+
+        $album = Album::where('name', $request->album_name)->first();
+
+        if($album == null){
+            return redirect()->back()->with('error', 'Album not found');
+        }
+
+        $album_track = Track::where('album_id', $album->id)->get();
+        foreach($album_track as $track){
+            if($track->name == $request->name){
+                return redirect()->back()->with('error', 'Track already exists in this album');
+            }
+        }
+
+        if($request -> lyrics == null){
+            $lyrics = 'NO LYRICS';
+        }else{
+            $lyrics = $request->lyrics;
+        }
+
+        $explicit = $request->input('explicit');
+        if($explicit == null){
+            $explicit = 'NO';
+        }else{
+            $explicit = 'YES';
+        }
+
+        Track::create(
+            [
+                'name' => $request->name,
+                'time' => $request->time,
+                'spotify_link' => $request->spotify_link,
+                'youtube_link' => $request->youtube_link,
+                'apple_music_link' => $request->apple_music_link,
+                'album_id' => $album->id,
+                'lyrics' => $lyrics,
+                'explicit' => $explicit,
+            ]
+        );
+
+        return redirect('admin-panel');
+    }
+
+    /**
+     * Show track edit page.
+     */
+    public function edit_track_page($crypt_track){
+        $track_id = Crypt::decrypt($crypt_track);
+        $track = Track::find($track_id);
+        $albums = Album::all();
+        $track_album = Album::where('id', $track->album_id)->first();
+        return view('admin_views.track.editTrack', compact('track', 'albums', 'track_album'));
+    }
+
+    /**
+     * Save edited track.
+     */
+
+     public function edit_track(Request $request){
+        $request->validate([
+            'crypt_track' => 'required',
+            'name' => 'required',
+            'time' => 'required',
+            'spotify_link' => 'required',
+            'youtube_link' => 'required',
+            'apple_music_link' => 'required',
+            'album_name' => 'required',
+            'lyrics' => '',
+        ]);
+
+        $track_id = Crypt::decrypt($request->crypt_track);
+        $track = Track::find($track_id);
+
+        $album = Album::where('name', $request->album_name)->first();
+
+        if($album == null){
+            return redirect()->back()->with('error', 'Album not found');
+        }
+
+        $album_track = Track::where('album_id', $album->id)->get();
+        if($track->name != $request->name){
+            foreach($album_track as $track){
+                if($track->name == $request->name){
+                    return redirect()->back()->with('error', 'Track already exists in this album');
+                }
+            }
+        }
+
+        if($request -> lyrics == null){
+            $lyrics = 'NO LYRICS';
+        }else{
+            $lyrics = $request->lyrics;
+        }
+
+        $explicit = $request->input('explicit');
+        if($explicit == null){
+            $explicit = 'NO';
+        }else{
+            $explicit = 'YES';
+        }
+
+        $track->update([
+            'name' => $request->name,
+            'time' => $request->time,
+            'spotify_link' => $request->spotify_link,
+            'youtube_link' => $request->youtube_link,
+            'apple_music_link' => $request->apple_music_link,
+            'album_id' => $album->id,
+            'lyrics' => $lyrics,
+            'explicit' => $explicit,
+        
+        ]);
+
+        return redirect('admin-panel');
+    }
+    
+    /**
+     * Delete track.
+     */
+    public function delete_track($crypt_track){
+        $track_id = Crypt::decrypt($crypt_track);
+
+        $track = Track::find($track_id);
+        
+        $comments = DB::table('comment_tracks')->where('track_id', $track->id)->get();
+        if ($comments->count() != 0) {
+            foreach ($comments as $comment) {
+                $comment_delete = CommentTrack::find($comment->id)->delete;
+            }
+        }
+
+        $likes = DB::table('like_tracks')->where('track_id', $track->id)->get();
+        if ($likes->count() != 0) {
+            foreach ($likes as $like) {
+                $like_delete = LikeTrack::find($like->id)->delete();
+            }
+        }
+
+        $track_delete = Track::find($track->id)->delete();
+        
+        return redirect()->back();
+    }
+
 }

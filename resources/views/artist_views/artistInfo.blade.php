@@ -34,7 +34,7 @@
         <div class="d-flex flex-row justify-content-center align-content-center mb-3">
             @if ($like == 0) 
             <div class="d-flex flex-row">
-                <a href="/like_artist/{{$artist -> id}}"><img src="{{asset('images/like.png')}}" alt="" style="width: 22px; height: 22px; margin-right: 6px;"></a>
+                <a href="/like-artist/{{$artist -> id}}"><img src="{{asset('images/like.png')}}" alt="" style="width: 22px; height: 22px; margin-right: 6px;"></a>
             </div>
             <div class="white-text">
                 <span style="color: white; font-size:20px;"> {{$artist_likes}}</span>
@@ -48,7 +48,7 @@
             </div>    
             @else ($like == 1) 
             <div>
-                <a href="/unlike_artist/{{$artist -> id}}"><img src="{{asset('images/liked.png')}}" alt="" style="width: 22px; height: 22px; margin-right: 6px;"></a>
+                <a href="/unlike-artist/{{$artist -> id}}"><img src="{{asset('images/liked.png')}}" alt="" style="width: 22px; height: 22px; margin-right: 6px;"></a>
             </div>
             <div>
                 <span style="color: white; font-size:20px;"> {{$artist_likes}} </span>
@@ -128,7 +128,7 @@
                     <textarea required placeholder="Add comment" rows="4" wrap="hard" class="comment-input" readonly></textarea>
                 </form>
             @else 
-            <form data-mdb-input-init class="mt-3" action="/save_comment_artist" method="post">
+            <form data-mdb-input-init class="mt-3" action="/save-comment-artist" method="post">
                 @csrf
                 <input type="hidden" name="artist_id" value="{{$artist->id}}">
                 <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
@@ -204,7 +204,7 @@
                 </div>
             @endforeach
         </div>
-        <a class="artist-button flex-wrap" href="/all_tracks/{{$crypt_artist}}">Show all tracks by {{$artist -> name}}</a>
+        <a class="artist-button flex-wrap" href="/all-tracks/{{$crypt_artist}}">Show all tracks by {{$artist -> name}}</a>
         @endif
 
         <div class="w-100 d-flex flex-row justify-content-evenly align-content-center">
@@ -219,7 +219,7 @@
 
         @if (count($albums) == 0)
             <div class="w-100 d-flex flex-column justify-content-center m-5">
-                <h1 class="w-100 text-center white-text text-Montserrat text-">THIS ARTIST HAS NO ALBUMS</h1>
+                <h1 class="w-100 text-center white-text text-Montserrat">THIS ARTIST HAS NO ALBUMS</h1>
             </div>
         @else
         <div class=" row justify-content-around mt-3 w-94 mb-4">
@@ -242,7 +242,7 @@
                 </div>
             @endforeach
         </div>
-        <a class="artist-button-album flex-wrap" href="/all_albums/{{$crypt_artist}}">Show all albums by {{$artist -> name}}</a>
+        <a class="artist-button-album flex-wrap" href="/all-albums/{{$crypt_artist}}">Show all albums by {{$artist -> name}}</a>
     </div>
         @endif
 </div>

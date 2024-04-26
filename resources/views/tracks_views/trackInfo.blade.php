@@ -53,7 +53,7 @@
         <div class="d-flex flex-row justify-content-center align-content-center mb-3">
             @if ($like == 0) 
             <div class="d-flex flex-row">
-                <a href="/like_track/{{$track -> id}}">
+                <a href="/like-track/{{$track -> id}}">
                     <img src="{{asset('images/like.png')}}" alt="" style="width: 22px; height: 22px; margin-right: 6px;">
                 </a>
             </div>
@@ -69,7 +69,7 @@
             </div>    
             @else ($like == 1) 
             <div>
-                <a href="/unlike_track/{{$track -> id}}"><img src="{{asset('images/liked.png')}}" alt="" style="width: 22px; height: 22px; margin-right: 6px;"></a>
+                <a href="/unlike-track/{{$track -> id}}"><img src="{{asset('images/liked.png')}}" alt="" style="width: 22px; height: 22px; margin-right: 6px;"></a>
             </div>
             <div>
                 <span style="color: white; font-size:20px;"> {{$track_likes}} </span>
@@ -190,7 +190,7 @@
                     <textarea required placeholder="Add comment" rows="4" wrap="hard" class="comment-input" readonly></textarea>
                 </form>
             @else 
-            <form data-mdb-input-init class="mt-3" action="/save_comment_track" method="post">
+            <form data-mdb-input-init class="mt-3" action="/save-comment-track" method="post">
                 @csrf
                 <input type="hidden" name="track_id" value="{{$track->id}}">
                 <input type="hidden" name="user_id" value="{{Auth::user()->id}}">

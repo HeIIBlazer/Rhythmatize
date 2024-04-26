@@ -19,6 +19,6 @@ class Artist extends Model
         'description',
         'youtube_link',
         'spotify_link',
-        'apple_link_link',
+        'apple_music_link',
     ];
 }

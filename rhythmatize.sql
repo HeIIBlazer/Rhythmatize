@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Apr 22, 2024 at 12:17 PM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- Хост: 127.0.0.1
+-- Время создания: Апр 24 2024 г., 14:35
+-- Версия сервера: 10.4.32-MariaDB
+-- Версия PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `rhythmatize`
+-- База данных: `rhythmatize`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `albums`
+-- Структура таблицы `albums`
 --
 
 CREATE TABLE `albums` (
@@ -42,7 +42,7 @@ CREATE TABLE `albums` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `albums`
+-- Дамп данных таблицы `albums`
 --
 
 INSERT INTO `albums` (`id`, `name`, `cover_url`, `release_date`, `description`, `youtube_link`, `spotify_link`, `apple_music_link`, `type`, `artist_id`, `genre_id`) VALUES
@@ -81,7 +81,7 @@ INSERT INTO `albums` (`id`, `name`, `cover_url`, `release_date`, `description`, 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `artists`
+-- Структура таблицы `artists`
 --
 
 CREATE TABLE `artists` (
@@ -96,7 +96,7 @@ CREATE TABLE `artists` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `artists`
+-- Дамп данных таблицы `artists`
 --
 
 INSERT INTO `artists` (`id`, `name`, `picture_url`, `banner_url`, `description`, `youtube_link`, `spotify_link`, `apple_music_link`) VALUES
@@ -129,7 +129,7 @@ INSERT INTO `artists` (`id`, `name`, `picture_url`, `banner_url`, `description`,
 -- --------------------------------------------------------
 
 --
--- Table structure for table `comment_albums`
+-- Структура таблицы `comment_albums`
 --
 
 CREATE TABLE `comment_albums` (
@@ -139,18 +139,10 @@ CREATE TABLE `comment_albums` (
   `content` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `comment_albums`
---
-
-INSERT INTO `comment_albums` (`id`, `user_id`, `album_id`, `content`) VALUES
-(1, 3, 3, 'Good Album!!!'),
-(2, 2, 1, 'Best album I\'ve ever listened to');
-
 -- --------------------------------------------------------
 
 --
--- Table structure for table `comment_artists`
+-- Структура таблицы `comment_artists`
 --
 
 CREATE TABLE `comment_artists` (
@@ -160,25 +152,10 @@ CREATE TABLE `comment_artists` (
   `content` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `comment_artists`
---
-
-INSERT INTO `comment_artists` (`id`, `user_id`, `artist_id`, `content`) VALUES
-(1, 3, 3, 'Best Artist'),
-(2, 2, 3, 'Good Artist!!'),
-(3, 6, 1, 'dsasdasdasdas'),
-(4, 6, 1, 'asdasdasdasd'),
-(5, 6, 1, 'hjgj'),
-(6, 6, 1, 'asdasdas'),
-(7, 6, 1, 'asdasdasdas'),
-(8, 6, 1, 'dasdasdasda'),
-(9, 6, 1, 'asdasdasdasasdasdasdasasdasdasdasasda\r\nsdasdasasdasdasdasasdasdasdasasdasdas\r\ndasasdasdasdasasdasdasdasasdasdasdasa\r\nsdasdasdasasdasdasdasasdasdasdasasdas\r\ndasdasasdasdasdasasdasdasdasasdasdas\r\ndasasdasdasdasasdasdasdasasdasdasdasa\r\nsdasdasdasasdasdasdasasdasdasdasasdas\r\ndasdasasdasdasdasasdasdasdasasdasdas\r\ndasasdasdasdasasdasdasdasasdasdasdasa\r\nsdasdasdasasdasdasdasasdasdasdasasdas\r\ndasdasasdasdasdasasdasdasdasasdasdas\r\ndasasdasdasdasasdasdasdasasdasdasdasa\r\nsdasdasdasasdasdasdasasdasdasdasasdas\r\ndasdasasdasdasdasasdasdasdasasdasdas\r\ndasasdasdasdasasdasdasdas');
-
 -- --------------------------------------------------------
 
 --
--- Table structure for table `comment_tracks`
+-- Структура таблицы `comment_tracks`
 --
 
 CREATE TABLE `comment_tracks` (
@@ -188,19 +165,10 @@ CREATE TABLE `comment_tracks` (
   `content` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `comment_tracks`
---
-
-INSERT INTO `comment_tracks` (`id`, `user_id`, `track_id`, `content`) VALUES
-(1, 3, 29, 'Good track'),
-(2, 2, 34, 'Not that good '),
-(3, 6, 1, 'LOL!');
-
 -- --------------------------------------------------------
 
 --
--- Table structure for table `genres`
+-- Структура таблицы `genres`
 --
 
 CREATE TABLE `genres` (
@@ -209,7 +177,7 @@ CREATE TABLE `genres` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `genres`
+-- Дамп данных таблицы `genres`
 --
 
 INSERT INTO `genres` (`id`, `name`) VALUES
@@ -227,7 +195,7 @@ INSERT INTO `genres` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `like_albums`
+-- Структура таблицы `like_albums`
 --
 
 CREATE TABLE `like_albums` (
@@ -236,23 +204,10 @@ CREATE TABLE `like_albums` (
   `album_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `like_albums`
---
-
-INSERT INTO `like_albums` (`id`, `user_id`, `album_id`) VALUES
-(1, 3, 3),
-(2, 2, 1),
-(3, 1, 3),
-(4, 6, 4),
-(5, 6, 22),
-(10, 6, 16),
-(12, 6, 17);
-
 -- --------------------------------------------------------
 
 --
--- Table structure for table `like_artists`
+-- Структура таблицы `like_artists`
 --
 
 CREATE TABLE `like_artists` (
@@ -261,29 +216,10 @@ CREATE TABLE `like_artists` (
   `artist_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `like_artists`
---
-
-INSERT INTO `like_artists` (`id`, `user_id`, `artist_id`) VALUES
-(1, 3, 3),
-(2, 2, 1),
-(9, 4, 1),
-(11, 4, 2),
-(14, 6, 6),
-(15, 6, 4),
-(16, 6, 1),
-(17, 6, 3),
-(18, 6, 112),
-(19, 6, 7),
-(20, 6, 2),
-(21, 4, 8),
-(22, 4, 112);
-
 -- --------------------------------------------------------
 
 --
--- Table structure for table `like_tracks`
+-- Структура таблицы `like_tracks`
 --
 
 CREATE TABLE `like_tracks` (
@@ -292,36 +228,10 @@ CREATE TABLE `like_tracks` (
   `track_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `like_tracks`
---
-
-INSERT INTO `like_tracks` (`id`, `user_id`, `track_id`) VALUES
-(1, 3, 16),
-(2, 3, 27),
-(3, 3, 34),
-(4, 3, 2),
-(5, 3, 33),
-(6, 2, 16),
-(7, 2, 17),
-(8, 2, 29),
-(9, 3, 27),
-(10, 2, 31),
-(13, 6, 4),
-(14, 6, 27),
-(15, 6, 8),
-(17, 6, 215),
-(18, 6, 221),
-(19, 6, 222),
-(20, 6, 2),
-(21, 6, 38),
-(22, 6, 14),
-(23, 6, 338);
-
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tracks`
+-- Структура таблицы `tracks`
 --
 
 CREATE TABLE `tracks` (
@@ -337,7 +247,7 @@ CREATE TABLE `tracks` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `tracks`
+-- Дамп данных таблицы `tracks`
 --
 
 INSERT INTO `tracks` (`id`, `name`, `time`, `spotify_link`, `youtube_link`, `apple_music_link`, `lyrics`, `explicit`, `album_id`) VALUES
@@ -794,7 +704,7 @@ INSERT INTO `tracks` (`id`, `name`, `time`, `spotify_link`, `youtube_link`, `app
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Структура таблицы `users`
 --
 
 CREATE TABLE `users` (
@@ -810,19 +720,19 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `users`
+-- Дамп данных таблицы `users`
 --
 
 INSERT INTO `users` (`id`, `avatar_url`, `banner_url`, `email`, `password`, `username`, `role`, `description`, `remember_token`) VALUES
-(7, 'http://127.0.0.1:8000/../images/avatars/Default_avatar.png', 'http://127.0.0.1:8000/../images/banners/Default_banner.png', 'admin@test.com', '$2y$12$xCXK4P1HLN4uoAmvL5usdubka3Ro.z1EcRe7K7dHnMeFfuQUhApGe', 'ADMIN', 'admin', '', NULL),
-(8, 'http://127.0.0.1:8000/../images/avatars/Default_avatar.png', 'http://127.0.0.1:8000/../images/banners/Default_banner.png', 'user@test.com', '$2y$12$SBPuU1/iLkF6q/iPYziwN.2OpqQSmZZR..1F3Su4RLm8o9SweVbpu', 'User', 'user', '', NULL);
+(1, 'http://127.0.0.1:8000/../images/avatars/Default_avatar.png', 'http://127.0.0.1:8000/../images/banners/Default_banner.png', 'admin@test.com', '$2y$12$xCXK4P1HLN4uoAmvL5usdubka3Ro.z1EcRe7K7dHnMeFfuQUhApGe', 'ADMIN', 'admin', '', NULL),
+(2, 'http://127.0.0.1:8000/../images/avatars/Default_avatar.png', 'http://127.0.0.1:8000/../images/banners/Default_banner.png', 'user@test.com', '$2y$12$SBPuU1/iLkF6q/iPYziwN.2OpqQSmZZR..1F3Su4RLm8o9SweVbpu', 'User', 'user', '', NULL);
 
 --
--- Indexes for dumped tables
+-- Индексы сохранённых таблиц
 --
 
 --
--- Indexes for table `albums`
+-- Индексы таблицы `albums`
 --
 ALTER TABLE `albums`
   ADD PRIMARY KEY (`id`),
@@ -830,13 +740,13 @@ ALTER TABLE `albums`
   ADD KEY `genres_album_FK` (`genre_id`);
 
 --
--- Indexes for table `artists`
+-- Индексы таблицы `artists`
 --
 ALTER TABLE `artists`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `comment_albums`
+-- Индексы таблицы `comment_albums`
 --
 ALTER TABLE `comment_albums`
   ADD PRIMARY KEY (`id`),
@@ -844,7 +754,7 @@ ALTER TABLE `comment_albums`
   ADD KEY `album_user_FK` (`album_id`);
 
 --
--- Indexes for table `comment_artists`
+-- Индексы таблицы `comment_artists`
 --
 ALTER TABLE `comment_artists`
   ADD PRIMARY KEY (`id`),
@@ -852,7 +762,7 @@ ALTER TABLE `comment_artists`
   ADD KEY `artist_user_FK` (`artist_id`);
 
 --
--- Indexes for table `comment_tracks`
+-- Индексы таблицы `comment_tracks`
 --
 ALTER TABLE `comment_tracks`
   ADD PRIMARY KEY (`id`),
@@ -860,13 +770,13 @@ ALTER TABLE `comment_tracks`
   ADD KEY `track_user_FK` (`track_id`);
 
 --
--- Indexes for table `genres`
+-- Индексы таблицы `genres`
 --
 ALTER TABLE `genres`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `like_albums`
+-- Индексы таблицы `like_albums`
 --
 ALTER TABLE `like_albums`
   ADD PRIMARY KEY (`id`),
@@ -874,7 +784,7 @@ ALTER TABLE `like_albums`
   ADD KEY `albums_users_FK` (`album_id`);
 
 --
--- Indexes for table `like_artists`
+-- Индексы таблицы `like_artists`
 --
 ALTER TABLE `like_artists`
   ADD PRIMARY KEY (`id`),
@@ -882,7 +792,7 @@ ALTER TABLE `like_artists`
   ADD KEY `users_artists_FK` (`user_id`);
 
 --
--- Indexes for table `like_tracks`
+-- Индексы таблицы `like_tracks`
 --
 ALTER TABLE `like_tracks`
   ADD PRIMARY KEY (`id`),
@@ -890,147 +800,98 @@ ALTER TABLE `like_tracks`
   ADD KEY `tracks_users_FK` (`track_id`);
 
 --
--- Indexes for table `tracks`
+-- Индексы таблицы `tracks`
 --
 ALTER TABLE `tracks`
   ADD PRIMARY KEY (`id`),
   ADD KEY `tracks_FK` (`album_id`);
 
 --
--- Indexes for table `users`
+-- Индексы таблицы `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT для сохранённых таблиц
 --
 
 --
--- AUTO_INCREMENT for table `albums`
+-- AUTO_INCREMENT для таблицы `albums`
 --
 ALTER TABLE `albums`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
--- AUTO_INCREMENT for table `artists`
+-- AUTO_INCREMENT для таблицы `artists`
 --
 ALTER TABLE `artists`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=125;
 
 --
--- AUTO_INCREMENT for table `comment_albums`
+-- AUTO_INCREMENT для таблицы `comment_albums`
 --
 ALTER TABLE `comment_albums`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `comment_artists`
+-- AUTO_INCREMENT для таблицы `comment_artists`
 --
 ALTER TABLE `comment_artists`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
--- AUTO_INCREMENT for table `comment_tracks`
+-- AUTO_INCREMENT для таблицы `comment_tracks`
 --
 ALTER TABLE `comment_tracks`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `genres`
+-- AUTO_INCREMENT для таблицы `genres`
 --
 ALTER TABLE `genres`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
--- AUTO_INCREMENT for table `like_albums`
+-- AUTO_INCREMENT для таблицы `like_albums`
 --
 ALTER TABLE `like_albums`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
--- AUTO_INCREMENT for table `like_artists`
+-- AUTO_INCREMENT для таблицы `like_artists`
 --
 ALTER TABLE `like_artists`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
--- AUTO_INCREMENT for table `like_tracks`
+-- AUTO_INCREMENT для таблицы `like_tracks`
 --
 ALTER TABLE `like_tracks`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
--- AUTO_INCREMENT for table `tracks`
+-- AUTO_INCREMENT для таблицы `tracks`
 --
 ALTER TABLE `tracks`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=435;
 
 --
--- AUTO_INCREMENT for table `users`
+-- AUTO_INCREMENT для таблицы `users`
 --
 ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- Constraints for dumped tables
+-- Ограничения внешнего ключа сохраненных таблиц
 --
 
 --
--- Constraints for table `albums`
+-- Ограничения внешнего ключа таблицы `albums`
 --
 ALTER TABLE `albums`
   ADD CONSTRAINT `albums_FK` FOREIGN KEY (`artist_id`) REFERENCES `artists` (`id`),
   ADD CONSTRAINT `genres_album_FK` FOREIGN KEY (`genre_id`) REFERENCES `genres` (`id`);
-
---
--- Constraints for table `comment_albums`
---
-ALTER TABLE `comment_albums`
-  ADD CONSTRAINT `album_user_FK` FOREIGN KEY (`album_id`) REFERENCES `albums` (`id`),
-  ADD CONSTRAINT `user_album_FK` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
-
---
--- Constraints for table `comment_artists`
---
-ALTER TABLE `comment_artists`
-  ADD CONSTRAINT `artist_user_FK` FOREIGN KEY (`artist_id`) REFERENCES `artists` (`id`),
-  ADD CONSTRAINT `user_artist_FK` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
-
---
--- Constraints for table `comment_tracks`
---
-ALTER TABLE `comment_tracks`
-  ADD CONSTRAINT `track_user_FK` FOREIGN KEY (`track_id`) REFERENCES `tracks` (`id`),
-  ADD CONSTRAINT `user_track_FK` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
-
---
--- Constraints for table `like_albums`
---
-ALTER TABLE `like_albums`
-  ADD CONSTRAINT `albums_users_FK` FOREIGN KEY (`album_id`) REFERENCES `albums` (`id`),
-  ADD CONSTRAINT `users_albums_FK` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
-
---
--- Constraints for table `like_artists`
---
-ALTER TABLE `like_artists`
-  ADD CONSTRAINT `artists_users_FK` FOREIGN KEY (`artist_id`) REFERENCES `artists` (`id`),
-  ADD CONSTRAINT `users_artists_FK` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
-  ADD CONSTRAINT `users_tracks_FK` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
-
---
--- Constraints for table `like_tracks`
---
-ALTER TABLE `like_tracks`
-  ADD CONSTRAINT `tracks_users_FK` FOREIGN KEY (`track_id`) REFERENCES `tracks` (`id`),
-  ADD CONSTRAINT `users_trackss_FK` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
-
---
--- Constraints for table `tracks`
---
-ALTER TABLE `tracks`
-  ADD CONSTRAINT `tracks_FK` FOREIGN KEY (`album_id`) REFERENCES `albums` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

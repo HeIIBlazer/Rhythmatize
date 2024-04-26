@@ -37,7 +37,7 @@
                 </div>
                     
                 <div class="mb-2 mt-2">
-                    <a href="/last_added_albums"><button class="see_more_button" type="submit">See more</button></a>
+                    <a href="/last-added-albums"><button class="see_more_button" type="submit">See more</button></a>
                 </div>
             </div>
         </div>
@@ -68,7 +68,7 @@
                     @endforeach
                 </div>
                 <div class="button-div">
-                    <a href="{{url ('/album_chart')}}"><button class="see_more_button" type="submit">See more</button></a>
+                    <a href="{{url ('/album-chart')}}"><button class="see_more_button" type="submit">See more</button></a>
                 </div>
             </div>
 
@@ -92,7 +92,7 @@
                     @endforeach
                 </div>
                 <div class="button-div">
-                    <a href="{{url ('/artist_chart')}}"><button class="see_more_button" type="submit">See more</button></a>
+                    <a href="{{url ('/artist-chart')}}"><button class="see_more_button" type="submit">See more</button></a>
                 </div>
             </div>
 
@@ -122,7 +122,7 @@
                     </div>
 
                     <div class="button-div">
-                        <a href="{{ url ('/track_chart') }}"><button class="see_more_button" type="submit">See more</button></a>
+                        <a href="{{ url ('/track-chart') }}"><button class="see_more_button" type="submit">See more</button></a>
                     </div>
             </div>
         </div>

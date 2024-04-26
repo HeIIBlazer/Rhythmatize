@@ -37,9 +37,15 @@ class AuthController extends Controller
         }
         return redirect()->back()->with('error_login', 'Email or password is incorrect');
     }
-    public function logout()
+    public function logout(Request $request)
     {
-        auth::logout();
-        return redirect()->back();
+        Auth::logout();
+    
+        $request->session()->invalidate();
+    
+        $request->session()->regenerateToken();
+    
+        return redirect('/')->with('showLoginModal', true);
     }
+
 }

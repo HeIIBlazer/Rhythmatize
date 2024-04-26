@@ -33,13 +33,18 @@
         <div>
             <h1 class="info-header">{{$album -> name}}</h1>
         </div>
-        <div class="mb-3">
-            <a href="/artist/{{$crypt_artist}}" class="white-text text-decoration-none"><h3 class="artists-lower-text">{{$genre -> name}} | {{$artist -> name}}</a></h3>
+        <div class="mb-0">
+            <p class="artists-lower-text ">
+                {{$album -> type}} | {{$genre -> name}} | {{$album -> release_date}} 
+            </p>
+        </div>
+        <div class="mb-3 mt-0">
+            <a href="/artist/{{$crypt_artist}}" class="white-text text-decoration-none"><h3 class="artists-lower-text">{{$artist -> name}}</a></h3>
         </div>
         <div class="d-flex flex-row justify-content-center align-content-center mb-3">
             @if ($like == 0) 
             <div class="d-flex flex-row">
-                <a href="/like_album/{{$album -> id}}">
+                <a href="/like-album/{{$album -> id}}">
                     <img src="{{asset('images/like.png')}}" alt="" style="width: 22px; height: 22px; margin-right: 6px;">
                 </a>
             </div>
@@ -55,7 +60,7 @@
             </div>    
             @else ($like == 1) 
             <div>
-                <a href="/unlike_album/{{$album -> id}}"><img src="{{asset('images/liked.png')}}" alt="" style="width: 22px; height: 22px; margin-right: 6px;"></a>
+                <a href="/unlike-album/{{$album -> id}}"><img src="{{asset('images/liked.png')}}" alt="" style="width: 22px; height: 22px; margin-right: 6px;"></a>
             </div>
             <div>
                 <span style="color: white; font-size:20px;"> {{$album_likes}} </span>
@@ -143,7 +148,7 @@
             </div>
             <hr>
             <div class="w-100 d-flex justify-content-center">
-                <a href="/all_albums/{{$crypt_artist}}" class="all-button">View all {{$artist -> name}} albums</a>
+                <a href="/all-albums/{{$crypt_artist}}" class="all-button">View all {{$artist -> name}} albums</a>
             </div>
             @endif
         </div>
@@ -189,7 +194,7 @@
                     <textarea required placeholder="Add comment" rows="4" wrap="hard" class="comment-input" readonly></textarea>
                 </form>
             @else 
-            <form data-mdb-input-init class="mt-3" action="/save_comment_album" method="post">
+            <form data-mdb-input-init class="mt-3" action="/save-comment-album" method="post">
                 @csrf
                 <input type="hidden" name="album_id" value="{{$album->id}}">
                 <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
@@ -210,6 +215,11 @@
                 <div class="artist-header-line"></div>
             </div>
         </div>
+        @if (count($tracks) == 0)
+            <div class="w-100 d-flex flex-column justify-content-center">
+                <h1 class="w-100 text-center white-text text-Montserrat mt-2">THIS ALBUM HAS NO TRACKS FOR NOW</h1>
+            </div>
+        @else
         <div class="w-100 mt-3">
             <table class="w-100">
             @foreach ($tracks as $track)
@@ -278,6 +288,8 @@
                 @endphp
             @endforeach
             </table>
+        @endif
+        
         </div>
         
     </div>
