@@ -24,7 +24,7 @@ class CommentTrackController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($comment)
+    public function delete_track_comment($comment)
     {
         $comment_delete = CommentTrack::find($comment)->delete();
         return redirect()->back();

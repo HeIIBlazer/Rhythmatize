@@ -10,6 +10,12 @@ body {
 .white-text {
     color: white;
 }
+
+.cursor-pointer{
+    cursor: pointer;
+
+}
+
 .modal-content {
     max-height: 100%;
     overflow: hidden;
