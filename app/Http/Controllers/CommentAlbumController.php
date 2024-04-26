@@ -71,9 +71,9 @@ class CommentAlbumController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(CommentAlbum $commentAlbum)
+    public function destroy($comment)
     {
-        $commentAlbum->delete();
-        return redirect()->route('albums.show', $commentAlbum->album_id);
+        $comment_delete = CommentAlbum::find($comment)->delete();
+        return redirect()->back();
     }
 }

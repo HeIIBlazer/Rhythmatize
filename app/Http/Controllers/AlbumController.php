@@ -33,8 +33,8 @@ class AlbumController extends Controller
     {
         
         $albums = DB::table("albums")->select('albums.*', DB::raw('count(like_albums.id) as likes_count'))
-                        ->leftJoin('like_albums', 'albums.id', '=', 'like_albums.album_id')
-                        ->groupBy('albums.id', 'albums.name' , 'albums.cover_url', 'albums.release_date', 'albums.description', 'albums.youtube_link', 'albums.spotify_link', 'albums.apple_music_link', 'albums.type', 'albums.artist_id', 'albums.genre_id')
+                        ->leftJoin('like_albums',"album_id",'=' ,'albums.id')
+                        ->groupBy('albums.id', 'albums.name', 'albums.cover_url', 'albums.release_date', 'albums.description', 'albums.youtube_link', 'albums.spotify_link', 'albums.apple_music_link', 'albums.type', 'albums.artist_id', 'albums.genre_id')
                         ->orderBy('likes_count', 'desc',)
                         ->paginate(10);
 
@@ -47,16 +47,16 @@ class AlbumController extends Controller
     public function top_3_albums()
     {
         $albums = DB::table("albums")->select('albums.*', DB::raw('count(like_albums.id) as likes_count'))
-                        ->leftJoin('like_albums', 'albums.id', '=', 'like_albums.album_id')
+                        ->leftJoin('like_albums',"album_id",'=' ,'albums.id')
                         ->groupBy('albums.id', 'albums.name' , 'albums.cover_url', 'albums.release_date', 'albums.description', 'albums.youtube_link', 'albums.spotify_link', 'albums.apple_music_link', 'albums.type', 'albums.artist_id', 'albums.genre_id')
-                        ->orderBy('likes_count', 'desc',)
+                        ->orderBy('likes_count', 'asc',)
                         ->limit(3)
                         ->get();
 
         $lastAdded = Album::orderBy('id', 'desc')->take(3)->get();
 
-        $artists = Artist::select('artists.*', DB::raw('count(like_artists.id) as likes_count'))
-                        ->leftJoin('like_artists', 'artists.id', '=', 'like_artists.artist_id')
+        $artists = DB::table("artists")->select('artists.*', DB::raw('count(like_artists.id) as likes_count'))
+                        ->leftJoin('like_artists', 'artist_id', '=', 'artists.id')
                         ->groupBy('artists.id', 'artists.name', 'artists.picture_url', 'artists.banner_url', 'artists.description', 'artists.youtube_link', 'artists.spotify_link', 'artists.apple_music_link')
                         ->orderBy('likes_count', 'desc')
                         ->limit(3)

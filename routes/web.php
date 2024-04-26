@@ -37,6 +37,7 @@ Route::get('/last-added-albums', [AlbumController::class, 'last_added']);
 Route::get('/album/{album}', [AlbumController::class, 'show_album']);
 Route::post('/save-comment-album', [CommentAlbumController::class, 'save_comment'])->name('save_comment');
 Route::get('/all-albums/{artist}', [AlbumController::class, 'all_albums']);
+Route::get('/delete-album-comment/{comment}', [CommentAlbumController::class, 'delete_album_comment']);
 
 
 // ARTISTS
@@ -52,6 +53,7 @@ Route::get('/track-chart', [TrackController::class, 'charts']);
 Route::get('/track/{track}', [TrackController::class, 'show_track']);
 Route::post('/save-comment-track', [CommentTrackController::class, 'save_comment'])->name('save_comment');
 Route::get('/all-tracks/{artist}', [TrackController::class, 'all_tracks']);
+Route::get('/delete-track-comment/{comment}', [CommentTrackController::class, 'delete_track_comment']);
 
 // USER
 Route::get('/user/{user}', [UserController::class, 'show_user']);
