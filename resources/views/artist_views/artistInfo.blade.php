@@ -110,10 +110,20 @@
                     $crypt = Crypt::encrypt($user->id);
                 @endphp
                 <div class=" w-100 d-flex flex-column">
-                    <div class="d-flex flex-row align-items-center mb-3" style="height: 35px">
-                        <img src=" {{url ($user -> avatar_url)}}" alt="" style="width: 35px; height: 35px; margin-right: 5px; border-radius:200px;">
-                        <a href="/user/{{$crypt}}" class="comment-user">{{$user -> username}}</a>
+                    <div class="d-flex flex-row justify-content-between align-items-center">
+                        <div class="d-flex flex-row align-items-center mb-3" style="height: 35px">
+                            <img src=" {{url ($user -> avatar_url)}}" alt="" style="width: 35px; height: 35px; margin-right: 5px; border-radius:200px;">
+                            <a href="/user/{{$crypt}}" class="comment-user">{{$user -> username}}</a>
+                        </div>
+                        @if ($like != 2)
+                            @if(Auth::user()->role == 'admin' || Auth::user()->id == $comment -> user_id)
+                            <a href="/delete-artist-comment/{{$comment -> id}}" class="text-decoration-none mb-3">
+                                <span aria-hidden="true" style="font-size:30px;" class="white-text">&times;</span>
+                            </a>
+                            @endif
+                        @endif
                     </div>
+
                     <div  class="w-100">
                         <p class="text-Montserrat">{{$comment -> content}}</p>
                     </div>

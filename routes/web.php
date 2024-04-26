@@ -45,6 +45,7 @@ Route::get('/artist-chart', [ArtistController::class, 'charts']);
 Route::get('/last-added-artists', [ArtistController::class, 'last_added']);
 Route::get('/artist/{artist}', [ArtistController::class, 'show_artist']);
 Route::post('/save-comment-artist', [CommentArtistController::class, 'save_comment'])->name('save_comment');
+Route::get('/delete-artist-comment/{comment}', [CommentArtistController::class, 'delete_artist_comment']);
 
 // TRACKS
 Route::get('/track-chart', [TrackController::class, 'charts']);

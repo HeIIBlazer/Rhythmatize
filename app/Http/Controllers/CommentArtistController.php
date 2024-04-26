@@ -49,36 +49,9 @@ class CommentArtistController extends Controller
         return redirect()->route('artists.show', $request->artist_id);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(CommentArtist $commentArtist)
+    public function delete_artist_comment($comment)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(CommentArtist $commentArtist)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, CommentArtist $commentArtist)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(CommentArtist $commentArtist)
-    {
-        $commentArtist->delete();
-        return redirect()->route('artists.show', $commentArtist->artist_id);
+        $comment_delete = CommentArtist::find($comment)->delete();
+        return redirect()->back();
     }
 }
