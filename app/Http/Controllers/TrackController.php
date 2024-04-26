@@ -88,6 +88,142 @@ class TrackController extends Controller
         return view('tracks_views.allTracks', compact('tracks', 'all_tracks', 'artist'));
     }
 
+    /**
+     * Show track add page
+     */
+    public function add_track_page(){
+        $albums = Album::all();
+        return view('admin_views.track.addTrack', compact('albums'));
+    }
+
+    /**
+     * Add track.
+     */
+    public function add_track(Request $request){
+        $request->validate([
+            'name' => 'required',
+            'time' => 'required',
+            'spotify_link' => 'required',
+            'youtube_link' => 'required',
+            'apple_music_link' => 'required',
+            'album_name' => 'required',
+            'lyrics' => 'required',
+        ]);
+
+        $album = Album::where('name', $request->album_name)->first();
+
+        if($album == null){
+            return redirect()->back()->with('error', 'Album not found');
+        }
+
+        $album_track = Track::where('album_id', $album->id)->get();
+        foreach($album_track as $track){
+            if($track->name == $request->name){
+                return redirect()->back()->with('error', 'Track already exists in this album');
+            }
+        }
+
+        if($request -> lyrics == null){
+            $lyrics = 'NO LYRICS';
+        }else{
+            $lyrics = $request->lyrics;
+        }
+
+        $explicit = $request->input('explicit');
+        if($explicit == null){
+            $explicit = 'NO';
+        }else{
+            $explicit = 'YES';
+        }
+
+        Track::create(
+            [
+                'name' => $request->name,
+                'time' => $request->time,
+                'spotify_link' => $request->spotify_link,
+                'youtube_link' => $request->youtube_link,
+                'apple_music_link' => $request->apple_music_link,
+                'album_id' => $album->id,
+                'lyrics' => $lyrics,
+                'explicit' => $explicit,
+            ]
+        );
+
+        return redirect('admin-panel');
+    }
+
+    /**
+     * Show track edit page.
+     */
+    public function edit_track_page($crypt_track){
+        $track_id = Crypt::decrypt($crypt_track);
+        $track = Track::find($track_id);
+        $albums = Album::all();
+        $track_album = Album::where('id', $track->album_id)->first();
+        return view('admin_views.track.editTrack', compact('track', 'albums', 'track_album'));
+    }
+
+    /**
+     * Save edited track.
+     */
+
+     public function edit_track(Request $request){
+        $request->validate([
+            'crypt_track' => 'required',
+            'name' => 'required',
+            'time' => 'required',
+            'spotify_link' => 'required',
+            'youtube_link' => 'required',
+            'apple_music_link' => 'required',
+            'album_name' => 'required',
+            'lyrics' => '',
+        ]);
+
+        $track_id = Crypt::decrypt($request->crypt_track);
+        $track = Track::find($track_id);
+
+        $album = Album::where('name', $request->album_name)->first();
+
+        if($album == null){
+            return redirect()->back()->with('error', 'Album not found');
+        }
+
+        $album_track = Track::where('album_id', $album->id)->get();
+        if($track->name != $request->name){
+            foreach($album_track as $track){
+                if($track->name == $request->name){
+                    return redirect()->back()->with('error', 'Track already exists in this album');
+                }
+            }
+        }
+
+        if($request -> lyrics == null){
+            $lyrics = 'NO LYRICS';
+        }else{
+            $lyrics = $request->lyrics;
+        }
+
+        $explicit = $request->input('explicit');
+        if($explicit == null){
+            $explicit = 'NO';
+        }else{
+            $explicit = 'YES';
+        }
+
+        $track->update([
+            'name' => $request->name,
+            'time' => $request->time,
+            'spotify_link' => $request->spotify_link,
+            'youtube_link' => $request->youtube_link,
+            'apple_music_link' => $request->apple_music_link,
+            'album_id' => $album->id,
+            'lyrics' => $lyrics,
+            'explicit' => $explicit,
+        
+        ]);
+
+        return redirect('admin-panel');
+    }
     
     /**
      * Delete track.

@@ -376,6 +376,7 @@ class AlbumController extends Controller
             }
         }
 
+        $likes = DB::table('like_albums')->where('album_id', $album->id)->get();
         if ($likes->count() != 0) {
             foreach ($likes as $like) {
                 $like_delete = LikeAlbum::find($like->id)->delete();

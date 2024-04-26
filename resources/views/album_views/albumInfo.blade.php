@@ -35,7 +35,7 @@
         </div>
         <div class="mb-0">
             <p class="artists-lower-text ">
-                {{$genre -> name}} | {{$album -> type}} 
+                {{$album -> type}} | {{$genre -> name}} | {{$album -> release_date}} 
             </p>
         </div>
         <div class="mb-3 mt-0">

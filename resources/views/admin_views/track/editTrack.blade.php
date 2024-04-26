@@ -1,0 +1,152 @@
+@extends('layouts.app', ['title' => 'Edit - '.$track -> name])
+
+@section('content')
+
+    @php
+        $crypt_track = Crypt::encrypt($track -> id);
+    @endphp
+    <div class="container">
+
+        <div class="Header-List">
+            <p>EDIT {{$track -> name}}</p>
+        </div>
+
+        @if (session()->has('error'))
+        <div class="alert error-login-1">
+            {{session()->get('error')}}
+        </div>
+        @endif
+
+        <div>
+            <form method="POST" action="{{url('/save-edited-track')}}" enctype="multipart/form-data">
+                @csrf
+
+                <div class="d-flex justify-content-evenly h-100 mb-5">
+                    <input type="hidden" name="crypt_track" value="{{$crypt_track}}">
+                    <div class="w-50">
+                        <div>  
+                            <div>
+                                <label for="name" class="mb-0 mt-2 add_input_label">EDIT TRACK NAME</label>
+                                <input type="text" class="add-input" id="name" name="name" value="{{$track -> name}}" required>
+                            </div>
+    
+                            <div>
+                                <label for="description" class="mb-0 mt-2 add_input_label">EDIT SPOTIFY LINK</label>
+                                <input type="text" class="add-input" id="spotify_link" name="spotify_link" value="{{$track -> spotify_link}}" required>
+                            </div>
+    
+                            <div>
+                                <label for="apple_music_link" class="mb-0 mt-2 add_input_label">EDIT APPLE MUSIC LINK</label>
+                                <input type="text" class="add-input" id="apple_music_link" name="apple_music_link" value="{{$track -> apple_music_link}}" required>
+                            </div>
+    
+                            <div>
+                                <label for="youtube_link" class="mb-0 mt-2 add_input_label">ADD YOUTUBE MUSIC LINK</label>
+                                <input type="text" class="add-input" id="youtube_link" name="youtube_link" value="{{$track -> youtube_link}}" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="w-50 h-100 d-flex flex-column justify-content-end">
+                        <div class="w-100 d-flex flex-row">
+                            <div class="w-75">
+                                <label for="track_length" class="mb-0 mt-2 add_input_label">EDIT TRACK LENGTH</label>
+                                <input type="text" class="add-input" id="track_length" name="time" value="{{$track -> time}}" required>
+                            </div>
+                            @if ($track -> explicit == "YES")
+                            <div class="w-25">
+                                <label for="explicit" class="mb-0 mt-2 add_input_label">
+                                    EXPLICIT
+                                </label>
+                                <div class="d-flex flex-row align-items-center">
+                                    <input type="checkbox" id="explicit" name="explicit" class="form-check-input mt-3 mb-3" checked>
+                                    <label for="explicit" class="remember-me">YES</label>
+                                </div>
+                            </div>
+                        @else
+                            <div class="w-25">
+                                <label for="explicit" class="mb-0 mt-2 add_input_label">
+                                    EXPLICIT
+                                </label>
+                                <div class="d-flex flex-row align-items-center">
+                                    <input type="checkbox" id="explicit" name="explicit" class="form-check-input mt-3 mb-3">
+                                    <label for="explicit" class="remember-me">YES</label>
+                                </div>
+                            </div>
+                        @endif
+
+                        </div>
+
+                        <div class="w-100 d-flex flex-row">
+                            <div class="w-95">
+                                <label for="album_name" class="mb-0 mt-2 add_input_label">CHOOSE ALBUM</label>
+                                <input type="text" class="add-input-genre" id="album_name" list="albums-list" name="album_name" value="{{$track_album -> name}}" required>
+                            </div>
+
+                            <a href="/add-album" class="plus-button">
+                                +
+                            </a>
+                        </div>
+                        <datalist id="albums-list">
+                            @foreach ($albums as $album)
+                                <option value="{{$album -> name}}"></option>
+                            @endforeach
+                        </datalist>
+
+                        <div class=" w-100">
+                            <label for="lyrics" class="mb-0 mt-2 add_input_label">EDIT LYRICS</label>
+                            <textarea class="add_textarea-small" id="description" name="lyrics">{{$track -> lyrics}}</textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-flex w-100 flex-row justify-content-evenly mb-5">
+                    <button type="submit" class="add-save-button me-3">SAVE</button>
+                    <a href="/admin-panel" class="add-cancel-button text-decoration-none">CANCEL</a>
+                </div>
+            </form>
+        </div>
+        </div>
+
+    </div>
+
+    <script>
+
+        $(document).ready(function () {
+            if ($('.error-genre').length > 0) {
+            // Open the modal window
+                $('#addGenreModal').modal('show');
+            }
+        });
+        
+        document.getElementById('photoInput').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            const reader = new FileReader();
+            const fileName = event.target.files[0].name;
+
+            reader.onload = function(event) {
+                document.getElementById('photoPreview').src = event.target.result;
+                document.getElementById('photoPreview').style.padding = '0';
+                document.getElementById('photoInputText').textContent = fileName;
+            };
+
+            reader.readAsDataURL(file);
+        });
+
+        document.getElementById('coverInput').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            const reader = new FileReader();
+            const fileName = event.target.files[0].name;
+
+            reader.onload = function(event) {
+                document.getElementById('coverPreview').src = event.target.result;
+                document.getElementById('coverPreview').style.padding = '0';
+                document.getElementById('coverInputText').textContent = fileName;
+            };
+
+            reader.readAsDataURL(file);
+        });
+
+    </script>
+
+@endsection

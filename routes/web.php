@@ -99,6 +99,6 @@ Route::middleware('admin')->group(function () {
     Route::get('/add-track', [TrackController::class, 'add_track_page']);
     Route::post('/add-track-to-database', [TrackController::class, 'add_track']);
     Route::get('/edit-track/{track}', [TrackController::class, 'edit_track_page']);
-    Route::post('/save-edited-track', [TrackController::class, 'save_edited_track']);
+    Route::post('/save-edited-track', [TrackController::class, 'edit_track']);
     Route::get('/delete-track/{track}', [TrackController::class, 'delete_track']);
 });
