@@ -28,7 +28,7 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-        <a class="navbar-brand" href="/"><img src="{{ URL::asset('images/logo.png') }}" alt="Logo_Rhythmatize"></a>
+        <a class="navbar-brand" href="/"><h1 class="logo-text ms-2">Rhythmatize</h1></a>
         <ul class="navbar-nav me-auto justify-content-evenly w-25 mb-2 mb-lg-0">
           <li class="nav-item">
             <div class="dropdown">
@@ -167,7 +167,7 @@
         @else
         <li class="avatar-button">
           <div class="dropdown">
-              <a class="header_button" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"><img src="{{url (Auth::user()-> avatar_url)}}" alt="" style="width: 45px; height: 45px; border-radius: 50px; object-fit: cover;"></a>
+              <a class="header_button" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"><img src="{{url (Auth::user()-> avatar_url)}}" alt="" style="width: 45px; height: 45px; border-radius: 50px; object-fit: cover; border: 2px solid white"></a>
             <ul class="dropdown-menu dropdown-menu-dark slim-dropdown-menu" aria-labelledby="dropdownMenuLink">
               @php
                 $crypt_user = Crypt::encrypt(Auth::user() -> id);

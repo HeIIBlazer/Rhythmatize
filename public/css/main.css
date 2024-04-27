@@ -11,6 +11,16 @@ body {
     color: white;
 }
 
+.logo-text {
+    font-family: 'audiowide', sans-serif;
+    font-size: 40px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    
+}
+
 .cursor-pointer{
     cursor: pointer;
 

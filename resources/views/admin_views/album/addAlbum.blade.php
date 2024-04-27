@@ -136,7 +136,7 @@
                                 </div>
                                 <div class="d-flex w-100 flex-row justify-content-evenly mt-5 mb-3">
                                     <button type="submit" class="add-save-button w-25 me-3">SAVE</button>
-                                    <button type="button" class="add-cancel-button w-25" data-bs-dismiss="modal">CANCEL</button>
+                                    <button type="button" data-toggle="modal" data-target="#addGenreModal" data-dismiss="modal" id="modal-close-cancel" class="add-cancel-button w-25" >CANCEL</button>
                                 </div>
                             </form>
                             
@@ -149,15 +149,16 @@
 
     </div>
 
-    <script>
+    <script>   
 
         $(document).ready(function () {
             if ($('.error-genre').length > 0) {
             // Open the modal window
                 $('#addGenreModal').modal('show');
             }
+
         });
-        
+                
         document.getElementById('photoInput').addEventListener('change', function(event) {
             const file = event.target.files[0];
             const reader = new FileReader();

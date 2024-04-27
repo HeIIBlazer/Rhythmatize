@@ -107,7 +107,7 @@ class TrackController extends Controller
             'youtube_link' => 'required',
             'apple_music_link' => 'required',
             'album_name' => 'required',
-            'lyrics' => 'required',
+            'lyrics' => '',
         ]);
 
         $album = Album::where('name', $request->album_name)->first();

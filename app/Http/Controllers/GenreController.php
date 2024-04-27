@@ -16,8 +16,9 @@ class GenreController extends Controller
             'name_genre' => 'required'
         ]);
 
-        $genre_exist = Genre::where('name', $request->name_genre)->get();
-        if ($genre_exist) {
+        $genre_exist = Genre::where('name', $request->name_genre)->first();
+
+        if ($genre_exist != null) {
             return redirect()->back()->with('error_genre', 'Genre already exists');
         }
 
