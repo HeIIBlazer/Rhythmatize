@@ -216,6 +216,12 @@
                 $(document).ready(function(){
                     $('#artist-added').toast('show');
                 });
+
+                $(document).ready(function(){
+                    $('.cross-button').on('click', function(){
+                        $(this).closest('.toast').toast('hide');
+                    });
+                });
             </script>
             @php
                 $artist_id = session()->get('artistId');
@@ -223,7 +229,7 @@
             @endphp
             <!-- Then put toasts within -->
             <div class="w-100 d-flex justify-content-center align-items-center position-fixed top-0 start-50 translate-middle-x mt-3" style="z-index: 9999;">
-                <div class="toast" id="artist-added" role="alert" aria-live="assertive" aria-atomic="true" data-delay="10000"  data-autohide="true">
+                <div class="toast" id="artist-added" role="alert" aria-live="assertive" aria-atomic="true" data-delay="10000"  data-autohide="true" style="z-index: 10000;">
                     <div class="toast-header">
                         <img src="{{ URL::asset('images/logo_title.png') }}" class="rounded mr-2" alt="...">
                         <strong class="me-auto">Rhythmatize</strong>
@@ -240,6 +246,12 @@
             <script>
                 $(document).ready(function(){
                     $('#artist-edited').toast('show');
+                });
+
+                $(document).ready(function(){
+                    $('.cross-button').on('click', function(){
+                        $(this).closest('.toast').toast('hide');
+                    });
                 });
             </script>
             @php
@@ -266,6 +278,12 @@
                 $(document).ready(function(){
                     $('#artist-deleted').toast('show');
                 });
+
+                $(document).ready(function(){
+                    $('.cross-button').on('click', function(){
+                        $(this).closest('.toast').toast('hide');
+                    });
+                });
             </script>
             <div class="w-100 d-flex justify-content-center align-items-center position-fixed top-0 start-50 translate-middle-x mt-3" style="z-index: 9999;">
                 <div class="toast" id="artist-deleted" role="alert" aria-live="assertive" aria-atomic="true" data-delay="10000"  data-autohide="true">
@@ -285,6 +303,12 @@
             <script>
                 $(document).ready(function(){
                     $('#album-added').toast('show');
+                });
+
+                $(document).ready(function(){
+                    $('.cross-button').on('click', function(){
+                        $(this).closest('.toast').toast('hide');
+                    });
                 });
             </script>
             @php
@@ -311,6 +335,12 @@
                 $(document).ready(function(){
                     $('#album-edited').toast('show');
                 });
+
+                $(document).ready(function(){
+                    $('.cross-button').on('click', function(){
+                        $(this).closest('.toast').toast('hide');
+                    });
+                });
             </script>
             @php
                 $album_id = session()->get('albumId');
@@ -336,6 +366,14 @@
                 $(document).ready(function(){
                     $('#album-deleted').toast('show');
                 });
+
+                document.querySelectorAll('.cross-button').forEach(function(button) {
+                    button.addEventListener('click', function() {
+                        var toastElement = button.closest('.toast');
+                        var toast = new bootstrap.Toast(toastElement);
+                        toast.hide();
+                    });
+                });
             </script>
             <div class="w-100 d-flex justify-content-center align-items-center position-fixed top-0 start-50 translate-middle-x mt-3" style="z-index: 9999;">
                 <div class="toast" id="album-deleted" role="alert" aria-live="assertive" aria-atomic="true" data-delay="10000"  data-autohide="true">
@@ -355,6 +393,12 @@
             <script>
                 $(document).ready(function(){
                     $('#track-added').toast('show');
+                });
+
+                $(document).ready(function(){
+                    $('.cross-button').on('click', function(){
+                        $(this).closest('.toast').toast('hide');
+                    });
                 });
             </script>
             @php
@@ -381,6 +425,12 @@
                 $(document).ready(function(){
                     $('#track-edited').toast('show');
                 });
+
+                $(document).ready(function(){
+                    $('.cross-button').on('click', function(){
+                        $(this).closest('.toast').toast('hide');
+                    });
+                });
             </script>
             @php
                 $track_id = session()->get('trackId');
@@ -405,6 +455,12 @@
             <script>
                 $(document).ready(function(){
                     $('#track-deleted').toast('show');
+                });
+
+                $(document).ready(function(){
+                    $('.cross-button').on('click', function(){
+                        $(this).closest('.toast').toast('hide');
+                    });
                 });
             </script>
             <div class="w-100 d-flex justify-content-center align-items-center position-fixed top-0 start-50 translate-middle-x mt-3" style="z-index: 9999;">
