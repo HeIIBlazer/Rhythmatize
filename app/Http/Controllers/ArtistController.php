@@ -121,7 +121,7 @@ class ArtistController extends Controller
             $file->move(public_path('images/artist_images'), $filename);
             $picture_url = 'images/artist_images/' . $filename;
         } else {
-            $picture_url = 'public/avatars/Default_avatar.png';
+            $picture_url = '../images/avatars/Default_avatar.png';
         }
         
         if ($request->hasFile('banner_url')) {
@@ -130,7 +130,7 @@ class ArtistController extends Controller
             $file->move(public_path('images/artist_banners'), $filename);
             $banner_url = 'images/artist_banners/' . $filename;
         } else {
-            $banner_url = 'public/banners/Default_banner.png';
+            $banner_url = '../images/banners/Default_banner.png';
         }
 
         if($request -> description == null){
@@ -148,8 +148,10 @@ class ArtistController extends Controller
             'picture_url' => $picture_url,
             'banner_url' => $banner_url,
         ]);
+
+        $artist = Artist::where('name', $request->name)->first();
         
-        return redirect('/admin-panel');
+        return redirect('/admin-panel')->with('success-artist-added', 'Artist added successfully.')->with('artistId', $artist->id);
     }
 
     /**
@@ -208,7 +210,7 @@ class ArtistController extends Controller
             'banner_url' => $banner_url,
         ]);
 
-        return redirect('/admin-panel');
+        return redirect('/admin-panel')->with('success-artist-edited', 'Artist edited succesfully!')->with('artistId', $artist->id);
     }
 
     /**
@@ -272,7 +274,7 @@ class ArtistController extends Controller
 
             $artist->delete();
 
-            return redirect()->back();
+            return redirect()->back()->with('success-artist-deleted', 'Artist deleted succesfully!');
     }
 }
 

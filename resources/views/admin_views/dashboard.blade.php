@@ -3,11 +3,14 @@
 @section('content')
 
     <div class="container">
+
         <div>
             <div class="Header-List">
                 <p>ADMIN DASHBOARD</p>
             </div>
         </div>
+
+
 
         <div class="d-flex flex-column justify-content-center mt-2 mb-3">
             <div class="Header-List">
@@ -208,8 +211,220 @@
             </div>
         </div>
 
-    </div>
+        @if (session()->has('success-artist-added'))
+            <script>
+                $(document).ready(function(){
+                    $('#artist-added').toast('show');
+                });
+            </script>
+            @php
+                $artist_id = session()->get('artistId');
+                $crypt_artist = Crypt::encrypt($artist_id);
+            @endphp
+            <!-- Then put toasts within -->
+            <div class="w-100 d-flex justify-content-center align-items-center position-fixed top-0 start-50 translate-middle-x mt-3" style="z-index: 9999;">
+                <div class="toast" id="artist-added" role="alert" aria-live="assertive" aria-atomic="true" data-delay="10000"  data-autohide="true">
+                    <div class="toast-header">
+                        <img src="{{ URL::asset('images/logo_title.png') }}" class="rounded mr-2" alt="...">
+                        <strong class="me-auto">Rhythmatize</strong>
+                        <button type="button" class="ml-2 mb-1 cross-button " data-dismiss="toast" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="toast-body">
+                        Artist was added successfully! <br><a href="/artist/{{$crypt_artist}}" class="link-text">View Artist</a>
+                    </div>
+                </div>
+            </div>
+        @elseif (session()->has('success-artist-edited'))
+            <script>
+                $(document).ready(function(){
+                    $('#artist-edited').toast('show');
+                });
+            </script>
+            @php
+                $artist_id = session()->get('artistId');
+                $crypt_artist = Crypt::encrypt($artist_id);
+            @endphp
+            <!-- Then put toasts within -->
+            <div class="w-100 d-flex justify-content-center align-items-center position-fixed top-0 start-50 translate-middle-x mt-3" style="z-index: 9999;">
+                <div class="toast" id="artist-edited" role="alert" aria-live="assertive" aria-atomic="true" data-delay="10000"  data-autohide="true">
+                    <div class="toast-header">
+                        <img src="{{ URL::asset('images/logo_title.png') }}" class="rounded mr-2" alt="...">
+                        <strong class="me-auto">Rhythmatize</strong>
+                        <button type="button" class="ml-2 mb-1 cross-button " data-dismiss="toast" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="toast-body">
+                        Artist was edited successfully! <br><a href="/artist/{{$crypt_artist}}" class="link-text">View Artist</a>
+                    </div>
+                </div>
+            </div>
+        @elseif (session()->has('success-artist-deleted'))
+            <script>
+                $(document).ready(function(){
+                    $('#artist-deleted').toast('show');
+                });
+            </script>
+            <div class="w-100 d-flex justify-content-center align-items-center position-fixed top-0 start-50 translate-middle-x mt-3" style="z-index: 9999;">
+                <div class="toast" id="artist-deleted" role="alert" aria-live="assertive" aria-atomic="true" data-delay="10000"  data-autohide="true">
+                    <div class="toast-header">
+                        <img src="{{ URL::asset('images/logo_title.png') }}" class="rounded mr-2" alt="...">
+                        <strong class="me-auto">Rhythmatize</strong>
+                        <button type="button" class="ml-2 mb-1 cross-button " data-dismiss="toast" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="toast-body">
+                        Artist was deleted successfully!
+                    </div>
+                </div>
+            </div>
+        @elseif (session()->has('success-album-added'))
+            <script>
+                $(document).ready(function(){
+                    $('#album-added').toast('show');
+                });
+            </script>
+            @php
+                $album_id = session()->get('albumId');
+                $crypt_album = Crypt::encrypt($album_id);
+            @endphp
+            <!-- Then put toasts within -->
+            <div class="w-100 d-flex justify-content-center align-items-center position-fixed top-0 start-50 translate-middle-x mt-3" style="z-index: 9999;">
+                <div class="toast" id="album-added" role="alert" aria-live="assertive" aria-atomic="true" data-delay="10000"  data-autohide="true">
+                    <div class="toast-header">
+                        <img src="{{ URL::asset('images/logo_title.png') }}" class="rounded mr-2" alt="...">
+                        <strong class="me-auto">Rhythmatize</strong>
+                        <button type="button" class="ml-2 mb-1 cross-button " data-dismiss="toast" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="toast-body">
+                        Album was added successfully! <br><a href="/album/{{$crypt_album}}" class="link-text">View Album</a>
+                    </div>
+                </div>
+            </div>
+        @elseif (session()->has('success-album-edited'))
+            <script>
+                $(document).ready(function(){
+                    $('#album-edited').toast('show');
+                });
+            </script>
+            @php
+                $album_id = session()->get('albumId');
+                $crypt_album = Crypt::encrypt($album_id);
+            @endphp
+            <!-- Then put toasts within -->
+            <div class="w-100 d-flex justify-content-center align-items-center position-fixed top-0 start-50 translate-middle-x mt-3" style="z-index: 9999;">
+                <div class="toast" id="album-edited" role="alert" aria-live="assertive" aria-atomic="true" data-delay="10000"  data-autohide="true">
+                    <div class="toast-header">
+                        <img src="{{ URL::asset('images/logo_title.png') }}" class="rounded mr-2" alt="...">
+                        <strong class="me-auto">Rhythmatize</strong>
+                        <button type="button" class="ml-2 mb-1 cross-button " data-dismiss="toast" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="toast-body">
+                        Album was edited successfully! <br><a href="/album/{{$crypt_album}}" class="link-text">View Album</a>
+                    </div>
+                </div>
+            </div>
+        @elseif (session()->has('success-album-deleted'))
+            <script>
+                $(document).ready(function(){
+                    $('#album-deleted').toast('show');
+                });
+            </script>
+            <div class="w-100 d-flex justify-content-center align-items-center position-fixed top-0 start-50 translate-middle-x mt-3" style="z-index: 9999;">
+                <div class="toast" id="album-deleted" role="alert" aria-live="assertive" aria-atomic="true" data-delay="10000"  data-autohide="true">
+                    <div class="toast-header">
+                        <img src="{{ URL::asset('images/logo_title.png') }}" class="rounded mr-2" alt="...">
+                        <strong class="me-auto">Rhythmatize</strong>
+                        <button type="button" class="ml-2 mb-1 cross-button " data-dismiss="toast" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="toast-body">
+                        Album was deleted successfully!
+                    </div>
+                </div>
+            </div>
+        @elseif (session()->has('success-track-added'))
+            <script>
+                $(document).ready(function(){
+                    $('#track-added').toast('show');
+                });
+            </script>
+            @php
+                $track_id = session()->get('trackId');
+                $crypt_track = Crypt::encrypt($track_id);
+            @endphp
+            <!-- Then put toasts within -->
+            <div class="w-100 d-flex justify-content-center align-items-center position-fixed top-0 start-50 translate-middle-x mt-3" style="z-index: 9999;">
+                <div class="toast" id="track-added" role="alert" aria-live="assertive" aria-atomic="true" data-delay="1000"  data-autohide="true">
+                    <div class="toast-header">
+                        <img src="{{ URL::asset('images/logo_title.png') }}" class="rounded mr-2" alt="...">
+                        <strong class="me-auto">Rhythmatize</strong>
+                        <button type="button" class="ml-2 mb-1 cross-button " data-dismiss="toast" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="toast-body">
+                        Track was added successfully! <br><a href="/track/{{$crypt_track}}" class="link-text">View Track</a>
+                    </div>
+                </div>
+            </div>
+        @elseif (session()->has('success-track-edited'))
+            <script>
+                $(document).ready(function(){
+                    $('#track-edited').toast('show');
+                });
+            </script>
+            @php
+                $track_id = session()->get('trackId');
+                $crypt_track = Crypt::encrypt($track_id);
+            @endphp
+            <!-- Then put toasts within -->
+            <div class="w-100 d-flex justify-content-center align-items-center position-fixed top-0 start-50 translate-middle-x mt-3" style="z-index: 9999;">
+                <div class="toast" id="track-edited" role="alert" aria-live="assertive" aria-atomic="true" data-delay="10000"  data-autohide="true">
+                    <div class="toast-header">
+                        <img src="{{ URL::asset('images/logo_title.png') }}" class="rounded mr-2" alt="...">
+                        <strong class="me-auto">Rhythmatize</strong>
+                        <button type="button" class="ml-2 mb-1 cross-button " data-dismiss="toast" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="toast-body">
+                        Track was edited successfully! <br><a href="/track/{{$crypt_track}}" class="link-text">View Track</a>
+                    </div>
+                </div>
+            </div>
+        @elseif (session()->has('success-track-deleted'))
+            <script>
+                $(document).ready(function(){
+                    $('#track-deleted').toast('show');
+                });
+            </script>
+            <div class="w-100 d-flex justify-content-center align-items-center position-fixed top-0 start-50 translate-middle-x mt-3" style="z-index: 9999;">
+                <div class="toast" id="track-deleted" role="alert" aria-live="assertive" aria-atomic="true" data-delay="10000"  data-autohide="true">
+                    <div class="toast-header">
+                        <img src="{{ URL::asset('images/logo_title.png') }}" class="rounded mr-2" alt="...">
+                        <strong class="me-auto">Rhythmatize</strong>
+                        <button type="button" class="ml-2 mb-1 cross-button " data-dismiss="toast" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="toast-body">
+                        Track was deleted successfully!
+                    </div>
+                </div>
+            </div>
+        @endif
 
+        </div>
+        
 <script>
 
     $(document).ready(function() {

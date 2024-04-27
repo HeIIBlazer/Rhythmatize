@@ -149,7 +149,11 @@ class TrackController extends Controller
             ]
         );
 
-        return redirect('admin-panel');
+        $track = Track::where('name', $request->name)->first();
+
+        $track_id = $track->id;
+
+        return redirect('admin-panel')->with('success-track-added', 'Track added')->with('trackId', $track_id);
     }
 
     /**
@@ -167,7 +171,7 @@ class TrackController extends Controller
      * Save edited track.
      */
 
-     public function edit_track(Request $request){
+    public function edit_track(Request $request){
         $request->validate([
             'crypt_track' => 'required',
             'name' => 'required',
@@ -222,7 +226,11 @@ class TrackController extends Controller
         
         ]);
 
-        return redirect('admin-panel');
+        $track = Track::where('name', $request->name)->first();
+
+        $track_id = $track->id;
+
+        return redirect('admin-panel')->with('success-track-edited', 'Track updated')->with('trackId', $track_id);
     }
     
     /**
@@ -249,7 +257,7 @@ class TrackController extends Controller
 
         $track_delete = Track::find($track->id)->delete();
         
-        return redirect()->back();
+        return redirect()->back()->with('success-track-deleted', 'Track deleted');
     }
 
 }

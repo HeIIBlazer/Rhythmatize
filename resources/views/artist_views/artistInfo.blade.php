@@ -110,15 +110,55 @@
                     $crypt = Crypt::encrypt($user->id);
                 @endphp
                 <div class=" w-100 d-flex flex-column">
-                    <div class="d-flex flex-row align-items-center mb-3" style="height: 35px">
-                        <img src=" {{url ($user -> avatar_url)}}" alt="" style="width: 35px; height: 35px; margin-right: 5px; border-radius:200px;">
-                        <a href="/user/{{$crypt}}" class="comment-user">{{$user -> username}}</a>
+                    <div class="d-flex flex-row justify-content-between align-items-center">
+                        <div class="d-flex flex-row align-items-center mb-3" style="height: 35px">
+                            <img src=" {{url ($user -> avatar_url)}}" alt="" style="width: 35px; height: 35px; margin-right: 5px; border-radius:200px;">
+                            <a href="/user/{{$crypt}}" class="comment-user">{{$user -> username}}</a>
+                        </div>
+                        @if ($like != 2)
+                            @if(Auth::user()->role == 'admin' || Auth::user()->id == $comment -> user_id)
+                            <a data-toggle="modal" data-target="#deleteCommentModal" class="text-decoration-none mb-3 cursor-pointer">
+                                <span aria-hidden="true" style="font-size:30px;" class="white-text">&times;</span>
+                            </a>
+                            @endif
+                        @endif
                     </div>
+
                     <div  class="w-100">
                         <p class="text-Montserrat">{{$comment -> content}}</p>
                     </div>
                 </div>
                 <hr>
+                <div class="modal fade" id="deleteCommentModal" tabindex="-1" role="dialog" aria-labelledby="deleteCommentLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content border-b">
+                            <div class="login">
+                                <div class="w-100">
+                                    <div cl>
+                                        <h1 class="confirmation-header mt-3 mb-3">CONFIRMATION</h1>
+                                    </div>
+                                    
+                                    <div id="confirmation_text_track" class="d-flex w-100 flex-column justify-content-center align-items-center mt-5 mb-5">
+                                        <p class="confirmation-text">
+                                            Are you sure you want to delete this comment?
+                                        </p>
+                                    </div>
+        
+                                    <div class="d-flex flex-row w-100 mt-2 mb-3 justify-content-evenly">
+                                        <div id="submit_delete_track" class="w-50">
+                                            <a href="/delete-artist-comment/{{$comment -> id}}" class="save-button-confirmation text-decoration-none">
+                                                <button type="submit" class="buttons-inside-confirm">DELETE</button>
+                                            </a>
+                                        </div>
+                                        <div class="cancel-button-confirmation">
+                                            <button data-dismiss="modal" form aria-label="Close" class="buttons-inside-cancel" id="cancel">CANCEL</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 @endforeach
             </div>
             @endif
@@ -200,6 +240,7 @@
                             </div>
                         </div>
                     </a>
+                    
                     @endforeach
                 </div>
             @endforeach
