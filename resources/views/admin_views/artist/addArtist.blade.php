@@ -13,6 +13,8 @@
         </div>
         @endif
 
+
+
         <div>
             <form method="POST" action="{{url('/add-artist-to-database')}}" enctype="multipart/form-data">
                 @csrf
@@ -86,6 +88,8 @@
             const file = event.target.files[0];
             const reader = new FileReader();
             const fileName = event.target.files[0].name;
+
+
 
             reader.onload = function(event) {
                 document.getElementById('photoPreview').src = event.target.result;

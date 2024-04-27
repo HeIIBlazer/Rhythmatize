@@ -244,7 +244,11 @@ class AlbumController extends Controller
             'genre_id' => $genre->id,
         ]);
 
-        return redirect('/admin-panel');
+        $album = Album::where('name', $request->name)->first();
+
+        $album_id = $album->id;
+
+        return redirect('/admin-panel')->with('success-album-added', 'Album added successfully')->with('albumId', $album_id);
     }
 
     /**
@@ -336,7 +340,11 @@ class AlbumController extends Controller
             'genre_id' => $genre->id,
         ]);
 
-        return redirect('/admin-panel');
+        $album = Album::where('name', $request->name)->first();
+
+        $album_id = $album->id;
+
+        return redirect('/admin-panel')->with('success-album-edited', 'Album edited successfully')->with('albumId', $album_id);
     }
 
     /**
@@ -385,6 +393,6 @@ class AlbumController extends Controller
 
         $album_delete = Album::find($album->id)->delete();
 
-        return redirect()->back();
+        return redirect()->back()->with('success-album-deleted', 'Album deleted successfully');
     }
 }

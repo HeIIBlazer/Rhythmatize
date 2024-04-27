@@ -1891,3 +1891,41 @@ hr {
     -webkit-text-stroke: 2px black;
     text-align: center;
 }
+
+.toast-header {
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 20px;
+    background-color: #202020;
+    border: none;
+}
+
+.toast-body {
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 20px;
+    background-color: #2C2C2C;
+    border: none;
+}
+
+.toast {
+    border: none;
+}
+
+
+.link-text {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 20px;
+    color: #606060;
+    font-weight: 600;
+    text-align: center;
+    text-decoration: none;
+    transition: ease all 0.1s;
+    cursor: pointer;
+}
+
+.link-text:hover {
+    text-decoration: underline;
+    color: white;
+    transition: ease all 0.1s;
+}
