@@ -3,7 +3,7 @@
 
 <head>
 
-  <link rel="icon" style="width: 50px; height: 50px" type="image/x-icon" href="/images/logo_title.png">
+  <link rel="icon" style="width: 50px; height: 50px" type="image/x-icon" href="/images/avatars/Default_avatar.png">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
   <title>
@@ -49,7 +49,7 @@
           </li>
         </ul>
         <form class="d-flex" method="GET" action="{{ url('/search') }}">
-          <input class="form-control rounded-0 mr-5" name="search" type="search" placeholder="Search" aria-label="Search">
+          <input class="form-control rounded-0 mr-5" name="search" type="search" placeholder="Search" aria-label="Search" required>
           <button class="search_button" type="submit">Search</button>
         </form>
         @if(Auth::guest())
