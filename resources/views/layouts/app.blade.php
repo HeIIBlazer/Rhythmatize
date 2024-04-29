@@ -3,7 +3,8 @@
 
 <head>
 
-  <link rel="icon" style="width: 50px; height: 50px" type="image/x-icon" href="/images/logo_title.png">
+  <link rel="icon" style="width: 50px; height: 50px" type="image/x-icon" href="/images/avatars/Default_avatar.png">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
   <title>
     @isset($title)
@@ -27,35 +28,32 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-        <a class="navbar-brand" href="/"><img src="{{ URL::asset('images/logo.png') }}" alt="Logo_Rhythmatize"></a>
+        <a class="navbar-brand" href="/"><h1 class="logo-text ms-2">Rhythmatize</h1></a>
         <ul class="navbar-nav me-auto justify-content-evenly w-25 mb-2 mb-lg-0">
           <li class="nav-item">
             <div class="dropdown">
               <a class="header_button" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">Charts</a>
               <ul class="dropdown-menu dropdown-menu-dark slim-dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <li><a class="dropdown-item" href="{{ url('/artist_chart')}}">Artists</a></li>
-                <li><a class="dropdown-item" href="{{ url('/album_chart')}}">Albums</a></li>
-                <li><a class="dropdown-item" href="{{url ('/track_chart')}}">Tracks</a></li>
+                <li><a class="dropdown-item" href="{{ url('/artist-chart')}}">Artists</a></li>
+                <li><a class="dropdown-item" href="{{ url('/album-chart')}}">Albums</a></li>
+                <li><a class="dropdown-item" href="{{url ('/track-chart')}}">Tracks</a></li>
               </ul>
             </div>
           </li>
           </li> 
           <li class="nav-item">
-            <a class="header_button" href="{{ url ('/artist_list')}}">Artists</a>
+            <a class="header_button" href="{{ url ('/artist-list')}}">Artists</a>
           </li> 
           <li class="nav-item">
-            <a class="header_button" href="{{ url ('/album_list')}}">Albums</a>
+            <a class="header_button" href="{{ url ('/album-list')}}">Albums</a>
           </li>
         </ul>
-        <form class="d-flex mt-3 " method="GET" action="{{ url('/search') }}">
-          <input class="form-control rounded-0 mr-5" name="search" type="search" placeholder="Search" aria-label="Search">
+        <form class="d-flex" method="GET" action="{{ url('/search') }}">
+          <input class="form-control rounded-0 mr-5" name="search" type="search" placeholder="Search" aria-label="Search" required>
           <button class="search_button" type="submit">Search</button>
         </form>
         @if(Auth::guest())
         <div class="login_buttons">
-          {{-- <div class="mb-2">
-            <a class="login_button" href="{{url ('/login')}}">LOG IN</a>
-          </div> --}}
         <div class="mb-2">
           <button class="login_button" data-toggle="modal" data-target="#loginModal">
           LOG IN
@@ -80,13 +78,19 @@
                               </div>
                           @endif
                           <div class="d-flex w-100 flex-column justify-content-center align-items-center">
-                              <form action="{{url('/login_auth')}}" method="POST" class="form">
+                              <form action="{{url('/login-auth')}}" method="POST" class="form">
                                   @csrf
                                   <div class="w-100 d-flex justify-content-center align-center mt-2">
                                       <input type="email" class="login-input" name="email" placeholder="Email" required autofocus>
                                   </div>
                                   <div class="w-100 d-flex justify-content-center align-center mt-3 mb-4">
                                       <input type="password" class="login-input" name="password" placeholder="Password" minlength="6" required>
+                                  </div>
+                                  <div class="w-100 d-flex remember mb-3">
+                                    <input type="checkbox" id="remember" name="remember" class="ms-5 form-check-input">
+                                    <label for="remember" class="remember-me">
+                                      Remember me
+                                    </label>
                                   </div>
                                   <div class="w-100 d-flex justify-content-center mt-2 mb-4">
                                       <button type="submit" class="login-button" name="login">Log in</button>
@@ -125,8 +129,13 @@
                           </div>
                           @endif
                           <div class="d-flex w-100 flex-column justify-content-center align-items-center h-75 ">
-                              <form action="{{url('/register')}}" method="POST" class="form">
+                              <form action="{{url('/register')}}" method="POST" class="form" enctype="multipart/form-data">
                                   @csrf
+                                  <div class="w-100 d-flex justify-content-center align-items-center flex-column align-center mt-3">
+                                    <img id="imagePreview" src="#" alt="Image preview" style="display: none; width: 45%; height: 45%; border:3#808080px solid #808080; border-radius: 5px;" class="mb-3 mt-0"/>
+                                    <input type="file" id="imageInput" name="avatar_url" class="img-input">
+                                    <label for="imageInput"  id="imageInputLabel" class="edit-button m-0">Insert Avatar</label>
+                                  </div>
                                   <div class="w-100 d-flex justify-content-center align-center mt-3">
                                       <input type="text" class="login-input" name="username" placeholder="Username" required autofocus>
                                   </div>
@@ -158,13 +167,12 @@
         @else
         <li class="avatar-button">
           <div class="dropdown">
-            @if(Auth::user() -> avatar_url == 0)
-              <a class="header_button" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"><img src="{{URL::asset('images/default-user.jpg') }}" alt="" style="width: 45px; height: 45px; border-radius: 50px; object-fit: inherit;"></a>
-            @else
-              <a class="header_button" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"><img src="{{url (Auth::user()-> avatar_url)}}" alt="" style="width: 45px; height: 45px; border-radius: 50px; object-fit: cover;"></a>
-            @endif
+              <a class="header_button" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"><img src="{{url (Auth::user()-> avatar_url)}}" alt="" style="width: 45px; height: 45px; border-radius: 50px; object-fit: cover; border: 2px solid white"></a>
             <ul class="dropdown-menu dropdown-menu-dark slim-dropdown-menu" aria-labelledby="dropdownMenuLink">
-              <li><a class="dropdown-item" href="{{ url('/account')}}">Profile</a></li>
+              @php
+                $crypt_user = Crypt::encrypt(Auth::user() -> id);
+              @endphp
+              <li><a class="dropdown-item" href="/user/{{$crypt_user}}">Profile</a></li>
               <li><a class="dropdown-item" href="{{url ('/logout')}}">Log out</a></li>
             </ul>
           </div>
@@ -173,9 +181,11 @@
       </div>
     </div>
   </nav>
-<div>
-  @yield('content')
-</div>
+  <div>
+    @yield('content')
+  </div>
+
+
 <div class="footer">
     <div class="socials_part mt-4 ">
         <div>
@@ -206,13 +216,13 @@
                 <p class="links_header">ALBUM</p>
             </div>
             <div class="links_buttons">
-                <a href="{{ url('/album_chart')}}" class="links_button">Charts</a>
+                <a href="{{ url('/album-chart')}}" class="links_button">Charts</a>
             </div>
             <div class="links_buttons">
-                <a href="{{ url('/last_added_albums')}}" class="links_button">Last Added</a>
+                <a href="{{ url('/last-added-albums')}}" class="links_button">Last Added</a>
             </div>
             <div class="links_buttons">
-                <a href="{{ url('/album_list')}}" class="links_button">List</a>
+                <a href="{{ url('/album-list')}}" class="links_button">List</a>
             </div>
         </div>
         <div class="Artists_part">
@@ -220,13 +230,13 @@
                 <p class="links_header">ARTIST</p>
             </div>
             <div class="links_buttons">
-                <a href="{{ url('/artist_chart')}}" class="links_button">Charts</a>
+                <a href="{{ url('/artist-chart')}}" class="links_button">Charts</a>
             </div>
             <div class="links_buttons">
-                <a href="{{ url('/last_added_artists')}}" class="links_button">Last Added</a>
+                <a href="{{ url('/last-added-artists')}}" class="links_button">Last Added</a>
             </div>
             <div class="links_buttons">
-                <a href="{{ url('/artist_list')}}" class="links_button">List</a>
+                <a href="{{ url('/artist-list')}}" class="links_button">List</a>
             </div>
         </div>
         <div class="Songs_part">
@@ -234,12 +244,12 @@
                 <p class="links_header">TRACKS</p>
             </div>
             <div class="links_buttons">
-                <a href="{{url ('/track_chart')}}" class="links_button">Charts</a>
+                <a href="{{url ('/track-chart')}}" class="links_button">Charts</a>
             </div>
         </div>
-          @if(Auth::check() && Auth::user()->role)
+          @if(Auth::check() && Auth::user()->role == 'admin')
           <div class="h-100 d-flex align-items-center justify-content-center">
-            <a href="{{url ('/track_chart')}}" class="links_header">ADMIN</a>
+            <a href="{{url ('/admin-panel')}}" class="links_header">ADMIN</a>
           </div>
           @else
           @endif
@@ -263,22 +273,60 @@
       if ($('.error-login').length > 0) {
           // Open the modal window
           $('#loginModal').modal('show');
+
       }else if($('.error-login-1').length > 0){
           $('#signupModal').modal('show');
+          
+      }else if ($('.error-login-2').length > 0){
+          $('#editModal').modal('show');
       }
+
       $('.cross').click(function () {
         // Close the modal window
         $(this).closest('.modal').modal('hide');
     });
+
+    $('.cancel-button').click(function () {
+        // Close the modal window
+        $(this).closest('.modal').modal('hide');
+    });
+
     $('.login-undertext-button').click(function () {
         // Close the modal window
         $(this).closest('.modal').modal('hide');
     });
   });
+
+  const imageInput = document.getElementById('imageInput');
+  const imagePreview = document.getElementById('imagePreview');
+  const imageInputLabel = document.getElementById('imageInputLabel');
+
+  imageInput.addEventListener('change', function(event) {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+    const fileName = event.target.files[0].name;
+
+    reader.onload = function(event) {
+      imagePreview.src = event.target.result;
+      imagePreview.style.padding = '0';
+      imagePreview.style.display = 'block';
+      imageInputLabel.textContent = fileName;
+    };
+    reader.readAsDataURL(file);
+});
+    
+$(document).ready(function() {
+    @if (session('showLoginModal'))
+      $('#loginModal').modal('show');
+    @endif
+
+});
+
 </script>
 
 
     <!-- Include the Bootstrap JavaScript file -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 
-  </html>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</html>

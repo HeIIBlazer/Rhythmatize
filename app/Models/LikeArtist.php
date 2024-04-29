@@ -11,8 +11,6 @@ class LikeArtist extends Model
     
     protected $table = 'like_artists';
     public $timestamps = false;
-
-
     protected $fillable = [
         'user_id',
         'artist_id',

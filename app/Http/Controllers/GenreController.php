@@ -8,56 +8,25 @@ use Illuminate\Http\Request;
 class GenreController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Add new genre to database
      */
-    public function index()
+    public function add_genre(Request $request)
     {
-        //
-    }
+        $request->validate([
+            'name_genre' => 'required'
+        ]);
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
+        $genre_exist = Genre::where('name', $request->name_genre)->first();
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-    }
+        if ($genre_exist != null) {
+            return redirect()->back()->with('error_genre', 'Genre already exists');
+        }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Genre $genre)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Genre $genre)
-    {
-        
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Genre $genre)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Genre $genre)
-    {
+        Genre::create(
+            [
+                'name' => $request->name_genre
+            ]
+        );
+        return redirect()->back();
     }
 }

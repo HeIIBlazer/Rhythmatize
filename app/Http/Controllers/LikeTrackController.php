@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\LikeTrack;
+use App\Models\Track;
 use Illuminate\Http\Request;
 
 class LikeTrackController extends Controller
@@ -69,5 +70,29 @@ class LikeTrackController extends Controller
         $likeTrack->delete();
 
         return redirect()->route('tracks.show', $likeTrack->track_id);
+    }
+
+    public function like(Track $track)
+    {
+        $track_id = $track->id;
+        $user_id = auth()->user()->id;
+
+        LikeTrack::create([
+            'track_id' => $track_id,
+            'user_id' => $user_id
+        ]);
+
+        return redirect()->back();
+    }
+
+    public function unlike(Track $track)
+    {
+        $track_id = $track->id;
+        $user_id = auth()->user()->id;
+
+        $like = LikeTrack::where('track_id', $track_id)->where('user_id', $user_id)->first();
+        $like->delete();
+
+        return redirect()->back();
     }
 }

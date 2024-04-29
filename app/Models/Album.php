@@ -10,11 +10,11 @@ class Album extends Model
     use HasFactory;
     
     protected $table = 'albums';
-    public $timestamps = true;
+    public $timestamps = false;
     
     protected $fillable = [
         'name',
-        'cover_ur;',
+        'cover_url',
         'release_date',
         'description',
         'youtube_link',
@@ -22,5 +22,6 @@ class Album extends Model
         'apple_music_link',
         'type',
         'artist_id',
+        'genre_id'
     ];
 }

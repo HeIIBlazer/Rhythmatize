@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\LikeAlbum;
+use App\Models\Album;
 use Illuminate\Http\Request;
 
 class LikeAlbumController extends Controller
@@ -68,5 +69,29 @@ class LikeAlbumController extends Controller
         $likeAlbum->delete();
 
         return redirect()->route('albums.show', $likeAlbum->album_id);
+    }
+
+    public function like(Album $album)
+    {
+        $album_id = $album->id;
+        $user_id = auth()->user()->id;
+
+        LikeAlbum::create([
+            'album_id' => $album_id,
+            'user_id' => $user_id
+        ]);
+
+        return redirect()->back();
+    }
+
+    public function unlike(Album $album)
+    {
+        $album_id = $album->id;
+        $user_id = auth()->user()->id;
+
+        $like = LikeAlbum::where('album_id', $album_id)->where('user_id', $user_id)->first();
+        $like->delete();
+
+        return redirect()->back();
     }
 }

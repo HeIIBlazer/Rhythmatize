@@ -6,6 +6,8 @@
                 ->where('like_artists.artist_id', $artist->id)
                 ->count();
 
+    $crypt_artist = Crypt::encrypt($artist->id);
+
     if (Auth::user() != null) {
         $like = DB::table('like_artists')
             ->where('like_artists.artist_id', $artist->id)
@@ -20,7 +22,7 @@
         <img src="{{url ($artist -> banner_url)}}" alt="" style="width: 100%; height: 300px; object-fit:cover; object-position: 50% 50%;">
     </div>
 <div class="container d-flex flex-row justify-content-between mb-5">
-    <div class="w-25 d-flex flex-column justify-content-center">
+    <div class="w-25 d-flex flex-column  align-items-center">
         <div>
             <div class="artist-img w-100 d-flex justify-content-center align-items-center">
                 <img src="{{url ($artist -> picture_url)}}" alt="" class="Info-Image">
@@ -32,7 +34,7 @@
         <div class="d-flex flex-row justify-content-center align-content-center mb-3">
             @if ($like == 0) 
             <div class="d-flex flex-row">
-                <a href="/like_artist/{{$artist -> id}}"><img src="{{asset('images/like.png')}}" alt="" style="width: 22px; height: 22px; margin-right: 6px;"></a>
+                <a href="/like-artist/{{$artist -> id}}"><img src="{{asset('images/like.png')}}" alt="" style="width: 22px; height: 22px; margin-right: 6px;"></a>
             </div>
             <div class="white-text">
                 <span style="color: white; font-size:20px;"> {{$artist_likes}}</span>
@@ -46,7 +48,7 @@
             </div>    
             @else ($like == 1) 
             <div>
-                <a href="/unlike_artist/{{$artist -> id}}"><img src="{{asset('images/liked.png')}}" alt="" style="width: 22px; height: 22px; margin-right: 6px;"></a>
+                <a href="/unlike-artist/{{$artist -> id}}"><img src="{{asset('images/liked.png')}}" alt="" style="width: 22px; height: 22px; margin-right: 6px;"></a>
             </div>
             <div>
                 <span style="color: white; font-size:20px;"> {{$artist_likes}} </span>
@@ -56,19 +58,19 @@
 
         <div class="w-100 d-flex flex-row justify-content-center mb-4">
             <div class="w-25 h-25 d-flex justify-content-center">           
-                <a href="{{$artist-> spotify_link}}">
+                <a href="{{$artist-> spotify_link}}" target=”_blank”>
                     <img src="{{asset('images/links_images/spotify.png')}}" alt="" style="width: 36px; height:36px;">
                 </a>
             </div>
 
             <div class="w-25 h-25 d-flex justify-content-center">           
-                <a href="{{$artist-> apple_music_link}}">
+                <a href="{{$artist-> apple_music_link}}" target=”_blank”>
                     <img src="{{asset('images/links_images/apple.png')}}" alt="" style="width: 36px; height:36px;">
                 </a>
             </div>
 
             <div class="w-25 h-25 d-flex justify-content-center">           
-                <a href="{{$artist-> youtube_link}}">
+                <a href="{{$artist-> youtube_link}}" target=”_blank”>
                     <img src="{{asset('images/links_images/youtube.png')}}" alt="" style="width: 36px; height:36px;">
                 </a>
             </div>
@@ -93,29 +95,70 @@
                 <h1 class="comments-header">Comments:</h1>
                 <hr>
             </div>
-            @if ($comments == 'NO COMMENTS')
+            @if (count($comments) == 0)
                 <div class="w-100 d-flex flex-column justify-content-center">
                     <p class="w-100 text-center text-Montserrat">THIS ARTIST HAS NO COMMENTS</p>
                     <hr>
                 </div>
             @else
-            <div style="max-height: 460px; min-height: 200px; overflow-y:auto">
+            <div style="max-height: 460px; min-height: 200px; overflow-y:auto; max-width:450px;">
                 @foreach($comments as $comment)
                 @php
                     $user = DB::table('users')
                         ->where('users.id', $comment->user_id)
                         ->first();
+                    $crypt = Crypt::encrypt($user->id);
                 @endphp
-                <div class="d-flex flex-column">
-                    <div class="d-flex flex-row align-items-center mb-3" style="height: 35px">
-                        <img src=" {{url ($user -> avatar_url)}}" alt="" style="width: 20px; height: 20px; margin-right: 5px; border-radius:200px;">
-                        <p style="height: 10px">{{$user -> username}}</p>
+                <div class=" w-100 d-flex flex-column">
+                    <div class="d-flex flex-row justify-content-between align-items-center">
+                        <div class="d-flex flex-row align-items-center mb-3" style="height: 35px">
+                            <img src=" {{url ($user -> avatar_url)}}" alt="" style="width: 35px; height: 35px; margin-right: 5px; border-radius:200px;">
+                            <a href="/user/{{$crypt}}" class="comment-user">{{$user -> username}}</a>
+                        </div>
+                        @if ($like != 2)
+                            @if(Auth::user()->role == 'admin' || Auth::user()->id == $comment -> user_id)
+                            <a data-toggle="modal" data-target="#deleteCommentModal" class="text-decoration-none mb-3 cursor-pointer">
+                                <span aria-hidden="true" style="font-size:30px;" class="white-text">&times;</span>
+                            </a>
+                            @endif
+                        @endif
                     </div>
+
                     <div  class="w-100">
-                        <p>{{$comment -> content}}</p>
+                        <p class="text-Montserrat">{{$comment -> content}}</p>
                     </div>
                 </div>
                 <hr>
+                <div class="modal fade" id="deleteCommentModal" tabindex="-1" role="dialog" aria-labelledby="deleteCommentLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content border-b">
+                            <div class="login">
+                                <div class="w-100">
+                                    <div cl>
+                                        <h1 class="confirmation-header mt-3 mb-3">CONFIRMATION</h1>
+                                    </div>
+                                    
+                                    <div id="confirmation_text_track" class="d-flex w-100 flex-column justify-content-center align-items-center mt-5 mb-5">
+                                        <p class="confirmation-text">
+                                            Are you sure you want to delete this comment?
+                                        </p>
+                                    </div>
+        
+                                    <div class="d-flex flex-row w-100 mt-2 mb-3 justify-content-evenly">
+                                        <div id="submit_delete_track" class="w-50">
+                                            <a href="/delete-artist-comment/{{$comment -> id}}" class="save-button-confirmation text-decoration-none">
+                                                <button type="submit" class="buttons-inside-confirm">DELETE</button>
+                                            </a>
+                                        </div>
+                                        <div class="cancel-button-confirmation">
+                                            <button data-dismiss="modal" form aria-label="Close" class="buttons-inside-cancel" id="cancel">CANCEL</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 @endforeach
             </div>
             @endif
@@ -125,7 +168,7 @@
                     <textarea required placeholder="Add comment" rows="4" wrap="hard" class="comment-input" readonly></textarea>
                 </form>
             @else 
-            <form data-mdb-input-init class="mt-3" action="/save_comment" method="post">
+            <form data-mdb-input-init class="mt-3" action="/save-comment-artist" method="post">
                 @csrf
                 <input type="hidden" name="artist_id" value="{{$artist->id}}">
                 <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
@@ -147,7 +190,7 @@
             </div>
         </div>
 
-        @if ($tracks == 'NO TRACKS BY THIS ARTIST')
+        @if (count($tracks) == 0)
             <div class="w-100 d-flex flex-column justify-content-center m-5">
                 <h1 class="w-100 text-center white-text text-Montserrat text-">THIS ARTIST HAS NO TRACKS</h1>
             </div>
@@ -157,16 +200,22 @@
             @foreach ($tracks->chunk(2) as $chunk)
                 <div class=" d-flex flex-row justify-content-between align-items-center mb-4 w-100">
                     @foreach ($chunk as $track)
-
                         @php
                             $album = DB::table('albums')
                                         ->where('albums.id', $track->album_id)
                                         ->first();
-                        @endphp
+                            $crypt_track = Crypt::encrypt($track->id);
+                            $crypt_album = Crypt::encrypt($album->id);
 
+                            $track_liked = DB::table('like_tracks')
+                                        ->where('like_tracks.track_id', $track->id)
+                                        ->where('like_tracks.user_id', Auth::id())
+                                        ->count();
+                        @endphp
+                        <a href="/track/{{$crypt_track}}" class="text-decoration-none">
                         <div class="d-flex flex-row track-artist">
 
-                            <div class="d-flex justify-content-center align-items-center">
+                            <div class="d-flex justify-content-center align-items-center h-100">
                                 <img src="{{url ($album -> cover_url)}}" alt="" class="track-cover">
                             </div>
 
@@ -174,11 +223,15 @@
                                 <div class="w-100 d-flex flex-column justify-content-evenly">
                                     <p class="artist-track-name">{{$track -> name}}</p>
 
-                                    <p class="artist-track-album">{{$album -> name}}</p>
+                                    <a href="/album/{{$crypt_album}}" class="text-decoration-none"><p class="artist-track-album">{{$album -> name}}</p></a>
                                 </div>
                                 <div class="d-flex flex-row flex-wrap align-content-end" style="padding: 10px 10px; height:45%;">
                                     <div class="d-flex flex-column justify-content-around">
-                                        <img src="{{asset('images/like.png')}}" alt="" style="width: 25px; height: 25px; margin-right: 6px;">
+                                        @if ($track_liked == 1)
+                                            <img src="{{asset('images/liked.png')}}" alt="" style="width: 25px; height: 25px; margin-right: 6px;">
+                                        @else
+                                            <img src="{{asset('images/like.png')}}" alt="" style="width: 25px; height: 25px; margin-right: 6px;">
+                                        @endif
                                     </div>
                                     <div>
                                         <span style="color: white; font-size:25px; vertical-align: bottom;"> {{$track -> likes_count}} </span>
@@ -186,11 +239,13 @@
                                 </div>
                             </div>
                         </div>
+                    </a>
+                    
                     @endforeach
                 </div>
             @endforeach
         </div>
-        <a class="artist-button flex-wrap" href="">Show all tracks by {{$artist -> name}}</a>
+        <a class="artist-button flex-wrap" href="/all-tracks/{{$crypt_artist}}">Show all tracks by {{$artist -> name}}</a>
         @endif
 
         <div class="w-100 d-flex flex-row justify-content-evenly align-content-center">
@@ -203,27 +258,32 @@
             </div>
         </div>
 
-        @if ($albums == 'NO ALBUMS BY THIS ARTIST')
+        @if (count($albums) == 0)
             <div class="w-100 d-flex flex-column justify-content-center m-5">
-                <h1 class="w-100 text-center white-text text-Montserrat text-">THIS ARTIST HAS NO ALBUMS</h1>
+                <h1 class="w-100 text-center white-text text-Montserrat">THIS ARTIST HAS NO ALBUMS</h1>
             </div>
         @else
-        <div class=" row justify-content-evenly mt-3 w-94 mb-4">
+        <div class=" row justify-content-around mt-3 w-94 mb-4">
             @foreach ($albums as $album)
+            @php
+                $crypt_album = Crypt::encrypt($album->id);
+            @endphp
                 <div class="col-auto artist-album-card">
-                    <div >
-                        <img src="{{url ($album -> cover_url)}}" alt="" style="width: 250px; height: 250px; border-radius: 5px; margin-top:10px; padding: 10px 10px;">
-                    </div>
-                    <div class="w-100 d-flex justify-content-center text-center white-text">
-                        <p class="text-truncate text-Montserrat-album">{{$album -> name}}</p>
-                    </div>
-                    <div class="w-100 d-flex justify-content-center text-center white-text">
-                        <p class="text-truncate text-Montserrat-light">{{$album -> type}} | {{$album -> release_date}}</p>
-                    </div>
+                    <a href="/album/{{$crypt_album}}" class="text-decoration-none">
+                        <div>
+                            <img src="{{url ($album -> cover_url)}}" alt="" style="width: 250px; height: 250px; border-radius: 5px; margin-top:10px; padding: 10px 10px;">
+                        </div>
+                        <div class="w-100 d-flex justify-content-center text-center white-text">
+                            <p class="text-truncate text-Montserrat-album">{{$album -> name}}</p>
+                        </div>
+                        <div class="w-100 d-flex justify-content-center text-center white-text">
+                            <p class="text-truncate text-Montserrat-light">{{$album -> type}} | {{$album -> release_date}}</p>
+                        </div>
+                    </a>
                 </div>
             @endforeach
         </div>
-        <a class="artist-button flex-wrap" href="">Show all albums by {{$artist -> name}}</a>
+        <a class="artist-button-album flex-wrap" href="/all-albums/{{$crypt_artist}}">Show all albums by {{$artist -> name}}</a>
     </div>
         @endif
 </div>
@@ -279,6 +339,19 @@ document.addEventListener('DOMContentLoaded', function() {
         readMoreButton.style.display = 'none';
     }
 });
+
+function addLineBreaks(text) {
+    return text.replace(/\n/g, '<br>');
+}
+
+// Get the text with the `desc-text` class
+let descText = document.querySelector('.desc-text').textContent;
+
+// Use the `addLineBreaks` function to replace "\n" with "<br>"
+let textWithLineBreaks = addLineBreaks(descText);
+
+// Set the innerHTML of the `desc-text` element to the new text with line breaks
+document.querySelector('.desc-text').innerHTML = textWithLineBreaks;
 
 </script>
     

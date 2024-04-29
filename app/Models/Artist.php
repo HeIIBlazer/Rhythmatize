@@ -10,7 +10,7 @@ class Artist extends Model
     use HasFactory;
     
     protected $table = 'artists';
-    public $timestamps = true;
+    public $timestamps = false;
 
     protected $fillable = [
         'name',
@@ -19,6 +19,6 @@ class Artist extends Model
         'description',
         'youtube_link',
         'spotify_link',
-        'apple_link_link',
+        'apple_music_link',
     ];
 }
