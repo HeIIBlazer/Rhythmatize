@@ -22,13 +22,13 @@
 
 </head>
 
-  <nav class="navbar navbar-expand-lg navbar-black bg-black">
-    <div class="container-fluid">
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
+<nav class="navbar navbar-expand-lg navbar-black bg-black">
+  <div class="container-fluid d-flex justify-content-between w-100">
+      <a class="navbar-brand" href="/"><h1 class="logo-text ms-2">Rhythmatize</h1></a>
+      <button class="navbar-toggler custom-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-        <a class="navbar-brand" href="/"><h1 class="logo-text ms-2">Rhythmatize</h1></a>
         <ul class="navbar-nav me-auto justify-content-evenly w-25 mb-2 mb-lg-0">
           <li class="nav-item">
             <div class="dropdown">
@@ -49,7 +49,7 @@
           </li>
         </ul>
         <form class="d-flex" method="GET" action="{{ url('/search') }}">
-          <input class="form-control rounded-0 mr-5" name="search" type="search" placeholder="Search" aria-label="Search" required>
+          <input class="form-control rounded-0 mr-5 custom-search" name="search" type="search" placeholder="Search" aria-label="Search" required>
           <button class="search_button" type="submit">Search</button>
         </form>
         @if(Auth::guest())
@@ -186,7 +186,7 @@
   </div>
 
 
-<div class="footer">
+<div class="footer d-flex flex-column flex-lg-row">
     <div class="socials_part mt-4 ">
         <div>
             <img src="{{asset('images/logo.png')}}" alt="">
