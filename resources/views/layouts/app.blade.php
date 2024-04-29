@@ -29,7 +29,7 @@
           <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-        <ul class="navbar-nav me-auto justify-content-evenly w-25 mb-2 mb-lg-0">
+        <ul class="navbar-nav me-auto justify-content-start w-100 w-md-50 w-lg-25 mb-2 mb-lg-0">
           <li class="nav-item">
             <div class="dropdown">
               <a class="header_button" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">Charts</a>
@@ -39,7 +39,6 @@
                 <li><a class="dropdown-item" href="{{url ('/track-chart')}}">Tracks</a></li>
               </ul>
             </div>
-          </li>
           </li> 
           <li class="nav-item">
             <a class="header_button" href="{{ url ('/artist-list')}}">Artists</a>
@@ -186,10 +185,10 @@
   </div>
 
 
-<div class="footer d-flex flex-column flex-lg-row">
+  <div class="footer d-flex flex-column flex-lg-row justify-content-center align-items-center">
     <div class="socials_part mt-4 ">
         <div>
-            <img src="{{asset('images/logo.png')}}" alt="">
+          <h1 class="logo-text ">Rhythmatize</h1>
         </div>
         <div class="socials_text_block">
             <p class="socials_text">Reach us at <u>Rhythmatize@gmail.com</u> or through our socials.</p>
@@ -207,15 +206,15 @@
         </div>
     </div>
 
-    <div class="vertical_line">
+    <div class="vertical_line d-none d-lg-block">
     </div>
 
-    <div class="links_part w-50 mr-5">
+    <div class="links_part d-flex flex-column align-items-center justify-content-center flex-lg-row w-100 w-lg-50 ml-3 ml-lg-0">
         <div class="albums_part">
             <div>
                 <p class="links_header">ALBUM</p>
             </div>
-            <div class="links_buttons">
+            <div class="links_buttons ">
                 <a href="{{ url('/album-chart')}}" class="links_button">Charts</a>
             </div>
             <div class="links_buttons">
@@ -255,7 +254,7 @@
           @endif
     </div>
 
-    <div class="vertical_line">
+    <div class="vertical_line d-none d-lg-block">
     </div>
 
     <div class="Copyright_part">

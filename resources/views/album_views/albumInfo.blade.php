@@ -23,8 +23,8 @@
     <div style="width: 100%; height: 180px;">
         <img src="{{url ($artist -> banner_url)}}" alt="" style="width: 100%; height: 300px; object-fit:cover; object-position: 50% 50%;">
     </div>
-<div class="container d-flex flex-row justify-content-between mb-5">
-    <div class="w-25 d-flex flex-column  align-items-center">
+<div class="container d-flex flex-column flex-lg-row justify-content-between align-items-center align-items-lg-none mb-5">
+    <div class="w-95 w-lg-25 d-flex flex-column align-items-center">
         <div>
             <div class="artist-img w-100 d-flex justify-content-center align-items-center">
                 <img src="{{url ($album -> cover_url)}}" alt="" class="Info-Image">
@@ -133,7 +133,7 @@
                 @php
                     $crypt_album = Crypt::encrypt($artist_album->id);
                 @endphp
-                    <div class="d-flex flex-column justify-content-between align-items-center" style=" width: 45%; height:45%;">
+                    <div class="d-flex flex-column justify-content-between align-items-center " style="width: 45%; height: 45%;">
                         <a href="/album/{{$crypt_album}}">
                             <div class="album-cover">
                                 <img src="{{url ($artist_album -> cover_url)}}" alt="Album Cover" class="img-fluid alb">
@@ -147,14 +147,14 @@
                 @endforeach
             </div>
             <hr>
-            <div class="w-100 d-flex justify-content-center">
-                <a href="/all-albums/{{$crypt_artist}}" class="all-button">View all {{$artist -> name}} albums</a>
+            <div class="w-95 d-flex justify-content-center">
+                <a href="/all-albums/{{$crypt_artist}}" class="all-button text-center">View all {{$artist -> name}} albums</a>
             </div>
             @endif
         </div>
 
 
-        <div class="background-block mt-4 mb-4">
+        <div class="background-block mt-4 mb-lg-4 ">
             <div >
                 <h1 class="comments-header">Comments:</h1>
                 <hr>
@@ -244,7 +244,7 @@
         </div>
     </div>
 
-    <div class="w-65 d-flex flex-column align-items-center">
+    <div class="w-95 w-lg-65 d-flex flex-column align-items-center">
         <div class="w-100 d-flex flex-row justify-content-evenly align-content-center">
             <div class="artist-tracks-headers w-94">
                 <div class="artist-header-line"></div>
