@@ -29,7 +29,7 @@
             </div>
         </div>
 
-        <div class="d-flex flex-row justify-content-evenly w-100 mt-3 mb-3">
+        <div class="w-100 d-flex flex-lg-row flex-column justify-content-evenly mt-4 mb-4">
             @foreach ($tracks as $track)
                 @php
                     $crypt_track = Crypt::encrypt($track -> id);
@@ -50,7 +50,7 @@
                 @endphp
 
                 <a href="/track/{{$crypt_track}}" class="text-decoration-none">
-                    <div class="d-flex flex-row all-tracks-3">
+                    <div class="d-flex flex-row all-tracks-3 w-100 w-lg-30 mt-lg-0 mt-4">
 
                         <div class="d-flex justify-content-center align-items-center h-100">
                             <img src="{{url ($album -> cover_url)}}" alt="" class="track-cover">

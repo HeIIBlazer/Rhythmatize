@@ -24,7 +24,7 @@
 
 <nav class="navbar navbar-expand-lg navbar-black bg-black">
   <div class="container-fluid d-flex justify-content-between w-100">
-      <a class="navbar-brand" href="/"><h1 class="logo-text ms-2">Rhythmatize</h1></a>
+      <a class="navbar-brand" href="/"><h1 class="logo-text ms-2 me-2 ">Rhythmatize</h1></a>
       <button class="navbar-toggler custom-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
       </button>
@@ -53,7 +53,7 @@
         </form>
         @if(Auth::guest())
         <div class="login_buttons">
-          <div class="mb-2">
+          <div class="mb-4 mb-lg-2">
             <button class="login_button" data-toggle="modal" data-target="#loginModal">
             LOG IN
           </button>
@@ -185,7 +185,7 @@
 
 
   <div class="footer d-flex flex-column flex-lg-row justify-content-center align-items-center">
-    <div class="socials_part mt-4 ">
+    <div class="socials_part mt-4 w-100 w-lg-25">
         <div>
           <h1 class="logo-text ">Rhythmatize</h1>
         </div>
@@ -208,10 +208,10 @@
     <div class="vertical_line d-none d-lg-block">
     </div>
 
-    <div class="links_part d-flex flex-column align-items-center justify-content-center flex-lg-row w-100 w-lg-50 ml-3 ml-lg-0">
+    <div class="links_part d-flex flex-column align-items-center align-items-lg-none justify-content-evenly flex-lg-row w-100 w-lg-50 ml-3 ml-lg-0">
         <div class="albums_part">
             <div>
-                <p class="links_header">ALBUM</p>
+                <p class="links_header text-center">ALBUM</p>
             </div>
             <div class="links_buttons ">
                 <a href="{{ url('/album-chart')}}" class="links_button">Charts</a>
@@ -225,7 +225,7 @@
         </div>
         <div class="Artists_part">
             <div>
-                <p class="links_header">ARTIST</p>
+                <p class="links_header text-center">ARTIST</p>
             </div>
             <div class="links_buttons">
                 <a href="{{ url('/artist-chart')}}" class="links_button">Charts</a>
@@ -239,7 +239,7 @@
         </div>
         <div class="Songs_part">
             <div>
-                <p class="links_header">TRACKS</p>
+                <p class="links_header text-center">TRACKS</p>
             </div>
             <div class="links_buttons">
                 <a href="{{url ('/track-chart')}}" class="links_button">Charts</a>
@@ -256,7 +256,7 @@
     <div class="vertical_line d-none d-lg-block">
     </div>
 
-    <div class="Copyright_part">
+    <div class="Copyright_part w-lg-25 w-100">
         <div class="copyright_text">
             <p>&copy; 2024 Copyright: <br>rhythmatize.com</p>
         </div>

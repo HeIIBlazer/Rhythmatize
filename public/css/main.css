@@ -13,11 +13,12 @@ body {
 
 .logo-text {
     font-family: 'audiowide', sans-serif;
-    font-size: 40px;
+    font-size: 35px;
     text-align: center;
     justify-content: center;
     align-items: center;
     color: white;
+    padding-top: 3px;
 }
 
 .cursor-pointer{
@@ -67,7 +68,7 @@ body {
     width: 200px;
 }
 .login_buttons {
-    width:7%;
+    width:8%;
     display: flex;
     flex-direction: column;
     margin-left: 20px;
@@ -182,7 +183,6 @@ body {
     margin-top: -5px;
     display: flex;
     flex-direction: row;
-    align-items: center;
     justify-content: space-evenly;
     width: 50%;
 }
@@ -242,7 +242,7 @@ body {
 }
 
 .Copyright_part {
-    width: 17%;
+    width: 20%;
     height: 160px;
     display: flex;
     flex-direction: column;
@@ -1037,7 +1037,7 @@ hr {
     padding: 5px 10px;
     padding-top: 10px;
     font-weight: 600;
-    max-width: 245px;
+    max-width: 100%;
     height: 40px;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -1058,10 +1058,7 @@ hr {
     color: #808080;
     font-weight: 500;
     font-size: 14px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 230px;
+    max-width: 100%;
     text-decoration: none;
     transition: ease all 0.3s;
     cursor: pointer;
@@ -1624,7 +1621,6 @@ hr {
 
 .all-tracks-3 {
     background-color: #373737;
-    width: 30%;
     height: 185px;
     border-radius: 5px;
     box-shadow: 10px 10px 4px #00000054;
@@ -1966,6 +1962,9 @@ hr {
         width: 25% !important;
     }
 
+    .w-lg-30 {
+        width: 30% !important;
+    }
 }
 
 @media (max-width: 992px) {
@@ -1973,6 +1972,16 @@ hr {
     .track-artist {
         width: 98%;
     }
+
+    .login_buttons {
+        width: 100%;
+        margin-top: 10px;
+        .login_button {
+            font-size: 25px;
+        }
+    }
+
+    
 }
 
 .image_artist_list {
