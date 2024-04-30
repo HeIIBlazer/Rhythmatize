@@ -1,4 +1,4 @@
-@extends('layouts.app', ['title' => 'All Tracks By '.$artist -> name])
+@extends('layouts.app', ['title' => $album -> name])
 
 @section('content')
     @php
@@ -114,7 +114,7 @@
 
         <div class=" w-100 background-block mt-4 p-2">
             <div>
-                <h2 class="desc-header">Other {{$artist -> name}} albums:</h2>
+                <h2 class="desc-header ">Other {{$artist -> name}} albums:</h2>
                 <hr>
             </div>
             @if ( $albums->count() == 0)
@@ -133,10 +133,10 @@
                 @php
                     $crypt_album = Crypt::encrypt($artist_album->id);
                 @endphp
-                    <div class="d-flex flex-column justify-content-between align-items-center " style="width: 45%; height: 45%;">
+                    <div class="d-flex flex-column justify-content-between align-items-center" style="width: 45%; height: 45%;">
                         <a href="/album/{{$crypt_album}}">
                             <div class="album-cover">
-                                <img src="{{url ($artist_album -> cover_url)}}" alt="Album Cover" class="img-fluid alb">
+                                <img src="{{url ($artist_album -> cover_url)}}" alt="Album Cover" class="img-fluid alb" style="width: 90%; height: 90%;">
                                 <div class="album-info d-flex flex-column justify-content-center align-items-center text-center">
                                     <h2 class="album-name">{{$artist_album -> name}}</h2>
                                     <p class="album-year">{{$artist_album -> release_date}}</p>
@@ -147,7 +147,7 @@
                 @endforeach
             </div>
             <hr>
-            <div class="w-95 d-flex justify-content-center">
+            <div class="w-100 d-flex justify-content-center align-content-center">
                 <a href="/all-albums/{{$crypt_artist}}" class="all-button text-center">View all {{$artist -> name}} albums</a>
             </div>
             @endif
