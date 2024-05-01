@@ -65,18 +65,20 @@
           </div>
       </div>
         @else
-        <li class="avatar-button">
-          <div class="dropdown">
-              <a class="header_button" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"><img src="{{url (Auth::user()-> avatar_url)}}" alt="" style="width: 45px; height: 45px; border-radius: 50px; object-fit: cover; border: 2px solid white"></a>
-            <ul class="dropdown-menu dropdown-menu-dark slim-dropdown-menu" aria-labelledby="dropdownMenuLink">
-              @php
-                $crypt_user = Crypt::encrypt(Auth::user() -> id);
-              @endphp
-              <li><a class="dropdown-item" href="/user/{{$crypt_user}}">Profile</a></li>
-              <li><a class="dropdown-item" href="{{url ('/logout')}}">Log out</a></li>
-            </ul>
+        <li class="avatar-button position-static">
+          <div class="dropdown position-relative">
+              <a class="header_button_account " href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                  <img src="{{url (Auth::user()-> avatar_url)}}" alt="" style="width: 45px; height: 45px; border-radius: 50px; object-fit: cover; border: 2px solid white" class="ms-2 mt-2 mt-lg-0 me-0">
+              </a>
+              <ul class="dropdown-menu dropdown-menu-dark slim-dropdown-menu dropdown-menu-lg-end  me-auto dropdown-desktop" aria-labelledby="dropdownMenuLink">
+                  @php
+                      $crypt_user = Crypt::encrypt(Auth::user() -> id);
+                  @endphp
+                  <li><a class="dropdown-item" href="/user/{{$crypt_user}}">Profile</a></li>
+                  <li><a class="dropdown-item" href="{{url ('/logout')}}">Log out</a></li>
+              </ul>
           </div>
-        </li>
+      </li>
         @endif
       </div>
     </div>
@@ -160,10 +162,10 @@
                                 <input type="password" class="login-input" name="password" placeholder="Password" minlength="6" required>
                             </div>
                             <div class="w-100 d-flex remember mb-3">
-                              <input type="checkbox" id="remember" name="remember" class="ms-5 form-check-input">
-                              <label for="remember" class="remember-me">
+                                <input type="checkbox" id="remember" name="remember" class="ms-5 form-check-input">
+                                <label for="remember" class="remember-me">
                                 Remember me
-                              </label>
+                                </label>
                             </div>
                             <div class="w-100 d-flex justify-content-center mt-2 mb-4">
                                 <button type="submit" class="login-button" name="login">Log in</button>
@@ -179,15 +181,16 @@
         </div>
     </div>
 </div>
-  <div>
+
+<div>
     @yield('content')
-  </div>
+</div>
 
 
-  <div class="footer d-flex flex-column flex-lg-row justify-content-center align-items-center">
+<div class="footer d-flex flex-column flex-lg-row justify-content-center align-items-center">
     <div class="socials_part mt-4 w-100 w-lg-25">
         <div>
-          <h1 class="logo-text ">Rhythmatize</h1>
+            <h1 class="logo-text ">Rhythmatize</h1>
         </div>
         <div class="socials_text_block">
             <p class="socials_text">Reach us at <u>Rhythmatize@gmail.com</u> or through our socials.</p>
@@ -245,12 +248,12 @@
                 <a href="{{url ('/track-chart')}}" class="links_button">Charts</a>
             </div>
         </div>
-          @if(Auth::check() && Auth::user()->role == 'admin')
-          <div class="h-100 d-flex align-items-center justify-content-center">
-            <a href="{{url ('/admin-panel')}}" class="links_header">ADMIN</a>
-          </div>
-          @else
-          @endif
+        @if(Auth::check() && Auth::user()->role == 'admin')
+            <div class="h-100 d-flex align-items-center justify-content-center">
+                <a href="{{url ('/admin-panel')}}" class="links_header">ADMIN</a>
+            </div>
+        @else
+        @endif
     </div>
 
     <div class="vertical_line d-none d-lg-block">
@@ -266,20 +269,20 @@
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
 <script>
-  $(document).ready(function () {
-      // Check if there is an error message in the session
-      if ($('.error-login').length > 0) {
-          // Open the modal window
-          $('#loginModal').modal('show');
+$(document).ready(function () {
+    // Check if there is an error message in the session
+    if ($('.error-login').length > 0) {
+        // Open the modal window
+        $('#loginModal').modal('show');
 
-      }else if($('.error-login-1').length > 0){
-          $('#signupModal').modal('show');
-          
-      }else if ($('.error-login-2').length > 0){
-          $('#editModal').modal('show');
-      }
+    }else if($('.error-login-1').length > 0){
+        $('#signupModal').modal('show');
+        
+    }else if ($('.error-login-2').length > 0){
+        $('#editModal').modal('show');
+    }
 
-      $('.cross').click(function () {
+        $('.cross').click(function () {
         // Close the modal window
         $(this).closest('.modal').modal('hide');
     });
@@ -293,30 +296,30 @@
         // Close the modal window
         $(this).closest('.modal').modal('hide');
     });
-  });
+    });
 
-  const imageInput = document.getElementById('imageInput');
-  const imagePreview = document.getElementById('imagePreview');
-  const imageInputLabel = document.getElementById('imageInputLabel');
+const imageInput = document.getElementById('imageInput');
+const imagePreview = document.getElementById('imagePreview');
+const imageInputLabel = document.getElementById('imageInputLabel');
 
-  imageInput.addEventListener('change', function(event) {
-    const file = event.target.files[0];
-    const reader = new FileReader();
-    const fileName = event.target.files[0].name;
+imageInput.addEventListener('change', function(event) {
+const file = event.target.files[0];
+const reader = new FileReader();
+const fileName = event.target.files[0].name;
 
-    reader.onload = function(event) {
-      imagePreview.src = event.target.result;
-      imagePreview.style.padding = '0';
-      imagePreview.style.display = 'block';
-      imageInputLabel.textContent = fileName;
-    };
-    reader.readAsDataURL(file);
+reader.onload = function(event) {
+    imagePreview.src = event.target.result;
+    imagePreview.style.padding = '0';
+    imagePreview.style.display = 'block';
+    imageInputLabel.textContent = fileName;
+};
+reader.readAsDataURL(file);
 });
-    
+
 $(document).ready(function() {
-    @if (session('showLoginModal'))
-      $('#loginModal').modal('show');
-    @endif
+@if (session('showLoginModal'))
+    $('#loginModal').modal('show');
+@endif
 
 });
 

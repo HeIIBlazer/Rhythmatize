@@ -103,7 +103,19 @@ body {
     align-items: center;
     text-decoration: none;
     color: white;
-    margin-right: 15px;
+    margin-right: 25px;
+}
+
+.header_button_account {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    font-size: 25px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    color: white;
+    /* margin-right: 25px; */
 }
 
 .header_button:hover {
@@ -528,7 +540,6 @@ body {
 .card {
     display: flex;
     flex-direction: column;
-    /* height: 280px; */
     margin: 13px;
     background-color: #2C2C2C;
     border-radius: 5px;
@@ -1190,7 +1201,6 @@ hr {
     display: flex;
     flex-direction: row;
     align-items: center;
-    /* width: 50%; */
     margin: 1em;
     flex: 1;
     padding: 10px;
@@ -1965,12 +1975,20 @@ hr {
     .w-lg-30 {
         width: 30% !important;
     }
+
+    .desktop-dropdown {
+        transform: translateX(-50px);
+    }
 }
 
 @media (max-width: 992px) {
 
     .track-artist {
         width: 98%;
+    }
+
+    .desktop-dropdown {
+        transform: translateX(0);
     }
 
     .login_buttons {
@@ -1980,8 +1998,8 @@ hr {
             font-size: 25px;
         }
     }
-
     
+
 }
 
 .image_artist_list {
@@ -1989,7 +2007,7 @@ hr {
     top: 50%; 
     left: 50%; 
     transform: translate(-50%, -50%); 
-    width: 90%; 
+    width: 95%; 
     height: 100%; 
     border-radius: 5px; 
     object-fit: cover;

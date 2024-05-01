@@ -21,11 +21,11 @@
 
         <div>
             <div class="d-flex flex-row justify-content-center align-items-center">
-                <div class="artist-header-line"></div>
+                <div class="artist-header-line flex-grow-1"></div>
                 <div class="ms-2 me-2 d-flex justify-content-center">
                     <span class="all-header-2 text-uppercase">MOST POPULAR {{$artist -> name}} TRACKS</span>
                 </div>
-                <div class="artist-header-line"></div>
+                <div class="artist-header-line flex-grow-1"></div>
             </div>
         </div>
 
@@ -87,11 +87,11 @@
 
         <div class="w-100 d-flex flex-column justify-content-center">
             <div class="d-flex flex-row justify-content-center align-items-center">
-                <div class="all-line-2"></div>
+                <div class="all-line-2 flex-grow-1"></div>
                 <div class="ms-2 me-2 d-flex justify-content-center">
                     <span class="all-header-2 text-uppercase">ALL {{$artist -> name}} TRACKS</span>
                 </div>
-                <div class="all-line-2"></div>
+                <div class="all-line-2 flex-grow-1"></div>
             </div>
             <div>
                 <p class="all-header-3 mt-2 mb-3">{{$artist -> name}} discography includes {{$number_tracks}} songs</p>
