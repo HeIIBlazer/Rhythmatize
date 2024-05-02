@@ -86,7 +86,7 @@
 
         <div class="w-100 d-flex flex-column justify-content-center">
             <div class="d-flex flex-row justify-content-center align-items-center">
-                <div class="all-line-2" flex-grow-1></div>
+                <div class="all-line-2 flex-grow-1"></div>
                 <div class="ms-2 me-2 d-flex justify-content-center">
                     <span class="all-header-2 text-uppercase">ALL {{$artist -> name}} ALBUMS</span>
                 </div>
