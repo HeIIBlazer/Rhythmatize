@@ -83,8 +83,8 @@
                     @php
                         $crypt_artist = Crypt::encrypt($artist->id);
                     @endphp
-                    <a href="/artist/{{$crypt_artist}}" class="album-cover" style="">
-                            <img src="{{url ($artist->picture_url)}}" alt="Album Cover" class="alb">
+                    <a href="/artist/{{$crypt_artist}}" class="album-cover d-flex align-items-center justify-content-center" style="width: 30%; height: 200px;">
+                            <img src="{{url ($artist->picture_url)}}" alt="Album Cover" class="w-100 h-100 alb">
                         <div class="album-info d-flex flex-column justify-content-center align-items-center text-center h-100 w-100">
                             <h2 class="album-name-main">{{ $artist-> name }}</h2>
                         </div>
@@ -108,11 +108,9 @@
                             $album = \App\Models\Album::find($track->album_id); 
                             $artist = \App\Models\Artist::find($album->artist_id);
                             $crypt_track = Crypt::encrypt($track->id);
-                            // $spotify_link = $track -> spotify_link; USE FOR TRACK INFO PAGE!!!!!
-                            // $modified_link = substr($spotify_link, 24);
                         @endphp
-                        <a href="/track/{{$crypt_track}}" class="album-cover" style=" width: 30%; height:20%;">
-                            <img src="{{url ($album->cover_url)}}" alt="Album Cover" class="w-100 h-100 alb">
+                        <a href="/track/{{$crypt_track}}" class="album-cover">
+                            <img src="{{url ($album->cover_url)}}" alt="Album Cover" class="album-img alb">
                         <div class="album-info d-flex flex-column justify-content-center align-items-center text-center h-100 w-100">
                             <h2 class="artist-name-main">{{ $artist-> name }}</h2>
                             <p class="album-name-main">{{$track -> name}}</p>

@@ -133,9 +133,9 @@
                 @php
                     $crypt_album = Crypt::encrypt($artist_album->id);
                 @endphp
-                    <div class="d-flex flex-column justify-content-between align-items-center" style="width: 45%; height: 45%;">
+                    <div class="d-flex flex-column justify-content-between align-items-center w-100 h-100">
                         <a href="/album/{{$crypt_album}}">
-                            <div class="album-cover">
+                            <div class="album-cover w-100 h-100 d-flex flex-row align-items-center justify-content-center">
                                 <img src="{{url ($artist_album -> cover_url)}}" alt="Album Cover" class="img-fluid alb" style="width: 90%; height: 90%;">
                                 <div class="album-info d-flex flex-column justify-content-center align-items-center text-center">
                                     <h2 class="album-name">{{$artist_album -> name}}</h2>
