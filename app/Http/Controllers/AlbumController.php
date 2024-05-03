@@ -318,7 +318,7 @@ class AlbumController extends Controller
             $file->move(public_path('images/album_covers'), $filename);
             $album_cover = 'images/album_covers/' . $filename;
         } else {
-            $album_cover = '../images/avatars/Default_avatar.png';
+            $album_cover = $album->cover_url;
         }
 
         if($request -> description == null){

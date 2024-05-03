@@ -21,10 +21,10 @@
             <form method="POST" action="{{url('/save-edited-artist')}}" enctype="multipart/form-data">
                 @csrf
                 <input type="hidden" name="id" value="{{$crypt_artist}}">
-                <div class="d-flex flex-row justify-content-evenly mt-2 mb-5">
+                <div class="d-flex flex-lg-row flex-column justify-content-evenly mt-2 mb-5 w-100 align-items-center align-items-lg-none">
                     <div class="w-50 d-flex justify-content-center align-items-center flex-column align-center mt-3">
                         <input type="file" id="photoInput" name="picture_url" class="img-input">
-                        <label for="photoInput"  id="photoInputLabel" class="edit-change-button m-0">
+                        <label for="photoInput"  id="photoInputLabel" class="edit-change-button m-0 d-flex flex-column align-items-center justify-content-center w-100">
                             <img id="photoPreview" src="{{url ($artist -> picture_url)}}" alt="Image preview" style=" width: 230px; height: 230px; border:3px solid #BDBDBD; border-radius: 10px;" class="mb-3 mt-0"/>
                             <p id="photoInputText" class="text-center">
                                 EDIT PHOTO
@@ -34,7 +34,7 @@
 
                     <div class="w-50 d-flex justify-content-center align-items-center flex-column align-center mt-3">
                         <input type="file" id="coverInput" name="banner_url" class="img-input">
-                        <label for="coverInput"  id="coverInputLabel" class="edit-change-button m-0">
+                        <label for="coverInput"  id="coverInputLabel" class="edit-change-button m-0 d-flex flex-column align-items-center justify-content-center w-100">
                             <img id="coverPreview" src="{{url ($artist -> banner_url)}}" alt="Image preview" style=" width: 230px; height: 230px; border:3px solid #BDBDBD; border-radius: 10px;" class="mb-3 mt-0"/>
                             <p id="coverInputText" class="text-center">
                                 EDIT BANNER
@@ -43,8 +43,8 @@
                     </div>
                 </div>
 
-                <div class="d-flex justify-content-evenly h-100 mb-5">
-                    <div class="w-50">
+                <div class="d-flex flex-column flex-lg-row justify-content-evenly h-100 mb-5">
+                    <div class="w-lg-50 w-100">
                         <div>  
                             <div>
                                 <label for="name" class="mb-0 mt-2 add_input_label">EDIT ARTIST NAME</label>
@@ -68,7 +68,7 @@
                         </div>
                     </div>
 
-                    <div class="w-50 h-100 d-flex flex-column justify-content-end">
+                    <div class="w-lg-50 w-100 h-100 d-flex flex-column justify-content-end">
                         <div class="h-100 w-100">
                             <label for="description" class="mb-0 mt-2 add_input_label">EDIT DESCRIPTION</label>
                             <textarea class="add_textarea" id="description" name="description">{{$artist -> description}}</textarea>
@@ -76,9 +76,9 @@
                     </div>
                 </div>
 
-                <div class="d-flex w-100 flex-row justify-content-evenly mb-5">
-                    <button type="submit" class="add-save-button me-3">SAVE</button>
-                    <a href="/admin-panel" class="add-cancel-button text-decoration-none">CANCEL</a>
+                <div class="d-flex w-100 flex-lg-row flex-column align-items-center align-items-lg-none justify-content-evenly mb-5">
+                    <button type="submit" class="add-save-button me-0 mb-lg-3 mb-3 mb-lg-0 w-100 w-lg-25">SAVE</button>
+                    <a href="/admin-panel" class="add-cancel-button text-decoration-none w-100 w-lg-25">CANCEL</a>
                 </div>
             </form>
         </div>

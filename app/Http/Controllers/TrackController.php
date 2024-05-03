@@ -184,7 +184,7 @@ class TrackController extends Controller
         ]);
 
         $track_id = Crypt::decrypt($request->crypt_track);
-        $track = Track::find($track_id);
+        $trackToUpdate = Track::find($track_id);
 
         $album = Album::where('name', $request->album_name)->first();
 
@@ -193,7 +193,7 @@ class TrackController extends Controller
         }
 
         $album_track = Track::where('album_id', $album->id)->get();
-        if($track->name != $request->name){
+        if($trackToUpdate->name != $request->name){
             foreach($album_track as $track){
                 if($track->name == $request->name){
                     return redirect()->back()->with('error', 'Track already exists in this album');
@@ -214,7 +214,7 @@ class TrackController extends Controller
             $explicit = 'YES';
         }
 
-        $track->update([
+        $trackToUpdate->update([
             'name' => $request->name,
             'time' => $request->time,
             'spotify_link' => $request->spotify_link,
@@ -223,7 +223,6 @@ class TrackController extends Controller
             'album_id' => $album->id,
             'lyrics' => $lyrics,
             'explicit' => $explicit,
-        
         ]);
 
         $track = Track::where('name', $request->name)->first();

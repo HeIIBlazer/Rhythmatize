@@ -29,13 +29,12 @@ class AuthController extends Controller
         if (auth::attempt($credentials)) {
             if (!empty($remember)) {
                 auth::login(auth::user(), true);
-                redirect()->back();
+                return redirect()->back();
             }
-            redirect()->back();
+            return redirect()->back();
         }else{
             return redirect()->back()->with('error_login', 'Email or password is incorrect');
         }
-        return redirect()->back()->with('error_login', 'Email or password is incorrect');
     }
     public function logout(Request $request)
     {
@@ -47,5 +46,4 @@ class AuthController extends Controller
     
         return redirect('/')->with('showLoginModal', true);
     }
-
 }

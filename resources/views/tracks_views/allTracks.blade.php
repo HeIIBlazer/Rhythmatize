@@ -21,15 +21,15 @@
 
         <div>
             <div class="d-flex flex-row justify-content-center align-items-center">
-                <div class="artist-header-line"></div>
+                <div class="artist-header-line flex-grow-1"></div>
                 <div class="ms-2 me-2 d-flex justify-content-center">
                     <span class="all-header-2 text-uppercase">MOST POPULAR {{$artist -> name}} TRACKS</span>
                 </div>
-                <div class="artist-header-line"></div>
+                <div class="artist-header-line flex-grow-1"></div>
             </div>
         </div>
 
-        <div class="d-flex flex-row justify-content-evenly w-100 mt-3 mb-3">
+        <div class="w-100 d-flex flex-lg-row flex-column justify-content-evenly mt-4 mb-4">
             @foreach ($tracks as $track)
                 @php
                     $crypt_track = Crypt::encrypt($track -> id);
@@ -50,7 +50,7 @@
                 @endphp
 
                 <a href="/track/{{$crypt_track}}" class="text-decoration-none">
-                    <div class="d-flex flex-row all-tracks-3">
+                    <div class="d-flex flex-row all-tracks-3 w-100 w-lg-30 mt-lg-0 mt-4">
 
                         <div class="d-flex justify-content-center align-items-center h-100">
                             <img src="{{url ($album -> cover_url)}}" alt="" class="track-cover">
@@ -87,11 +87,11 @@
 
         <div class="w-100 d-flex flex-column justify-content-center">
             <div class="d-flex flex-row justify-content-center align-items-center">
-                <div class="all-line-2"></div>
+                <div class="all-line-2 flex-grow-1"></div>
                 <div class="ms-2 me-2 d-flex justify-content-center">
                     <span class="all-header-2 text-uppercase">ALL {{$artist -> name}} TRACKS</span>
                 </div>
-                <div class="all-line-2"></div>
+                <div class="all-line-2 flex-grow-1"></div>
             </div>
             <div>
                 <p class="all-header-3 mt-2 mb-3">{{$artist -> name}} discography includes {{$number_tracks}} songs</p>

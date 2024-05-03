@@ -28,8 +28,8 @@
     <div style="width: 100%; height: 180px;">
         <img src="{{url ($artist -> banner_url)}}" alt="" style="width: 100%; height: 300px; object-fit:cover; object-position: 50% 50%;">
     </div>
-<div class="container d-flex flex-row justify-content-between mb-5">
-    <div class="w-25 d-flex flex-column  align-items-center">
+<div class="container d-flex flex-column flex-lg-row align-items-center align-items-lg-none justify-content-lg-between mb-5">
+    <div class="w-95 w-lg-25 d-flex flex-column align-items-center">
         <div>
             <div class="artist-img w-100 d-flex justify-content-center align-items-center">
                 <img src="{{url ($album -> cover_url)}}" alt="" class="Info-Image">
@@ -241,7 +241,7 @@
 
     </div>
 
-    <div class="w-65 d-flex flex-column align-items-center pt-130 ">
+    <div class="w-lg-65 w-95 d-flex flex-column align-items-center pt-130 ">
         <div class="track-lyrics-background w-100">
             <div class="w-100 d-flex flex-row justify-content-evenly align-content-center">
                 <div class="tracks-lyrics-headers w-94">
