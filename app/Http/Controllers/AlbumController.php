@@ -49,7 +49,7 @@ class AlbumController extends Controller
         $albums = DB::table("albums")->select('albums.*', DB::raw('count(like_albums.id) as likes_count'))
                         ->leftJoin('like_albums',"album_id",'=' ,'albums.id')
                         ->groupBy('albums.id', 'albums.name' , 'albums.cover_url', 'albums.release_date', 'albums.description', 'albums.youtube_link', 'albums.spotify_link', 'albums.apple_music_link', 'albums.type', 'albums.artist_id', 'albums.genre_id')
-                        ->orderBy('likes_count', 'asc',)
+                        ->orderBy('likes_count', 'desc',)
                         ->limit(3)
                         ->get();
 
