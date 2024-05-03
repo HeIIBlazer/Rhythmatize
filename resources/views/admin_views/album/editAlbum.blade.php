@@ -36,8 +36,8 @@
                     </div>
                 </div>
 
-                <div class="d-flex justify-content-evenly h-100 mb-5">
-                    <div class="w-50">
+                <div class="d-flex flex-column flex-lg-row justify-content-lg-evenly justify-content-center align-items-lg-none align-items-center h-100 mb-5 w-100">
+                    <div class="w-lg-50 w-100">
                         <div>  
                             <div>
                                 <label for="name" class="mb-0 mt-2 add_input_label">ADD ALBUM NAME</label>
@@ -66,7 +66,7 @@
                         </div>
                     </div>
 
-                    <div class="w-50 h-100 d-flex flex-column justify-content-end">
+                    <div class="w-lg-50 mt-5 mt-lg-0 w-100 h-100 d-flex flex-column justify-content-end">
                         <div>
                             <label for="type" class="mb-0 mt-2 add_input_label">CHOOSE TYPE</label>
                             <select class="add-input" id="type" name="type" required>
@@ -77,7 +77,7 @@
                         </div>
 
                         <div class="w-100 d-flex flex-row">
-                            <div class="w-95">
+                            <div class="w-95-genre">
                                 <label for="description" class="mb-0 mt-2 add_input_label">CHOOSE GENRE</label>
                                 <input type="text" class="add-input-genre" id="genre_name" list="genres-list" name="genre_name" value="{{$genre_album -> name}}" required>
                             </div>
@@ -93,7 +93,7 @@
                         </datalist>
 
                         <div class="w-100 d-flex flex-row">
-                            <div class="w-95">
+                            <div class="w-95-genre">
                                 <label for="description" class="mb-0 mt-2 add_input_label">CHOOSE ARTIST</label>
                                 <input type="text" class="add-input-genre" id="artist_name" list="artists-list" name="artist_name" value="{{$artist_album -> name}}" required>
                             </div>
@@ -115,9 +115,9 @@
                     </div>
                 </div>
 
-                <div class="d-flex w-100 flex-row justify-content-evenly mb-5">
-                    <button type="submit" class="add-save-button me-3">SAVE</button>
-                    <a href="/admin-panel" class="add-cancel-button text-decoration-none">CANCEL</a>
+                <div class="d-flex w-100 flex-lg-row flex-column  justify-content-evenly mb-5">
+                    <button type="submit" class="add-save-button mb-lg-0 mb-3 me-3 w-100 w-lg-25">SAVE</button>
+                    <a href="/admin-panel" class="add-cancel-button text-decoration-none w-100 w-lg-25">CANCEL</a>
                 </div>
             </form>
         </div>
