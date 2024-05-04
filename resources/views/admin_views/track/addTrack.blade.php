@@ -17,8 +17,8 @@
             <form method="POST" action="{{url('/add-track-to-database')}}" enctype="multipart/form-data">
                 @csrf
 
-                <div class="d-flex justify-content-evenly h-100 mb-5">
-                    <div class="w-50">
+                <div class="d-flex flex-lg-row flex-column justify-content-evenly h-100 mb-5">
+                    <div class="w-100 w-lg-50">
                         <div>  
                             <div>
                                 <label for="name" class="mb-0 mt-2 add_input_label">ADD TRACK NAME</label>
@@ -42,14 +42,14 @@
                         </div>
                     </div>
 
-                    <div class="w-50 h-100 d-flex flex-column justify-content-end">
+                    <div class="w-lg-50 w-100 h-100 d-flex flex-column justify-content-end mt-5 mt-lg-0">
                         <div class="w-100 d-flex flex-row">
-                            <div class="w-75">
-                                <label for="track_length" class="mb-0 mt-2 add_input_label">ADD TRACK LENGTH</label>
-                                <input type="text" class="add-input" id="track_length" name="time" required>
+                            <div class="w-75-length">
+                                <label for="track_length" class="mb-0 mt-2 add_input_label ">ADD TRACK LENGTH</label>
+                                <input type="text" class="add-input " id="track_length" name="time" required>
                             </div>
 
-                            <div class="w-25">
+                            <div class="w-25 ms-3 ms-lg-0">
                                 <label for="explicit" class="mb-0 mt-2 add_input_label">
                                     EXPLICIT
                                 </label>
@@ -60,8 +60,8 @@
                             </div>
                         </div>
 
-                        <div class="w-100 d-flex flex-row">
-                            <div class="w-95">
+                        <div class="w-100 d-flex flex-row ">
+                            <div class="w-95-genre">
                                 <label for="album_name" class="mb-0 mt-2 add_input_label">CHOOSE ALBUM</label>
                                 <input type="text" class="add-input-genre" id="album_name" list="albums-list" name="album_name" required>
                             </div>
@@ -83,9 +83,9 @@
                     </div>
                 </div>
 
-                <div class="d-flex w-100 flex-row justify-content-evenly mb-5">
-                    <button type="submit" class="add-save-button me-3">SAVE</button>
-                    <a href="/admin-panel" class="add-cancel-button text-decoration-none">CANCEL</a>
+                <div class="d-flex w-100 flex-row justify-content-evenly mb-5 flex-lg-row flex-column">
+                    <button type="submit" class="add-save-button me-0 me-lg-3 mb-3 mb-lg-3 w-lg-25 w-100">SAVE</button>
+                    <a href="/admin-panel" class="add-cancel-button text-decoration-none w-lg-25 w-100">CANCEL</a>
                 </div>
             </form>
         </div>

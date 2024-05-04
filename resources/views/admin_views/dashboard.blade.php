@@ -5,8 +5,8 @@
     <div class="container">
 
         <div>
-            <div class="Header-List">
-                <p>ADMIN DASHBOARD</p>
+            <div class="Header-List ">
+                <p class="text-center">ADMIN DASHBOARD</p>
             </div>
         </div>
 
@@ -27,18 +27,18 @@
                     @endforeach
                 </datalist>
             </div>
-            <div class="d-flex flex-row justify-content-center w-100">
-                <div style="width: 15%;" class="me-5">
-                    <a href="/add-artist" class="dashboard-button ">
+            <div class="d-flex flex-column flex-lg-row justify-content-center align-items-lg-none align-items-center w-100">
+                <div class="me-lg-5 w-lg-15 mb-3 mb-lg-0 w-lg-15">
+                    <a href="/add-artist" class="dashboard-button">
                         <p class="w-100 h-100 pt-1">ADD</p>
                     </a>
                 </div>
-                <div id="edit_artist" style="width: 15%; cursor: pointer;" class="me-5" >
-                    <div class="dashboard-button me-5">
+                <div id="edit_artist" class="me-lg-5 w-lg-15 mb-3 mb-lg-0 w-lg-15" >
+                    <div class="dashboard-button">
                         <p class="w-100 h-100 pt-1">EDIT</p>
                     </div>
                 </div>
-                <div style="width: 15%; cursor: pointer;" id="delete_artist">
+                <div id="delete_artist" class="w-lg-15">
                     <a id="delete-artist" class="dashboard-button">
                         <p class="w-100 h-100 pt-1">DELETE</p>
                     </a>
@@ -94,18 +94,18 @@
                     @endforeach
                 </datalist>
             </div>
-            <div class="d-flex flex-row justify-content-center w-100">
-                <div style="width: 15%; cursor: pointer;" class="me-5">
+            <div class="d-flex flex-column flex-lg-row justify-content-center align-items-lg-none align-items-center w-100">
+                <div class="me-lg-5 w-lg-15 mb-3 mb-lg-0 w-lg-15">
                     <a href="/add-album" id="add_album" class="dashboard-button">
                         <p class="w-100 h-100 pt-1">ADD</p>
                     </a>
                 </div>
-                <div id="edit_album" style="width: 15%; cursor: pointer;" class="me-5" >
-                    <div class="dashboard-button me-5">
+                <div id="edit_album" class="me-lg-5 w-lg-15 mb-3 mb-lg-0 w-lg-15" >
+                    <div class="dashboard-button">
                         <p class="w-100 h-100 pt-1">EDIT</p>
                     </div>
                 </div>
-                <div style="width: 15%; cursor: pointer;" id="delete_album">
+                <div id="delete_album" class="w-lg-15">
                     <a id="delete_album" class="dashboard-button">
                         <p class="w-100 h-100 pt-1">DELETE</p>
                     </a>
@@ -161,18 +161,18 @@
                     @endforeach
                 </datalist>
             </div>
-            <div class="d-flex flex-row justify-content-center w-100">
-                <div style="width: 15%; cursor: pointer;" class="me-5">
+            <div class="d-flex flex-column flex-lg-row justify-content-center align-content-lg-none align-items-center w-100">
+                <div class="me-lg-5 w-lg-15 mb-3 mb-lg-0">
                     <a href="/add-track" id="add_track" class="dashboard-button">
                         <p class="w-100 h-100 pt-1">ADD</p>
                     </a>
                 </div>
-                <div id="edit_track" style="width: 15%; cursor: pointer;" class="me-5" >
-                    <div class="dashboard-button me-5">
+                <div id="edit_track" class="me-lg-5 w-lg-15 mb-3 mb-lg-0">
+                    <div class="dashboard-button">
                         <p class="w-100 h-100 pt-1">EDIT</p>
                     </div>
                 </div>
-                <div style="width: 15%; cursor: pointer;" id="delete_track">
+                <div id="delete_track" class="w-lg-15">
                     <a id="delete_track" class="dashboard-button">
                         <p class="w-100 h-100 pt-1">DELETE</p>
                     </a>

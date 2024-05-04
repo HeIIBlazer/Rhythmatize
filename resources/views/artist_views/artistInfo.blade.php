@@ -21,8 +21,8 @@
     <div style="width: 100%; height: 180px;">
         <img src="{{url ($artist -> banner_url)}}" alt="" style="width: 100%; height: 300px; object-fit:cover; object-position: 50% 50%;">
     </div>
-<div class="container d-flex flex-row justify-content-between mb-5">
-    <div class="w-25 d-flex flex-column  align-items-center">
+<div class="container flex-lg-row flex-column d-flex align-items-center align-items-lg-none justify-content-between mb-5">
+    <div class="w-95 w-lg-25 d-flex flex-column align-items-center">
         <div>
             <div class="artist-img w-100 d-flex justify-content-center align-items-center">
                 <img src="{{url ($artist -> picture_url)}}" alt="" class="Info-Image">
@@ -179,7 +179,7 @@
         </div>
     </div>
 
-    <div class="w-65 d-flex flex-column align-items-center">
+    <div class="w-lg-65 w-95 d-flex flex-column align-items-center">
         <div class="w-100 d-flex flex-row justify-content-evenly align-content-center">
             <div class="artist-tracks-headers w-94">
                 <div class="artist-header-line"></div>
@@ -196,9 +196,9 @@
             </div>
         @else
 
-        <div class="w-94 d-flex flex-column justify-content-between align-items-center mt-3">
+        <div class="w-94  d-flex flex-column justify-content-between align-items-center mt-3">
             @foreach ($tracks->chunk(2) as $chunk)
-                <div class=" d-flex flex-row justify-content-between align-items-center mb-4 w-100">
+                <div class=" d-flex flex-lg-row justify-content-between align-items-center mb-4 w-100 flex-column">
                     @foreach ($chunk as $track)
                         @php
                             $album = DB::table('albums')
@@ -213,7 +213,7 @@
                                         ->count();
                         @endphp
                         <a href="/track/{{$crypt_track}}" class="text-decoration-none">
-                        <div class="d-flex flex-row track-artist">
+                        <div class="d-flex flex-row track-artist mt-lg-0 mt-5">
 
                             <div class="d-flex justify-content-center align-items-center h-100">
                                 <img src="{{url ($album -> cover_url)}}" alt="" class="track-cover">
@@ -268,7 +268,7 @@
             @php
                 $crypt_album = Crypt::encrypt($album->id);
             @endphp
-                <div class="col-auto artist-album-card">
+                <div class="col-auto mt-3 mt-lg-0 artist-album-card">
                     <a href="/album/{{$crypt_album}}" class="text-decoration-none">
                         <div>
                             <img src="{{url ($album -> cover_url)}}" alt="" style="width: 250px; height: 250px; border-radius: 5px; margin-top:10px; padding: 10px 10px;">

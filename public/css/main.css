@@ -13,12 +13,12 @@ body {
 
 .logo-text {
     font-family: 'audiowide', sans-serif;
-    font-size: 40px;
+    font-size: 35px;
     text-align: center;
     justify-content: center;
     align-items: center;
     color: white;
-    
+    padding-top: 3px;
 }
 
 .cursor-pointer{
@@ -44,9 +44,13 @@ body {
     width: 90%;
 }
 
+.w-95-genre {
+    width: 90%;
+}
 .w-5 {
     width: 5%;
 }
+
 
 .cross-button {
     background-color: transparent;
@@ -60,13 +64,19 @@ body {
     color: white;
 }
 /* HEADER STYLES */
+.custom-toggler .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 255, 255)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+.custom-search {
+    width: 200px;
+}
 .login_buttons {
-    width: 5%;
+    width:8%;
     display: flex;
     flex-direction: column;
     margin-left: 20px;
     align-items: center;
-    justify-content: space-between;
     height: 100%;
 }
 
@@ -74,7 +84,7 @@ body {
     width: 100%;
     height: 22px;
     color: white;
-    font-size: 15px;
+    font-size: 14px;
     text-align: center;
     text-decoration: none;
     font-weight: bold;
@@ -89,7 +99,7 @@ body {
 }
 
 .header_button {
-    font-family: "Montserrat", sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-weight: bold;
     font-size: 25px;
     text-align: center;
@@ -97,6 +107,19 @@ body {
     align-items: center;
     text-decoration: none;
     color: white;
+    margin-right: 25px;
+}
+
+.header_button_account {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    font-size: 25px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    color: white;
+    /* margin-right: 25px; */
 }
 
 .header_button:hover {
@@ -175,7 +198,6 @@ body {
     margin-top: -5px;
     display: flex;
     flex-direction: row;
-    align-items: center;
     justify-content: space-evenly;
     width: 50%;
 }
@@ -234,7 +256,7 @@ body {
 }
 
 .Copyright_part {
-    width: 17%;
+    width: 20%;
     height: 160px;
     display: flex;
     flex-direction: column;
@@ -517,6 +539,7 @@ body {
     margin-bottom: 0px;
     margin-top: 15px;
     display: flex;
+    text-align: center;
         flex-direction: column;
         align-items: center;
     -webkit-text-stroke: 2px black;
@@ -544,8 +567,6 @@ body {
 .card {
     display: flex;
     flex-direction: column;
-    width: 15%;
-    height: 280px;
     margin: 13px;
     background-color: #2c2c2c;
     border-radius: 5px;
@@ -1040,6 +1061,8 @@ hr {
 }
 
 
+
+
 .artist-track-name {
     font-family: "Montserrat", sans-serif;
     font-size: 20px;
@@ -1047,7 +1070,7 @@ hr {
     padding: 5px 10px;
     padding-top: 10px;
     font-weight: 600;
-    max-width: 245px;
+    max-width: 100%;
     height: 40px;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -1068,10 +1091,7 @@ hr {
     color: #808080;
     font-weight: 500;
     font-size: 14px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 230px;
+    max-width: 100%;
     text-decoration: none;
     transition: ease all 0.3s;
     cursor: pointer;
@@ -1218,7 +1238,6 @@ hr {
     display: flex;
     flex-direction: row;
     align-items: center;
-    /* width: 50%; */
     margin: 1em;
     flex: 1;
     padding: 10px;
@@ -1361,10 +1380,11 @@ hr {
 }
 
 .album-cover {
+    width: 30%;
+        height: 20%;
     position: relative;
-    text-align: center;
-    color: white;
 }
+
 .album-info {
     position: absolute;
     top: 50%;
@@ -1372,9 +1392,37 @@ hr {
     transform: translate(-50%, -50%);
 }
 
-.alb {
+/* .alb {
+    height: 100%;
+        width: 100%;
+        object-fit: cover;
+    transition: ease all .2s;
+} */
+
+.album-cover {
     width: 100%;
-    height:100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.album-img {
+    max-width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+@media (min-width: 768px) {
+    .album-cover {
+        width: 30%;
+        height: 20%;
+    }
+}
+.alb {
+    max-width: 100%;
+        height: 5%;
     object-fit: cover;
     transition: ease all .2s;
 }
@@ -1650,7 +1698,6 @@ hr {
 
 .all-tracks-3 {
     background-color: #373737;
-    width: 30%;
     height: 185px;
     border-radius: 5px;
     box-shadow: 10px 10px 4px #00000054;
@@ -1970,4 +2017,114 @@ hr {
     text-decoration: underline;
     color: white;
     transition: ease all 0.1s;
+}
+
+@media (min-width: 992px) {
+    .w-lg-65 {
+        width: 65% !important;
+    }
+}
+
+.w-sm-75 {
+    width: 45%;
+    height: 45%;
+}
+
+.w-lg-15 {
+    width: 75%;
+    cursor: pointer;
+
+}
+.w-75-length {
+    width: 75%;
+}
+@media (min-width: 992px) {
+    .align-items-lg-none {
+        align-items: initial !important;
+    }
+
+    .w-lg-25 {
+        width: 25% !important;
+    }
+
+    .w-lg-30 {
+        width: 30% !important;
+    }
+
+    .desktop-dropdown {
+        transform: translateX(-50px);
+    }
+        .w-lg-15 {
+            width: 15%;
+            cursor: pointer;
+        }
+}
+
+@media (max-width: 992px) {
+
+    .track-artist {
+        width: 98%;
+    }
+
+        .w-75-length {
+            width: 100%;
+        }
+
+    .desktop-dropdown {
+        transform: translateX(0);
+    }
+
+        .add-input {
+            width: 100%;
+        }
+    
+        .add_textarea {
+            width: 95%;
+            height: 300px;
+            padding-left: 15px;
+            padding-top: 5px;
+            border: none;
+            border-radius: 15px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 500;
+            background-color: #373737;
+            color: white;
+            font-size: 25px;
+            box-shadow: 10px 10px 4px #00000054;
+        }
+    
+        .add_textarea-small {
+            width: 100%;
+        }
+    
+        .add_textarea {
+            width: 100%;
+        }
+    
+        .w-95-genre {
+            width: 100%;
+        }
+        .dashboard-input {
+            width: 75%;
+        }
+
+    .login_buttons {
+        width: 100%;
+        margin-top: 10px;
+        .login_button {
+            font-size: 25px;
+        }
+    }
+                
+}
+
+.image_artist_list {
+    position: absolute;
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    width: 95%; 
+    height: 100%; 
+    border-radius: 5px; 
+    object-fit: cover;
 }

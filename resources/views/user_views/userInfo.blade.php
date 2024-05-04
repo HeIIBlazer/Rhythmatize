@@ -9,8 +9,8 @@
 <div style="width: 100%; height: 180px;">
     <img src="{{url ($user -> banner_url)}}" alt="" style="width: 100%; height: 300px; object-fit:cover; object-position: 50% 50%;">
 </div>
-<div class="container d-flex flex-row justify-content-between mb-5">
-    <div class="w-25 d-flex flex-column  align-items-center">
+<div class="container d-flex flex-lg-row flex-column justify-content-between mb-5">
+    <div class="w-lg-25 w-100 d-flex flex-column  align-items-center">
         <div>
             <div class="artist-img w-100 d-flex justify-content-center align-items-center">
                 <img src="{{url ($user -> avatar_url)}}" alt="" class="Info-Image">
@@ -47,7 +47,7 @@
     </div>
 
 
-    <div class="w-65 d-flex flex-column align-items-center">
+    <div class="w-lg-65 w-100  d-flex flex-column align-items-center">
 
         <div class="w-100 artist-tracks-headers  d-flex flex-row justify-content-evenly align-content-center">
             <div class="artist-tracks-headers-2 mt-4 w-94">
@@ -69,7 +69,7 @@
             @php
                 $crypt_artist = Crypt::encrypt($artist -> id);
             @endphp
-                <a href="/artist/{{$crypt_artist}}" class=" text-decoration-none col-auto artist-album-card pb-3">
+                <a href="/artist/{{$crypt_artist}}" class=" text-decoration-none col-auto artist-album-card pb-3 mt-4 mt-lg-0">
                     <div class="mb-3">
                         <img src="{{url ($artist -> picture_url)}}" alt="" style="width: 250px; height: 250px; border-radius: 5px; margin-top:10px; padding: 10px 10px; object-fit:cover;">
                     </div>
@@ -104,7 +104,7 @@
                 <h1 class="w-100 text-center white-text text-Montserrat text-">THIS USER DID NOT LIKED AN ALBUM YET</h1>
             </div>
         @else
-        <div class="row justify-content-evenly mt-3 w-94 mb-4">
+        <div class="row justify-content-evenly mt-3 w-94 mb-4 ">
             @foreach ($albums as $album)
             @php
             $artist = DB::table('artists')
@@ -113,21 +113,21 @@
             $crypt_album = Crypt::encrypt($album-> id);
             $crypt_artist = Crypt::encrypt($artist -> id);
             @endphp
-                <div class="col-auto artist-album-card pb-3">
-                    <a href="/album/{{$crypt_album}}" class="text-decoration-none">
-                        <div>
-                            <img src="{{url ($album -> cover_url)}}" alt="" style="width: 250px; height: 250px; border-radius: 5px; margin-top:10px; padding: 10px 10px;">
-                        </div>
-                        <div class="w-100 d-flex justify-content-center text-center white-text">
-                            <p class="text-truncate text-Montserrat-album">{{$album -> name}}</p>
-                        </div>
-                        <div class="w-100 d-flex justify-content-center text-center white-text">
-                            <a href="/artist/{{$crypt_artist}}" class="text-truncate artist-track-album">
-                                {{$album -> type}} | {{$album -> release_date}} | {{$artist -> name}}
-                            </a>
-                        </div>
-                    </a>
-                </div>
+            <div class="col-auto mt-3 mt-lg-0 artist-album-card" style="width: 250px;">
+                <a href="/album/{{$crypt_album}}" class="text-decoration-none">
+                    <div>
+                        <img src="{{url ($album -> cover_url)}}" alt="" style="width: 100%; height: 250px; border-radius: 5px; margin-top:10px; padding: 10px 10px;">
+                    </div>
+                    <div class="w-100 d-flex justify-content-center text-center white-text overflow-hidden">
+                        <p class="text-Montserrat-album">{{$album -> name}}</p>
+                    </div>
+                    <div class="w-100 d-flex justify-content-center text-center white-text mb-3 mb-lg-0 overflow-hidden">
+                        <a href="/artist/{{$crypt_artist}}" class="artist-track-album">
+                            {{$album -> type}} | {{$album -> release_date}} | {{$artist -> name}}
+                        </a>
+                    </div>
+                </a>
+            </div>
             @endforeach
         </div>
         <a class="artist-button-album flex-wrap" href="/liked-albums/{{$crypt_user}}">Show all liked albums</a>
@@ -148,9 +148,9 @@
                 <h1 class="w-100 text-center white-text text-Montserrat text-">THIS USER DID NOT LIKED A TRACK YET</h1>
             </div>
         @else
-        <div class="w-94 d-flex flex-column mt-3">
+        <div class="w-94 d-flex flex-column justify-content-between align-items-center mt-3">
             @foreach ($tracks->chunk(2) as $chunk)
-                <div class=" d-flex flex-row justify-content-around mb-4  w-100">
+                <div class=" d-flex flex-lg-row justify-content-between align-items-center mb-4 w-100 flex-column">
                     @foreach ($chunk as $track)
 
                         @php
@@ -164,7 +164,7 @@
                             $crypt_track = Crypt::encrypt($track -> id);
                         @endphp
 
-                        <div class="d-flex flex-row track-artist mr-2">
+                        <div class="d-flex flex-row track-artist mr-2 mt-lg-0 mt-5">
                             <a href="/track/{{$crypt_track}}" class="text-decoration-none">
                                 <div class="d-flex  align-items-center h-100">
                                     <img src="{{url ($album -> cover_url)}}" alt="" class="track-cover">
@@ -208,8 +208,8 @@
                             <form action="/update/{{$user -> id}}" method="POST" class="form" enctype="multipart/form-data" id="edit">
                                 @csrf
                                 <div class="w-100">
-                                    <div class=" w-100 h-100 d-flex flex-row justify-content-center">
-                                        <div class="d-flex flex-column align-items-center align-content-center justify-content-center w-50">
+                                    <div class=" w-100 h-100 d-flex flex-column flex-lg-row justify-content-center align-items-lg-none align-items-center">
+                                        <div class="d-flex flex-column align-items-center align-content-center justify-content-center w-100 w-lg-50">
                                             <div class="d-flex h-50 align-items-center justify-content-center flex-column align-content-center" >
                                                 <div class="d-flex justify-content-center" style="border:3px solid #808080;border-radius: 5px; height: 200px;">
                                                     <img id="imagePreview" src="{{$user -> avatar_url}}" alt="Image preview" style="width:100%; height: 100%;  object-fit:fill" class="mb-2"/>
@@ -227,33 +227,33 @@
                                             </div>
                                         </div>
 
-                                        <div class="w-50 d-flex flex-column align-items-baseline">
-                                            <div class="w-100 d-flex justify-content-center align-center mt-2 flex-column">
+                                        <div class="w-100 w-lg-50 d-flex flex-column align-items-lg-baseline align-items-center ">
+                                            <div class="w-100 d-flex justify-content-center align-items-center align-items-lg-none mt-2 flex-column">
                                                 <label class="label-edit" for="username">USERNAME</label>
                                                 <input type="text" class="edit-input" name="username" id="username" placeholder="Username" value="{{$user -> username}}">
                                             </div>
 
-                                            <div class="w-100 d-flex flex-column mt-2">
+                                            <div class="w-100 d-flex flex-column mt-2 align-items-center align-items-lg-none">
                                                 <label class="label-edit" for="description">BIO</label>
                                                 <textarea name="description" id="description" placeholder="Add description" rows="4" wrap="hard" class="edit-input" style="height: 210px">{{$user -> description}}</textarea>
                                             </div>
 
-                                            <div class="w-100 d-flex flex-column mt-2">
+                                            <div class="w-100 d-flex flex-column mt-2 align-items-center align-items-lg-none">
                                                 <label class="label-edit" for="email">EMAIL</label>
                                                 <input type="email" id="email" placeholder="Email" class="edit-input" name="email" value="{{$user -> email}}">
                                             </div>
 
-                                            <div class="w-100 d-flex flex-column justify-content-center align-center mt-2 ">
+                                            <div class="w-100 d-flex flex-column justify-content-center align-center mt-2 align-items-center align-items-lg-none">
                                                 <label class="label-edit" for="password">ENTER YOUR PASSWORD TO CONFIRM</label>
                                                 <input type="password" class="edit-input" name="password" placeholder="Current Password" minlength="6" required>
                                             </div>
                                             
-                                            <div class="w-100 d-flex flex-column justify-content-center align-center mt-2 ">
+                                            <div class="w-100 d-flex flex-column justify-content-center  mt-2 align-items-center align-items-lg-none">
                                                 <label class="label-edit" for="new_password">NEW PASSWORD</label>
                                                 <input type="password" class="edit-input" name="new_password" placeholder="New Password" minlength="6">
                                             </div>
                                             
-                                            <div class="w-100 d-flex flex-column justify-content-center align-center mt-2 mb-3">
+                                            <div class="w-100 d-flex flex-column justify-content-center align-items-center align-items-lg-none mt-2 mb-3">
                                                 <label class="label-edit" for="password_confirmation">CONFIRM PASSWORD</label>
                                                 <input type="password" class="edit-input" name="password_confirmation" placeholder=" Confirm Password" minlength="6">
                                             </div>
@@ -261,8 +261,8 @@
                                         </div>
                                     </div>
 
-                                    <div class="d-flex flex-row w-100 mt-2 mb-3 justify-content-evenly">
-                                        <div class="">
+                                    <div class="d-flex flex-lg-row flex-column w-100 mt-2 mb-3 justify-content-evenly align-items-lg-none align-items-center">
+                                        <div class=" mb-lg-0 mb-3">
                                             <button type="submit" class="save-button">SAVE</button>
                                         </div>
                                         <div class="">
