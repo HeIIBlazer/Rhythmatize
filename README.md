@@ -1,10 +1,10 @@
-<p align="center"><a href="" target="_blank"><img src="https://github.com/HeIIBlazer/Rhythmatize/blob/main/public/images/logo.png?raw=true"width="400" alt="Rhythmatize Logo"></a></p>
+<p align="center"><a href="" target="_blank"><img src="https://github.com/HeIIBlazer/Rhythmatize/blob/main/public/images/logo.jpg"width="400" alt="Rhythmatize Logo"></a></p>
 
-<p align="center">Rhythmize is a music-centric website that serves as a hub for music enthusiasts and fans. It offers a comprehensive database of artists and their music, complete with links to various music streaming services. Visitors can access song lyrics, detailed artist information, and explore the rich world of music, all in one convenient platform.</p>
+<p align="center">Rhythmatize is a music-centric website that serves as a hub for music enthusiasts and fans. It offers a comprehensive database of artists and their music, complete with links to various music streaming services. Visitors can access song lyrics, detailed artist information, and explore the rich world of music, all in one convenient platform.</p>
 
 ## AUTHORS
-- [Daniil Vassiljev](https://github.com/HeIIBlazer) - backend & frontend
-- [Daniil Divissenko](https://github.com/ayayaa-dev) - design & frontend
+- [Daniil Vassiljev](https://github.com/HeIIBlazer) - UX/UI design & full-stack developer
+- [Daniil Divissenko](https://github.com/ayayaa-dev) - UX/UI design & full-stack developer
 
 
 <h2 align="center">USED TECHNOLOGIES:</h2>
@@ -57,7 +57,7 @@ To run this project, you must have the following installed on your system:
 ## Admin & User Credentials:
 
 - Admin:
-  - Email: admin@test.ee
+  - Email: admin@test.com
   - Password: Admin123!
 
 
