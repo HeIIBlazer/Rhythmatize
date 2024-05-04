@@ -50,7 +50,7 @@
         </div>
     
         @else
-        <div class="row">
+        <div class="row w-100 justify-content-evenly">
             @foreach ($artists as $artist)
             @php
                 $crypt_artist = Crypt::encrypt($artist->id);
