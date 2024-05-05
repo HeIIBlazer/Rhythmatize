@@ -138,7 +138,7 @@
                             <div class="album-cover w-100 h-100 d-flex flex-row align-items-center justify-content-center">
                                 <img src="{{url ($artist_album -> cover_url)}}" alt="Album Cover" class="img-fluid alb" style="width: 90%; height: 90%;">
                                 <div class="album-info d-flex flex-column justify-content-center align-items-center text-center">
-                                    <h2 class="album-name">{{$artist_album -> name}}</h2>
+                                    <h2 class="album-name-main h-25">{{$artist_album -> name}}</h2>
                                     <p class="album-year">{{$artist_album -> release_date}}</p>
                                 </div>
                             </div>
