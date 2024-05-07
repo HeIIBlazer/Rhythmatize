@@ -93,7 +93,6 @@
 
 <script>
     const currentUrl = window.location.href;
-    if 
     let crypt = "{{$crypt_user}}";
     const username ="{{$username}}";
     // Check if the URL contains a specific string (e.g. "user-albums")

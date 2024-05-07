@@ -1,0 +1,57 @@
+version: '3'
+
+services:
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    restart: unless-stopped
+    environment:
+      PMA_HOST: mariadb
+      PMA_PORT: 3306
+      MYSQL_ROOT_PASSWORD: mtalhead313
+    ports:
+      - "8080:80"
+  mariadb:
+    image: mariadb:10.5
+    container_name: mariadb
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: mtalhead313
+      MYSQL_DATABASE: rhythmatize
+      MYSQL_USER: root
+      MYSQL_PASSWORD: mtalhead313
+    volumes:
+      - mariadb_data:/var/lib/mysql
+  rhythmatize:
+    build: .
+    container_name: rhythmatize
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      DB_CONNECTION: mysql
+      DB_HOST: mariadb
+      DB_DATABASE: rhythmatize
+      DB_USERNAME: root
+      DB_PASSWORD: mtalhead313
+    volumes:
+      - .:/var/www/html
+    depends_on:
+      - mariadb
+  nginx:
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile.nginx
+    container_name: nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - .:/var/www/html
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - rhythmatize
+
+volumes:
+  mariadb_data:
