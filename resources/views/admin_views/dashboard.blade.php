@@ -365,13 +365,13 @@
             <script>
                 $(document).ready(function(){
                     $('#album-deleted').toast('show');
+
+                    
                 });
 
-                document.querySelectorAll('.cross-button').forEach(function(button) {
-                    button.addEventListener('click', function() {
-                        var toastElement = button.closest('.toast');
-                        var toast = new bootstrap.Toast(toastElement);
-                        toast.hide();
+                $(document).ready(function(){
+                    $('.cross-button').on('click', function(){
+                        $(this).closest('.toast').toast('hide');
                     });
                 });
             </script>
