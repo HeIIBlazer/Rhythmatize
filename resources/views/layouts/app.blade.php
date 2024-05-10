@@ -102,7 +102,7 @@
                     @endif
                     <div class="d-flex w-100 flex-column justify-content-center align-items-center h-75 ">
                         <form action="{{url('/register')}}" method="POST" class="form" enctype="multipart/form-data">
-                            @csrf
+                            {{ csrf_token() }}
                             <div class="w-100 d-flex justify-content-center align-items-center flex-column align-center mt-3">
                               <img id="imagePreview" src="#" alt="Image preview" style="display: none; width: 45%; height: 45%; border:3#808080px solid #808080; border-radius: 5px;" class="mb-3 mt-0"/>
                               <input type="file" id="imageInput" name="avatar_url" class="img-input">
@@ -154,7 +154,7 @@
                     @endif
                     <div class="d-flex w-100 flex-column justify-content-center align-items-center">
                         <form action="{{url('/login-auth')}}" method="POST" class="form">
-                            @csrf
+                            {{ csrf_token() }}
                             <div class="w-100 d-flex justify-content-center align-center mt-2">
                                 <input type="email" class="login-input" name="email" placeholder="Email" required autofocus>
                             </div>
