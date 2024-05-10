@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1
--- Время создания: Май 05 2024 г., 12:00
+-- Время создания: Май 10 2024 г., 19:24
 -- Версия сервера: 10.4.32-MariaDB
 -- Версия PHP: 8.2.12
 
@@ -20,12 +20,14 @@ SET time_zone = "+00:00";
 --
 -- База данных: `rhythmatize`
 --
-
 -- --------------------------------------------------------
 
 --
 -- Структура таблицы `albums`
 --
+
+CREATE DATABASE IF NOT EXISTS rhythmatize;
+USE rhythmatize;
 
 CREATE TABLE `albums` (
   `id` int(11) NOT NULL,
@@ -60,7 +62,7 @@ INSERT INTO `albums` (`id`, `name`, `cover_url`, `release_date`, `description`, 
 (14, 'UTOPIA', 'https://upload.wikimedia.org/wikipedia/en/thumb/2/23/Travis_Scott_-_Utopia.png/220px-Travis_Scott_-_Utopia.png', 2023, 'Utopia is the fourth studio album by American rapper Travis Scott. It was released through Cactus Jack and Epic Records on July 28, 2023. The album features guest appearances from Teezo Touchdown, Drake, Playboi Carti, Beyoncé, Rob49, 21 Savage, the Weeknd, Swae Lee, Yung Lean, Dave Chappelle, Young Thug, Westside Gunn, Kid Cudi, Bad Bunny, SZA, Future, and James Blake. Physical releases of the album feature additional guest appearances from Lil Uzi Vert and Sheck Wes. Production was handled by a variety of record producers, including Scott and Blake themselves, WondaGurl, Ye, Allen Ritter, Guy-Manuel de Homem-Christo, Wheezy, Buddy Ross, Vegyn, 30 Roc, Jahaan Sweet, Boi-1da, Vinylz, Tay Keith, Bnyx, Oz, Justin Vernon, the Alchemist, Dom Maker, Illangelo, DVLP, and Metro Boomin, among others. The album serves as the follow-up to Scott\'s third studio album, Astroworld (2018), as well as JackBoys (2019), his compilation album that was released in collaboration with Cactus Jack. It is a concept record that was accompanied by a film titled Circus Maximus which was released the day before the album.', 'https://music.youtube.com/playlist?list=OLAK5uy_lVBIQz7oaPE4-KWRIXhejjCY-MzfuQsdg', 'https://open.spotify.com/album/18NOKLkZETa4sWwLMIm0UZ', 'https://music.apple.com/us/album/utopia/1699712635', 'Album', 6, 1),
 (15, 'ASTROWORLD', 'https://upload.wikimedia.org/wikipedia/en/thumb/4/4b/Travis_Scott_-_Astroworld.png/220px-Travis_Scott_-_Astroworld.png', 2018, 'Astroworld (stylized in all caps) is the third studio album by American rapper Travis Scott. It was released on August 3, 2018, through Cactus Jack Records and Grand Hustle Records, and distributed by Epic Records. The album features guest vocals from Frank Ocean, Drake, Swae Lee, Kid Cudi, James Blake, Philip Bailey, Juice Wrld, Sheck Wes, the Weeknd, 21 Savage, Gunna, Nav, Don Toliver, Quavo, and Takeoff, among others. Production was handled by multiple producers, including Scott himself, Mike Dean, Allen Ritter, Hit-Boy, WondaGurl, Tay Keith, Tame Impala, Frank Dukes, Sonny Digital, Murda Beatz, and Thundercat, among others. The album follows Scott\'s second studio album, Birds in the Trap Sing McKnight (2016), and his collaborative album with Quavo, Huncho Jack, Jack Huncho (2017).', 'https://music.youtube.com/playlist?list=OLAK5uy_lQBWLW8abzmKVTapMPyyDj2kRaC65qMjA', 'https://open.spotify.com/album/41GuZcammIkupMPKH2OJ6I', 'https://music.apple.com/us/album/astroworld/1421241217', 'Album', 6, 1),
 (16, 'Nightscape', 'https://i.scdn.co/image/ab67616d0000b273bb7c9c3eed08dbcc2be33077', 2014, 'The first (and final) release by this rock quartet since 2011’s The Verge. This EP sets itself apart from its predecessors in its marked stylistic variance and overall departure from previous records.', 'https://music.youtube.com/playlist?list=OLAK5uy_k87Tqvaf7PZ9o6Q4xGCY4TJ2DIb_FU5VY', 'https://open.spotify.com/track/6EuaaGDKg8fk4MY4Ahr4sB', 'NO ALBUM', 'EP', 7, 8),
-(17, 'A Little Faster', 'https://upload.wikimedia.org/wikipedia/en/thumb/b/ba/ALittleFaster.jpg/220px-ALittleFaster.jpg', 2009, 'A Little Faster is the second studio album by American alternative rock band There for Tomorrow. It was released on June 9, 2009, through Hopeless Records. It debuted on June 27 at #181 in the Billboard 200, #9 Heatseekers Albums and #37 in the Independent Album scharts of Billboard. It stayed for 6 weeks in the Heatseekers chart. It was released in the UK on April 5, 2010. It reached #63 on Alternative iTunes UK. The first single of the album was \"A Little Faster\". Later followed by the second single \"Deathbed\".', 'https://music.youtube.com/playlist?list=OLAK5uy_kQ5EfC30gq8edGkniRaUJozmoYLMJY0xI', 'https://open.spotify.com/album/42PRXEfZyaRBq3oeLnlqoT', 'https://music.apple.com/us/album/a-little-faster-deluxe-version/485586001', 'Album', 7, 8),
+(17, 'A Little Faster', 'images/album_covers/1715360206.jpg', 2009, 'A Little Faster is the second studio album by American alternative rock band There for Tomorrow. It was released on June 9, 2009, through Hopeless Records. It debuted on June 27 at #181 in the Billboard 200, #9 Heatseekers Albums and #37 in the Independent Album scharts of Billboard. It stayed for 6 weeks in the Heatseekers chart. It was released in the UK on April 5, 2010. It reached #63 on Alternative iTunes UK. The first single of the album was \"A Little Faster\". Later followed by the second single \"Deathbed\".', 'https://music.youtube.com/playlist?list=OLAK5uy_kQ5EfC30gq8edGkniRaUJozmoYLMJY0xI', 'https://open.spotify.com/album/42PRXEfZyaRBq3oeLnlqoT', 'https://music.apple.com/us/album/a-little-faster-deluxe-version/485586001', 'Album', 7, 8),
 (18, 'ATLAS', 'https://lh3.googleusercontent.com/JeVJiVrap9mLd7VkPBqggE9oExQLacJPEc8HTPaREZBcXD3jezxDioUhDaszLqNIRybm3UCujPsq2-Y=w544-h544-l90-rj', 2017, 'ATLAS is The Score’s first studio album. They have had four EP’s released since 2015 which are Where Do You Run EP, Unstoppable EP, Myths & Legends EP, and most recent Stripped however, Stripped was taken off most music services because every song was on ATLAS (Deluxe).', 'https://music.youtube.com/playlist?list=OLAK5uy_lUdUV141_TEayAIPGiHyrsXBEyduhWloQ', 'https://open.spotify.com/album/6pUg9RDDoVyQQVJ48FkmXz', 'https://music.apple.com/us/album/atlas-deluxe/1440909016', 'Album', 8, 8),
 (19, 'Pressure', 'https://lh3.googleusercontent.com/3gAlmAgsnd_7O1QutVy9cYdX3pdLy8b0KjXCOPfdEVhFFLNpYnlFnnXgdQBUcYtDrtLWkbZAcRUWXj5A=w544-h544-l90-rj', 2019, 'NO INFO', 'https://music.youtube.com/playlist?list=OLAK5uy_mR6ZWw7uIM5GDxg7VJS3el0dcjwLkWVsM', 'https://open.spotify.com/album/4enE8eppWJ9fQXLqTP2TDE', 'https://music.apple.com/us/album/born-for-this/1450571591?i=1450571759', 'EP', 8, 8),
 (20, 'Boulevard of Broken Dreams', 'https://lh3.googleusercontent.com/aXgVS6rViHDBqs36JnVe-TFD-rWzszRp6cXZstdtDHIO5av77sNV8eShXrrkvdy0iHgF7-dERK3toQ9h=w544-h544-s-l90-rj', 2004, 'NO INFO', 'https://music.youtube.com/playlist?list=OLAK5uy_ljOUeTR6AiqYRt0sAUigLa7a8YYfTAl4M', 'https://open.spotify.com/album/2sIWM1FzNqLCccNwXuC4SA', 'https://music.apple.com/us/album/boulevard-of-broken-dreams/1161539183?i=1161539476', 'Single', 9, 8),
@@ -1145,8 +1147,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `avatar_url`, `banner_url`, `email`, `password`, `username`, `role`, `description`, `remember_token`) VALUES
-(1, 'http://127.0.0.1:8000/../images/avatars/Default_avatar.png', 'http://127.0.0.1:8000/../images/banners/Default_banner.png', 'admin@test.com', '$2y$12$xCXK4P1HLN4uoAmvL5usdubka3Ro.z1EcRe7K7dHnMeFfuQUhApGe', 'ADMIN', 'admin', '', 'JLICQVfOZsR4M1ik6HbvWuiSTbC19deiAPo0EaXsvcT01yLYmWFGcZ0RqDoI'),
-(2, 'http://127.0.0.1:8000/../images/avatars/Default_avatar.png', 'http://127.0.0.1:8000/../images/banners/Default_banner.png', 'user@test.com', '$2y$12$SBPuU1/iLkF6q/iPYziwN.2OpqQSmZZR..1F3Su4RLm8o9SweVbpu', 'User', 'user', '', NULL);
+(1, 'images/avatars/Default_avatar.png', 'images/banners/Default_banner.png', 'admin@test.com', '$2y$12$wIYu01582lrHSBA9WZVGdOJ3c40qROReAgaug0G/4H4mcQQudgIla', 'ADMIN', 'admin', '', 'U5MFlZct5kG4SWcsN8Z8JquHUpKOfpfZxDcGLXEGGODnBCjQHbf0LGDADE0J'),
+(2, 'images/avatars/Default_avatar.png', 'images/banners/Default_banner.png', 'user@test.com', '$2y$12$SBPuU1/iLkF6q/iPYziwN.2OpqQSmZZR..1F3Su4RLm8o9SweVbpu', 'User', 'user', '', NULL);
 
 --
 -- Индексы сохранённых таблиц
@@ -1301,7 +1303,7 @@ ALTER TABLE `tracks`
 -- AUTO_INCREMENT для таблицы `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- Ограничения внешнего ключа сохраненных таблиц
