@@ -212,15 +212,15 @@
                                         <div class="d-flex flex-column align-items-center align-content-center justify-content-center w-100 w-lg-50">
                                             <div class="d-flex h-50 align-items-center justify-content-center flex-column align-content-center" >
                                                 <div class="d-flex justify-content-center" style="border:3px solid #808080;border-radius: 5px; height: 200px;">
-                                                    <img id="imagePreview" src="{{$user -> avatar_url}}" alt="Image preview" style="width:100%; height: 100%;  object-fit:fill" class="mb-2"/>
+                                                    <img id="avatarPreview" src="{{url ($user -> avatar_url)}}" alt="avatar preview" style="width:100%; height: 100%;  object-fit:fill" class="mb-2"/>
                                                 </div>
-                                                <input type="file" id="imageInput" name="avatar_url" class="img-input" value="{{$user -> avatar_url}}">
-                                                <label for="imageInput"  id="imageInputLabel" class="edit-change-button m-0">CHANGE AVATAR</label>
+                                                <input type="file" id="avatarInput" name="avatar_url" class="img-input" value="{{$user -> avatar_url}}">
+                                                <label for="avatarInput"  id="avatarInputLabel" class="edit-change-button m-0">CHANGE AVATAR</label>
                                             </div>
 
                                             <div class="d-flex w-100 h-50 align-items-center flex-column align-center mt-3" style="padding: 10px">
                                                 <div class="d-flex w-100 justify-content-center" style="border:3px solid #808080;border-radius: 5px; height: 200px; width: 100%;">
-                                                    <img id="bannerPreview" src="{{$user -> banner_url}}" alt="banner preview" style="object-fit:contain" class="mb-2 w-100 h-100"/>
+                                                    <img id="bannerPreview" src="{{url ($user -> banner_url)}}" alt="banner preview" style="object-fit:contain" class="mb-2 w-100 h-100"/>
                                                 </div>
                                                 <input type="file" id="bannerInput" name="banner_url" class="img-input" value="{{$user -> banner_url}}">
                                                 <label for="bannerInput"  id="bannerInputLabel" class="edit-change-button m-0">CHANGE BANNER</label>
@@ -328,6 +328,10 @@ const bannerInput = document.getElementById('bannerInput');
 const bannerPreview = document.getElementById('bannerPreview');
 const bannerInputLabel = document.getElementById('bannerInputLabel');
 
+const avatarInput = document.getElementById('avatarInput');
+const avatarPreview = document.getElementById('avatarPreview');
+const avatarInputLabel = document.getElementById('avatarInputLabel');
+
 bannerInput.addEventListener('change', function(event1) {
     const file_banner = event1.target.files[0];
     const reader_banner = new FileReader();
@@ -340,14 +344,26 @@ bannerInput.addEventListener('change', function(event1) {
     reader_banner.readAsDataURL(file_banner);
 });
 
+avatarInput.addEventListener('change', function(event1) {
+    const file_avatar = event1.target.files[0];
+    const reader_avatar = new FileReader();
+    const fileName_avatar = event1.target.files[0].name;
+
+    reader_avatar.onload = function(event1) {
+    avatarPreview.src = event1.target.result;
+    avatarInputLabel.textContent = fileName_avatar;
+    };
+    reader_avatar.readAsDataURL(file_avatar);
+});
+
 
 const cancel = document.getElementById("cancel");
 
 cancel.addEventListener('click',() => {
-    bannerPreview.src = '{{$user -> banner_url}}';
+    bannerPreview.src = '{{url( $user -> banner_url)}}';
     bannerInputLabel.textContent = 'CHANGE BANNER';
-    imagePreview.src = '{{$user -> avatar_url}}';
-    imageInputLabel.textContent = 'CHANGE AVATAR';
+    avatarPreview.src = '{{url( $user -> avatar_url)}}';
+    avatarInputLabel.textContent = 'CHANGE AVATAR';
 
     document.getElementById("edit").reset();
 }); 

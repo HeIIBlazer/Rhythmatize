@@ -880,6 +880,13 @@ body {
     color: red;
 }
 
+.error-login-2 {
+    margin-top: 0;
+    text-align: center;
+    height: 2%;
+    color: red;
+}
+
 .error-login {
     margin-top: 0;
     text-align: center;

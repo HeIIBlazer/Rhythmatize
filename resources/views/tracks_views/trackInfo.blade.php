@@ -80,7 +80,7 @@
         <div class="w-100 d-flex flex-row justify-content-center mb-4">
             <div class="w-25 h-25 d-flex justify-content-center">           
                 <a href="{{$track -> spotify_link}}" target=”_blank”>
-                    <img src="{{asset('images/links_images/spotify.png')}}" alt="" style="width: 36px; height:36px;">
+                    <img src="{{asset('images/links_images/Spotify.png')}}" alt="" style="width: 36px; height:36px;">
                 </a>
             </div>
 
