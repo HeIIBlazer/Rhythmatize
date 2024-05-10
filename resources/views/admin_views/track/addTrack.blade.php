@@ -14,7 +14,7 @@
         @endif
 
         <div>
-            <form method="POST" action="{{url('/add-track-to-database')}}" enctype="multipart/form-data">
+            <form method="POST" action="{{secure_url('/add-track-to-database')}}" enctype="multipart/form-data">
                 @csrf
 
                 <div class="d-flex flex-lg-row flex-column justify-content-evenly h-100 mb-5">

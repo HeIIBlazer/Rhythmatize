@@ -26,13 +26,13 @@
     @endphp
 
     <div style="width: 100%; height: 180px;">
-        <img src="{{url ($artist -> banner_url)}}" alt="" style="width: 100%; height: 300px; object-fit:cover; object-position: 50% 50%;">
+        <img src="{{secure_url ($artist -> banner_url)}}" alt="" style="width: 100%; height: 300px; object-fit:cover; object-position: 50% 50%;">
     </div>
 <div class="container d-flex flex-column flex-lg-row align-items-center align-items-lg-none justify-content-lg-between mb-5">
     <div class="w-95 w-lg-25 d-flex flex-column align-items-center">
         <div>
             <div class="artist-img w-100 d-flex justify-content-center align-items-center">
-                <img src="{{url ($album -> cover_url)}}" alt="" class="Info-Image">
+                <img src="{{secure_url ($album -> cover_url)}}" alt="" class="Info-Image">
             </div>
         </div>
         @if ($track -> explicit == 'YES')      
@@ -174,7 +174,7 @@
                 <div class="d-flex flex-column">
                     <div class="d-flex flex-row justify-content-between align-items-center">
                         <div class="d-flex flex-row align-items-center mb-3" style="height: 35px">
-                            <img src=" {{url ($user -> avatar_url)}}" alt="" style="width: 35px; height: 35px; margin-right: 5px; border-radius:200px;">
+                            <img src=" {{secure_url($user -> avatar_url)}}" alt="" style="width: 35px; height: 35px; margin-right: 5px; border-radius:200px;">
                             <a href="/user/{{$crypt_user}}" class="comment-user">{{$user -> username}}</a>
                         </div>
                         @if ($like != 2)

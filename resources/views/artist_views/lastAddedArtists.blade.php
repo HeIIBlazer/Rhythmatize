@@ -14,7 +14,7 @@
         <div class="col-12 col-sm-6 col-md-4 col-lg-2 mb-4">
                 <a href="/artist/{{$crypt_artist}}" class="card">
                     <div class="mt-2 mb-3 d-flex justify-content-center align-items-center" style="width: 100%; padding-top: 90%; position: relative;">
-                        <img src="{{url ($artist -> picture_url)}}" alt="" class="mt-1 image_artist_list">
+                        <img src="{{secure_url ($artist -> picture_url)}}" alt="" class="mt-1 image_artist_list">
                     </div>
                     <div style="margin-left: 10px; max-width: 100%;">
                         <p class="card-text-bigger-artist">{{$artist -> name}}</p>

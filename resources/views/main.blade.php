@@ -27,7 +27,7 @@
                     $crypt_album = Crypt::encrypt($album->id); 
                 @endphp
                     <a href="/album/{{$crypt_album}}" class="album-cover" style="width: 31.5%; height:20%;">
-                        <img src="{{url ($album->cover_url)}}" alt="Album Cover" class="w-100 h-100 alb">
+                        <img src="{{secure_url ($album->cover_url)}}" alt="Album Cover" class="w-100 h-100 alb">
                         <div class="album-info d-flex flex-column justify-content-center align-items-center h-100 w-100">
                             <h2 class="artist-name-main">{{ $artist-> name }}</h2>
                             <p class="album-name-main">{{ $album_name }}</p>
@@ -59,7 +59,7 @@
                             $crypt_album = Crypt::encrypt($album->id);
                         @endphp
                     <a href="/album/{{$crypt_album}}" class="album-cover" style="width: 30%; height:20%;">
-                        <img src="{{url ($album -> cover_url)}}" alt="Album Cover" class="w-100 h-100 alb">
+                        <img src="{{secure_url ($album -> cover_url)}}" alt="Album Cover" class="w-100 h-100 alb">
                         <div class="album-info d-flex flex-column justify-content-center align-items-center h-100 w-100">
                             <h2 class="artist-name-main">{{ $artist-> name }}</h2>
                             <p class="album-name-main h-25">{{ $album -> name }}</p>
@@ -68,7 +68,7 @@
                     @endforeach
                 </div>
                 <div class="button-div">
-                    <a href="{{url ('/album-chart')}}"><button class="see_more_button" type="submit">See more</button></a>
+                    <a href="{{secure_url ('/album-chart')}}"><button class="see_more_button" type="submit">See more</button></a>
                 </div>
             </div>
 
@@ -84,7 +84,7 @@
                         $crypt_artist = Crypt::encrypt($artist->id);
                     @endphp
                     <a href="/artist/{{$crypt_artist}}" class="album-cover d-flex align-items-center justify-content-center" style="width: 30%; height: 200px;">
-                            <img src="{{url ($artist->picture_url)}}" alt="Album Cover" class="w-100 h-100 alb">
+                            <img src="{{secure_url ($artist->picture_url)}}" alt="Album Cover" class="w-100 h-100 alb">
                         <div class="album-info d-flex flex-column justify-content-center align-items-center text-center h-100 w-100">
                             <h2 class="album-name-main">{{ $artist-> name }}</h2>
                         </div>
@@ -92,7 +92,7 @@
                     @endforeach
                 </div>
                 <div class="button-div">
-                    <a href="{{url ('/artist-chart')}}"><button class="see_more_button" type="submit">See more</button></a>
+                    <a href="{{secure_url ('/artist-chart')}}"><button class="see_more_button" type="submit">See more</button></a>
                 </div>
             </div>
 
@@ -110,7 +110,7 @@
                             $crypt_track = Crypt::encrypt($track->id);
                         @endphp
                         <a href="/track/{{$crypt_track}}" class="album-cover">
-                            <img src="{{url ($album->cover_url)}}" alt="Album Cover" class="album-img alb">
+                            <img src="{{secure_url ($album->cover_url)}}" alt="Album Cover" class="album-img alb">
                         <div class="album-info d-flex flex-column justify-content-center align-items-center text-center h-100 w-100">
                             <h2 class="artist-name-main">{{ $artist-> name }}</h2>
                             <p class="album-name-main">{{$track -> name}}</p>
@@ -120,7 +120,7 @@
                     </div>
 
                     <div class="button-div">
-                        <a href="{{ url ('/track-chart') }}"><button class="see_more_button" type="submit">See more</button></a>
+                        <a href="{{ secure_url ('/track-chart') }}"><button class="see_more_button" type="submit">See more</button></a>
                     </div>
             </div>
         </div>

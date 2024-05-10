@@ -14,14 +14,14 @@
         @endif
 
         <div>
-            <form method="POST" action="{{url('/add-album-to-database')}}" enctype="multipart/form-data">
+            <form method="POST" action="{{secure_url('/add-album-to-database')}}" enctype="multipart/form-data">
                 @csrf
 
                 <div class="mt-2 mb-5">
                     <div class="w-100 d-flex justify-content-center align-items-center flex-column align-center mt-3">
                         <input type="file" id="photoInput" name="cover_url" class="img-input">
                         <label for="photoInput"  id="photoInputLabel" class="edit-change-button m-0 d-flex flex-column align-items-center">
-                            <img id="photoPreview" src="{{ URL::asset('images/camera.svg') }}" alt="Image preview" style=" width: 230px; height: 230px; border:3px solid #BDBDBD; border-radius: 10px; padding: 50px" class="mb-3 mt-0"/>
+                            <img id="photoPreview" src="{{ asset('images/camera.svg') }}" alt="Image preview" style=" width: 230px; height: 230px; border:3px solid #BDBDBD; border-radius: 10px; padding: 50px" class="mb-3 mt-0"/>
                             <p id="photoInputText" class="text-center">
                                 ADD COVER
                             </p> 
@@ -128,7 +128,7 @@
                                     {{session()->get('error_genre')}}
                                 </div>
                             @endif
-                            <form method="POST" action="{{url('/add-genre')}}">
+                            <form method="POST" action="{{secure_url('/add-genre')}}">
                                 @csrf
                                 <div class="w-100 d-flex flex-column align-items-center">
                                     <label for="name_genre" class="mb-0 mt-2 add_input_label">ADD GENRE NAME</label>
