@@ -111,7 +111,7 @@ class AlbumController extends Controller
         } catch (DecryptException $e) {
             abort(404);
         }
-        $album = Album::find($cryptId)->firstOrFail();
+        $album = Album::findorfail($cryptId);
 
         $genre = DB::table('genres')->where('id', $album->genre_id)->first();
 
@@ -144,7 +144,7 @@ class AlbumController extends Controller
         } catch (DecryptException $e) {
             abort(404);
         }
-        $artist = Artist::find($artist_id)->firstOrFail();
+        $artist = Artist::findorfail($artist_id);
 
         $albums = DB::table('albums')->where('artist_id', $artist_id)
                 ->leftJoin('like_albums as la', 'albums.id', '=', 'la.album_id')

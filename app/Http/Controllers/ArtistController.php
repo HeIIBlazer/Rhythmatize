@@ -63,7 +63,7 @@ class ArtistController extends Controller
             abort(404);
         }
 
-        $artist = Artist::find($artist_id)->firstOrFail();
+        $artist = Artist::findorfail($artist_id);
 
         $comments = DB::table('comment_artists')->where('artist_id', $artist->id)->get();
 

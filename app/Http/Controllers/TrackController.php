@@ -38,7 +38,7 @@ class TrackController extends Controller
         } catch (DecryptException $e) {
             abort(404);
         }
-        $track = Track::find($track_id)->firstOrFail();
+        $track = Track::findorfail($track_id);
 
         $album = DB::table('albums')->where('id', $track->album_id)->first();
 
@@ -58,7 +58,7 @@ class TrackController extends Controller
         } catch (DecryptException $e) {
             abort(404);
         }
-        $artist = Artist::find($artist_id)->firstOrFail();
+        $artist = Artist::findOrFail($artist_id);
         
 
         // Get all albums by the artist
