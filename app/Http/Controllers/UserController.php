@@ -79,7 +79,7 @@ class UserController extends Controller
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|',
             'password_confirmation' => 'required|string|min:6|',
-            'avatar_url' => 'image',
+            'avatar_url' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         if ($request->password != $request->password_confirmation) {
@@ -144,6 +144,14 @@ class UserController extends Controller
     */
 
     public function update(Request $request, User $user) {
+
+        if ($request->hasFile('avatar_url') && $request->file('avatar_url')->getSize() > 15360 * 1024) {
+            return redirect()->back()->with('error', 'The avatar image may not be larger than 15 megabytes.');
+        }
+        
+        if ($request->hasFile('banner_url') && $request->file('banner_url')->getSize() > 15360 * 1024) {
+            return redirect()->back()->with('error', 'The banner image may not be larger than 15 megabytes.');
+        }
         
         $request->validate([
             'username' => '',
@@ -151,10 +159,10 @@ class UserController extends Controller
             'password' => 'required',
             'new_password' => '',
             'password_confirmation' => '',
-            'avatar_url' => '',
-            'banner_url' => '',
+            'description' => '',
+            'avatar_url' => 'image|mimes:jpeg,png,jpg,gif|max:15360',
+            'banner_url' => 'image|mimes:jpeg,png,jpg,gif|max:15360',
         ]);
-
 
         if (Hash::check($request->password, $user->password)) {
 
@@ -187,6 +195,7 @@ class UserController extends Controller
                     'password' => Hash::make($request->new_password),
                     'avatar_url' => $avatar_url,
                     'banner_url' => $banner_url,
+                    'description' => $request -> description,
                 ]);
 
                 return redirect()->back();
@@ -196,6 +205,7 @@ class UserController extends Controller
                     'email' => $request->email,
                     'avatar_url' => $avatar_url,
                     'banner_url' => $banner_url,
+                    'description' => $request -> description,
                 ]);
 
                 return redirect()->back();
@@ -207,184 +217,6 @@ class UserController extends Controller
             
         }
     }
-
-    // public function update(Request $request, User $user)
-    // {
-
-    //     $request->validate([
-    //         'username' => '',
-    //         'email' => '',
-    //         'password' => 'required',
-    //         'new_password' => '',
-    //         'password_confirmation' => '',
-    //         'avatar_url' => 'image',
-    //         'banner_url' => 'image',
-    //     ]);
-
-    //     $data = $request->all();
-
-    //     if (Hash::check($request->password, $user->password)) {
-    //         if ($request->new_password != null) {
-    //             if ($request->new_password != $request->password_confirmation) {
-    //                 return redirect()->back()->with('error', 'New passwords do not match');
-    //             }
-
-    //             if ($request->hasFile('avatar_url') && $request->file('avatar_url')->isValid() && $request->hasFile('banner_url') && $request->file('banner_url')->isValid()) {
-    //                 $filename = $request->file('avatar_url')->getClientOriginalName();
-    //                 $filebanner = $request->file('banner_url')->getClientOriginalName();
-    //                 $data['avatar_url'] = '';
-    //                 $data['banner_url'] = '';
-    //                 $data['avatar_url'] = '../images/avatars/' . $filename;
-    //                 $data['banner_url'] = '../images/banners/' . $filebanner;
-
-    //                 $user->update([
-    //                     'username' => $data['username'],
-    //                     'description' => $data['description'],
-    //                     'password' => Hash::make($data['new_password']),
-    //                     'avatar_url' => $data['avatar_url'],
-    //                     'banner_url' => $data['banner_url'],
-    //                     'email' => $data['email']
-    //                 ]);
-
-    //                 $file = $request->file('avatar_url');
-    //                 $filebannersave = $request->file('banner_url');
-    //                 if ($filename) {
-    //                     $file->move('../public/images/avatars/', $filename);
-    //                 }
-    //                 if ($filebannersave) {
-    //                     $filebannersave->move('../public/images/banners/', $filebanner);
-    //                 }
-
-    //                 return redirect()->back();
-    //             } else if ($request->hasFile('avatar_url') && $request->file('avatar_url')->isValid()) {
-    //                 $filename = $request->file('avatar_url')->getClientOriginalName();
-    //                 $data['avatar_url'] = '';
-    //                 $data['avatar_url'] = '../images/avatars/' . $filename;
-
-    //                 $user->update([
-    //                     'username' => $data['username'],
-    //                     'description' => $data['description'],
-    //                     'password' => Hash::make($data['new_password']),
-    //                     'avatar_url' => $data['avatar_url'],
-    //                     'email' => $data['email']
-    //                 ]);
-
-    //                 $file = $request->file('avatar_url');
-    //                 if ($filename) {
-    //                     $file->move('../public/images/avatars/', $filename);
-    //                 }
-
-    //                 return redirect()->back();
-    //             } elseif ($request->hasFile('banner_url') && $request->file('banner_url')->isValid()) {
-    //                 $filebanner = $request->file('banner_url')->getClientOriginalName();
-    //                 $data['banner_url'] = '';
-    //                 $data['banner_url'] = '../images/banners/' . $filebanner;
-
-    //                 $user->update([
-    //                     'username' => $data['username'],
-    //                     'description' => $data['description'],
-    //                     'password' => Hash::make($data['new_password']),
-    //                     'banner_url' => $data['banner_url'],
-    //                     'email' => $data['email']
-
-    //                 ]);
-
-    //                 $filebannersave = $request->file('banner_url');
-    //                 if ($filebanner) {
-    //                     $filebannersave->move('../public/images/banners/', $filebanner);
-    //                 }
-
-    //                 return redirect()->back();
-    //             }
-
-    //             $user->update([
-    //                 'username' => $data['username'],
-    //                 'password' => Hash::make($data['new_password']),
-    //                 'description' => $data['description'],
-    //                 'avatar_url' => $data['avatar_url'],
-    //                 'banner_url' => $data['banner_url'],
-    //                 'email' => $data['email']
-    //             ]);
-
-    //             return redirect()->back();
-    //         } else {
-    //             $data = $request->all();
-
-    //             if ($request->hasFile('avatar_url') && $request->file('avatar_url')->isValid() && $request->hasFile('banner_url') && $request->file('banner_url')->isValid()) {
-    //                 $filename = $request->file('avatar_url')->getClientOriginalName();
-    //                 $filebanner = $request->file('banner_url')->getClientOriginalName();
-    //                 $data['avatar_url'] = '';
-    //                 $data['banner_url'] = '';
-    //                 $data['avatar_url'] = '../images/avatars/' . $filename;
-    //                 $data['banner_url'] = '../images/banners/' . $filebanner;
-
-    //                 $user->update([
-    //                     'username' => $data['username'],
-    //                     'description' => $data['description'],
-    //                     'avatar_url' => $data['avatar_url'],
-    //                     'banner_url' => $data['banner_url'],
-    //                     'email' => $data['email']
-    //                 ]);
-    //                 $file = $request->file('avatar_url');
-    //                 if ($filename) {
-    //                     $file->move('../public/images/avatars/', $filename);
-    //                 }
-
-    //                 $filebannersave = $request->file('banner_url');
-    //                 if ($filebanner) {
-    //                     $filebannersave->move('../public/images/banners/', $filebanner);
-    //                 }
-
-    //                 return redirect()->back();
-    //             } else if ($request->hasFile('avatar_url') && $request->file('avatar_url')->isValid()) {
-    //                 $filename = $request->file('avatar_url')->getClientOriginalName();
-    //                 $data['avatar_url'] = '';
-    //                 $data['avatar_url'] = '../images/avatars/' . $filename;
-
-    //                 $user->update([
-    //                     'username' => $data['username'],
-    //                     'description' => $data['description'],
-    //                     'avatar_url' => $data['avatar_url'],
-    //                     'email' => $data['email']
-    //                 ]);
-
-    //                 $file = $request->file('avatar_url');
-    //                 if ($filename) {
-    //                     $file->move('../public/images/avatars/', $filename);
-    //                 }
-
-    //                 return redirect()->back();
-    //             } elseif ($request->hasFile('banner_url') && $request->file('banner_url')->isValid()) {
-    //                 $filebanner = $request->file('banner_url')->getClientOriginalName();
-    //                 $data['banner_url'] = '';
-    //                 $data['banner_url'] = '../images/banners/' . $filebanner;
-
-    //                 $user->update([
-    //                     'username' => $data['username'],
-    //                     'description' => $data['description'],
-    //                     'banner_url' => $data['banner_url'],
-    //                     'email' => $data['email']
-    //                 ]);
-
-    //                 $filebannersave = $request->file('banner_url');
-    //                 if ($filebanner) {
-    //                     $filebannersave->move('../public/images/banners/', $filebanner);
-    //                 }
-
-    //                 return redirect()->back();
-    //             } else {
-    //                 $user->update([
-    //                     'username' => $data['username'],
-    //                     'description' => $data['description'],
-    //                     'email' => $data['email']
-    //                 ]);
-    //                 return redirect()->back();
-    //             }
-    //         }
-    //     } else {
-    //         return redirect()->back()->with('error', 'Incorrect current password');
-    //     }
-    // }
 
     public function dashboard()
     {

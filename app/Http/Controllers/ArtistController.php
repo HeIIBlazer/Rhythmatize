@@ -15,6 +15,7 @@ use App\Models\LikeAlbum;
 use App\Models\LikeArtist;
 use App\Models\LikeTrack;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Contracts\Encryption\DecryptException;
 
 class ArtistController extends Controller
 {
@@ -56,9 +57,13 @@ class ArtistController extends Controller
      */
     public function show_artist ($crypt_artist)
     {
-        $cryptId = Crypt::decrypt($crypt_artist);
+        try{
+            $artist_id = Crypt::decrypt($crypt_artist);
+        } catch (DecryptException $e) {
+            abort(404);
+        }
 
-        $artist = Artist::find($cryptId);
+        $artist = Artist::find($artist_id)->firstOrFail();
 
         $comments = DB::table('comment_artists')->where('artist_id', $artist->id)->get();
 
@@ -103,7 +108,7 @@ class ArtistController extends Controller
             'name' => 'required',
             'picture_url' => 'image',
             'banner_url' => 'image',
-            'description' => 'string',
+            'description' => '',
             'youtube_link' => 'required',
             'spotify_link' => 'required',
             'apple_music_link' => 'required|string',

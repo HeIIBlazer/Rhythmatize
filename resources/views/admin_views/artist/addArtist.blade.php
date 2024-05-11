@@ -8,7 +8,7 @@
         </div>
 
         @if (session()->has('error'))
-        <div class="alert error-login-1">
+        <div class="alert error-login-2">
             {{session()->get('error')}}
         </div>
         @endif
@@ -69,7 +69,7 @@
                     <div class="w-lg-50 w-100 h-100 d-flex flex-column justify-content-end">
                         <div class="h-100 w-100">
                             <label for="description" class="mb-0 mt-2 add_input_label">ADD DESCRIPTION</label>
-                            <textarea class="add_textarea" id="description" name="descrsiption"></textarea>
+                            <textarea class="add_textarea" id="description" name="description"></textarea>
                         </div>
                     </div>
                 </div>
@@ -84,6 +84,8 @@
     </div>
 
     <script>
+
+
         document.getElementById('photoInput').addEventListener('change', function(event) {
             const file = event.target.files[0];
             const reader = new FileReader();

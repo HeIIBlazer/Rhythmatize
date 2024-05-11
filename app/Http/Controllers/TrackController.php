@@ -9,7 +9,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Crypt;
 use App\Models\Album;
-
+use App\Models\Artist;
+use Illuminate\Contracts\Encryption\DecryptException;
 class TrackController extends Controller
 {
     /**
@@ -18,7 +19,7 @@ class TrackController extends Controller
     public function charts()
     {
         $user = null;
-        $tracks = DB::table("tracks")->select('tracks.*', DB::raw('count(like_tracks.id) as likes_count'))
+        $tracks = DB::table("tracks")->select('tracks.*', DB::raw('counst(like_tracks.id) as likes_count'))
             ->leftJoin('like_tracks', 'track_id', '=', 'tracks.id')
             ->groupBy('tracks.id', 'tracks.name', 'tracks.time', 'tracks.spotify_link', 'tracks.youtube_link', 'tracks.apple_music_link', 'tracks.album_id', 'tracks.lyrics', 'tracks.explicit')
             ->orderBy('likes_count', 'desc')
@@ -32,8 +33,12 @@ class TrackController extends Controller
      */
     public function show_track($crypt_track)
     {
-        $track_id = Crypt::decrypt($crypt_track);
-        $track = Track::find($track_id);
+        try{
+            $track_id = Crypt::decrypt($crypt_track);
+        } catch (DecryptException $e) {
+            abort(404);
+        }
+        $track = Track::find($track_id)->firstOrFail();
 
         $album = DB::table('albums')->where('id', $track->album_id)->first();
 
@@ -48,8 +53,12 @@ class TrackController extends Controller
      */
     public function all_tracks($crypt_artist)
     {
-        $artistId = Crypt::decrypt($crypt_artist);
-        $artist = DB::table('artists')->where('id', $artistId)->first();
+        try{
+            $artist_id = Crypt::decrypt($crypt_artist);
+        } catch (DecryptException $e) {
+            abort(404);
+        }
+        $artist = Artist::find($artist_id)->firstOrFail();
         
 
         // Get all albums by the artist

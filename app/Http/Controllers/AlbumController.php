@@ -13,6 +13,7 @@ use App\Models\LikeAlbum;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Contracts\Encryption\DecryptException;
 
 class AlbumController extends Controller
 {
@@ -103,15 +104,14 @@ class AlbumController extends Controller
     /**
      * Shows info about album with the tracks from it.
      */
-    public function album_show(Album $album) {
-        $tracks = DB::table('tracks')->where('album_id', $album->id)->get();
-        return view('album_views.albumShow', compact('album', 'tracks'));
-    }
-
     public function show_album($crypt_album)
     {
-        $cryptId = Crypt::decrypt($crypt_album);
-        $album = Album::find($cryptId);
+        try {
+            $cryptId = Crypt::decrypt($crypt_album);
+        } catch (DecryptException $e) {
+            abort(404);
+        }
+        $album = Album::find($cryptId)->firstOrFail();
 
         $genre = DB::table('genres')->where('id', $album->genre_id)->first();
 
@@ -139,9 +139,12 @@ class AlbumController extends Controller
      * Show all albums for one artist.
      */
     public function all_albums($crypt_artist){
-
-        $artist_id = Crypt::decrypt($crypt_artist);
-        $artist = Artist::find($artist_id);
+        try{
+            $artist_id = Crypt::decrypt($crypt_artist);
+        } catch (DecryptException $e) {
+            abort(404);
+        }
+        $artist = Artist::find($artist_id)->firstOrFail();
 
         $albums = DB::table('albums')->where('artist_id', $artist_id)
                 ->leftJoin('like_albums as la', 'albums.id', '=', 'la.album_id')
@@ -197,8 +200,6 @@ class AlbumController extends Controller
         $artist = Artist::where('name', $request->artist_name)->first();
         $genre = Genre::where('name', $request->genre_name)->first();
 
-
-        
         
         if ($artist == null) {
             return redirect()->back()->with('error', 'Artist does not exist');
