@@ -53,7 +53,7 @@
 
                     <a href="/album/{{$crypt_album}}"  class="d-flex  flex-row all-tracks-3 w-100 w-lg-30 mt-lg-0 mt-4 text-decoration-none">
                         <div class="d-flex justify-content-center align-items-center h-100">
-                            <img src="{{secure_url ($album -> cover_url)}}" alt="" class="track-cover">
+                            <img src="{{url ($album -> cover_url)}}" alt="" class="track-cover">
                         </div>
 
                         <div class="w-100 d-flex position-relative">
@@ -137,7 +137,7 @@
                         <div class="chart-pic">
                             <a href="/album/{{$crypt_album}}">
                                 <div class="chart-pic w-100">
-                                    <img src="{{secure_url ($album -> cover_url)}}" alt="" style="width: 75px; height: 75; object-fit: cover;">
+                                    <img src="{{url ($album -> cover_url)}}" alt="" style="width: 75px; height: 75; object-fit: cover;">
                                 </div>
                             </a>
                         </div>

@@ -37,7 +37,7 @@
                 <td style="width: 8%;" class="table-separete">
                     <a href="/artist/{{$crypt_artist}}" class="text-decoration-none">
                         <div class="chart-pic w-100">
-                            <img src="{{secure_url ($artist -> picture_url)}}" alt="" style="width: 75px; height: 75px; object-fit: cover;">
+                            <img src="{{url ($artist -> picture_url)}}" alt="" style="width: 75px; height: 75px; object-fit: cover;">
                         </div>
                     </a>
                 </td>

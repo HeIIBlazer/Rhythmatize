@@ -16,7 +16,7 @@
 
 
         <div>
-            <form method="POST" action="{{secure_url('/add-artist-to-database')}}" enctype="multipart/form-data">
+            <form method="POST" action="{{url('/add-artist-to-database')}}" enctype="multipart/form-data">
                 @csrf
 
                 <div class="d-flex flex-lg-row flex-column justify-content-evenly mt-2 mb-5 w-100 align-items-center align-items-lg-none">

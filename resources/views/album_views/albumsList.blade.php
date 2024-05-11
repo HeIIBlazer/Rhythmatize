@@ -27,7 +27,7 @@
                 <div class="card">
                     <a href="/album/{{$crypt_album}}" class="text-decoration-none">
                     <div class="mt-2 mb-4 d-flex justify-content-center">
-                        <img src="{{secure_url ($album -> cover_url)}}" alt="" style="width: 90%; height: 90%; border-radius: 5px;" class="mt-2">
+                        <img src="{{url ($album -> cover_url)}}" alt="" style="width: 90%; height: 90%; border-radius: 5px;" class="mt-2">
                     </div>
                     <div style="margin-left: 10px; max-width: 100%;" class="mb-3">
                         <p class="card-text-bigger">{{$album -> name}}</p>

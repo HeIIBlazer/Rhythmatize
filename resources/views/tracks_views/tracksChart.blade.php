@@ -46,7 +46,7 @@
                     <div class="chart-pic">
                         <a href="/track/{{$crypt_track}}">
                             <div class="chart-pic w-100">
-                                <img src="{{secure_url ($album -> cover_url)}}" alt="" style="width: 75px; height: 75; object-fit: cover;">
+                                <img src="{{url ($album -> cover_url)}}" alt="" style="width: 75px; height: 75; object-fit: cover;">
                             </div>
                         </a>
                     </div>

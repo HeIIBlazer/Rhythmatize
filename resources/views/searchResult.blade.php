@@ -24,7 +24,7 @@
                 <div class="card">
                     <a href="/album/{{$crypt_album}}" class="text-decoration-none">
                     <div class="mt-2 mb-4 d-flex justify-content-center">
-                        <img src="{{secure_url ($album -> cover_url)}}" alt="" style="width: 90%; height: 90%; border-radius: 5px;" class="mt-2">
+                        <img src="{{url ($album -> cover_url)}}" alt="" style="width: 90%; height: 90%; border-radius: 5px;" class="mt-2">
                     </div>
                     <div style="margin-left: 10px; max-width: 80%;" class="mb-3">
                         <p class="card-text-bigger">{{$album -> name}}</p>
@@ -58,7 +58,7 @@
                 <div class="col-12 col-sm-6 col-md-4 col-lg-2 mb-4">
                     <a href="/artist/{{$crypt_artist}}" class="card">
                         <div class="mt-2 mb-3 d-flex justify-content-center align-items-center" style="width: 100%; padding-top: 90%; position: relative;">
-                            <img src="{{secure_url ($artist -> picture_url)}}" alt="" class="mt-1 image_artist_list">
+                            <img src="{{url ($artist -> picture_url)}}" alt="" class="mt-1 image_artist_list">
                         </div>
                         <div style="margin-left: 10px; max-width: 100%;">
                             <p class="card-text-bigger-artist">{{$artist -> name}}</p>
@@ -95,7 +95,7 @@
                                 <a href="/track/{{$crypt_track}}" class="text-decoration-none">
                                     <div class="track-item">
                                         <div>
-                                            <img src="{{secure_url($album->cover_url)}}" alt="" style="width: 100px; height: 100px; border-radius: 5px; object-fit: cover;">
+                                            <img src="{{url($album->cover_url)}}" alt="" style="width: 100px; height: 100px; border-radius: 5px; object-fit: cover;">
                                         </div>
                                         <div class="track-info w-50  pt-4">
                                             <a href="/track/{{$crypt_track}}" class="text-decoration-none"><span class="chart-text-big">{{ $track -> name }}</span></a>

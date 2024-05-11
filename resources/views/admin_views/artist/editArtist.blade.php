@@ -18,14 +18,14 @@
         @endif
 
         <div>
-            <form method="POST" action="{{secure_url('/save-edited-artist')}}" enctype="multipart/form-data">
+            <form method="POST" action="{{url('/save-edited-artist')}}" enctype="multipart/form-data">
                 @csrf
                 <input type="hidden" name="id" value="{{$crypt_artist}}">
                 <div class="d-flex flex-lg-row flex-column justify-content-evenly mt-2 mb-5 w-100 align-items-center align-items-lg-none">
                     <div class="w-50 d-flex justify-content-center align-items-center flex-column align-center mt-3">
                         <input type="file" id="photoInput" name="picture_url" class="img-input">
                         <label for="photoInput"  id="photoInputLabel" class="edit-change-button m-0 d-flex flex-column align-items-center justify-content-center w-100">
-                            <img id="photoPreview" src="{{secure_url ($artist -> picture_url)}}" alt="Image preview" style=" width: 230px; height: 230px; border:3px solid #BDBDBD; border-radius: 10px;" class="mb-3 mt-0"/>
+                            <img id="photoPreview" src="{{url ($artist -> picture_url)}}" alt="Image preview" style=" width: 230px; height: 230px; border:3px solid #BDBDBD; border-radius: 10px;" class="mb-3 mt-0"/>
                             <p id="photoInputText" class="text-center">
                                 EDIT PHOTO
                             </p> 
@@ -35,7 +35,7 @@
                     <div class="w-50 d-flex justify-content-center align-items-center flex-column align-center mt-3">
                         <input type="file" id="coverInput" name="banner_url" class="img-input">
                         <label for="coverInput"  id="coverInputLabel" class="edit-change-button m-0 d-flex flex-column align-items-center justify-content-center w-100">
-                            <img id="coverPreview" src="{{secure_url ($artist -> banner_url)}}" alt="Image preview" style=" width: 230px; height: 230px; border:3px solid #BDBDBD; border-radius: 10px;" class="mb-3 mt-0"/>
+                            <img id="coverPreview" src="{{url ($artist -> banner_url)}}" alt="Image preview" style=" width: 230px; height: 230px; border:3px solid #BDBDBD; border-radius: 10px;" class="mb-3 mt-0"/>
                             <p id="coverInputText" class="text-center">
                                 EDIT BANNER
                             </p> 

@@ -14,7 +14,7 @@
         @endif
 
         <div>
-            <form method="POST" action="{{secure_url('/add-album-to-database')}}" enctype="multipart/form-data">
+            <form method="POST" action="{{url('/add-album-to-database')}}" enctype="multipart/form-data">
                 @csrf
 
                 <div class="mt-2 mb-5">
@@ -128,7 +128,7 @@
                                     {{session()->get('error_genre')}}
                                 </div>
                             @endif
-                            <form method="POST" action="{{secure_url('/add-genre')}}">
+                            <form method="POST" action="{{url('/add-genre')}}">
                                 @csrf
                                 <div class="w-100 d-flex flex-column align-items-center">
                                     <label for="name_genre" class="mb-0 mt-2 add_input_label">ADD GENRE NAME</label>

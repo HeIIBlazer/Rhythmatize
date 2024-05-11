@@ -7,13 +7,13 @@
 @endphp
 
 <div style="width: 100%; height: 180px;">
-    <img src="{{secure_url ($user -> banner_url)}}" alt="" style="width: 100%; height: 300px; object-fit:cover; object-position: 50% 50%;">
+    <img src="{{url ($user -> banner_url)}}" alt="" style="width: 100%; height: 300px; object-fit:cover; object-position: 50% 50%;">
 </div>
 <div class="container d-flex flex-lg-row flex-column justify-content-between mb-5">
     <div class="w-lg-25 w-100 d-flex flex-column  align-items-center">
         <div>
             <div class="artist-img w-100 d-flex justify-content-center align-items-center">
-                <img src="{{secure_url ($user -> avatar_url)}}" alt="" class="Info-Image">
+                <img src="{{url ($user -> avatar_url)}}" alt="" class="Info-Image">
             </div>
         </div>
         <div>
@@ -71,7 +71,7 @@
             @endphp
                 <a href="/artist/{{$crypt_artist}}" class=" text-decoration-none col-auto artist-album-card pb-3 mt-4 mt-lg-0">
                     <div class="mb-3">
-                        <img src="{{secure_url ($artist -> picture_url)}}" alt="" style="width: 250px; height: 250px; border-radius: 5px; margin-top:10px; padding: 10px 10px; object-fit:cover;">
+                        <img src="{{url ($artist -> picture_url)}}" alt="" style="width: 250px; height: 250px; border-radius: 5px; margin-top:10px; padding: 10px 10px; object-fit:cover;">
                     </div>
                     <div class="w-100 d-flex justify-content-center  text-center white-text">
                         <p class="text-truncate text-Montserrat-album">{{$artist -> name}}</p>
@@ -116,7 +116,7 @@
             <div class="col-auto mt-3 mt-lg-0 artist-album-card" style="width: 250px;">
                 <a href="/album/{{$crypt_album}}" class="text-decoration-none">
                     <div>
-                        <img src="{{secure_url ($album -> cover_url)}}" alt="" style="width: 100%; height: 250px; border-radius: 5px; margin-top:10px; padding: 10px 10px;">
+                        <img src="{{url ($album -> cover_url)}}" alt="" style="width: 100%; height: 250px; border-radius: 5px; margin-top:10px; padding: 10px 10px;">
                     </div>
                     <div class="w-100 d-flex justify-content-center text-center white-text overflow-hidden">
                         <p class="text-Montserrat-album">{{$album -> name}}</p>
@@ -167,7 +167,7 @@
                         <div class="d-flex flex-row track-artist mr-2 mt-lg-0 mt-5">
                             <a href="/track/{{$crypt_track}}" class="text-decoration-none">
                                 <div class="d-flex  align-items-center h-100">
-                                    <img src="{{secure_url ($album -> cover_url)}}" alt="" class="track-cover">
+                                    <img src="{{url ($album -> cover_url)}}" alt="" class="track-cover">
                                 </div>
 
                                 <div class="w-100">
@@ -360,9 +360,9 @@ avatarInput.addEventListener('change', function(event1) {
 const cancel = document.getElementById("cancel");
 
 cancel.addEventListener('click',() => {
-    bannerPreview.src = '{{secure_url( $user -> banner_url)}}';
+    bannerPreview.src = '{{url( $user -> banner_url)}}';
     bannerInputLabel.textContent = 'CHANGE BANNER';
-    avatarPreview.src = '{{secure_url( $user -> avatar_url)}}';
+    avatarPreview.src = '{{url( $user -> avatar_url)}}';
     avatarInputLabel.textContent = 'CHANGE AVATAR';
 
     document.getElementById("edit").reset();

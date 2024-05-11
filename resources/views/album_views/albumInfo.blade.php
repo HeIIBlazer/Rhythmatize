@@ -21,13 +21,13 @@
     @endphp
 
     <div style="width: 100%; height: 180px;">
-        <img src="{{secure_url ($artist -> banner_url)}}" alt="" style="width: 100%; height: 300px; object-fit:cover; object-position: 50% 50%;">
+        <img src="{{url ($artist -> banner_url)}}" alt="" style="width: 100%; height: 300px; object-fit:cover; object-position: 50% 50%;">
     </div>
 <div class="container d-flex flex-column flex-lg-row justify-content-between align-items-center align-items-lg-none mb-5">
     <div class="w-95 w-lg-25 d-flex flex-column align-items-center">
         <div>
             <div class="artist-img w-100 d-flex justify-content-center align-items-center">
-                <img src="{{secure_url ($album -> cover_url)}}" alt="" class="Info-Image">
+                <img src="{{url ($album -> cover_url)}}" alt="" class="Info-Image">
             </div>
         </div>
         <div>
@@ -136,7 +136,7 @@
                     <div class="d-flex flex-column justify-content-between align-items-center w-100 h-100">
                         <a href="/album/{{$crypt_album}}">
                             <div class="album-cover w-100 h-100 d-flex flex-row align-items-center justify-content-center">
-                                <img src="{{secure_url($artist_album -> cover_url)}}" alt="Album Cover" class="img-fluid alb" style="width: 90%; height: 90%;">
+                                <img src="{{url($artist_album -> cover_url)}}" alt="Album Cover" class="img-fluid alb" style="width: 90%; height: 90%;">
                                 <div class="album-info d-flex flex-column justify-content-center align-items-center text-center">
                                     <h2 class="album-name-main h-25">{{$artist_album -> name}}</h2>
                                     <p class="album-year">{{$artist_album -> release_date}}</p>
@@ -178,7 +178,7 @@
                 <div class="d-flex flex-column">
                     <div class="d-flex flex-row justify-content-between align-items-center">
                         <div class="d-flex flex-row align-items-center mb-3" style="height: 35px">
-                            <img src=" {{secure_url ($user -> avatar_url)}}" alt="" style="width: 35px; height: 35px; margin-right: 5px; border-radius:200px;">
+                            <img src=" {{url ($user -> avatar_url)}}" alt="" style="width: 35px; height: 35px; margin-right: 5px; border-radius:200px;">
                             <a href="/user/{{$crypt_user}}" class="comment-user">{{$user -> username}}</a>
                         </div>
                         @if ($like != 2)

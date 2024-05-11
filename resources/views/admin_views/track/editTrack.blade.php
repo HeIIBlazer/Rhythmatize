@@ -18,7 +18,7 @@
         @endif
 
         <div>
-            <form method="POST" action="{{secure_url('/save-edited-track')}}" enctype="multipart/form-data">
+            <form method="POST" action="{{url('/save-edited-track')}}" enctype="multipart/form-data">
                 @csrf
 
                 <div class="d-flex flex-lg-row flex-column justify-content-evenly h-100 mb-5">

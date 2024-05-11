@@ -34,20 +34,20 @@
             <div class="dropdown">
               <a class="header_button" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">Charts</a>
               <ul class="dropdown-menu dropdown-menu-dark slim-dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <li><a class="dropdown-item" href="{{ secure_url('/artist-chart')}}">Artists</a></li>
-                <li><a class="dropdown-item" href="{{ secure_url('/album-chart')}}">Albums</a></li>
-                <li><a class="dropdown-item" href="{{secure_url ('/track-chart')}}">Tracks</a></li>
+                <li><a class="dropdown-item" href="{{ url('/artist-chart')}}">Artists</a></li>
+                <li><a class="dropdown-item" href="{{ url('/album-chart')}}">Albums</a></li>
+                <li><a class="dropdown-item" href="{{url ('/track-chart')}}">Tracks</a></li>
               </ul>
             </div>
           </li> 
           <li class="nav-item">
-            <a class="header_button" href="{{ secure_url ('/artist-list')}}">Artists</a>
+            <a class="header_button" href="{{ url ('/artist-list')}}">Artists</a>
           </li> 
           <li class="nav-item">
-            <a class="header_button" href="{{ secure_url ('/album-list')}}">Albums</a>
+            <a class="header_button" href="{{ url ('/album-list')}}">Albums</a>
           </li>
         </ul>
-        <form class="d-flex" method="GET" action="{{ secure_url('/search') }}">
+        <form class="d-flex" method="GET" action="{{ url('/search') }}">
           <input class="form-control rounded-0 mr-5 custom-search" name="search" type="search" placeholder="Search" aria-label="Search" required>
           <button class="search_button" type="submit">Search</button>
         </form>
@@ -68,14 +68,14 @@
         <li class="avatar-button position-static">
           <div class="dropdown position-relative">
               <a class="header_button_account " href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                  <img src="{{secure_url (Auth::user()-> avatar_url)}}" alt="" style="width: 45px; height: 45px; border-radius: 50px; object-fit: cover; border: 2px solid white" class="ms-2 mt-2 mt-lg-0 me-0">
+                  <img src="{{url (Auth::user()-> avatar_url)}}" alt="" style="width: 45px; height: 45px; border-radius: 50px; object-fit: cover; border: 2px solid white" class="ms-2 mt-2 mt-lg-0 me-0">
               </a>
               <ul class="dropdown-menu dropdown-menu-dark slim-dropdown-menu dropdown-menu-lg-end  me-auto dropdown-desktop" aria-labelledby="dropdownMenuLink">
                   @php
                       $crypt_user = Crypt::encrypt(Auth::user() -> id);
                   @endphp
                   <li><a class="dropdown-item" href="/user/{{$crypt_user}}">Profile</a></li>
-                  <li><a class="dropdown-item" href="{{secure_url ('/logout')}}">Log out</a></li>
+                  <li><a class="dropdown-item" href="{{url ('/logout')}}">Log out</a></li>
               </ul>
           </div>
       </li>
@@ -101,7 +101,7 @@
                     </div>
                     @endif
                     <div class="d-flex w-100 flex-column justify-content-center align-items-center h-75 ">
-                        <form action="{{secure_url('/register')}}" method="POST" class="form" enctype="multipart/form-data">
+                        <form action="{{url('/register')}}" method="POST" class="form" enctype="multipart/form-data">
                             @csrf
                             <div class="w-100 d-flex justify-content-center align-items-center flex-column align-center mt-3">
                               <img id="imagePreview" src="#" alt="Image preview" style="display: none; width: 45%; height: 45%; border:3#808080px solid #808080; border-radius: 5px;" class="mb-3 mt-0"/>
@@ -153,7 +153,7 @@
                         </div>
                     @endif
                     <div class="d-flex w-100 flex-column justify-content-center align-items-center">
-                        <form action="{{secure_url('/login-auth')}}" method="POST" class="form">
+                        <form action="{{url('/login-auth')}}" method="POST" class="form">
                             @csrf
                             <div class="w-100 d-flex justify-content-center align-center mt-2">
                                 <input type="email" class="login-input" name="email" placeholder="Email" required autofocus autocomplete="email">
@@ -217,13 +217,13 @@
                 <p class="links_header text-center">ALBUM</p>
             </div>
             <div class="links_buttons ">
-                <a href="{{ secure_url('/album-chart')}}" class="links_button">Charts</a>
+                <a href="{{ url('/album-chart')}}" class="links_button">Charts</a>
             </div>
             <div class="links_buttons">
-                <a href="{{ secure_url('/last-added-albums')}}" class="links_button">Last Added</a>
+                <a href="{{ url('/last-added-albums')}}" class="links_button">Last Added</a>
             </div>
             <div class="links_buttons">
-                <a href="{{ secure_url('/album-list')}}" class="links_button">List</a>
+                <a href="{{ url('/album-list')}}" class="links_button">List</a>
             </div>
         </div>
         <div class="Artists_part">
@@ -231,13 +231,13 @@
                 <p class="links_header text-center">ARTIST</p>
             </div>
             <div class="links_buttons">
-                <a href="{{ secure_url('/artist-chart')}}" class="links_button">Charts</a>
+                <a href="{{ url('/artist-chart')}}" class="links_button">Charts</a>
             </div>
             <div class="links_buttons">
-                <a href="{{ secure_url('/last-added-artists')}}" class="links_button">Last Added</a>
+                <a href="{{ url('/last-added-artists')}}" class="links_button">Last Added</a>
             </div>
             <div class="links_buttons">
-                <a href="{{ secure_url('/artist-list')}}" class="links_button">List</a>
+                <a href="{{ url('/artist-list')}}" class="links_button">List</a>
             </div>
         </div>
         <div class="Songs_part">
@@ -245,12 +245,12 @@
                 <p class="links_header text-center">TRACKS</p>
             </div>
             <div class="links_buttons">
-                <a href="{{secure_url ('/track-chart')}}" class="links_button">Charts</a>
+                <a href="{{url ('/track-chart')}}" class="links_button">Charts</a>
             </div>
         </div>
         @if(Auth::check() && Auth::user()->role == 'admin')
             <div class="h-100 d-flex align-items-center justify-content-center">
-                <a href="{{secure_url ('/admin-panel')}}" class="links_header">ADMIN</a>
+                <a href="{{url ('/admin-panel')}}" class="links_header">ADMIN</a>
             </div>
         @else
         @endif

@@ -19,13 +19,13 @@
     @endphp
 
     <div style="width: 100%; height: 180px;">
-        <img src="{{secure_url ($artist -> banner_url)}}" alt="" style="width: 100%; height: 300px; object-fit:cover; object-position: 50% 50%;">
+        <img src="{{url ($artist -> banner_url)}}" alt="" style="width: 100%; height: 300px; object-fit:cover; object-position: 50% 50%;">
     </div>
 <div class="container flex-lg-row flex-column d-flex align-items-center align-items-lg-none justify-content-between mb-5">
     <div class="w-95 w-lg-25 d-flex flex-column align-items-center">
         <div>
             <div class="artist-img w-100 d-flex justify-content-center align-items-center">
-                <img src="{{secure_url ($artist -> picture_url)}}" alt="" class="Info-Image">
+                <img src="{{url ($artist -> picture_url)}}" alt="" class="Info-Image">
             </div>
         </div>
         <div>
@@ -112,7 +112,7 @@
                 <div class=" w-100 d-flex flex-column">
                     <div class="d-flex flex-row justify-content-between align-items-center">
                         <div class="d-flex flex-row align-items-center mb-3" style="height: 35px">
-                            <img src=" {{secure_url ($user -> avatar_url)}}" alt="" style="width: 35px; height: 35px; margin-right: 5px; border-radius:200px;">
+                            <img src=" {{url ($user -> avatar_url)}}" alt="" style="width: 35px; height: 35px; margin-right: 5px; border-radius:200px;">
                             <a href="/user/{{$crypt}}" class="comment-user">{{$user -> username}}</a>
                         </div>
                         @if ($like != 2)
@@ -216,7 +216,7 @@
                         <div class="d-flex flex-row track-artist mt-lg-0 mt-5">
 
                             <div class="d-flex justify-content-center align-items-center h-100">
-                                <img src="{{secure_url ($album -> cover_url)}}" alt="" class="track-cover">
+                                <img src="{{url ($album -> cover_url)}}" alt="" class="track-cover">
                             </div>
 
                             <div class="w-100">
@@ -271,7 +271,7 @@
                 <div class="col-auto mt-3 mt-lg-0 artist-album-card">
                     <a href="/album/{{$crypt_album}}" class="text-decoration-none">
                         <div>
-                            <img src="{{secure_url ($album -> cover_url)}}" alt="" style="width: 250px; height: 250px; border-radius: 5px; margin-top:10px; padding: 10px 10px;">
+                            <img src="{{url ($album -> cover_url)}}" alt="" style="width: 250px; height: 250px; border-radius: 5px; margin-top:10px; padding: 10px 10px;">
                         </div>
                         <div class="w-100 d-flex justify-content-center text-center white-text">
                             <p class="text-truncate text-Montserrat-album">{{$album -> name}}</p>
