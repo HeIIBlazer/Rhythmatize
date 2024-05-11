@@ -73,13 +73,16 @@ class UserController extends Controller
         } elseif ($userExistsEmail) {
             return redirect()->back()->with('error_signup', 'The email is already in use.');
         }
+        if ($request->hasFile('avatar_url') && $request->file('avatar_url')->getSize() > 15360 * 1024) {
+            return redirect()->back()->with('error_signup', 'The avatar image may not be larger than 15 megabytes.');
+        }
 
         $request->validate([
             'username' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|',
             'password_confirmation' => 'required|string|min:6|',
-            'avatar_url' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            'avatar_url' => 'image|mimes:jpeg,png,jpg,gif|max:15360',
         ]);
 
         if ($request->password != $request->password_confirmation) {
