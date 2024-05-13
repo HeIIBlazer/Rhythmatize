@@ -188,7 +188,7 @@
 
 
 <div class="footer d-flex flex-column flex-lg-row justify-content-center align-items-center">
-    <div class="socials_part mt-4 w-100 w-lg-25">
+    <div class="socials_part ms-3 mt-4 w-100 w-lg-25">
         <div>
             <h1 class="logo-text ">Rhythmatize</h1>
         </div>

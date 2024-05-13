@@ -1103,6 +1103,12 @@ hr {
     transition: ease all 0.3s;
     cursor: pointer;
     font-family: 'Montserrat', sans-serif;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    /* Specify the number of lines to show */
+    -webkit-box-orient: vertical;
 }
 
 .artist-track-album:hover {

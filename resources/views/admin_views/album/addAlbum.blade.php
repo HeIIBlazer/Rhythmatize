@@ -16,7 +16,6 @@
         <div>
             <form method="POST" action="{{secure_url('/add-album-to-database')}}" enctype="multipart/form-data">
                 @csrf
-
                 <div class="mt-2 mb-5">
                     <div class="w-100 d-flex justify-content-center align-items-center flex-column align-center mt-3">
                         <input type="file" id="photoInput" name="cover_url" class="img-input">

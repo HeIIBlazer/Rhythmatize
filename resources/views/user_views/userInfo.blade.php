@@ -122,7 +122,7 @@
                         <p class="text-Montserrat-album">{{$album -> name}}</p>
                     </div>
                     <div class="w-100 d-flex justify-content-center text-center white-text mb-3 mb-lg-0 overflow-hidden">
-                        <a href="/artist/{{$crypt_artist}}" class="artist-track-album">
+                        <a href="/artist/{{$crypt_artist}}" class="artist-track-album mb-3">
                             {{$album -> type}} | {{$album -> release_date}} | {{$artist -> name}}
                         </a>
                     </div>
