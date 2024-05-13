@@ -13,6 +13,7 @@ use App\Http\Controllers\LikeArtistController;
 use App\Http\Controllers\LikeAlbumController;
 use App\Http\Controllers\LikeTrackController;
 use App\Http\Controllers\GenreController;
+use Illuminate\Support\Facades\URL;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +29,7 @@ use App\Http\Controllers\GenreController;
 Route::get('/', function () {
     return view('main');
 });
+
 
 // ALBUMS
 Route::get('/', [AlbumController::class, 'top_3_albums']);

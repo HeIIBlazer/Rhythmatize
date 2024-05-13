@@ -24,7 +24,7 @@
 
 <nav class="navbar navbar-expand-lg navbar-black bg-black">
   <div class="container-fluid d-flex justify-content-between w-100">
-      <a class="navbar-brand" href="/"><h1 class="logo-text ms-2 me-2 ">Rhythmatize</h1></a>
+      <a class="navbar-brand" href="{{ secure_url('/')}}"><h1 class="logo-text ms-2 me-2 ">Rhythmatize</h1></a>
       <button class="navbar-toggler custom-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
       </button>
@@ -36,7 +36,7 @@
               <ul class="dropdown-menu dropdown-menu-dark slim-dropdown-menu" aria-labelledby="dropdownMenuLink">
                 <li><a class="dropdown-item" href="{{ secure_url('/artist-chart')}}">Artists</a></li>
                 <li><a class="dropdown-item" href="{{ secure_url('/album-chart')}}">Albums</a></li>
-                <li><a class="dropdown-item" href="{{secure_url ('/track-chart')}}">Tracks</a></li>
+                <li><a class="dropdown-item" href="{{ secure_url ('/track-chart')}}">Tracks</a></li>
               </ul>
             </div>
           </li> 
