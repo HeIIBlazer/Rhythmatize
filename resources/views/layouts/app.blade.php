@@ -2,6 +2,7 @@
 <html>
 
 <head>
+<meta name="google-site-verification" content="Kg8EEsgwMx6Im72cwhat4sbeUxid3zfeNzYrdKsrNn0" />
 
   <link rel="icon" style="width: 50px; height: 50px" type="image/x-icon" href="/images/avatars/Default_avatar.png">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
