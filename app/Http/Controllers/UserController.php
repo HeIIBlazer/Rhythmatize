@@ -160,7 +160,7 @@ class UserController extends Controller
         $request->validate([
             'username' => '',
             'email' => '',
-            'password' => 'required',
+            'password' => '',
             'new_password' => '',
             'password_confirmation' => '',
             'description' => '',
@@ -168,30 +168,32 @@ class UserController extends Controller
             'banner_url' => 'image|mimes:jpeg,png,jpg,gif|max:15360',
         ]);
 
-        if (Hash::check($request->password, $user->password)) {
+        
+        if ($request->hasFile('avatar_url')) {
+            $file = $request->file('avatar_url');
+            $filename = time() . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path('images/avatars'), $filename);
+            $avatar_url = 'images/avatars/' . $filename;
+        } else {
+            $avatar_url = $user->avatar_url;
+        }
+        
+        if ($request->hasFile('banner_url')) {
+            $file = $request->file('banner_url');
+            $filename = time() . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path('images/banners'), $filename);
+            $banner_url = 'images/banners/' . $filename;
+        } else {
+            $banner_url = $user->banner_url;
+        }
 
-            if ($request->hasFile('avatar_url')) {
-                $file = $request->file('avatar_url');
-                $filename = time() . '.' . $file->getClientOriginalExtension();
-                $file->move(public_path('images/avatars'), $filename);
-                $avatar_url = 'images/avatars/' . $filename;
-            } else {
-                $avatar_url = $user->avatar_url;
-            }
-
-            if ($request->hasFile('banner_url')) {
-                $file = $request->file('banner_url');
-                $filename = time() . '.' . $file->getClientOriginalExtension();
-                $file->move(public_path('images/banners'), $filename);
-                $banner_url = 'images/banners/' . $filename;
-            } else {
-                $banner_url = $user->banner_url;
-            }
-
-            if ($request->new_password != null) {
-                if ($request->new_password != $request->password_confirmation) {
-                    return redirect()->back()->with('error', 'New passwords do not match');
-                }
+        $description = $request->description;
+        
+        if ($request->new_password != null) {
+                if (Hash::check($request->password, $user->password)) {
+                    if ($request->new_password != $request->password_confirmation) {
+                        return redirect()->back()->with('error', 'New passwords do not match');
+                    }
 
                 $user->update([
                     'username' => $request->username,
@@ -199,9 +201,11 @@ class UserController extends Controller
                     'password' => Hash::make($request->new_password),
                     'avatar_url' => $avatar_url,
                     'banner_url' => $banner_url,
-                    'description' => $request -> description,
+                    'description' => $description,
                 ]);
-
+            }else{
+                return redirect()->back()->with('error', 'Incorrect current password'); 
+            }
                 return redirect()->back();
             } else {
                 $user->update([
@@ -209,17 +213,12 @@ class UserController extends Controller
                     'email' => $request->email,
                     'avatar_url' => $avatar_url,
                     'banner_url' => $banner_url,
-                    'description' => $request -> description,
+                    'description' => $description,
                 ]);
 
                 return redirect()->back();
             }
 
-        }else{
-
-            return redirect()->back()->with('error', 'Incorrect current password');
-            
-        }
     }
 
     /**
