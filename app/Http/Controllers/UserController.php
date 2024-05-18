@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Contracts\Encryption\DecryptException;
 
 
 
@@ -218,6 +219,31 @@ class UserController extends Controller
 
             return redirect()->back()->with('error', 'Incorrect current password');
             
+        }
+    }
+
+    /**
+   * delete user account
+   */
+    public function destroy($crypt_user, Request $request)
+    {
+        try {
+            $user_id = Crypt::decrypt($crypt_user);
+        } catch (DecryptException $e) {
+            abort(404);
+        }
+        
+        $user = User::find($user_id);
+
+        $request->validate([
+            'password' => 'required',
+        ]);
+
+        if (Hash::check($request->password, $user->password)){
+            $user->delete();
+            return redirect('/');
+        }else{
+            return redirect()->back()->with('error_genre', 'Incorrect current password');
         }
     }
 

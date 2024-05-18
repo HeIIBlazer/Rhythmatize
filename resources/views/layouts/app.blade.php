@@ -107,7 +107,7 @@
                             <div class="w-100 d-flex justify-content-center align-items-center flex-column align-center mt-3">
                               <img id="imagePreview" src="#" alt="Image preview" style="display: none; width: 45%; height: 45%; border:3#808080px solid #808080; border-radius: 5px;" class="mb-3 mt-0"/>
                               <input type="file" id="imageInput" name="avatar_url" class="img-input">
-                              <label for="imageInput"  id="imageInputLabel" class="edit-button m-0">Insert Avatar</label>
+                              <label for="imageInput"  id="imageInputLabel" class="edit-button m-0">Upload Avatar</label>
                             </div>
                             <div class="w-100 d-flex justify-content-center align-center mt-3">
                                 <input type="text" class="login-input" name="username" placeholder="Username" required autofocus>

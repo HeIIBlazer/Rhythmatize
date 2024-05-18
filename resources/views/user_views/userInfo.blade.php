@@ -205,7 +205,7 @@
                             </div>
                         @endif
                         <div class="d-flex w-100 flex-column justify-content-between">
-                            <form action="/update/{{$user -> id}}" method="POST" class="form" enctype="multipart/form-data" id="edit">
+                            <form action="/update/{{$user -> id}}" method="POST" class="form mb-1" enctype="multipart/form-data" id="edit">
                                 @csrf
                                 <div class="w-100">
                                     <div class=" w-100 h-100 d-flex flex-column flex-lg-row justify-content-center align-items-lg-none align-items-center">
@@ -245,12 +245,12 @@
 
                                             <div class="w-100 d-flex flex-column justify-content-center align-center mt-2 align-items-center align-items-lg-none">
                                                 <label class="label-edit" for="password">ENTER YOUR PASSWORD TO CONFIRM</label>
-                                                <input type="password" class="edit-input" name="password" placeholder="Current Password" minlength="6" required>
+                                                <input id="current_password" type="password" class="edit-input" name="password" placeholder="Current Password" minlength="6">
                                             </div>
                                             
                                             <div class="w-100 d-flex flex-column justify-content-center  mt-2 align-items-center align-items-lg-none">
                                                 <label class="label-edit" for="new_password">NEW PASSWORD</label>
-                                                <input type="password" class="edit-input" name="new_password" placeholder="New Password" minlength="6">
+                                                <input id="new_password" type="password" class="edit-input" name="new_password" placeholder="New Password" minlength="6">
                                             </div>
                                             
                                             <div class="w-100 d-flex flex-column justify-content-center align-items-center align-items-lg-none mt-2 mb-3">
@@ -265,18 +265,58 @@
                                         <div class=" mb-lg-0 mb-3">
                                             <button type="submit" class="save-button">SAVE</button>
                                         </div>
-                                        <div class="">
+                                        <div class="mb-lg-0 mb-3">
                                             <button data-dismiss="modal" form aria-label="Close" class="cancel-button" id="cancel">CANCEL</button>
                                         </div>
                                     </div>
                                 </div>
                                     
                             </form>
+                            <div class="w-100 d-flex justify-content-center align-content-center align-items-center mb-3">
+                                <button data-dismiss="modal" data-toggle="modal" data-target="#deleteModal" aria-label="Close" class="cancel-button" id="cancel">DELETE ACCOUNT</button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
+        <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content border-b">
+                    <div class="login">
+                        <div class="w-100">
+
+                            @php
+                                $crypt_user = Crypt::encrypt($user-> id)
+                            @endphp
+                            <div cl>
+                                <h1 class="confirmation-header mt-3 mb-3">ARE YOU SURE?</h1>
+                            </div>
+                            @if (session()->has('error_genre'))
+                                <div class="alert error-genre">
+                                    {{session()->get('error_genre')}}
+                                </div>
+                            @endif
+                            <form method="POST" action="/delete_account/{{$crypt_user}}">
+                                @csrf
+                                @method('DELETE')
+                                <div class="w-100 d-flex flex-column align-items-center">
+                                    <label for="password" class="mb-0 mt-2 add_input_label text-center">ENTER YOUR CURRENT PASSWORD <br> TO DELETE YOUR ACCOUNT.</label>
+                                    <input type="password" class="add-input" id="password" name="password" required>
+                                    <p class="text-white mt-2 font-weight-bold">YOU WILL NOT BE ABLE TO RESTORE IT IN THE FUTURE!</p>
+                                </div>
+                                <div class="d-flex w-100 flex-row justify-content-evenly mt-5 mb-3">
+                                    <button type="submit" class="add-save-button w-25 me-3">DELETE</button>
+                                    <button type="button" data-toggle="modal" data-target="#deleteModal" data-dismiss="modal" id="modal-close-cancel" class="add-cancel-button w-25" >CANCEL</button>
+                                </div>
+                            </form>
+                            
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
     </div>
 </div>
 
@@ -284,6 +324,22 @@
 
 
 <script>
+
+$(".toggle-password").click(function() {
+
+    $(this).toggleClass("fa-eye fa-eye-slash");
+    var input = $($(this).attr("toggle"));
+    if (input.attr("type") == "password") {
+        input.attr("type", "text");
+    } else {
+        input.attr("type", "password");
+    }
+});
+
+document.getElementById('new_password').addEventListener('input', function() {
+    document.getElementById('current_password').required = this.value !== '';
+});
+
 const readMoreButtons = document.querySelectorAll('.read-more-button');
     readMoreButtons.forEach((button) => {
         button.addEventListener('click', () => {
@@ -367,6 +423,14 @@ cancel.addEventListener('click',() => {
 
     document.getElementById("edit").reset();
 }); 
+
+$(document).ready(function () {
+            if ($('.error-genre').length > 0) {
+            // Open the modal window
+                $('#addGenreModal').modal('show');
+            }
+
+        });
 
 </script>
     

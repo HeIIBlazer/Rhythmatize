@@ -70,6 +70,7 @@ Route::get('/login', [AuthController::class, 'login']);
 Route::post('/login-auth', [AuthController::class, 'authenticate']);
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::post('/register', [UserController::class, 'store_register']);
+Route::delete('/delete_account/{user}', [UserController::class, 'destroy']);
 
 //LIKE SYSTEM
 Route::get('/like-artist/{artist}', [LikeArtistController::class, 'like']);

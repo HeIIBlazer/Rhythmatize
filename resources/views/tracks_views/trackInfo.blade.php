@@ -31,9 +31,9 @@
 <div class="container d-flex flex-column flex-lg-row align-items-center align-items-lg-none justify-content-lg-between mb-5">
     <div class="w-95 w-lg-25 d-flex flex-column align-items-center">
         <div>
-            <div class="artist-img w-100 d-flex justify-content-center align-items-center">
+            <a href="/album/{{$crypt_album}}"  class="artist-img w-100 d-flex justify-content-center align-items-center">
                 <img src="{{secure_url ($album -> cover_url)}}" alt="" class="Info-Image">
-            </div>
+            </a>
         </div>
         @if ($track -> explicit == 'YES')      
         <div class="d-flex flex-row align-items-center">
