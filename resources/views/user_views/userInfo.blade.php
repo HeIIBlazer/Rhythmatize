@@ -86,7 +86,7 @@
             <div class="artist-tracks-headers-2 mt-4 w-94">
                 <div class="artist-header-line"></div>
                 <div>
-                    <h2 class="artist-tracks-header">artists liked by {{$user -> username}} </h2>
+                    <h2 class="artist-tracks-header">albums liked by {{$user -> username}} </h2>
                 </div>
                 <div class="artist-header-line"></div>
             </div>
@@ -302,7 +302,7 @@
                                 @csrf
                                 @method('DELETE')
                                 <div class="w-100 d-flex flex-column align-items-center">
-                                    <label for="password" class="mb-0 mt-2 add_input_label text-center">ENTER YOUR CURRENT PASSWORD <br> TO DELETE YOUR ACCOUNT.</label>
+                                    <label for="password" class="mb-0 mt-2 mb-3 add_input_label text-center">ENTER YOUR CURRENT PASSWORD <br> TO DELETE YOUR ACCOUNT.</label>
                                     <input type="password" class="add-input" id="password" name="password" required>
                                     <p class="text-white mt-2 font-weight-bold">YOU WILL NOT BE ABLE TO RESTORE IT IN THE FUTURE!</p>
                                 </div>
