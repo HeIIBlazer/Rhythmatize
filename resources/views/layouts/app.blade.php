@@ -194,7 +194,7 @@
             <h1 class="logo-text ">Rhythmatize</h1>
         </div>
         <div class="socials_text_block">
-            <p class="socials_text">Reach us at <u>Rhythmatize@gmail.com</u> or through our socials.</p>
+            <p class="socials_text">Reach us at <u>rhythmatize@gmail.com</u> or through our socials.</p>
         </div>
         <div class="socials_logos">
             <div>
@@ -215,7 +215,7 @@
     <div class="links_part d-flex flex-column align-items-center align-items-lg-none justify-content-evenly flex-lg-row w-100 w-lg-50 ml-3 ml-lg-0">
         <div class="albums_part">
             <div>
-                <p class="links_header text-center">ALBUM</p>
+                <p class="links_header ">ALBUM</p>
             </div>
             <div class="links_buttons ">
                 <a href="{{ secure_url('/album-chart')}}" class="links_button">Charts</a>
@@ -229,7 +229,7 @@
         </div>
         <div class="Artists_part">
             <div>
-                <p class="links_header text-center">ARTIST</p>
+                <p class="links_header ">ARTIST</p>
             </div>
             <div class="links_buttons">
                 <a href="{{ secure_url('/artist-chart')}}" class="links_button">Charts</a>
@@ -243,7 +243,7 @@
         </div>
         <div class="Songs_part">
             <div>
-                <p class="links_header text-center">TRACKS</p>
+                <p class="links_header ">TRACKS</p>
             </div>
             <div class="links_buttons">
                 <a href="{{secure_url ('/track-chart')}}" class="links_button">Charts</a>
@@ -260,9 +260,9 @@
     <div class="vertical_line d-none d-lg-block">
     </div>
 
-    <div class="Copyright_part w-lg-25 w-100">
+    <div class="Copyright_part w-lg-25 w-100 me-lg-3 me-0">
         <div class="copyright_text">
-            <p>&copy; 2024 Copyright: <br>rhythmatize.com</p>
+            <p>&copy; 2024 Copyright: <br>rhythmatize.servemp3.com</p>
         </div>
     </div>
 </div>
