@@ -8,6 +8,12 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Contracts\Encryption\DecryptException;
+use App\Models\LikeAlbum;
+use App\Models\LikeArtist;
+use App\Models\LikeTrack;
+use App\Models\CommentAlbum;
+use App\Models\CommentArtist;
+use App\Models\CommentTrack;
 
 
 
@@ -29,6 +35,10 @@ class UserController extends Controller
 
         $crypt = Crypt::decrypt($crypt_user);
         $user = User::find($crypt);
+
+        if ($user == 0){
+            abort(404);
+        }
 
         $artists = $user->likedArtists()->latest('like_artists.id')->take(3)->get();
         $tracks = $user->likedTracks()->latest('like_tracks.id')->take(4)->get();
@@ -222,7 +232,7 @@ class UserController extends Controller
     }
 
     /**
-   * delete user account
+   * delete user account and all his likes and comments
    */
     public function destroy($crypt_user, Request $request)
     {
@@ -239,6 +249,49 @@ class UserController extends Controller
         ]);
 
         if (Hash::check($request->password, $user->password)){
+            $Liked_artists = DB::table('like_artists')->where('user_id', $user->id)->get();
+            if ($Liked_artists->count() != 0) {
+                foreach ($Liked_artists as $Liked_artist) {
+                    $like_delete = LikeArtist::find($Liked_artist->id)->delete;
+                }
+            }
+
+            $Liked_albums = DB::table('like_albums')->where('user_id', $user->id)->get();
+            if ($Liked_albums->count() != 0) {
+                foreach ($Liked_albums as $Liked_album) {
+                    $like_delete = LikeAlbum::find($Liked_album->id)->delete;
+                }
+            }
+
+            $Liked_tracks = DB::table('like_tracks')->where('user_id', $user->id)->get();
+            if ($Liked_tracks->count() != 0) {
+                foreach ($Liked_tracks as $Liked_track) {
+                    $like_delete = LikeTrack::find($Liked_track->id)->delete;
+                }
+            }
+
+            $Comments_artists = DB::table('comment_artists')->where('user_id', $user->id)->get();
+            if ($Comments_artists->count() != 0) {
+                foreach ($Comments_artists as $Comment_artist) {
+                    $comment_delete = CommentArtist::find($Comment_artist->id)->delete;
+                }
+            }
+
+            $Comments_albums = DB::table('comment_albums')->where('user_id', $user->id)->get();
+            if ($Comments_albums->count() != 0) {
+                foreach ($Comments_albums as $Comment_album) {
+                    $comment_delete = CommentAlbum::find($Comment_album->id)->delete;
+                }
+            }
+
+            $Comments_tracks = DB::table('comment_tracks')->where('user_id', $user->id)->get();
+            if ($Comments_tracks->count() != 0) {
+                foreach ($Comments_tracks as $Comment_track) {
+                    $comment_delete = CommentTrack::find($Comment_track->id)->delete;
+                }
+            }
+
+
             $user->delete();
             return redirect('/');
         }else{
