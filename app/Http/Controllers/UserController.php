@@ -36,7 +36,7 @@ class UserController extends Controller
         $crypt = Crypt::decrypt($crypt_user);
         $user = User::find($crypt);
 
-        if ($user == 0){
+        if ($user === null){
             abort(404);
         }
 
